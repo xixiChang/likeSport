@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.3.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="052f5f840f21174a3ecf6544130194e2652cbb73">
+        <dex dex="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-ui-25.3.1_53f8287396bb590db8e17f34229bd46c6a1930ff/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/exploded-aar/com.flyco.dialog/FlycoDialog_Lib/1.2.2/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c2f45613248b0985ed90c530d612073e658fd9e6">
+        <dex dex="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.flyco.dialog-FlycoDialog_Lib-1.2.2_a7b4cefba5f4dd81d6e24d87d08abdbe09b9d249/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.3.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="45f697922e6f072daa12f8a2995dc77ab03c11da">
+        <dex dex="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-25.3.1_629bf29b1c4afe1f269d472481040b5db0e75c2f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/exploded-aar/com.android.support/design/25.3.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="38789e20ace9ab7dbd00554bd2673ab424478d3b">
+        <dex dex="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-25.3.1_a5efd0a676ee254579043deb087d0510633c97e8/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="2fa51339eac3c9f5a304bb45e8dc127bfab10eae">
+        <dex dex="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_60d4aa1a131436db2fa603b9cf9c26c2140b939a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.3.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4a26a1154d053ab11aaf4c3967c42a4d66390991">
+        <dex dex="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-25.3.1_bd5578d38b2914b603234a47da24f457be8f652b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.3.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6ef31f1555bb4cc513ec8d52711365a8b89f3600">
+        <dex dex="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-utils-25.3.1_69f04a699beba276f5f32f0753eb983708622ca6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.3.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="150252b33b00274cc868578ade018fda0d43a3eb">
+        <dex dex="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-25.3.1_e5d34795339cc0b498f31430ef98db2abc0518ed/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/exploded-aar/com.flyco.tablayout/FlycoTabLayout_Lib/1.5.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ba4f487f803041e6ddbfb99c34d323fc99945e52">
+        <dex dex="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.flyco.tablayout-FlycoTabLayout_Lib-1.5.0_809b27ff4b7b9f421ee9463654d9142b236e4da1/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/exploded-aar/de.hdodenhof/circleimageview/2.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a2af9c72ccaa4c5c049b500ca6ea664a4ce1f7d4">
+        <dex dex="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/transforms/dex/debug/folders/1000/10/de.hdodenhof-circleimageview-2.1.0_a36b5d2764d3e5488eeceb7998105ded9dba9d6c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.3.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="efb8cb62d47d157c29d1521daac7eefd4cb881ee">
+        <dex dex="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-25.3.1_b31267b308300e72716f090890d54b7c98208ec3/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/25.3.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="914f5d3e3ace66080e59613708f06d129a222e25">
+        <dex dex="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-cardview-v7-25.3.1_cc7f89b57f858cdd32d71fa5ca7db9f549ae5040/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/tools/android-studio-2.2.3/gradle/gradle-2.14.1/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/transforms/dex/debug/folders/1000/10/library-2.4.0_51f8cf27c4394742561596e427c2412854937166/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/exploded-aar/com.flyco.animation/FlycoAnimation_Lib/1.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ac7879ece11f48e9bcfa6399081b6b8f19966700">
+        <dex dex="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.flyco.animation-FlycoAnimation_Lib-1.0.0_439d1b8f09ceb58fc01c30de265d19aaf7cac47b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/exploded-aar/com.android.support/transition/25.3.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d4cf6227dd6a2ceff0f7dcf0c324380b7abf2c28">
+        <dex dex="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-transition-25.3.1_ada2d98817bce4e90ad20d0a2cac3dda71103eab/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/sda/software/sdk/extras/android/m2repository/com/android/support/support-annotations/25.3.1/support-annotations-25.3.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="bf8841d29fa39e077730e7a91222c2ce269fa7c9">
+        <dex dex="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-25.3.1_53ffdfa9981a672ec93c5f36e256a298cc31e8a3/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/exploded-aar/com.flyco.roundview/FlycoRoundView_Lib/1.1.2/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="9b5cc31fd0011de7e01ba8da234c7f81ff72c165">
+        <dex dex="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.flyco.roundview-FlycoRoundView_Lib-1.1.2_cec7aa1e62d1f5bd691b84c14d516a0eead1fe50/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/exploded-aar/com.github.Rukey7/TagLayout/1.0.4/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="39e4fa7f8c27ec4cbd2a32df7fd1c84cb7b95919">
+        <dex dex="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.github.Rukey7-TagLayout-1.0.4_9902a9ea71fc52f824c7b1fb37e302456a239bc1/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.3.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="47635644d0d5c103c1dd8360549eb9ba3225c7d3">
+        <dex dex="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-25.3.1_4fc8823fc876c89378d9a3f1adaa0447e726ceb1/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.3.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="da27a32db6af8954ee8061537c7d476fcb1df46f">
+        <dex dex="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-25.3.1_112ca8dc04e5bee1b20d29200c0ae0c37387a79c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f829801efa3885a2f5e91e19741715c8fd203b25">
+        <dex dex="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_b625eaaac536d0ebb0eb757486d43c700e350878/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.3.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-25.3.1_463b843c433fdeedcd02985168cba8f04255afa6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/25.3.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="95519720620b553f63afc789beba9ad582807f7c">
+        <dex dex="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-25.3.1_f684293a813f59491c0036436ec791aa6e3e565a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/exploded-aar/com.flyco.labelview/FlycoLabelView_Lib/1.0.2/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="443016806f98046b76fdb6bdeabf24b9199c1dfe">
+        <dex dex="/local/sda/APPWORKSPACE/SprotAppUI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.flyco.labelview-FlycoLabelView_Lib-1.0.2_2e7f9cd7bf81cfabda460ac2c6d5b50f9c76f120/classes.dex" />
+    </item>
+
+</items>

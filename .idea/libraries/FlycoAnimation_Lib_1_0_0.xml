@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="FlycoAnimation_Lib-1.0.0">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.flyco.animation/FlycoAnimation_Lib/1.0.0/res" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.flyco.animation/FlycoAnimation_Lib/1.0.0/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$APPLICATION_HOME_DIR$/gradle/gradle-2.14.1/caches/modules-2/files-2.1/com.flyco.animation/FlycoAnimation_Lib/1.0.0/a429a798d50b0ef57e9bfeff489917e3b2a0a1b9/FlycoAnimation_Lib-1.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
