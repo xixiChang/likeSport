@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="@dimen/item_margin_top"
+    android:paddingStart="@dimen/activity_vertical_margin"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/item_day_rate_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:textSize="@dimen/activity_content_size_x_big" />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/item_day_rate_image"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/item_day_rate_image"
+        android:layout_alignTop="@+id/item_day_rate_image"
+        android:layout_alignBottom="@+id/item_day_rate_image"
+        android:layout_marginLeft="@dimen/page_content_margin_left"
+        >
+        <TextView
+            android:id="@+id/item_day_rate_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/activity_content_size_big" />
+        <TextView
+            android:id="@+id/item_day_rate_user_desc"
+            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/activity_content_size_mid" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/distance_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin_small"
+        android:text="/km"/>
+    
+    <TextView
+        android:id="@+id/item_day_rate_user_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/distance_unit"
+        android:layout_marginRight="@dimen/activity_horizontal_margin_small"
+        android:layout_centerVertical="true"
+        android:textColor="@color/black"
+        android:textSize="@dimen/activity_content_size_mid" />
+
+</RelativeLayout>

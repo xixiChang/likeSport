@@ -2,6 +2,7 @@
     <string name="app_name">SprotAppUI</string>
     <string name="activity_main_title">运动</string>
     <string name="whole_distance">总距离/ｍ</string>
+    <string name="day_distance">里程/ｋｍ</string>
     <string name="whole_spent_time">总时长/ｈ</string>
     <string name="whole_consume">总消耗/ｋ</string>
     <string name="logout">登出</string>
@@ -14,6 +15,8 @@
     <string name="toolbar_name_sport_circle">运动圈</string>
     <string name="toolbar_name_contacts">消息</string>
     <string name="toolbar_name_my">我的</string>
+    <string name="day_rate">今日排行</string>
+
 
 </resources>
 
