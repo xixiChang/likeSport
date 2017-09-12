@@ -21,6 +21,7 @@ import ccc.tcl.com.sprotappui.adapter.ChooseItem;
 import ccc.tcl.com.sprotappui.customui.RecycleViewDivider;
 import ccc.tcl.com.sprotappui.model.ChooseItemModel;
 
+@Deprecated
 public class MainActivity extends BaseActivity {
     private RecyclerView recyclerView;
     private static List<ChooseItemModel> itemsInfos;
@@ -67,38 +68,38 @@ public class MainActivity extends BaseActivity {
 
     private void initView() {
         recyclerView = (RecyclerView) findViewById(R.id.choose_items);
-        logout = (TextView) findViewById(R.id.user_logout_button);
+//        logout = (TextView) findViewById(R.id.user_logout_button);
 
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                logoutWindow();
-            }
-        });
+//        logout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                logoutWindow();
+//            }
+//        });
     }
 
-    private void logoutWindow() {
-        if (logoutDialog == null){
-            logoutDialog = new ActionSheetDialog(context, new String[]{"退出"}, null);
-            logoutDialog.cancelText("取消")
-                    .isTitleShow(false)
-                    .create();
-            logoutDialog.setOnOperItemClickL(new OnOperItemClickL() {
-                @Override
-                public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    switch (position){
-                        case 0:
-                            if (logoutDialog.isShowing())
-                                logoutDialog.superDismiss();
-                            finish();
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            });
-        }
-        logoutDialog.show();
-    }
+//    private void logoutWindow() {
+//        if (logoutDialog == null){
+//            logoutDialog = new ActionSheetDialog(context, new String[]{"退出"}, null);
+//            logoutDialog.cancelText("取消")
+//                    .isTitleShow(false)
+//                    .create();
+//            logoutDialog.setOnOperItemClickL(new OnOperItemClickL() {
+//                @Override
+//                public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                    switch (position){
+//                        case 0:
+//                            if (logoutDialog.isShowing())
+//                                logoutDialog.superDismiss();
+//                            finish();
+//                            break;
+//                        default:
+//                            break;
+//                    }
+//                }
+//            });
+//        }
+//        logoutDialog.show();
+//    }
 
 }

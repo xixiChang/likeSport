@@ -113,19 +113,19 @@
         android:layout_height="wrap_content">
     </android.support.v7.widget.RecyclerView>
 
-    <com.dl7.tag.TagView
-        android:id="@+id/user_logout_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_alignParentBottom="true"
-        android:text="@string/logout"
-        app:tag_text_color="@color/red"
-        app:tag_border_color="@color/red"
-        app:tag_shape="arc"
-        app:tag_vertical_padding="@dimen/button_padding_top"
-        app:tag_horizontal_padding="@dimen/button_padding_left"
-        app:tag_press_feedback="true"
-        android:layout_centerHorizontal="true"/>
+    <!--<com.dl7.tag.TagView-->
+        <!--android:id="@+id/user_logout_button"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="@dimen/activity_vertical_margin"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:text="@string/logout"-->
+        <!--app:tag_text_color="@color/red"-->
+        <!--app:tag_border_color="@color/red"-->
+        <!--app:tag_shape="arc"-->
+        <!--app:tag_vertical_padding="@dimen/button_padding_top"-->
+        <!--app:tag_horizontal_padding="@dimen/button_padding_left"-->
+        <!--app:tag_press_feedback="true"-->
+        <!--android:layout_centerHorizontal="true"/>-->
 
 </RelativeLayout>

@@ -3,219 +3,210 @@
 
     <item
         is-multidex="true"
-        jar="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="837683a920dcd444e26c018d69787292edc683b8">
-        <dex dex="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_a6b06ede319c96ce379e1192c526c8660ce3c76b/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.3.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="4a26a1154d053ab11aaf4c3967c42a4d66390991">
-        <dex dex="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-25.3.1_b31ea7010e12429b237ba26b322d06c18e3620a0/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="0764d7ef6082010900d938b2ce1ccdc6dc9057de">
-        <dex dex="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_5713f74ec1ffdcd5ef7bc21f3fb1c432ec2e7cc4/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/exploded-aar/de.hdodenhof/circleimageview/2.1.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="a2af9c72ccaa4c5c049b500ca6ea664a4ce1f7d4">
-        <dex dex="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/de.hdodenhof-circleimageview-2.1.0_760943ba3aa69b2641a8cceda89cd097ce38661a/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/exploded-aar/com.flyco.animation/FlycoAnimation_Lib/1.0.0/jars/classes.jar"
+        jar="/local/sda/Wrok/likeSport/app/build/intermediates/exploded-aar/com.flyco.animation/FlycoAnimation_Lib/1.0.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="ac7879ece11f48e9bcfa6399081b6b8f19966700">
-        <dex dex="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.flyco.animation-FlycoAnimation_Lib-1.0.0_c3ac13c0318ded6b29802b99e99e869b2562b059/classes.dex" />
+        <dex dex="/local/sda/Wrok/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.flyco.animation-FlycoAnimation_Lib-1.0.0_aeb790aad215bd4e511a76262f780fd9955e39cf/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.3.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="150252b33b00274cc868578ade018fda0d43a3eb">
-        <dex dex="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-25.3.1_9b8d5288f7d10a8d04f41ed9879ad427eb1d8943/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.3.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="052f5f840f21174a3ecf6544130194e2652cbb73">
-        <dex dex="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-ui-25.3.1_5584671448311f0025bf3328dc8e91f109bd64bc/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/exploded-aar/com.flyco.labelview/FlycoLabelView_Lib/1.0.2/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="443016806f98046b76fdb6bdeabf24b9199c1dfe">
-        <dex dex="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.flyco.labelview-FlycoLabelView_Lib-1.0.2_4afc02bfeaa741fa3c29907ca723b37e27f12054/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.3.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="da27a32db6af8954ee8061537c7d476fcb1df46f">
-        <dex dex="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-25.3.1_555613355219281cae64b228896f1d2e2a3eadd0/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/exploded-aar/com.github.Rukey7/TagLayout/1.0.4/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="39e4fa7f8c27ec4cbd2a32df7fd1c84cb7b95919">
-        <dex dex="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.github.Rukey7-TagLayout-1.0.4_d97468c46a5a547e09aa2b37f21d2ff7140fe48e/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/exploded-aar/com.flyco.roundview/FlycoRoundView_Lib/1.1.2/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="9b5cc31fd0011de7e01ba8da234c7f81ff72c165">
-        <dex dex="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.flyco.roundview-FlycoRoundView_Lib-1.1.2_bdf1c02e2ebf09d8f765961a65844ee0836fd4f0/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.3.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="47635644d0d5c103c1dd8360549eb9ba3225c7d3">
-        <dex dex="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-25.3.1_5b81bae75c80b8fd0e607441946baa9e7d755e2e/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/25.3.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="95519720620b553f63afc789beba9ad582807f7c">
-        <dex dex="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-25.3.1_20a8f33694cf92c59739a8bddccb157e4cbcf33a/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/exploded-aar/com.android.support/design/25.3.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="38789e20ace9ab7dbd00554bd2673ab424478d3b">
-        <dex dex="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-25.3.1_bb31a1eae5a4adad0d2813bf94d6357cd6db6fdf/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/local/sda/tools/android-studio-2.2.3/gradle/gradle-2.14.1/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
-        <dex dex="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/library-2.4.0_51f8cf27c4394742561596e427c2412854937166/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/local/sda/sda/software/sdk/extras/android/m2repository/com/android/support/support-annotations/25.3.1/support-annotations-25.3.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="bf8841d29fa39e077730e7a91222c2ce269fa7c9">
-        <dex dex="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-25.3.1_53ffdfa9981a672ec93c5f36e256a298cc31e8a3/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/exploded-aar/com.android.support/transition/25.3.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d4cf6227dd6a2ceff0f7dcf0c324380b7abf2c28">
-        <dex dex="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-transition-25.3.1_3662721378b73c7c20e33bed724f3bfbef49214d/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.3.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="efb8cb62d47d157c29d1521daac7eefd4cb881ee">
-        <dex dex="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-25.3.1_4b09fe45edc2e3d60bc66b4ce3d00439a2587552/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.3.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="45f697922e6f072daa12f8a2995dc77ab03c11da">
-        <dex dex="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-25.3.1_bbba42815782ca8782b282e1dafa7f0a2ba5bf19/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.3.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="6ef31f1555bb4cc513ec8d52711365a8b89f3600">
-        <dex dex="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-utils-25.3.1_3437f87bab2a8dbd25d8ddda84da80a3d955ea4e/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/exploded-aar/com.flyco.dialog/FlycoDialog_Lib/1.2.2/jars/classes.jar"
+        jar="/local/sda/Wrok/likeSport/app/build/intermediates/exploded-aar/com.flyco.dialog/FlycoDialog_Lib/1.2.2/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="c2f45613248b0985ed90c530d612073e658fd9e6">
-        <dex dex="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.flyco.dialog-FlycoDialog_Lib-1.2.2_8aa6c4e45e297adad617ef966e73c58004b8aedd/classes.dex" />
+        <dex dex="/local/sda/Wrok/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.flyco.dialog-FlycoDialog_Lib-1.2.2_7e710c1c8e6e3213bb56f6456f7b9cb2cf95992d/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/25.3.1/jars/classes.jar"
+        jar="/local/sda/Wrok/likeSport/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="914f5d3e3ace66080e59613708f06d129a222e25">
-        <dex dex="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-cardview-v7-25.3.1_9fb0f4c8aaf86ab9288366f47432d2fe0c416c7b/classes.dex" />
+        sha1="1630658fbc2d222b988603c27b4a4249586fbfe7">
+        <dex dex="/local/sda/Wrok/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-25.1.0_31bec9055e6910c473e27bfc087179c4454b0efc/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.3.1/jars/classes.jar"
+        jar="/local/sda/Wrok/likeSport/app/build/intermediates/exploded-aar/de.hdodenhof/circleimageview/2.1.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-25.3.1_22c12ede97440911d1ed671ef58a078fbba2f38d/classes.dex" />
+        sha1="a2af9c72ccaa4c5c049b500ca6ea664a4ce1f7d4">
+        <dex dex="/local/sda/Wrok/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/de.hdodenhof-circleimageview-2.1.0_dc17dfe833fb82af81e37fb11c490f8230836e7f/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/exploded-aar/com.flyco.tablayout/FlycoTabLayout_Lib/1.5.0/jars/classes.jar"
+        jar="/local/sda/Wrok/likeSport/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f02263e35e52668dd17b73bf961437e3d562b35f">
+        <dex dex="/local/sda/Wrok/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-25.1.0_90fca0025bc2a4a114483288e040fd691e5c5a8f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/Wrok/likeSport/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0a0ef86b7fa568a52bf6214a0326ca1f1d618da7">
+        <dex dex="/local/sda/Wrok/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-utils-25.1.0_8a4081e866eea4fdb24c33202337730053340a72/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/Wrok/likeSport/app/build/intermediates/exploded-aar/com.android.support/transition/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d38084015027549951cbaea5d5f6fb795cc81151">
+        <dex dex="/local/sda/Wrok/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-transition-25.1.0_560bb551e98b9b3858af442b4590365e464cebf5/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/tools/android-studio-2.2.3/gradle/gradle-2.14.1/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="/local/sda/Wrok/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/library-2.4.0_52b907b2d50b6e8e7728c50f6fecb7efa346ca13/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/Wrok/likeSport/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="7f2420506110902f033406b25697cf97ee8c38b2">
+        <dex dex="/local/sda/Wrok/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-cardview-v7-25.1.0_f8bccf69538324e49cb4a4081472bbcf507248e1/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/Wrok/likeSport/app/build/intermediates/exploded-aar/com.flyco.labelview/FlycoLabelView_Lib/1.0.2/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="443016806f98046b76fdb6bdeabf24b9199c1dfe">
+        <dex dex="/local/sda/Wrok/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.flyco.labelview-FlycoLabelView_Lib-1.0.2_19010911b672ffd76885befa73f3235522121037/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/Wrok/likeSport/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b266c8faa5af72e579b9da36ef35053ffed6ac64">
+        <dex dex="/local/sda/Wrok/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-25.1.0_b7b6f936fa61bb296894d487973acf1f1acf82b7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/Wrok/likeSport/app/build/intermediates/exploded-aar/com.flyco.roundview/FlycoRoundView_Lib/1.1.2/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="9b5cc31fd0011de7e01ba8da234c7f81ff72c165">
+        <dex dex="/local/sda/Wrok/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.flyco.roundview-FlycoRoundView_Lib-1.1.2_58f51c54f0198f851f44eba2f72053a6a45c454e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/Wrok/likeSport/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ca3c7aa31e2726a400a6e552b93cb9f63c9a1e6d">
+        <dex dex="/local/sda/Wrok/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-25.1.0_27eeccebed67a94da4e1e3688e804565c2ee3dac/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/tools/android-sdk-linux/extras/android/m2repository/com/android/support/support-annotations/25.1.0/support-annotations-25.1.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="64cb6b229a8bdfd907bc8dd46839a0053e4c018d">
+        <dex dex="/local/sda/Wrok/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-25.1.0_9daf764ff8251029813b759ed13efea8b9a7d68d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/Wrok/likeSport/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="2a53c4f3518116b8c6aee0e477233f0f7da8616f">
+        <dex dex="/local/sda/Wrok/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-25.1.0_3c859a94cc85e67dae9a2b46e1651b52eec15172/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/Wrok/likeSport/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="9b348d466e66fd4bfaf693d5bd4146fe6c210b46">
+        <dex dex="/local/sda/Wrok/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_4cf7a2ec7c7802b45c73948f4c4cec72da0bbc40/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/Wrok/likeSport/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6fb6ac3e8d3b9013819920d9ea11f3803c4c0033">
+        <dex dex="/local/sda/Wrok/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-25.1.0_3c5b8e912ea7f0a0e11111f4f46cd3e1dd8b02d1/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/Wrok/likeSport/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e79aa3d9a16f8c9f16377c0608de70a8f31e5d80">
+        <dex dex="/local/sda/Wrok/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-25.1.0_a04a191783e26b39a5e28515bdcdb9baaeacf575/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/Wrok/likeSport/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0c254d519bbb4644eb7f77b2f029864787a7e716">
+        <dex dex="/local/sda/Wrok/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_dba6555adddeada37208cbf30f991f14a4e1da01/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/Wrok/likeSport/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="aee64634871d88a419d59eb743c1258a60f19700">
+        <dex dex="/local/sda/Wrok/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-ui-25.1.0_f8189a153bb0f072e6ba233b4785293ddeba02cf/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/Wrok/likeSport/app/build/intermediates/exploded-aar/com.flyco.tablayout/FlycoTabLayout_Lib/1.5.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="ba4f487f803041e6ddbfb99c34d323fc99945e52">
-        <dex dex="/local/sda/APPWORKSPACE/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.flyco.tablayout-FlycoTabLayout_Lib-1.5.0_4ea84a83ebe0feee592d0037d4b6b33011045044/classes.dex" />
+        <dex dex="/local/sda/Wrok/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.flyco.tablayout-FlycoTabLayout_Lib-1.5.0_bb8c215bcda2a9bf22706b23a5d4c8e7aed9df6c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/Wrok/likeSport/app/build/intermediates/exploded-aar/com.android.support/design/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="30103d98fa5ed824b54af839c85e2111f9bde8ec">
+        <dex dex="/local/sda/Wrok/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-25.1.0_217d2614e3d02388c198567c3514823aa00e57b6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/local/sda/Wrok/likeSport/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/local/sda/Wrok/likeSport/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-25.1.0_4feb7ec2b82a9ca04491fc534dd738caf01a92fb/classes.dex" />
     </item>
 
 </items>
