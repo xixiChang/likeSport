@@ -23,6 +23,14 @@ import ccc.tcl.com.sprotappui.model.Sport;
 public class FMSportItem extends RecyclerView.Adapter<FMSportItem.ViewHolder> {
 
     private List<Sport> data;
+    private OnRecyclerViewItemClickListener listener;
+
+    public interface OnRecyclerViewItemClickListener{
+        void onClick(View view, int position);
+    }
+    public void setListener(OnRecyclerViewItemClickListener listener) {
+        this.listener = listener;
+    }
 
     public FMSportItem(List<Sport> data) {
         this.data = data;
@@ -38,8 +46,14 @@ public class FMSportItem extends RecyclerView.Adapter<FMSportItem.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-
+    public void onBindViewHolder(final ViewHolder holder,final int position) {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null)
+                    listener.onClick(holder.itemView, position);
+            }
+        });
     }
 
     @Override
@@ -56,7 +70,7 @@ public class FMSportItem extends RecyclerView.Adapter<FMSportItem.ViewHolder> {
         ViewHolder(View itemView) {
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.item_fm_sport_image);
-            label = (LabelView) itemView.findViewById(R.id.item_fm_sport_is_new);
+//          label = (LabelView) itemView.findViewById(R.id.item_fm_sport_is_new);
             name = (TextView) itemView.findViewById(R.id.item_fm_sport_name);
             hotValue = (TextView) itemView.findViewById(R.id.item_fm_sport_hot_value);
             leftTime = (TextView) itemView.findViewById(R.id.item_fm_sport_left_time);

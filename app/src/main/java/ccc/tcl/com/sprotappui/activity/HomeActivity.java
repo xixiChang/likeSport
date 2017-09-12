@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import ccc.tcl.com.sprotappui.R;
+import ccc.tcl.com.sprotappui.adapter.FMSportItem;
 import ccc.tcl.com.sprotappui.entity.TabEntity;
 import ccc.tcl.com.sprotappui.fragment.MyFragment;
 import ccc.tcl.com.sprotappui.fragment.SimpleCardFragment;
@@ -48,7 +50,7 @@ public class HomeActivity extends BaseActivity {
     private ViewPager mViewPager;
     private CommonTabLayout mTabLayout;
     private Toolbar toolbar;
-
+    private FragmentManager fragmentManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,18 +59,22 @@ public class HomeActivity extends BaseActivity {
 
         this.setToolBar(toolbar, R.string.toolbar_name_sport);
 
+        SportFragment sportFragment = SportFragment.getInstance("Switch ViewPager " + mTitles[0]);
 
         mFragments.add(SimpleCardFragment.getInstance("Switch ViewPager " + mTitles[1]));
-        mFragments.add(SportFragment.getInstance("Switch ViewPager " + mTitles[0]));
+        mFragments.add(sportFragment);
         mFragments.add(SimpleCardFragment.getInstance("Switch ViewPager " + mTitles[2]));
         mFragments.add(MyFragment.getInstance());
+        fragmentManager = getSupportFragmentManager();
+
 
         for (int i = 0; i < mTitles.length; i++) {
             mTabEntities.add(new TabEntity(mTitles[i], mIconSelectIds[i], mIconUnselectIds[i]));
         }
         mDecorView = getWindow().getDecorView();
         mViewPager = ViewFindUtils.find(mDecorView, R.id.home_view_pager);
-        mViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+
+        mViewPager.setAdapter(new MyPagerAdapter(fragmentManager));
 
         mTabLayout = (CommonTabLayout) findViewById(R.id.home_tab_layout);
 

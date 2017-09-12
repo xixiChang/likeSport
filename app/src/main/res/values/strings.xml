@@ -14,6 +14,7 @@
     <string name="toolbar_name_sport_circle">运动圈</string>
     <string name="toolbar_name_contacts">消息</string>
     <string name="toolbar_name_my">我的</string>
+    <string name="location">地点</string>
 
 </resources>
 
