@@ -16,6 +16,13 @@
     <string name="toolbar_name_contacts">消息</string>
     <string name="toolbar_name_my">我的</string>
     <string name="day_rate">今日排行</string>
+    <string name="user_score">成绩</string>
+    <string name="user_sport_team">我的运动团</string>
+    <string name="create_sport">创建</string>
+    <string name="user_setting">设置</string>
+    <string name="score_walk">健走</string>
+    <string name="score_max_run_dis">最远跑步距离</string>
+    <string name="no_data_tip">还没有任何数据呢</string>
 
 
 </resources>

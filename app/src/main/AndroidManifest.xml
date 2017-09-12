@@ -26,7 +26,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.DayRateActivity" />
-        <activity android:name=".activity.ScoreActivity"></activity>
+        <activity android:name=".activity.ScoreActivity" />
+        <activity android:name=".activity.MySportTeamActivity"></activity>
     </application>
 
 </manifest>

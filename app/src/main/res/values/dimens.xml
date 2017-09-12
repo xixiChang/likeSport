@@ -15,6 +15,7 @@
     <dimen name="button_padding_top">6dp</dimen>
 
     <!--text size-->
+    <dimen name="activity_content_size_xxx_big">26sp</dimen>
     <dimen name="activity_content_size_xx_big">22sp</dimen>
     <dimen name="activity_content_size_x_big">20sp</dimen>
     <dimen name="activity_content_size_big">18sp</dimen>
