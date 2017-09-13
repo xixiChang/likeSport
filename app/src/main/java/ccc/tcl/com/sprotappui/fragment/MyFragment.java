@@ -1,6 +1,7 @@
 package ccc.tcl.com.sprotappui.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ccc.tcl.com.sprotappui.R;
+import ccc.tcl.com.sprotappui.activity.DayRateActivity;
+import ccc.tcl.com.sprotappui.activity.MySportTeamActivity;
+import ccc.tcl.com.sprotappui.activity.ScoreActivity;
 import ccc.tcl.com.sprotappui.adapter.ChooseItem;
 import ccc.tcl.com.sprotappui.customui.RecycleViewDivider;
 import ccc.tcl.com.sprotappui.model.ChooseItemModel;
@@ -88,6 +92,12 @@ public class MyFragment extends Fragment {
         ChooseItem chooseItem = new ChooseItem(itemsInfos);
         recyclerView.addItemDecoration(new RecycleViewDivider(context, LinearLayoutManager.VERTICAL, 2, R.color.darkgrey));
         recyclerView.setLayoutManager(linearLayoutManager);
+        chooseItem.setListener(new ChooseItem.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                handleItem(position);
+            }
+        });
         recyclerView.setAdapter(chooseItem);
     }
 
@@ -114,5 +124,27 @@ public class MyFragment extends Fragment {
 //        }
 //        logoutDialog.show();
 //    }
+
+    private void handleItem(int position){
+        Intent intent = new Intent();
+        switch (position){
+            case 0:
+                intent.setClass(context, DayRateActivity.class);
+                startActivity(intent);
+                break;
+            case 1:
+                intent.setClass(context, ScoreActivity.class);
+                startActivity(intent);
+                break;
+            case 2:
+                intent.setClass(context, MySportTeamActivity.class);
+                startActivity(intent);
+                break;
+            case 3:
+                break;
+            default:
+                break;
+        }
+    }
 
 }

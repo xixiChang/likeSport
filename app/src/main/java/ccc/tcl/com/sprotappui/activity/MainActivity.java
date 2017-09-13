@@ -62,6 +62,7 @@ public class MainActivity extends BaseActivity {
         ChooseItem chooseItem = new ChooseItem(itemsInfos);
         recyclerView.addItemDecoration(new RecycleViewDivider(context, LinearLayoutManager.VERTICAL, 2, R.color.darkgrey));
         recyclerView.setLayoutManager(linearLayoutManager);
+
         recyclerView.setAdapter(chooseItem);
     }
 

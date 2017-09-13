@@ -21,30 +21,38 @@ import ccc.tcl.com.sprotappui.model.ChooseItemModel;
 public class ChooseItem extends RecyclerView.Adapter<ChooseItem.ViewHolder> {
 
     private List<ChooseItemModel> data;
+    private OnRecyclerViewItemClickListener listener;
 
     public ChooseItem(List<ChooseItemModel> data) {
         this.data = data;
     }
 
+    public interface OnRecyclerViewItemClickListener {
+        void onClick(View view, int position);
+    }
 
+    public void setListener(OnRecyclerViewItemClickListener listener) {
+        this.listener = listener;
+    }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_user_chooses, parent, false);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        return new ViewHolder(view);
+        ViewHolder holder = new ViewHolder(view);
+        //
+        return holder;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
             holder.item_icon.setImageResource(data.get(position).getIconId());
             holder.item_name.setText(data.get(position).getItemName());
-
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onClick(v, position);
+                }
+            });
     }
 
     @Override
