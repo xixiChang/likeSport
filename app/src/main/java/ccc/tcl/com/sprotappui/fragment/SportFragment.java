@@ -71,7 +71,7 @@ public class SportFragment extends Fragment {
         adapter.setListener(new FMSportItem.OnRecyclerViewItemClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Intent intent = new Intent(context,BaseActivity.class);
+                Intent intent = new Intent(context,);
                 startActivity(intent);
             }
         });
