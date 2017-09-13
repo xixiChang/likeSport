@@ -23,6 +23,7 @@
     <string name="score_walk">健走</string>
     <string name="score_max_run_dis">最远跑步距离</string>
     <string name="no_data_tip">还没有任何数据呢</string>
+    <string name="location">地点</string>
 
 
 </resources>
