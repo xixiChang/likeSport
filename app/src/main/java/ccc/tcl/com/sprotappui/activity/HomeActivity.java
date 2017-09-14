@@ -77,7 +77,7 @@ public class HomeActivity extends BaseActivity {
         mViewPager.setAdapter(new MyPagerAdapter(fragmentManager));
 
         mTabLayout = (CommonTabLayout) findViewById(R.id.home_tab_layout);
-
+        
         tl_2();
         mTabLayout.showMsg(2, 55);
         mTabLayout.setMsgMargin(0, -5, 5);
