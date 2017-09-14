@@ -33,6 +33,8 @@
         <activity android:name=".activity.MySportTeamActivity" />
         <activity android:name=".activity.CreateActivity" />
         <activity android:name=".activity.FinishCreateActivity"></activity>
+        <activity android:name=".activity.MySportTeamActivity" />
+        <activity android:name=".activity.SettingActivity"></activity>
     </application>
 
 </manifest>

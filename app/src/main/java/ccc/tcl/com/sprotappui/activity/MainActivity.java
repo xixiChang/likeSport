@@ -37,7 +37,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        super.setToolBar(toolbar, R.string.activity_main_title);
+        super.setToolBar(toolbar, R.string.activity_main_title, true);
         context = this;
         initView();
         setRecyclerViewAdapter();

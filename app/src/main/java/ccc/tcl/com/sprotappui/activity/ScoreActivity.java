@@ -16,6 +16,6 @@ public class ScoreActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
         toolBar = (ToolBar) findViewById(toolbar);
-        this.setToolBar(toolBar, R.string.user_score);
+        super.setToolBar(toolBar, R.string.user_score, true);
     }
 }

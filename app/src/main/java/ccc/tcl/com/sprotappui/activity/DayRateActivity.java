@@ -33,7 +33,7 @@ public class DayRateActivity extends BaseActivity {
         setContentView(R.layout.activity_day_rate);
         context = this;
         toolBar = (ToolBar) findViewById(toolbar);
-        this.setToolBar(toolBar, R.string.day_rate);
+        super.setToolBar(toolBar, R.string.day_rate, true);
 
         initView();
     }
