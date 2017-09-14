@@ -15,7 +15,7 @@ public class LayoutActivity extends BaseActivity {
 //        setContentView(R.layout.activity_layout);
         setContentView(R.layout.news_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.news_details_toolbar);
-        super.setToolBar(toolbar, R.string.activity_main_title);
+        super.setToolBar(toolbar, R.string.activity_main_title,true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setSmoothScrollbarEnabled(true);
         layoutManager.setAutoMeasureEnabled(true);
