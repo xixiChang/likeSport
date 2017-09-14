@@ -9,8 +9,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/white">
+        android:orientation="vertical">
 
         <include layout="@layout/toolbar_general"></include>
 
@@ -22,56 +21,54 @@
 
         <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/whitesmoke">
+            android:layout_height="224dp"
+            android:background="@color/lightgrey">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_height="50dp"
                 >
                 <TextView
 
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.99"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:textAlignment="center"
-                    android:background="@android:color/holo_green_dark"
                     android:text="开始时间:"
-                    android:padding="10dp" />
+                    android:paddingTop="15dp" />
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:textAlignment="center"
-                    android:padding="10dp"
+                    android:paddingTop="15dp"
                     android:text="2017-10-01" />
-
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.98"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:textAlignment="center"
-                    android:padding="10dp"
+                    android:paddingTop="15dp"
                     android:text="结束时间:" />
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:padding="10dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="15dp"
                     android:layout_weight="1"
                     android:textAlignment="center"
                     android:text="2017-10-08" />
             </LinearLayout>
             <TableRow
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/whitesmoke">
+                android:layout_height="70dp"
+                android:background="@color/lightgrey">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
                     android:layout_weight="1"
                     android:text="运动里程："
-                    android:padding="15dp"
+                    android:paddingTop="15dp"
                     android:paddingBottom="10dp"
                     android:drawableTop="@color/chartreuse" />
                 <TextView
@@ -79,18 +76,18 @@
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
                     android:layout_weight="1"
-                    android:padding="15dp"
+                    android:paddingTop="15dp"
                     android:text="100km"/>
             </TableRow>
             <TableRow
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/whitesmoke">
+                android:layout_height="0dp"
+                android:background="@color/lightgrey">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/cursor_theme"
+                    android:background="@drawable/textview_border"
                     android:textAlignment="center"
                     android:layout_weight="1"
                     android:text="@string/location"
@@ -107,8 +104,8 @@
             </TableRow>
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/whitesmoke">
+                android:layout_height="50dp"
+                android:background="@color/lightgrey">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -176,7 +173,6 @@
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ulips"
                 android:adjustViewBounds="true" />
-
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
