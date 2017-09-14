@@ -70,7 +70,7 @@ public class FMSportItem extends RecyclerView.Adapter<FMSportItem.ViewHolder> {
         ViewHolder(View itemView) {
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.item_fm_sport_image);
-//          label = (LabelView) itemView.findViewById(R.id.item_fm_sport_is_new);
+            //label = (LabelView) itemView.findViewById(R.id.item_fm_sport_is_new);
             name = (TextView) itemView.findViewById(R.id.item_fm_sport_name);
             hotValue = (TextView) itemView.findViewById(R.id.item_fm_sport_hot_value);
             leftTime = (TextView) itemView.findViewById(R.id.item_fm_sport_left_time);

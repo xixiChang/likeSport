@@ -45,6 +45,7 @@ public class BaseActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
+
                 return true;
             case R.id.more:
                 Toast.makeText(this, "MORE", Toast.LENGTH_SHORT).show();

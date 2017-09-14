@@ -1,10 +1,13 @@
 package ccc.tcl.com.sprotappui.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -85,5 +88,22 @@ public class MySportTeamActivity extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_sport_team_toolbar, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d("", "onOptionsItemSelected: "+item.getItemId());
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                return true;
+            case R.id.create_sport:
+                Intent intent = new Intent(MySportTeamActivity.this,PickPictureActivity.class);
+                startActivity(intent);
+                //this.finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+
     }
 }
