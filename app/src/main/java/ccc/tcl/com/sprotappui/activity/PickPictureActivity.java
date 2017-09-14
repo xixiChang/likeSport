@@ -45,7 +45,7 @@ public class PickPictureActivity extends BaseActivity{
             }
         });
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        super.setToolBar(toolbar, R.string.create_activity);
+        super.setToolBar(toolbar, R.string.create_activity,true);
         File tmpDir = new File(Environment.getExternalStorageDirectory() + "/zz"  );
         if (!tmpDir.exists()){
             tmpDir.mkdir();

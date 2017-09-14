@@ -15,7 +15,7 @@ public class FinishCreateActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finish_create);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        super.setToolBar(toolbar, R.string.create_activity);
+        super.setToolBar(toolbar, R.string.create_activity,true);
     }
 
     @Override
