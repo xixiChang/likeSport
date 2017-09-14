@@ -19,6 +19,7 @@ import java.util.List;
 
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.activity.BaseActivity;
+import ccc.tcl.com.sprotappui.activity.LayoutActivity;
 import ccc.tcl.com.sprotappui.adapter.FMSportItem;
 import ccc.tcl.com.sprotappui.model.Sport;
 
@@ -71,7 +72,7 @@ public class SportFragment extends Fragment {
         adapter.setListener(new FMSportItem.OnRecyclerViewItemClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Intent intent = new Intent(context,);
+                Intent intent = new Intent(context, LayoutActivity.class);
                 startActivity(intent);
             }
         });

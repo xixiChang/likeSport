@@ -27,8 +27,12 @@
         </activity>
         <activity android:name=".activity.DayRateActivity" />
         <activity android:name=".activity.ScoreActivity" />
-        <activity android:name=".activity.layouttActivity"></activity>
-        <activity android:name=".activity.MySportTeamActivity"></activity>
+        <activity android:name=".activity.LayoutActivity"
+            android:theme="@style/beautyTheme"/>
+        <activity android:name=".activity.PickPictureActivity" />
+        <activity android:name=".activity.MySportTeamActivity" />
+        <activity android:name=".activity.CreateActivity" />
+        <activity android:name=".activity.FinishCreateActivity"></activity>
     </application>
 
 </manifest>

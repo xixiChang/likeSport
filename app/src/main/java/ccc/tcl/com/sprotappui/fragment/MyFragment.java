@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
+import com.dl7.tag.TagView;
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
 
@@ -32,7 +33,7 @@ public class MyFragment extends Fragment {
     private RecyclerView recyclerView;
     private static List<ChooseItemModel> itemsInfos;
 
-    //private TextView logout;
+    private TagView logout;
 
     private ActionSheetDialog logoutDialog;
     private Context context;
@@ -71,14 +72,14 @@ public class MyFragment extends Fragment {
 
     private void initView(View view) {
         recyclerView = (RecyclerView) view.findViewById(R.id.choose_items);
-//        logout = (TextView) view.findViewById(R.id.user_logout_button);
-//
-//        logout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                logoutWindow();
-//            }
-//        });
+        logout = (TagView) view.findViewById(R.id.user_logout_button);
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logoutWindow();
+            }
+        });
     }
 
     private void setRecyclerViewAdapter() {
@@ -101,29 +102,29 @@ public class MyFragment extends Fragment {
         recyclerView.setAdapter(chooseItem);
     }
 
-//    private void logoutWindow() {
-//        if (logoutDialog == null) {
-//            logoutDialog = new ActionSheetDialog(context, new String[]{"退出"}, null);
-//            logoutDialog.cancelText("取消")
-//                    .isTitleShow(false)
-//                    .create();
-//            logoutDialog.setOnOperItemClickL(new OnOperItemClickL() {
-//                @Override
-//                public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                    switch (position) {
-//                        case 0:
-//                            if (logoutDialog.isShowing())
-//                                logoutDialog.superDismiss();
-//                            getActivity().finish();
-//                            break;
-//                        default:
-//                            break;
-//                    }
-//                }
-//            });
-//        }
-//        logoutDialog.show();
-//    }
+    private void logoutWindow() {
+        if (logoutDialog == null) {
+            logoutDialog = new ActionSheetDialog(context, new String[]{"退出"}, null);
+            logoutDialog.cancelText("取消")
+                    .isTitleShow(false)
+                    .create();
+            logoutDialog.setOnOperItemClickL(new OnOperItemClickL() {
+                @Override
+                public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    switch (position) {
+                        case 0:
+                            if (logoutDialog.isShowing())
+                                logoutDialog.superDismiss();
+                            getActivity().finish();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            });
+        }
+        logoutDialog.show();
+    }
 
     private void handleItem(int position){
         Intent intent = new Intent();
