@@ -12,7 +12,7 @@ public class LayoutActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_layout);
+//      setContentView(R.layout.activity_layout);
         setContentView(R.layout.news_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.news_details_toolbar);
         super.setToolBar(toolbar, R.string.activity_main_title,true);
