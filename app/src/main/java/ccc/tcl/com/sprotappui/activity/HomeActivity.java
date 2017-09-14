@@ -55,7 +55,7 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.activity_home);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        this.setToolBar(toolbar, R.string.toolbar_name_sport);
+        super.setToolBar(toolbar, R.string.toolbar_name_sport, false);
 
 
         mFragments.add(SimpleCardFragment.getInstance("Switch ViewPager " + mTitles[1]));
@@ -77,14 +77,7 @@ public class HomeActivity extends BaseActivity {
         mTabLayout.setMsgMargin(0, -5, 5);
     }
 
-    @Override
-    protected void setToolBar(Toolbar toolbar, int titleID) {
-        toolbar.setTitle(titleID);
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() == null)
-            return;
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
+
 
     private Random mRandom = new Random();
 
@@ -93,9 +86,11 @@ public class HomeActivity extends BaseActivity {
         switch (position) {
             case 0:
                 toolbar.setVisibility(View.VISIBLE);
+                toolbar.setTitle(R.string.toolbar_name_sport);
                 break;
             case 1:
                 toolbar.setVisibility(View.VISIBLE);
+                toolbar.setTitle(R.string.toolbar_name_sport_circle);
                 break;
             case 2:
                 toolbar.setVisibility(View.GONE);

@@ -34,7 +34,7 @@ public class MySportTeamActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_sport_team);
         toolBar = (ToolBar) findViewById(toolbar);
-        setToolBar(toolBar, R.string.user_sport_team);
+        super.setToolBar(toolBar, R.string.user_sport_team, true);
         initView();
     }
 
@@ -64,18 +64,18 @@ public class MySportTeamActivity extends BaseActivity {
     private void initData() {
         sports = new ArrayList<>();
         UserSport userSport;
-        SimpleDateFormat simepleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
-        for (int i=0; i<5; i++){
+        for (int i=0; i<18; i++){
             userSport = new UserSport();
             String imageID = getResources().getIdentifier(
-                    "p" + (i+1), "drawable", getPackageName()) + "";
+                    "p" + ((i+1)>9 ? i-8 : i+1), "drawable", getPackageName()) + "";
             userSport.setName("这是活动"+ (i+1));
             userSport.setImageUrl(imageID);
             userSport.setBehavior(i%2 == 0 ? "发起人":"参与");
             userSport.setStatus( i < 2 ? "正在进行":"已结束");
-            userSport.setTime(simepleDateFormat.format(new Date()) + "-" +
-                    simepleDateFormat.format(new Date()));
+            userSport.setTime(simpleDateFormat.format(new Date()) + "-" +
+                    simpleDateFormat.format(new Date()));
             userSport.setValue((i+1) * 14 +3 + "参与");
             sports.add(userSport);
         }

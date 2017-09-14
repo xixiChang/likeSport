@@ -1,5 +1,6 @@
 package ccc.tcl.com.sprotappui.activity;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -18,18 +19,19 @@ import static ccc.tcl.com.sprotappui.utils.Util.isShouldHideInput;
 
 public class BaseActivity extends AppCompatActivity {
 
-
     /**
      *
      * @param toolbar
      * @param titleID
+     * @param canBack 是否能点击左上角返回
      */
-    protected void setToolBar(Toolbar toolbar, int titleID){
+    protected void setToolBar(@NonNull Toolbar toolbar, @NonNull int titleID, @NonNull boolean canBack) {
         toolbar.setTitle(titleID);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() == null)
             return;
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (canBack)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 
@@ -46,6 +48,9 @@ public class BaseActivity extends AppCompatActivity {
                 return true;
             case R.id.more:
                 Toast.makeText(this, "MORE", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.create_sport:
+                Toast.makeText(this, "创建活动", Toast.LENGTH_SHORT).show();
                 return true;
         }
         return super.onOptionsItemSelected(item);
