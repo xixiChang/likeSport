@@ -22,6 +22,7 @@
     <string name="create_activity">创建活动</string>
     <string name="next">下一步</string>
     <string name="finish">完成</string>
+    <string name="share_activity">分享</string>
     <string name="user_setting">设置</string>
     <string name="score_walk">健走</string>
     <string name="score_max_run_dis">最远跑步距离</string>

@@ -36,6 +36,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.button:
+                platform = SHARE_MEDIA.QQ;
+                mShareAPI.doOauthVerify(this, platform, umAuthListener);
+                mShareAPI.getPlatformInfo(LoginActivity.this, platform, umAuthListener);
                 break;
             case R.id.button2:
                 platform = SHARE_MEDIA.WEIXIN;
@@ -66,4 +69,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Toast.makeText( getApplicationContext(), "Authorize cancel", Toast.LENGTH_SHORT).show();
         }
     };
+    @Override
+    protected void onDestroy() {
+        UMShareAPI.get(this).release();
+        super.onDestroy();
+    }
 }
