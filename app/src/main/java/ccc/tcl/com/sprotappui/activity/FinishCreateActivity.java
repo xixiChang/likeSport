@@ -15,6 +15,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import ccc.tcl.com.sprotappui.R;
 
 import static ccc.tcl.com.sprotappui.utils.Util.hideInputMethod;
@@ -23,18 +27,25 @@ import static ccc.tcl.com.sprotappui.utils.Util.isShouldHideInput;
 public class FinishCreateActivity extends BaseActivity {
     TextView startTime;
     TextView endTime;
+    TextView time_text;
     ViewStub stub;
     LinearLayout ll = null;
+    int[] location_datePicker = new int[2];
+    int[] start_textview = new int[2];
+    SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
+    boolean set_start_time = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finish_create);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         super.setToolBar(toolbar, R.string.create_activity,true);
+        time_text = (TextView) findViewById(R.id.textView);
         startTime = (TextView) findViewById(R.id.start_time);
         startTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                set_start_time = true;
                 if (ll == null){//inflate只能调用一次，再次调用会报异常
                     stub.inflate();
                 }else if(ll.getVisibility()==View.GONE){
@@ -48,6 +59,7 @@ public class FinishCreateActivity extends BaseActivity {
         endTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                set_start_time = false;
                 if (ll == null){//inflate只能调用一次，再次调用会报异常
                     stub.inflate();
                 }else if(ll.getVisibility()==View.GONE){
@@ -57,12 +69,26 @@ public class FinishCreateActivity extends BaseActivity {
             }
 
         });
+        startTime.setText(format.format(new Date().getTime()));
+        endTime.setText(format.format(new Date().getTime()));
         stub = (ViewStub) findViewById(R.id.viewStub);
         stub.setOnInflateListener(new ViewStub.OnInflateListener() {
             @Override
-            public void onInflate(ViewStub stub, View inflated) {//加载完成以后回调//下面的代码也可以写到inflate()返回以后调用
+            public void onInflate(ViewStub stub, final View inflated) {//加载完成以后回调//下面的代码也可以写到inflate()返回以后调用
                 ll = (LinearLayout) inflated;
                 DatePicker picker = (DatePicker) findViewById(R.id.datePicker2);
+                picker.init(2013, 1, 4, new DatePicker.OnDateChangedListener() {
+                    @Override
+                    public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.set(year, monthOfYear, dayOfMonth);
+                        if (set_start_time)
+                            startTime.setText(format.format(calendar.getTime()));
+                        else if (!set_start_time)
+                            endTime.setText(format.format(calendar.getTime()));
+                        Toast.makeText(FinishCreateActivity.this, format.format(calendar.getTime()), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
@@ -88,12 +114,17 @@ public class FinishCreateActivity extends BaseActivity {
      */
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
+
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             View v = getCurrentFocus();
-            Log.d("", "dispatchTouchEvent: "+v.getClass() + v.getId());
 
+            if (null!=ll)
+                ll.getLocationInWindow(location_datePicker);
+            time_text.getLocationInWindow(start_textview);
+            Log.d("111", "dispatchTouchEvent: evY"+ev.getY());
+            Log.d("111", "dispatchTouchEvent: viewY"+location_datePicker[1]);
             //if (ll != null && !ll.hasFocus())
-            if (ll != null && ev.getY() >  startTime.getY())
+            if (ll != null && (ev.getY() >  ll.getY()+location_datePicker[1] || ev.getY() < start_textview[1]))
                 ll.setVisibility(View.GONE);
         }
         return super.dispatchTouchEvent(ev);
