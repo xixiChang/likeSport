@@ -12,6 +12,7 @@
     tools:context="ccc.tcl.com.sprotappui.activity.FinishCreateActivity"
     android:weightSum="1">
     <include layout="@layout/toolbar_general"></include>
+
     <TextView
         android:text="选择开始时间和结束时间"
         android:layout_width="match_parent"
@@ -20,23 +21,47 @@
         android:layout_marginStart="7dp"
         android:id="@+id/textView"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-    <EditText
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/editText"
-        android:hint="20字以内"
-        android:background="@color/lightgrey" />
+        android:background="@color/lightgrey">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/start_time"
+            android:layout_weight="2"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="至"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/end_time"
+            android:layout_weight="2"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+    </LinearLayout>
+
+
+    <ViewStub
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout="@layout/layout_date_picker"
+        android:id="@+id/viewStub" />
+
     <TextView
         android:text="选择一个地点，让同城的人可以看到"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
-
         android:id="@+id/textView1"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
@@ -51,6 +76,7 @@
         android:gravity="start"
         android:hint="40字以内"
         android:background="@color/lightgrey" />
+
     <TextView
         android:text="运动里程（KM ）"
         android:layout_width="match_parent"

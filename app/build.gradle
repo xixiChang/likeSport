@@ -38,11 +38,11 @@ dependencies {
     //Dialog 弹窗库
     compile 'com.flyco.dialog:FlycoDialog_Lib:1.2.2@aar'
     compile 'com.flyco.animation:FlycoAnimation_Lib:1.0.0@aar'
-    compile files('build/umeng_integratetool_result/libs/SocialSDK_QQ_Simplify.jar')
-    compile files('build/umeng_integratetool_result/libs/SocialSDK_WeChat_Simplify.jar')
-    compile files('build/umeng_integratetool_result/libs/umeng_shareboard_widget.jar')
-    compile files('build/umeng_integratetool_result/libs/umeng_social_api.jar')
-    compile files('build/umeng_integratetool_result/libs/umeng_social_net.jar')
-    compile files('build/umeng_integratetool_result/libs/umeng_social_shareboard.jar')
-    compile files('build/umeng_integratetool_result/libs/umeng_social_tool.jar')
+    compile files('libs/umeng_integratetool_result/libs/SocialSDK_QQ_Simplify.jar')
+    compile files('libs/umeng_integratetool_result/libs/SocialSDK_WeChat_Simplify.jar')
+    compile files('libs/umeng_integratetool_result/libs/umeng_shareboard_widget.jar')
+    compile files('libs/umeng_integratetool_result/libs/umeng_social_api.jar')
+    compile files('libs/umeng_integratetool_result/libs/umeng_social_net.jar')
+    compile files('libs/umeng_integratetool_result/libs/umeng_social_shareboard.jar')
+    compile files('libs/umeng_integratetool_result/libs/umeng_social_tool.jar')
 }
