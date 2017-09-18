@@ -73,7 +73,7 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingStart="10dp"
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:ems="10"
         android:id="@+id/editText2"
         android:gravity="start"
@@ -101,7 +101,7 @@
         tools:numeric="integer"
         android:inputType="number" />
     <TextView
-        android:text="活动详情"
+        android:text="备注"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
@@ -113,7 +113,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:paddingStart="10dp"
-        android:inputType="textPersonName"
+        android:inputType="textMultiLine"
         android:gravity="start"
         android:ems="10"
         android:hint="20字以内"
