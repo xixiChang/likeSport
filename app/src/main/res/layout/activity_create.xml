@@ -47,11 +47,34 @@
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:paddingStart="10dp"
-        android:inputType="textPersonName"
+        android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/editText2"
         android:gravity="start"
-        android:hint="40字以内"
+        android:hint="20字以内"
         android:background="@color/lightgrey"
-        android:layout_weight="0.45" />
+        android:layout_weight="0.17" />
+
+    <TextView
+        android:text="详情"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginStart="7dp"
+        android:id="@+id/textView2"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingStart="10dp"
+        android:background="@color/lightgrey"
+        android:gravity="start"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/editText3"
+        android:hint="50字以内"
+        android:layout_weight="0.27" />
 </LinearLayout>
