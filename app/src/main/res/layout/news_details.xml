@@ -96,15 +96,22 @@
                 android:text="温馨提示"
                 android:textSize="@dimen/activity_content_size_mid" />
 
-        <Button
+        <com.dl7.tag.TagView
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@mipmap/ic_button"
-            android:layout_marginTop="22dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
-            android:paddingBottom="10dp"
-            android:text="点击就送"/>
+            android:layout_alignParentBottom="true"
+            app:tag_text="点击就送"
+            app:tag_text_color="@color/white"
+            app:tag_bg_color="@color/springgreen"
+            app:tag_bg_color_check="@color/greenyellow"
+            app:tag_border_color="@color/red"
+            app:tag_shape="arc"
+            app:tag_press_feedback="true"
+            android:layout_centerHorizontal="true"/>
         </LinearLayout>
 
 
