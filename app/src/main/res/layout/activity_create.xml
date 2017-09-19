@@ -13,7 +13,7 @@
     android:weightSum="1">
     <include layout="@layout/toolbar_general"></include>
     <TextView
-        android:text="名字"
+        android:text="@string/activity_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
@@ -30,10 +30,9 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/editText"
-        android:hint="20字以内"
-        android:background="@color/lightgrey" />
+        android:hint="20字以内" />
     <TextView
-        android:text="简介"
+        android:text="@string/brief"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
@@ -49,10 +48,10 @@
         android:paddingStart="10dp"
         android:inputType="textMultiLine"
         android:ems="10"
+        android:textCursorDrawable="@drawable/cursor_theme"
         android:id="@+id/editText2"
         android:gravity="start"
         android:hint="20字以内"
-        android:background="@color/lightgrey"
         android:layout_weight="0.17" />
 
     <TextView
@@ -70,7 +69,6 @@
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:paddingStart="10dp"
-        android:background="@color/lightgrey"
         android:gravity="start"
         android:inputType="textMultiLine"
         android:ems="10"

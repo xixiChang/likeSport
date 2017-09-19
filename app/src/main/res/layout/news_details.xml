@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tool:context=".activity.LayoutActivity">
+    tool:context=".activity.LayoutActivity"
+    android:background="@color/my">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/news_details_appbar"
@@ -33,7 +34,7 @@
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/oala"
+                android:src="@mipmap/activity"
                 app:layout_collapseMode="parallax" />
 
             <android.support.v7.widget.Toolbar
@@ -50,7 +51,8 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
@@ -66,42 +68,42 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/lightgrey"
+                android:background="@color/white"
                 android:text="活动详情"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+                android:textSize="@dimen/activity_content_size_big" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/lightgrey"
+                android:background="@color/white"
                 android:text="内容"
-                android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Title" />
+                android:textSize="@dimen/activity_content_size_mid" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/lightgrey"
+                android:background="@color/white"
                 android:text="集合地点"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                android:textSize="@dimen/activity_content_size_mid" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/lightgrey"
+                android:background="@color/white"
                 android:text="交通方式"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                android:textSize="@dimen/activity_content_size_mid" />
             <TextView
-                android:layout_width="394dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/lightgrey"
+                android:background="@color/white"
                 android:text="温馨提示"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/lightgrey"
-                app:srcCompat="@drawable/ulips"
-                android:adjustViewBounds="true" />
+                android:textSize="@dimen/activity_content_size_mid" />
+
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
+            android:background="@mipmap/ic_button"
+            android:layout_marginTop="22dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:paddingBottom="10dp"
             android:text="点击就送"/>
         </LinearLayout>
 

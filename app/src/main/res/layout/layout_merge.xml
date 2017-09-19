@@ -2,42 +2,50 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:paddingTop="20dp"
-
-        >
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
         <TextView
-
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/lightgrey"
+            android:layout_height="match_parent"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:layout_weight="1"
             android:textAlignment="center"
+            android:background="@color/white"
             android:text="开始时间:"
-            android:paddingTop="15dp" />
+            android:textSize="@dimen/activity_content_size_mid"/>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/lightgrey"
+            android:layout_height="match_parent"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:layout_marginRight="2px"
             android:layout_weight="1"
             android:textAlignment="center"
-            android:paddingTop="15dp"
-            android:text="2017-10-01" />
+            android:background="@color/white"
+            android:text="2017-10-01"
+            android:textSize="@dimen/activity_content_size_mid"/>
+
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/lightgrey"
+            android:layout_height="match_parent"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:layout_weight="1"
             android:textAlignment="center"
-            android:paddingTop="15dp"
-            android:text="结束时间:" />
+            android:background="@color/white"
+            android:text="结束时间:"
+            android:textSize="@dimen/activity_content_size_mid"/>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/lightgrey"
-            android:paddingTop="15dp"
+            android:layout_height="match_parent"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:layout_weight="1"
             android:textAlignment="center"
-            android:text="2017-10-08" />
+            android:background="@color/white"
+            android:text="2017-10-08"
+            android:textSize="@dimen/activity_content_size_mid"/>
     </LinearLayout>
 </merge>

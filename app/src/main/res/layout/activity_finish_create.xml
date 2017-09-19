@@ -14,7 +14,7 @@
     <include layout="@layout/toolbar_general"></include>
 
     <TextView
-        android:text="选择开始时间和结束时间"
+        android:text="@string/time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
@@ -27,8 +27,7 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:background="@color/lightgrey">
+        android:paddingBottom="10dp">
 
         <TextView
             android:id="@+id/start_time"
@@ -74,14 +73,15 @@
         android:paddingBottom="10dp"
         android:paddingStart="10dp"
         android:inputType="text"
-        android:ems="10"
+        android:textColorLink="@color/lightseagreen"
         android:id="@+id/editText2"
         android:gravity="start"
         android:hint="40字以内"
-        android:background="@color/lightgrey" />
+        android:drawableBottom="@color/aqua"
+        android:lines="?android:attr/scrollbarDefaultDelayBeforeFade" />
 
     <TextView
-        android:text="运动里程（KM ）"
+        android:text="@string/day_distance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
@@ -97,7 +97,6 @@
         android:padding="20dp"
         android:ems="10"
         android:hint="20字以内"
-        android:background="@color/lightgrey"
         tools:numeric="integer"
         android:inputType="number" />
     <TextView
@@ -117,7 +116,6 @@
         android:gravity="start"
         android:ems="10"
         android:hint="20字以内"
-        android:background="@color/lightgrey"
         android:layout_weight="0.36" />
 
 </LinearLayout>
