@@ -28,6 +28,7 @@ import ccc.tcl.com.sprotappui.R;
 
 public class PickPictureActivity extends BaseActivity{
     ImageView imageView;
+    ImageView imageView2;
     private static final String TAG = "PickPictureActivity";
     private ActionSheetDialog pick_picture;
     final int PHOTO_REQUEST_CUT = 0;
@@ -42,6 +43,14 @@ public class PickPictureActivity extends BaseActivity{
             @Override
             public void onClick(View v) {
                 PopupWindow();
+            }
+        });
+        imageView2 = (ImageView) findViewById(R.id.imageView2);
+        imageView2 .setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //
+                // PopupWindow();
             }
         });
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -128,11 +137,12 @@ public class PickPictureActivity extends BaseActivity{
 
     private void setPicToView(Intent picdata) {
         Bundle bundle = picdata.getExtras();
-        if (bundle != null) {
+        if (bundle != null) {pick_picture.dismiss();
             Bitmap photo_data = bundle.getParcelable("data");
             SaveBitmapToFile(photo_data);
             Drawable drawable = new BitmapDrawable(photo_data);
-            imageView.setImageDrawable(drawable);
+            imageView2.setImageDrawable(drawable);
+
         }
     }
 
@@ -154,14 +164,14 @@ public class PickPictureActivity extends BaseActivity{
                             intent1.putExtra(MediaStore.EXTRA_OUTPUT,photoUri);
                             //调用系统相机
                             startActivityForResult(intent1, PHOTO_REQUEST_TAKE);
-                            //pick_picture = null;
+                            pick_picture.dismiss();
                             break;
 
                         case 1:
                             Intent intent = new Intent(Intent.ACTION_PICK, null);
                             intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,"image/*");
                             startActivityForResult(intent, PHOTO_REQUEST_GALLERY);
-                            //pick_picture = null;
+                            pick_picture.dismiss();
                             break;
                     }
                 }

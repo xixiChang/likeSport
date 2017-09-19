@@ -1,11 +1,15 @@
 package ccc.tcl.com.sprotappui.activity;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.umeng.socialize.ShareAction;
@@ -19,9 +23,10 @@ import java.io.File;
 import java.util.Map;
 
 import ccc.tcl.com.sprotappui.R;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class LayoutActivity extends BaseActivity {
-
+    CircleImageView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,13 +37,29 @@ public class LayoutActivity extends BaseActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setSmoothScrollbarEnabled(true);
         layoutManager.setAutoMeasureEnabled(true);
-
+        imageView = (CircleImageView) findViewById(R.id.circleImageView1);
+        Resources resources = getResources();
+        Drawable[] drawables = new Drawable[4];
+        drawables[0] = resources.getDrawable(R.drawable.head2,null);
+        drawables[1] = resources.getDrawable(R.drawable.head3,null);
+        drawables[2] = resources.getDrawable(R.drawable.head4,null);
+        drawables[3] = resources.getDrawable(R.drawable.head5,null);
+        LayerDrawable layerDrawable = new LayerDrawable(drawables);
+        imageView.setBackgroundColor(getResources().getColor(R.color.blue,null));
+        imageView.getBackground().setAlpha(0);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.share_toolbar,menu);
         return super.onCreateOptionsMenu(menu);
     }
+
+
+
+
+
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
