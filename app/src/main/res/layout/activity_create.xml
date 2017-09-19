@@ -31,7 +31,7 @@
         android:backgroundTint="@color/springgreen"
         android:textCursorDrawable="@drawable/cursor_theme"
         android:id="@+id/editText"
-        android:hint="20字以内" />
+        android:hint="10字以内" />
     <TextView
         android:text="@string/brief"
         android:layout_width="match_parent"
