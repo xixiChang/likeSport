@@ -10,7 +10,6 @@
     <string name="chooses_person_history">个人记录</string>
     <string name="chooses_my_sport_team">我的运动团</string>
     <string name="chooses_setting">设置</string>
-
     <string name="toolbar_name_sport">运动</string>
     <string name="toolbar_name_sport_circle">运动圈</string>
     <string name="toolbar_name_contacts">消息</string>
@@ -19,21 +18,9 @@
     <string name="user_score">成绩</string>
     <string name="user_sport_team">我的运动团</string>
     <string name="create_sport">创建</string>
-    <string name="create_activity">创建活动</string>
-    <string name="next">下一步</string>
-    <string name="finish">完成</string>
-    <string name="msg_setting">消息通知</string>
-    <string name="activity_name">活动名称</string>
-    <string name="time">起止时间</string>
-    <string name="brief">简介</string>
-    <string name="share_activity">分享</string>
     <string name="user_setting">设置</string>
     <string name="score_walk">健走</string>
     <string name="score_max_run_dis">最远跑步距离</string>
     <string name="no_data_tip">还没有任何数据呢</string>
-    <string name="location">活动地点</string>
-    <string name="title_activity_msg_setting">Settings</string>
-
-
 </resources>
 

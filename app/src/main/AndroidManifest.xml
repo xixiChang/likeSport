@@ -2,17 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ccc.tcl.com.sprotappui">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -27,17 +20,6 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-
-        <meta-data
-            android:name="UMENG_APPKEY"
-            android:value="59b4d0b4734be43ee60000f9" />
-
-        <activity
-            android:name=".weixin.callback.WXEntryActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".activity.BaseActivity" />
         <activity android:name=".activity.HomeActivity">
             <intent-filter>
@@ -48,21 +30,13 @@
         </activity>
         <activity android:name=".activity.DayRateActivity" />
         <activity android:name=".activity.ScoreActivity" />
-        <activity
-            android:name=".activity.LayoutActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            android:theme="@style/beautyTheme" />
-        <!-- android:theme="@android:style/Theme.Translucent.NoTitleBar" -->
-
-        <activity android:name=".activity.PickPictureActivity" />
         <activity android:name=".activity.MySportTeamActivity" />
-        <activity android:name=".activity.CreateActivity" />
-        <activity android:name=".activity.FinishCreateActivity" />
         <activity android:name=".activity.SettingActivity" />
-        <activity
-            android:name=".activity.MsgSettingActivity"
-            android:label="@string/title_activity_msg_setting" />
+        <activity android:name=".activity.LoginActivity">
+
+        </activity>
+        <activity android:name=".activity.RegisterActivity"></activity>
+        <activity android:name=".activity.TestActivity"></activity>
     </application>
 
 </manifest>
