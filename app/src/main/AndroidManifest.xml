@@ -10,8 +10,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <application
         android:allowBackup="true"
@@ -53,6 +51,7 @@
         <activity
             android:name=".activity.MsgSettingActivity"
             android:label="@string/title_activity_msg_setting" />
+
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.LoginActivity">
 
