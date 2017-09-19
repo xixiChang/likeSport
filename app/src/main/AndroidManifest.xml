@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ccc.tcl.com.sprotappui">
-
     <uses-permission android:name="android.permission.INTERNET" />
+
+
+
+
+
+
+
+
+
+
+
 
     <application
         android:name=".App"
@@ -31,6 +41,20 @@
         <activity android:name=".activity.DayRateActivity" />
         <activity android:name=".activity.ScoreActivity" />
         <activity android:name=".activity.MySportTeamActivity" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.LoginActivity">
 
