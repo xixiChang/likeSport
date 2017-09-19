@@ -118,7 +118,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_alignParentBottom="true"
-        android:text="@string/logout"
+        app:tag_text="@string/logout"
         app:tag_text_color="@color/red"
         app:tag_border_color="@color/red"
         app:tag_shape="arc"
