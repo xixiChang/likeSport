@@ -61,19 +61,6 @@
         <activity android:name=".activity.FinishCreateActivity" />
         <activity android:name=".activity.SettingActivity" />
         <activity
-            android:name=".activity.LoginActivity"
-            android:launchMode="singleTask"
-            android:noHistory="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="tencent100424468" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".activity.MsgSettingActivity"
             android:label="@string/title_activity_msg_setting" />
     </application>
