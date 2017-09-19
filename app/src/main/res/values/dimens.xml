@@ -11,8 +11,11 @@
     <dimen name="item_margin_bottom">8dp</dimen>
 
     <!--padding distance-->
-    <dimen name="button_padding_left">45dp</dimen>
+    <dimen name="button_padding_left">50dp</dimen>
     <dimen name="button_padding_top">6dp</dimen>
+    <dimen name="activity_vertical_padding">10dp</dimen>
+    <dimen name="activity_horizontal_padding">10dp</dimen>
+    <dimen name="activity_vertical_padding_big">16dp</dimen>
 
     <!--text size-->
     <dimen name="activity_content_size_xxx_big">26sp</dimen>

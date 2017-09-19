@@ -4,6 +4,10 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="black">#000000</color><!--黑色 -->
+    <color name="black_background">#424242</color><!--黑色背景(线条颜色) -->
+    <color name="black_word_base">#424242</color><!--一般文字颜色 -->
+    <color name="black_word_point">#212121</color><!--强调文字颜色 -->
+    <color name="grey_background">#EEEEEE</color><!--强调文字颜色 -->
     <color name="white">#FFFFFF</color><!--白色-->
     <color name="snow">#fffafa</color><!--雪白色 -->
     <color name="floralwhite">#fffaf0</color><!--花白色 -->

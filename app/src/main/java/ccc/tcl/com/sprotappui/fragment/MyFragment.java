@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
+import com.dl7.tag.TagView;
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
 
@@ -22,6 +23,7 @@ import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.activity.DayRateActivity;
 import ccc.tcl.com.sprotappui.activity.MySportTeamActivity;
 import ccc.tcl.com.sprotappui.activity.ScoreActivity;
+import ccc.tcl.com.sprotappui.activity.SettingActivity;
 import ccc.tcl.com.sprotappui.adapter.ChooseItem;
 import ccc.tcl.com.sprotappui.customui.RecycleViewDivider;
 import ccc.tcl.com.sprotappui.model.ChooseItemModel;
@@ -32,7 +34,7 @@ public class MyFragment extends Fragment {
     private RecyclerView recyclerView;
     private static List<ChooseItemModel> itemsInfos;
 
-    private TextView logout;
+    private TagView logout;
 
     private ActionSheetDialog logoutDialog;
     private Context context;
@@ -71,7 +73,7 @@ public class MyFragment extends Fragment {
 
     private void initView(View view) {
         recyclerView = (RecyclerView) view.findViewById(R.id.choose_items);
-        logout = (TextView) view.findViewById(R.id.user_logout_button);
+        logout = (TagView) view.findViewById(R.id.user_logout_button);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,21 +132,20 @@ public class MyFragment extends Fragment {
         switch (position){
             case 0:
                 intent.setClass(context, DayRateActivity.class);
-                startActivity(intent);
                 break;
             case 1:
                 intent.setClass(context, ScoreActivity.class);
-                startActivity(intent);
                 break;
             case 2:
                 intent.setClass(context, MySportTeamActivity.class);
-                startActivity(intent);
                 break;
             case 3:
+                intent.setClass(context, SettingActivity.class);
                 break;
             default:
                 break;
         }
+        startActivity(intent);
     }
 
 }

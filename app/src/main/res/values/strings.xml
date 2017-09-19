@@ -10,7 +10,6 @@
     <string name="chooses_person_history">个人记录</string>
     <string name="chooses_my_sport_team">我的运动团</string>
     <string name="chooses_setting">设置</string>
-
     <string name="toolbar_name_sport">运动</string>
     <string name="toolbar_name_sport_circle">运动圈</string>
     <string name="toolbar_name_contacts">消息</string>
@@ -23,7 +22,5 @@
     <string name="score_walk">健走</string>
     <string name="score_max_run_dis">最远跑步距离</string>
     <string name="no_data_tip">还没有任何数据呢</string>
-
-
 </resources>
 
