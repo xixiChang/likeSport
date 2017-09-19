@@ -76,6 +76,6 @@
         android:backgroundTint="@color/springgreen"
         android:textCursorDrawable="@drawable/cursor_theme"
         android:id="@+id/editText3"
-        android:hint="50字以内"
+        android:hint="40字以内"
         android:layout_weight="0.27" />
 </LinearLayout>
