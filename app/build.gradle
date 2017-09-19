@@ -31,7 +31,7 @@ dependencies {
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     compile 'io.reactivex:rxandroid:1.2.0'
     compile 'com.google.code.gson:gson:2.6.2'
-    //tablayout
+
     //circleImageView
     //TagLayout ：标签库
     //FlycoLabelView 角标库
