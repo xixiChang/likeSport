@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_msg_setting"
+    android:id="@+id/activity_authority_setting"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context="ccc.tcl.com.sprotappui.activity.AuthoritySettingActivity"
     android:orientation="vertical"
-    android:background="@color/grey_background"
-    tools:context="ccc.tcl.com.sprotappui.activity.MsgSettingActivity">
-
+    android:background="@color/grey_background">
     <include layout="@layout/toolbar_general"></include>
-
     <android.support.v7.widget.SwitchCompat
         android:id="@+id/switch1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/msg_setting"
+        android:text="@string/camera"
         android:background="@color/white"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
@@ -26,7 +24,7 @@
         android:id="@+id/switch2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/sport_circle_setting"
+        android:text="@string/storage"
         android:background="@color/white"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
@@ -38,7 +36,7 @@
         android:id="@+id/switch3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/sounds"
+        android:text="@string/position"
         android:background="@color/white"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
@@ -57,5 +55,4 @@
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
         android:layout_marginTop="2px"/>
-
 </LinearLayout>

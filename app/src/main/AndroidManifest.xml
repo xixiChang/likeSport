@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -51,13 +52,11 @@
         <activity
             android:name=".activity.MsgSettingActivity"
             android:label="@string/title_activity_msg_setting" />
-
         <activity android:name=".activity.SettingActivity" />
-        <activity android:name=".activity.LoginActivity">
-
-        </activity>
-        <activity android:name=".activity.RegisterActivity"></activity>
-        <activity android:name=".activity.TestActivity"></activity>
+        <activity android:name=".activity.LoginActivity"></activity>
+        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.TestActivity" />
+        <activity android:name=".activity.AuthoritySettingActivity"></activity>
     </application>
 
 </manifest>

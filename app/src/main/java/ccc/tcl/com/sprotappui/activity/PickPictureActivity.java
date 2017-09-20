@@ -49,8 +49,7 @@ public class PickPictureActivity extends BaseActivity{
         imageView2 .setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //
-                // PopupWindow();
+                 PopupWindow();
             }
         });
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
