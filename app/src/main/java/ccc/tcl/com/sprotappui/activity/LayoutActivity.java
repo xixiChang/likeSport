@@ -55,12 +55,6 @@ public class LayoutActivity extends BaseActivity {
     }
 
 
-
-
-
-
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){

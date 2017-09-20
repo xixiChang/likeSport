@@ -46,10 +46,10 @@ public class MyFragment extends Fragment {
 
     static {
         itemsInfos = new ArrayList<>();
-        itemsInfos.add(new ChooseItemModel(R.drawable.photo1, "排行"));
-        itemsInfos.add(new ChooseItemModel(R.drawable.photo1, "个人记录"));
-        itemsInfos.add(new ChooseItemModel(R.drawable.photo1, "我的运动团"));
-        itemsInfos.add(new ChooseItemModel(R.drawable.photo1, "设置"));
+        itemsInfos.add(new ChooseItemModel(R.mipmap.grade, "成绩"));
+        itemsInfos.add(new ChooseItemModel(R.mipmap.rating, "今日排行"));
+        itemsInfos.add(new ChooseItemModel(R.mipmap.my_sport_circle, "我的运动圈"));
+        itemsInfos.add(new ChooseItemModel(R.mipmap.setting, "设置"));
     }
 
     public static MyFragment getInstance() {
@@ -131,10 +131,10 @@ public class MyFragment extends Fragment {
         Intent intent = new Intent();
         switch (position){
             case 0:
-                intent.setClass(context, DayRateActivity.class);
+                intent.setClass(context, ScoreActivity.class);
                 break;
             case 1:
-                intent.setClass(context, ScoreActivity.class);
+                intent.setClass(context, DayRateActivity.class);
                 break;
             case 2:
                 intent.setClass(context, MySportTeamActivity.class);

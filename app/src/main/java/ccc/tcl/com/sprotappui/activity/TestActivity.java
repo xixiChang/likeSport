@@ -13,6 +13,7 @@ import ccc.tcl.com.sprotappui.constant.URLConstant;
 
 import static ccc.tcl.com.sprotappui.service.IMService.mIMKit;
 
+@Deprecated
 public class TestActivity extends BaseActivity {
     private Button start;
     private EditText aId;
@@ -24,6 +25,7 @@ public class TestActivity extends BaseActivity {
         initView();
     }
 
+    @Deprecated
     private void initView() {
         start = (Button) findViewById(R.id.start_conversation);
         aId = (EditText) findViewById(R.id.another_id);

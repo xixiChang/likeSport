@@ -6,20 +6,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
-import com.alibaba.mobileim.IYWLoginService;
-import com.alibaba.mobileim.YWAPI;
-import com.alibaba.mobileim.YWIMKit;
-import com.alibaba.mobileim.YWLoginParam;
-import com.alibaba.mobileim.channel.event.IWxCallback;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
@@ -28,20 +21,12 @@ import com.flyco.tablayout.utils.UnreadMsgUtils;
 import java.util.ArrayList;
 import java.util.Random;
 
-import ccc.tcl.com.sprotappui.App;
 import ccc.tcl.com.sprotappui.R;
-import ccc.tcl.com.sprotappui.adapter.FMSportItem;
-import ccc.tcl.com.sprotappui.constant.URLConstant;
-import ccc.tcl.com.sprotappui.data.UserInfo;
 import ccc.tcl.com.sprotappui.entity.TabEntity;
-import ccc.tcl.com.sprotappui.fragment.IMFragment;
 import ccc.tcl.com.sprotappui.fragment.MyFragment;
 import ccc.tcl.com.sprotappui.fragment.SimpleCardFragment;
 import ccc.tcl.com.sprotappui.fragment.SportFragment;
-import ccc.tcl.com.sprotappui.service.IMService;
 import ccc.tcl.com.sprotappui.utils.ViewFindUtils;
-
-import static ccc.tcl.com.sprotappui.service.IMService.mIMKit;
 
 
 public class HomeActivity extends BaseActivity {
@@ -55,10 +40,10 @@ public class HomeActivity extends BaseActivity {
     private static final String TAG = "HomeActivity";
 
     private int[] mIconUnselectIds = {
-            R.mipmap.tab_home_unselect, R.mipmap.tab_speech_unselect,
+            R.mipmap.table_run_click, R.mipmap.tab_speech_unselect,
             R.mipmap.home_icon_message, R.mipmap.tab_more_unselect};
     private int[] mIconSelectIds = {
-            R.mipmap.tab_home_select, R.mipmap.tab_speech_select,
+            R.mipmap.table_run_unclick, R.mipmap.tab_speech_select,
             R.mipmap.tab_contact_select, R.mipmap.tab_more_select};
 
     private View mDecorView;
@@ -213,31 +198,31 @@ public class HomeActivity extends BaseActivity {
         return true;
     }
 
-    private void connect() {
-
-
-        IYWLoginService loginService = mIMKit.getLoginService();
-        YWLoginParam loginParam = YWLoginParam.createLoginParam(App.userInfo.getIm_uid(),
-                App.userInfo.getSession());
-        loginService.login(loginParam, new IWxCallback() {
-
-            @Override
-            public void onSuccess(Object... arg0) {
-                Log.i(TAG, "onSuccess: " + arg0);
-            }
-
-            @Override
-            public void onProgress(int arg0) {
-                // TODO Auto-generated method stub
-                Log.d(TAG, "onProgress: ");
-            }
-
-            @Override
-            public void onError(int errCode, String description) {
-                //如果登录失败，errCode为错误码,description是错误的具体描述信息
-                Log.e(TAG, "onError: " + errCode + ">" + description );
-            }
-        });
-    }
+//    private void connect() {
+//
+//
+//        IYWLoginService loginService = mIMKit.getLoginService();
+//        YWLoginParam loginParam = YWLoginParam.createLoginParam(App.userInfo.getIm_uid(),
+//                App.userInfo.getSession());
+//        loginService.login(loginParam, new IWxCallback() {
+//
+//            @Override
+//            public void onSuccess(Object... arg0) {
+//                Log.i(TAG, "onSuccess: " + arg0);
+//            }
+//
+//            @Override
+//            public void onProgress(int arg0) {
+//                // TODO Auto-generated method stub
+//                Log.d(TAG, "onProgress: ");
+//            }
+//
+//            @Override
+//            public void onError(int errCode, String description) {
+//                //如果登录失败，errCode为错误码,description是错误的具体描述信息
+//                Log.e(TAG, "onError: " + errCode + ">" + description );
+//            }
+//        });
+//    }
 
 }

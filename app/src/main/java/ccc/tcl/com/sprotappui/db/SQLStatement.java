@@ -57,6 +57,13 @@ public class SQLStatement {
      * add data
      */
     public static final String addUser = "insert into lsdb.user(" +
+            "id,"+
+            "pwd,"+
+            "phone,"+
+            "name,"+
+            "session,"+
+            "image_url,"+
+            "im_uid"+
             ")" +
             "values(" +
             ")";
