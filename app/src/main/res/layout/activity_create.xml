@@ -18,8 +18,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:layout_marginStart="7dp"
-        android:id="@+id/textView"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:id="@+id/textView" />
 
     <EditText
         android:layout_width="match_parent"
@@ -40,8 +39,7 @@
         android:paddingBottom="10dp"
         android:layout_marginStart="7dp"
         android:textCursorDrawable="@drawable/cursor_theme"
-        android:id="@+id/textView1"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:id="@+id/textView1" />
 
     <EditText
         android:layout_width="match_parent"
@@ -63,8 +61,7 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:layout_marginStart="7dp"
-        android:id="@+id/textView2"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:id="@+id/textView2" />
 
     <EditText
         android:layout_width="match_parent"
