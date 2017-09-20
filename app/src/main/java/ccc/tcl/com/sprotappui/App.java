@@ -2,8 +2,8 @@ package ccc.tcl.com.sprotappui;
 
 import android.app.Application;
 
-import com.alibaba.mobileim.YWAPI;
-import com.alibaba.wxlib.util.SysUtil;
+//import com.alibaba.mobileim.YWAPI;
+//import com.alibaba.wxlib.util.SysUtil;
 
 import ccc.tcl.com.sprotappui.data.UserInfo;
 

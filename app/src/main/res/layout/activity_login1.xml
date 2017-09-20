@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/springgreen">
+
+    <com.dl7.tag.TagView
+        android:id="@+id/QQlogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:tag_text="QQ"
+        app:tag_text_color="@color/springgreen"
+        app:tag_shape="arc"
+        app:tag_text_size="@dimen/activity_content_size_mid"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"/>
+
+    <com.dl7.tag.TagView
+        android:id="@+id/wxlogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:tag_text="wx"
+        app:tag_text_color="@color/springgreen"
+        app:tag_shape="arc"
+        app:tag_text_size="@dimen/activity_content_size_mid"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/QQlogin"
+        android:layout_marginBottom="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"/>
+</RelativeLayout>

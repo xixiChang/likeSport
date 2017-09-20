@@ -11,8 +11,8 @@ import ccc.tcl.com.sprotappui.App;
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.constant.URLConstant;
 
-import static ccc.tcl.com.sprotappui.service.IMService.mIMKit;
-
+//import static ccc.tcl.com.sprotappui.service.IMService.mIMKit;
+@Deprecated
 public class TestActivity extends BaseActivity {
     private Button start;
     private EditText aId;
@@ -33,8 +33,8 @@ public class TestActivity extends BaseActivity {
             public void onClick(View v) {
                 String anotherId = aId.getText().toString();
 
-                Intent intent = mIMKit.getChattingActivityIntent(anotherId, URLConstant.BAICHUAN_APP_KEY);
-                startActivity(intent);
+//                Intent intent = mIMKit.getChattingActivityIntent(anotherId, URLConstant.BAICHUAN_APP_KEY);
+//                startActivity(intent);
             }
         });
     }
