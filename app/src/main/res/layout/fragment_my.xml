@@ -103,8 +103,6 @@
         </LinearLayout>
     </RelativeLayout>
 
-
-
     <com.dl7.tag.TagView
         android:id="@+id/user_logout_button"
         android:layout_width="wrap_content"
