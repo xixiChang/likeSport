@@ -15,5 +15,6 @@ public class AuthoritySettingActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         super.setToolBar(toolbar, R.string.authority_setting,true);
 
+
     }
 }

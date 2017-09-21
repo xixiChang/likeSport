@@ -41,6 +41,7 @@
         android:textCursorDrawable="@drawable/cursor_theme"
         android:id="@+id/textView1" />
 
+
     <EditText
         android:id="@+id/brief"
         android:layout_width="match_parent"

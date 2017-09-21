@@ -34,7 +34,6 @@ public class BaseActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-
     /**
      * 点击菜单响应事件
      * @param item
