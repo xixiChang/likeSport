@@ -1,5 +1,6 @@
 package ccc.tcl.com.sprotappui.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,9 +15,11 @@ import ccc.tcl.com.sprotappui.ui.SportAppView;
 
 public class RegisterActivity extends BaseActivity implements View.OnClickListener {
     private EditText name, phone, code, password;
+    private String sName, sPhone, sCode, sPassword;
     private Button getCode, register;
     private UserPresenter userPresenter = new UserPresenter();
     private static final String TAG = "RegisterActivity";
+    private static final int START_AC_REG = 5014;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,15 +73,24 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 Log.d(TAG, "onClick: rg_get_code");
                 break;
             case R.id.rg_register:
-                String sPhone1 = phone.getText().toString();
-                String sName = name.getText().toString();
-                String sPwd = password.getText().toString();
-                String sCode = code.getText().toString();
-                userPresenter.userRegister(sPhone1, sName, sPwd, sCode);
+                sPhone = phone.getText().toString();
+                sPassword = password.getText().toString();
+                sName = name.getText().toString();
+                sCode = code.getText().toString();
+                userPresenter.userRegister(sPhone, sName, sPassword, sCode);
                 break;
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent();
+        intent.putExtra("phone", sPhone);
+        intent.putExtra("password", sPassword);
+        setResult(START_AC_REG, intent);
     }
 
     @Override
