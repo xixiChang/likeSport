@@ -1,37 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".activity.HomeActivity">
-    <RelativeLayout
-        android:id="@+id/relative"
+    android:layout_height="match_parent">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/user_photo"
+        android:src="@drawable/photo1"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/page_content_margin_top" />
+
+    <TextView
+        android:id="@+id/user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="10dp">
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/user_photo"
-            android:src="@drawable/photo1"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/page_content_margin_top" />
+        android:layout_below="@+id/user_photo"
+        android:layout_marginTop="@dimen/title_content_margin"
+        android:text="小狐丸"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/activity_content_size_big"
+        android:layout_centerHorizontal="true" />
 
-        <TextView
-            android:id="@+id/user_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/user_photo"
-            android:layout_marginTop="@dimen/title_content_margin"
-            android:text="小狐丸"
-            android:textColor="@color/colorAccent"
-            android:textSize="@dimen/activity_content_size_big"
-            android:layout_centerHorizontal="true" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,7 +51,8 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:orientation="vertical"
-            android:layout_marginTop="116dp">
+            android:layout_marginTop="116dp"
+            >
             <TextView
                 android:id="@+id/whole_spent_time"
                 android:layout_width="wrap_content"
@@ -101,29 +93,4 @@
                 android:textColor="@color/dimgrey"
                 android:text="@string/whole_consume"/>
         </LinearLayout>
-    </RelativeLayout>
-
-    <com.dl7.tag.TagView
-        android:id="@+id/user_logout_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_alignParentBottom="true"
-        app:tag_text="@string/logout"
-        app:tag_text_color="@color/red"
-        app:tag_border_color="@color/red"
-        app:tag_shape="arc"
-        app:tag_vertical_padding="@dimen/button_padding_top"
-        app:tag_horizontal_padding="@dimen/button_padding_left"
-        app:tag_press_feedback="true"
-        android:layout_centerHorizontal="true"/>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/choose_items"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_below="@+id/relative">
-    </android.support.v7.widget.RecyclerView>
-
 </RelativeLayout>

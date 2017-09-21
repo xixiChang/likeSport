@@ -1,6 +1,6 @@
 package ccc.tcl.com.sprotappui.activity;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -20,16 +20,18 @@ import java.util.Calendar;
 import java.util.Date;
 
 import ccc.tcl.com.sprotappui.R;
-
-import static ccc.tcl.com.sprotappui.utils.Util.hideInputMethod;
-import static ccc.tcl.com.sprotappui.utils.Util.isShouldHideInput;
+import ccc.tcl.com.sprotappui.model.Sport;
 
 public class FinishCreateActivity extends BaseActivity {
     TextView startTime;
     TextView endTime;
     TextView time_text;
+    EditText location;
+    EditText distance;
+    EditText note;
     ViewStub stub;
     LinearLayout ll = null;
+    Sport sport;
     int[] location_datePicker = new int[2];
     int[] start_textview = new int[2];
     SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
@@ -40,7 +42,12 @@ public class FinishCreateActivity extends BaseActivity {
         setContentView(R.layout.activity_finish_create);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         super.setToolBar(toolbar, R.string.create_activity,true);
+        Intent intent0= getIntent();
+        sport = intent0.getParcelableExtra("data");
         time_text = (TextView) findViewById(R.id.textView);
+        location = (EditText) findViewById(R.id.location);
+        distance = (EditText) findViewById(R.id.distance);
+        note = (EditText) findViewById(R.id.note);
         startTime = (TextView) findViewById(R.id.start_time);
         startTime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,7 +110,18 @@ public class FinishCreateActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.finish:
+                Intent intent = new Intent();
+                Bundle data = new Bundle();
+                sport.setStart_time(startTime.getText().toString());
+                sport.setEnd_time(endTime.getText().toString());
+                sport.setLocation(location.getText().toString());
+                sport.setDistance(Integer.parseInt(distance.getText().toString()));
+                sport.setNotes(note.getText().toString());
+                data.putParcelable("data",sport);
+                intent.putExtras(data);
+                Log.d("", "onOptionsItemSelected: ");
                 break;
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -116,14 +134,11 @@ public class FinishCreateActivity extends BaseActivity {
     public boolean dispatchTouchEvent(MotionEvent ev) {
 
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-            View v = getCurrentFocus();
-
             if (null!=ll)
                 ll.getLocationInWindow(location_datePicker);
             time_text.getLocationInWindow(start_textview);
             Log.d("111", "dispatchTouchEvent: evY"+ev.getY());
             Log.d("111", "dispatchTouchEvent: viewY"+location_datePicker[1]);
-            //if (ll != null && !ll.hasFocus())
             if (ll != null && (ev.getY() >  ll.getY()+location_datePicker[1] || ev.getY() < start_textview[1]))
                 ll.setVisibility(View.GONE);
         }

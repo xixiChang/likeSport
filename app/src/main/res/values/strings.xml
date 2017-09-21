@@ -32,7 +32,12 @@
     <string name="no_data_tip">还没有任何数据呢</string>
     <string name="location">活动地点</string>
     <string name="title_activity_msg_setting">Settings</string>
-
-
+    <string name="authority_setting">权限设置</string>
+    <string name="sport_circle_setting">运动圈推送</string>
+    <string name="sounds">声音</string>
+    <string name="vibrate">震动</string>
+    <string name="camera">相机</string>
+    <string name="storage">存储</string>
+    <string name="position">定位</string>
 </resources>
 

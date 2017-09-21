@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tool:context=".activity.LayoutActivity"
-    android:background="@color/my">
+    android:background="@color/grey_background">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/news_details_appbar"
@@ -50,7 +50,7 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+
 
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -58,6 +58,61 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/skyblue"
+            android:alpha="0.6"
+            android:padding="6dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="20dp">
+            <TextView
+                android:id="@+id/item_fm_sport_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/activity_content_size_mid"
+                android:text="每天都来运动"/>
+
+
+            <TextView
+                android:id="@+id/item_fm_sport_hot_text"
+                android:layout_below="@+id/item_fm_sport_name"
+                android:layout_marginTop="@dimen/page_content_margin_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="热度:"/>
+            <TextView
+                android:id="@+id/item_fm_sport_hot_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/page_content_margin_top"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_below="@+id/item_fm_sport_name"
+                android:layout_toRightOf="@+id/item_fm_sport_hot_text"
+                android:textColor="@color/red"
+                android:text="35124"/>
+
+            <TextView
+                android:id="@+id/item_fm_sport_left_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/page_content_margin_top"
+                android:layout_below="@+id/item_fm_sport_name"
+                android:textSize="@dimen/activity_content_size_mid"
+                android:text="30小时"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/item_fm_sport_left_time"
+                android:layout_below="@+id/item_fm_sport_name"
+                android:layout_marginTop="@dimen/page_content_margin_top"
+                android:layout_marginRight="5dp"
+                android:text="距离活动结束还有:"/>
+        </RelativeLayout>
+
         <include layout="@layout/layout_merge"></include>
         <include layout="@layout/layout_merge1"></include>
         <include layout="@layout/layout_merge2"></include>
@@ -68,30 +123,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
                 android:text="活动详情"
                 android:textSize="@dimen/activity_content_size_big" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
                 android:text="内容"
                 android:textSize="@dimen/activity_content_size_mid" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
                 android:text="集合地点"
                 android:textSize="@dimen/activity_content_size_mid" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
                 android:text="交通方式"
                 android:textSize="@dimen/activity_content_size_mid" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
                 android:text="温馨提示"
                 android:textSize="@dimen/activity_content_size_mid" />
 
@@ -112,7 +177,6 @@
             app:tag_press_feedback="true"
             android:layout_centerHorizontal="true"/>
         </LinearLayout>
-
 
     </android.support.v4.widget.NestedScrollView>
 

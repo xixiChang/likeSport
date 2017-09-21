@@ -25,6 +25,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import ccc.tcl.com.sprotappui.R;
+import ccc.tcl.com.sprotappui.model.Sport;
 
 public class PickPictureActivity extends BaseActivity{
     ImageView imageView;
@@ -49,8 +50,7 @@ public class PickPictureActivity extends BaseActivity{
         imageView2 .setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //
-                // PopupWindow();
+                 PopupWindow();
             }
         });
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -82,6 +82,11 @@ public class PickPictureActivity extends BaseActivity{
                 break;
             case R.id.next:
                 Intent intent = new Intent(PickPictureActivity.this,CreateActivity.class);
+                Sport sport = new Sport();
+                sport.setImage_url("image.url");
+                Bundle data = new Bundle();
+                data.putParcelable("data",sport);
+                intent.putExtras(data);
                 startActivity(intent);
                 break;
         }

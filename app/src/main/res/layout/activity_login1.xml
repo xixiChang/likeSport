@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.dl7.tag.TagView
+        android:id="@+id/QQlogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:tag_text="QQ"
+        app:tag_text_color="@color/springgreen"
+        app:tag_shape="arc"
+        app:tag_text_size="@dimen/activity_content_size_mid"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="130dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"/>
+
+    <com.dl7.tag.TagView
+        android:id="@+id/wxlogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:tag_text="wx"
+        app:tag_text_color="@color/springgreen"
+        app:tag_shape="arc"
+        app:tag_text_size="@dimen/activity_content_size_mid"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/QQlogin"
+        android:layout_marginBottom="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/wxlogin"
+        android:layout_alignStart="@+id/QQlogin"
+        android:layout_marginTop="65dp"
+        android:id="@+id/textView3"
+        android:text="其他登陆" />
+
+    <TextView
+        android:text="注册"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView3"
+        android:layout_alignEnd="@+id/QQlogin"
+        android:id="@+id/textView4" />
+</RelativeLayout>

@@ -6,8 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import com.alibaba.mobileim.YWAPI;
-import com.alibaba.wxlib.util.SysUtil;
+//import com.alibaba.mobileim.YWAPI;
+//import com.alibaba.wxlib.util.SysUtil;
 
 import ccc.tcl.com.sprotappui.activity.HomeActivity;
 import ccc.tcl.com.sprotappui.activity.LoginActivity;

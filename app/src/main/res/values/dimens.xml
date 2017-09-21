@@ -6,6 +6,7 @@
     <dimen name="activity_vertical_margin_small">5dp</dimen>
     <dimen name="title_content_margin">5dp</dimen>
     <dimen name="page_content_margin_top">10dp</dimen>
+    <dimen name="page_content_margin_top_big">13dp</dimen>
     <dimen name="page_content_margin_left">12dp</dimen>
     <dimen name="item_margin_top">8dp</dimen>
     <dimen name="item_margin_bottom">8dp</dimen>
