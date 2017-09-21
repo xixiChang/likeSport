@@ -67,6 +67,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <EditText
+        android:id="@+id/location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
@@ -74,7 +75,7 @@
         android:paddingStart="10dp"
         android:inputType="text"
         android:textCursorDrawable="@drawable/cursor_theme"
-        android:id="@+id/editText2"
+
         android:gravity="start"
         android:hint="40字以内"
         android:backgroundTint="@color/springgreen"
@@ -89,6 +90,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <EditText
+        android:id="@+id/distance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
@@ -109,6 +111,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <EditText
+        android:id="@+id/note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"

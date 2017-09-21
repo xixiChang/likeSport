@@ -51,7 +51,7 @@ public class BaseActivity extends AppCompatActivity {
                 Toast.makeText(this, "MORE", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.create_sport:
-                Toast.makeText(this, "创建活动", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "创建活动", Toast.LENGTH_SHORT).show();
                 return true;
         }
         return super.onOptionsItemSelected(item);

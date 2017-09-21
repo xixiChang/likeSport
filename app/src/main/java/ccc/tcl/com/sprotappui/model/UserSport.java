@@ -1,5 +1,8 @@
 package ccc.tcl.com.sprotappui.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by user on 17-9-12.
  */
@@ -68,4 +71,5 @@ public class UserSport {
     public void setBehavior(String behavior) {
         this.behavior = behavior;
     }
+
 }
