@@ -20,7 +20,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import ccc.tcl.com.sprotappui.R;
-import ccc.tcl.com.sprotappui.model.Sport;
+import ccc.tcl.com.sprotappui.model.PlatFromActivity;
 
 public class FinishCreateActivity extends BaseActivity {
     TextView startTime;
@@ -31,7 +31,7 @@ public class FinishCreateActivity extends BaseActivity {
     EditText note;
     ViewStub stub;
     LinearLayout ll = null;
-    Sport sport;
+    PlatFromActivity platFromActivity;
     int[] location_datePicker = new int[2];
     int[] start_textview = new int[2];
     SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
@@ -43,7 +43,7 @@ public class FinishCreateActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         super.setToolBar(toolbar, R.string.create_activity,true);
         Intent intent0= getIntent();
-        sport = intent0.getParcelableExtra("data");
+        platFromActivity = intent0.getParcelableExtra("data");
         time_text = (TextView) findViewById(R.id.textView);
         location = (EditText) findViewById(R.id.location);
         distance = (EditText) findViewById(R.id.distance);
@@ -112,12 +112,12 @@ public class FinishCreateActivity extends BaseActivity {
             case R.id.finish:
                 Intent intent = new Intent();
                 Bundle data = new Bundle();
-                sport.setStart_time(startTime.getText().toString());
-                sport.setEnd_time(endTime.getText().toString());
-                sport.setLocation(location.getText().toString());
-                sport.setDistance(Integer.parseInt(distance.getText().toString()));
-                sport.setNotes(note.getText().toString());
-                data.putParcelable("data",sport);
+                platFromActivity.setStart_time(startTime.getText().toString());
+                platFromActivity.setEnd_time(endTime.getText().toString());
+                platFromActivity.setAddress(location.getText().toString());
+                platFromActivity.setDistance(Integer.parseInt(distance.getText().toString()));
+                platFromActivity.setNotes(note.getText().toString());
+                data.putParcelable("data", platFromActivity);
                 intent.putExtras(data);
                 Log.d("", "onOptionsItemSelected: ");
                 break;

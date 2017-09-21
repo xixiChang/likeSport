@@ -59,10 +59,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.SettingActivity" />
-        <activity android:name=".activity.LoginActivity"></activity>
-        <activity android:name=".activity.RegisterActivity" />
-        <activity android:name=".activity.TestActivity" />
         <activity android:name=".activity.AuthoritySettingActivity"></activity>
     </application>
 
