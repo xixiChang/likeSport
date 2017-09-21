@@ -4,11 +4,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tool="http://schemas.android.com/tools"
-    android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tool:context=".activity.LayoutActivity"
+    tool:context=".activity.NewCreateActivity"
     android:background="@color/grey_background">
 
     <android.support.design.widget.AppBarLayout
@@ -55,70 +54,70 @@
 
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/skyblue"
-            android:alpha="0.6"
-            android:padding="6dp"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="20dp">
-            <TextView
-                android:id="@+id/item_fm_sport_name"
-                android:layout_width="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="@dimen/activity_content_size_mid"
-                android:text="每天都来运动"/>
+                android:background="@color/skyblue"
+                android:alpha="0.6"
+                android:padding="6dp"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="20dp">
+                <TextView
+                    android:id="@+id/item_fm_sport_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/activity_content_size_mid"
+                    android:text="每天都来运动"/>
 
 
-            <TextView
-                android:id="@+id/item_fm_sport_hot_text"
-                android:layout_below="@+id/item_fm_sport_name"
-                android:layout_marginTop="@dimen/page_content_margin_top"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="热度:"/>
-            <TextView
-                android:id="@+id/item_fm_sport_hot_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/page_content_margin_top"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_below="@+id/item_fm_sport_name"
-                android:layout_toRightOf="@+id/item_fm_sport_hot_text"
-                android:textColor="@color/red"
-                android:text="35124"/>
+                <TextView
+                    android:id="@+id/item_fm_sport_hot_text"
+                    android:layout_below="@+id/item_fm_sport_name"
+                    android:layout_marginTop="@dimen/page_content_margin_top"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="热度:"/>
+                <TextView
+                    android:id="@+id/item_fm_sport_hot_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/page_content_margin_top"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_below="@+id/item_fm_sport_name"
+                    android:layout_toRightOf="@+id/item_fm_sport_hot_text"
+                    android:textColor="@color/red"
+                    android:text="35124"/>
 
-            <TextView
-                android:id="@+id/item_fm_sport_left_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="@dimen/page_content_margin_top"
-                android:layout_below="@+id/item_fm_sport_name"
-                android:textSize="@dimen/activity_content_size_mid"
-                android:text="30小时"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/item_fm_sport_left_time"
-                android:layout_below="@+id/item_fm_sport_name"
-                android:layout_marginTop="@dimen/page_content_margin_top"
-                android:layout_marginRight="5dp"
-                android:text="距离活动结束还有:"/>
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/item_fm_sport_left_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="@dimen/page_content_margin_top"
+                    android:layout_below="@+id/item_fm_sport_name"
+                    android:textSize="@dimen/activity_content_size_mid"
+                    android:text="30小时"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/item_fm_sport_left_time"
+                    android:layout_below="@+id/item_fm_sport_name"
+                    android:layout_marginTop="@dimen/page_content_margin_top"
+                    android:layout_marginRight="5dp"
+                    android:text="距离活动结束还有:"/>
+            </RelativeLayout>
 
-        <include layout="@layout/layout_merge"></include>
-        <include layout="@layout/layout_merge1"></include>
-        <include layout="@layout/layout_merge2"></include>
-        <include layout="@layout/layout_merge3"></include>
-        <include layout="@layout/layout_merge4"></include>
+            <include layout="@layout/layout_merge"></include>
+            <include layout="@layout/layout_merge1"></include>
+            <include layout="@layout/layout_merge2"></include>
+            <include layout="@layout/layout_merge3"></include>
+            <include layout="@layout/layout_merge4"></include>
 
             <TextView
                 android:layout_width="match_parent"
@@ -162,22 +161,6 @@
                 android:text="温馨提示"
                 android:textSize="@dimen/activity_content_size_mid" />
 
-        <com.dl7.tag.TagView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_alignParentBottom="true"
-            app:tag_text="点击就送"
-            app:tag_text_color="@color/white"
-            app:tag_bg_color="@color/springgreen"
-            app:tag_bg_color_check="@color/greenyellow"
-            app:tag_border_color="@color/red"
-            app:tag_shape="arc"
-            app:tag_press_feedback="true"
-            android:layout_centerHorizontal="true"/>
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

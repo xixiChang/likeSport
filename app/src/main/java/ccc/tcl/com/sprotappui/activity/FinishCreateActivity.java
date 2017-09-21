@@ -110,7 +110,7 @@ public class FinishCreateActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.finish:
-                Intent intent = new Intent();
+                Intent intent = new Intent(this,NewCreateActivity.class);
                 Bundle data = new Bundle();
                 sport.setStart_time(startTime.getText().toString());
                 sport.setEnd_time(endTime.getText().toString());
@@ -119,6 +119,7 @@ public class FinishCreateActivity extends BaseActivity {
                 sport.setNotes(note.getText().toString());
                 data.putParcelable("data",sport);
                 intent.putExtras(data);
+                startActivity(intent);
                 Log.d("", "onOptionsItemSelected: ");
                 break;
 

@@ -33,6 +33,14 @@ public class BaseActivity extends AppCompatActivity {
         if (canBack)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+    protected void setToolBar(@NonNull Toolbar toolbar, @NonNull String title, @NonNull boolean canBack) {
+        toolbar.setTitle(title);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() == null)
+            return;
+        if (canBack)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
 
     /**
      * 点击菜单响应事件
