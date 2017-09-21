@@ -7,9 +7,12 @@ package ccc.tcl.com.sprotappui.data;
 public class UserInfo {
     private String id;
     private String name;
+    private String phone;
+    private String password;
     private String session;
     private String image_url;
     private String im_uid;
+    private int login_method = 2;
 
     public String getId() {
         return id;
@@ -25,6 +28,22 @@ public class UserInfo {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getSession() {
@@ -49,5 +68,13 @@ public class UserInfo {
 
     public void setIm_uid(String im_uid) {
         this.im_uid = im_uid;
+    }
+
+    public int getLogin_method() {
+        return login_method;
+    }
+
+    public void setLogin_method(int login_method) {
+        this.login_method = login_method;
     }
 }

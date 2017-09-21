@@ -13,6 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.alibaba.mobileim.IYWLoginService;
+import com.alibaba.mobileim.YWLoginParam;
+import com.alibaba.mobileim.channel.event.IWxCallback;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
@@ -26,19 +29,22 @@ import ccc.tcl.com.sprotappui.entity.TabEntity;
 import ccc.tcl.com.sprotappui.fragment.MyFragment;
 import ccc.tcl.com.sprotappui.fragment.SimpleCardFragment;
 import ccc.tcl.com.sprotappui.fragment.SportFragment;
+import ccc.tcl.com.sprotappui.service.IMService;
 import ccc.tcl.com.sprotappui.utils.ViewFindUtils;
+
+import static ccc.tcl.com.sprotappui.App.userInfo;
+import static ccc.tcl.com.sprotappui.service.IMService.mIMKit;
 
 
 public class HomeActivity extends BaseActivity {
 
     private Context mContext = this;
-    private String[] mTitles = {"运动", "运动圈", "消息", "我的"};
     private ArrayList<Fragment> mFragments = new ArrayList<>();
-
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
 
     private static final String TAG = "HomeActivity";
 
+    private String[] mTitles = {"运动", "运动圈", "消息", "我的"};
     private int[] mIconUnselectIds = {
             R.mipmap.table_run_click, R.mipmap.tab_speech_unselect,
             R.mipmap.home_icon_message, R.mipmap.tab_more_unselect};
@@ -51,48 +57,56 @@ public class HomeActivity extends BaseActivity {
     private CommonTabLayout mTabLayout;
     private Toolbar toolbar;
     private FragmentManager fragmentManager;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-
         super.setToolBar(toolbar, R.string.toolbar_name_sport, false);
+        initIMConnect();
+        initView();
+    }
 
+
+    private void initIMConnect() {
+        if (mIMKit == null){
+            new IMService();
+        }
+        try {
+            connect();
+        } catch (Exception e) {
+            Log.e(TAG, "onCreate: " + e.getMessage());
+        }
+    }
+
+    private void initView() {
         SportFragment sportFragment = SportFragment.getInstance("Switch ViewPager " + mTitles[0]);
-//        new IMService();
-//
-//        try {
-//            connect();
-//        }catch (Exception e){
-//            Log.e(TAG, "onCreate: " + e.getMessage());
-//        }
 
         mFragments.add(SimpleCardFragment.getInstance("Switch ViewPager " + mTitles[1]));
         mFragments.add(sportFragment);
-        mFragments.add(SimpleCardFragment.getInstance("Switch ViewPager " + mTitles[2]));
+        if (mIMKit != null){
+            mFragments.add(mIMKit.getConversationFragment());
+        }else {
+            mFragments.add(SimpleCardFragment.getInstance("Switch ViewPager " + mTitles[2]));
+        }
         mFragments.add(MyFragment.getInstance());
         fragmentManager = getSupportFragmentManager();
-
 
         for (int i = 0; i < mTitles.length; i++) {
             mTabEntities.add(new TabEntity(mTitles[i], mIconSelectIds[i], mIconUnselectIds[i]));
         }
+
         mDecorView = getWindow().getDecorView();
         mViewPager = ViewFindUtils.find(mDecorView, R.id.home_view_pager);
 
         mViewPager.setAdapter(new MyPagerAdapter(fragmentManager));
-
         mTabLayout = (CommonTabLayout) findViewById(R.id.home_tab_layout);
-        
-        tl_2();
+        setTabLayout();
         mTabLayout.showMsg(2, 55);
         mTabLayout.setMsgMargin(0, -5, 5);
-
-
     }
-
-
 
     private Random mRandom = new Random();
 
@@ -119,7 +133,7 @@ public class HomeActivity extends BaseActivity {
         }
     }
 
-    private void tl_2() {
+    private void setTabLayout() {
         mTabLayout.setTabData(mTabEntities);
         mTabLayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
@@ -198,31 +212,30 @@ public class HomeActivity extends BaseActivity {
         return true;
     }
 
-//    private void connect() {
-//
-//
-//        IYWLoginService loginService = mIMKit.getLoginService();
-//        YWLoginParam loginParam = YWLoginParam.createLoginParam(App.userInfo.getIm_uid(),
-//                App.userInfo.getSession());
-//        loginService.login(loginParam, new IWxCallback() {
-//
-//            @Override
-//            public void onSuccess(Object... arg0) {
-//                Log.i(TAG, "onSuccess: " + arg0);
-//            }
-//
-//            @Override
-//            public void onProgress(int arg0) {
-//                // TODO Auto-generated method stub
-//                Log.d(TAG, "onProgress: ");
-//            }
-//
-//            @Override
-//            public void onError(int errCode, String description) {
-//                //如果登录失败，errCode为错误码,description是错误的具体描述信息
-//                Log.e(TAG, "onError: " + errCode + ">" + description );
-//            }
-//        });
-//    }
+    private void connect() {
+        IYWLoginService loginService = mIMKit.getLoginService();
+        YWLoginParam loginParam = YWLoginParam.createLoginParam(userInfo.getIm_uid(),
+                userInfo.getSession());
+        loginService.login(loginParam, new IWxCallback() {
+
+            @Override
+            public void onSuccess(Object... arg0) {
+                Log.i(TAG, "onSuccess: " + arg0);
+            }
+
+            @Override
+            public void onProgress(int arg0) {
+                // TODO Auto-generated method stub
+                Log.d(TAG, "onProgress: ");
+            }
+
+            @Override
+            public void onError(int errCode, String description) {
+                //如果登录失败，errCode为错误码,description是错误的具体描述信息
+                Log.e(TAG, "onError: " + errCode + ">" + description);
+            }
+        });
+    }
+
 
 }

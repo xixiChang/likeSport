@@ -16,8 +16,6 @@ public final class URLConstant {
 
 
 
-
-
     public static final String BAICHUAN_APP_KEY = "24624522";
     public static final String BAICHUAN_APP_SECRET = "2992e9309ef7f81e7d845376bd6010a7";
 }

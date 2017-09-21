@@ -1,8 +1,7 @@
 package ccc.tcl.com.sprotappui.activity;
 
-import android.app.Application;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,27 +11,33 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ccc.tcl.com.sprotappui.R;
+import ccc.tcl.com.sprotappui.data.BaseData;
 import ccc.tcl.com.sprotappui.data.UserInfo;
+import ccc.tcl.com.sprotappui.db.SQLParaWrapper;
+import ccc.tcl.com.sprotappui.db.SQLStatement;
 import ccc.tcl.com.sprotappui.model.ResponseResult;
 import ccc.tcl.com.sprotappui.presenter.presenterimpl.UserPresenter;
+import ccc.tcl.com.sprotappui.service.IMService;
 import ccc.tcl.com.sprotappui.ui.SportAppView;
 
 import static ccc.tcl.com.sprotappui.App.userInfo;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends BaseActivity implements View.OnClickListener {
     private EditText inputPhone, inputPwd;
     private TextView loginToReg;
     private Button login;
     private static final int START_AC_REG = 5014;
     private UserPresenter userPresenter;
     private static final String TAG = "LoginActivity";
-
+    private String phone, pwd;
+    private SQLParaWrapper sqlParaWrapper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initView();
+        sqlParaWrapper= new SQLParaWrapper(this);
     }
 
     @Override
@@ -59,9 +64,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         @Override
         public void onSuccess(ResponseResult<UserInfo> responseResult) {
             if (responseResult.isSuccess()) {
+                Log.d(TAG, "onSuccess: ");
                 userInfo = responseResult.getResult();
-                Log.e(TAG, "onSuccess: id>" + userInfo.getIm_uid());
-                Log.e(TAG, "onSuccess: pwd>" + userInfo.getSession());
+                userInfo.setPhone(phone);
+                userInfo.setPassword(pwd);
+                Log.d(TAG, "onSuccess: id>" + userInfo.getIm_uid());
+                Log.d(TAG, "onSuccess: pwd>" + userInfo.getSession());
+
+                saveUserInfoToDB();
+
                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(intent);
                 finish();
@@ -75,6 +86,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     };
 
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -83,8 +96,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 startActivityForResult(intent, START_AC_REG);
                 break;
             case R.id.login_button:
-                String phone = inputPhone.getText().toString();
-                String pwd = inputPwd.getText().toString();
+                phone = inputPhone.getText().toString();
+                pwd = inputPwd.getText().toString();
                 userPresenter.userLogin(phone, pwd, 0);
                 break;
         }
@@ -112,4 +125,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onStop();
         userPresenter.onStop();
     }
+
+    private void saveUserInfoToDB() {
+        try {
+            sqlParaWrapper.sqLiteDatabase.execSQL(SQLStatement.AddUser,
+                    sqlParaWrapper.getUserStringArray(userInfo));
+        }catch (SQLiteException e){
+            Log.e(TAG, "saveUserInfoToDB: " + e.getMessage() );
+        }
+        BaseData baseData = new BaseData(this);
+        baseData.updateUserID(userInfo.getId());
+        new IMService();
+    }
+
 }
