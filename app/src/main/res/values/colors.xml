@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#EEEEEE</color>
+    <color name="colorPrimaryDark">#EEEEEE</color>
     <color name="colorAccent">#00ff00</color>
     <color name="black">#000000</color><!--黑色 -->
     <color name="black_background">#424242</color><!--黑色背景(线条颜色) -->

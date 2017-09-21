@@ -13,8 +13,6 @@ public class AuthoritySettingActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authority_setting);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        super.setToolBar(toolbar, R.string.authority_setting,true);
-
-
+        super.setToolBar(toolbar, R.string.authority_setting, true);
     }
 }
