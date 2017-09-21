@@ -1,16 +1,12 @@
 package ccc.tcl.com.sprotappui;
 
 import android.app.Application;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 
-//import com.alibaba.mobileim.YWAPI;
-//import com.alibaba.wxlib.util.SysUtil;
+import com.alibaba.mobileim.YWAPI;
+import com.alibaba.wxlib.util.SysUtil;
 
-import ccc.tcl.com.sprotappui.activity.HomeActivity;
-import ccc.tcl.com.sprotappui.activity.LoginActivity;
 import ccc.tcl.com.sprotappui.data.UserInfo;
 
 import static ccc.tcl.com.sprotappui.constant.URLConstant.BAICHUAN_APP_KEY;

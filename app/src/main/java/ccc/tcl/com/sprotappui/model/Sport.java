@@ -26,6 +26,8 @@ public class Sport  implements  Parcelable {
     private int[] participant;
     private String details;
     private String notes;
+
+
     public Sport() {
 
     }
@@ -46,6 +48,7 @@ public class Sport  implements  Parcelable {
         details = in.readString();
         notes = in.readString();
     }
+
 
     public static final Creator<Sport> CREATOR = new Creator<Sport>() {
         @Override

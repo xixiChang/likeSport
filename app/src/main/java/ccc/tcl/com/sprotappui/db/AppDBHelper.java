@@ -19,13 +19,12 @@ public class AppDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.d(TAG, "onCreate: ");
         try {
             db.execSQL(SQLStatement.CREATE_TABLE_USER);
             db.execSQL(SQLStatement.CREATE_TABLE_SPORT_RECORD);
             db.execSQL(SQLStatement.CREATE_TABLE_ACTIVITY);
         }catch (SQLException e){
-            Log.e(TAG, "onCreate: " + e.getMessage() );
+            Log.e(TAG, "onCreate DB: " + e.getMessage() );
         }
     }
 
