@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 
 import com.alibaba.mobileim.YWAPI;
 import com.alibaba.wxlib.util.SysUtil;
+import com.umeng.socialize.PlatformConfig;
+import com.umeng.socialize.UMShareAPI;
 
 import ccc.tcl.com.sprotappui.data.UserInfo;
 
@@ -34,6 +36,7 @@ public class App extends Application {
             userInfo.setId(userID);
         }
         initIMKit();
+        initUmeng();
     }
 
     private String getBaseData(SharedPreferences s) {
@@ -51,5 +54,12 @@ public class App extends Application {
         if (SysUtil.isMainProcess()) {
             YWAPI.init(this, BAICHUAN_APP_KEY);
         }
+    }
+    /**
+     * 初始化umeng
+     */
+    private void initUmeng(){
+        PlatformConfig.setWeixin("wx615464c5b6f30c45", "2d11135893139930c161b102ae7a1f0f");
+        UMShareAPI.get(this);
     }
 }

@@ -1,5 +1,7 @@
 package ccc.tcl.com.sprotappui.activity;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -80,5 +82,18 @@ public class BaseActivity extends AppCompatActivity {
             }
         }
         return super.dispatchTouchEvent(ev);
+    }
+    /**
+     * 界面拉伸到状态栏
+     * @param isFullScreen
+     * @return
+     */
+    public void setFullScreen(boolean isFullScreen){
+        if (Build.VERSION.SDK_INT >= 21 && isFullScreen){
+            View decorView = getWindow().getDecorView();
+            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+            getWindow().setNavigationBarColor(Color.TRANSPARENT);
+            //getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
     }
 }

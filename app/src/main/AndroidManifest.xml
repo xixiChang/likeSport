@@ -19,6 +19,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="59b4d0b4734be43ee60000f9" />
+
         <activity android:name=".activity.MainActivity">
 
             <!-- <intent-filter> -->
@@ -29,8 +33,9 @@
             <!-- </intent-filter> -->
         </activity>
         <activity android:name=".activity.BaseActivity" />
-
-        <activity android:name=".activity.HomeActivity"></activity>
+        <activity
+            android:name=".activity.HomeActivity"
+            android:theme="@style/beautyTheme" />
         <activity android:name=".activity.DayRateActivity" />
         <activity android:name=".activity.ScoreActivity" />
         <activity
@@ -48,9 +53,6 @@
         <activity
             android:name=".activity.MsgSettingActivity"
             android:label="@string/title_activity_msg_setting" />
-
-        </activity>
-
         <activity android:name=".activity.TestActivity" />
         <activity android:name=".activity.WelcomeActivity">
             <intent-filter>
@@ -59,12 +61,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.SettingActivity" />
-        <activity android:name=".activity.LoginActivity"></activity>
+        <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.RegisterActivity" />
-        <activity android:name=".activity.TestActivity" />
         <activity android:name=".activity.AuthoritySettingActivity" />
-        <activity android:name=".activity.NewCreateActivity"></activity>
+        <activity android:name=".activity.NewCreateActivity" />
+        <activity android:name=".wxapi.WXEntryActivity" android:exported="true"/>
+        <activity android:name=".activity.LoginTestActivity"></activity>
     </application>
 
 </manifest>

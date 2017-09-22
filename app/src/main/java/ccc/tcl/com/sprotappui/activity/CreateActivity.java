@@ -41,10 +41,15 @@ public class CreateActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.next:
+                String nameText = name.getText().toString();
+                String detailText = detail.getText().toString();
+                if (nameText.isEmpty()||detailText.isEmpty()){
+                    break;
+                }
                 Intent intent = new Intent(this,FinishCreateActivity.class);
                 Bundle data = new Bundle();
-                sport.setName(name.getText().toString());
-                sport.setDetails(detail.getText().toString());
+                sport.setName(nameText);
+                sport.setDetails(detailText);
                 data.putParcelable("data",sport);
                 intent.putExtras(data);
                 startActivity(intent);
