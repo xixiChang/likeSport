@@ -67,6 +67,7 @@
         <activity android:name=".activity.NewCreateActivity" />
         <activity android:name=".wxapi.WXEntryActivity" android:exported="true"/>
         <activity android:name=".activity.LoginTestActivity"></activity>
+        <activity android:name=".activity.AuthoritySettingActivity"></activity>
     </application>
 
 </manifest>

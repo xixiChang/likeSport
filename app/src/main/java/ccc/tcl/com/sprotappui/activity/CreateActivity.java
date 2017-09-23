@@ -1,7 +1,6 @@
 package ccc.tcl.com.sprotappui.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -10,10 +9,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import ccc.tcl.com.sprotappui.R;
-import ccc.tcl.com.sprotappui.model.Sport;
+import ccc.tcl.com.sprotappui.model.PlatFromActivity;
 
 public class CreateActivity extends BaseActivity {
-    Sport sport;
+    PlatFromActivity platFromActivity;
     EditText name;
     EditText brief;
     EditText detail;
@@ -24,8 +23,8 @@ public class CreateActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         super.setToolBar(toolbar, R.string.create_activity,true);
         Intent intent = getIntent();
-        sport = intent.getParcelableExtra("data");
-        Toast.makeText(this,sport.getImage_url(),Toast.LENGTH_SHORT).show();
+        platFromActivity = intent.getParcelableExtra("data");
+        Toast.makeText(this, platFromActivity.getImage_url(),Toast.LENGTH_SHORT).show();
         name = (EditText) findViewById(R.id.name);
         brief = (EditText) findViewById(R.id.brief);
         detail = (EditText) findViewById(R.id.detail);
@@ -48,6 +47,9 @@ public class CreateActivity extends BaseActivity {
                 }
                 Intent intent = new Intent(this,FinishCreateActivity.class);
                 Bundle data = new Bundle();
+                platFromActivity.setName(name.getText().toString());
+                platFromActivity.setDetails(detail.getText().toString());
+                data.putParcelable("data", platFromActivity);
                 sport.setName(nameText);
                 sport.setDetails(detailText);
                 data.putParcelable("data",sport);

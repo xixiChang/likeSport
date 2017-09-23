@@ -37,7 +37,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initView();
-        sqlParaWrapper= new SQLParaWrapper(this);
     }
 
     @Override
@@ -128,6 +127,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private void saveUserInfoToDB() {
         try {
+            sqlParaWrapper= new SQLParaWrapper(this);
             sqlParaWrapper.sqLiteDatabase.execSQL(SQLStatement.AddUser,
                     sqlParaWrapper.getUserStringArray(userInfo));
         }catch (SQLiteException e){

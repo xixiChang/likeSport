@@ -2,31 +2,26 @@ package ccc.tcl.com.sprotappui.fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.flyco.labelview.LabelView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import ccc.tcl.com.sprotappui.R;
-import ccc.tcl.com.sprotappui.activity.BaseActivity;
 import ccc.tcl.com.sprotappui.activity.LayoutActivity;
 import ccc.tcl.com.sprotappui.adapter.FMSportItem;
-import ccc.tcl.com.sprotappui.model.Sport;
+import ccc.tcl.com.sprotappui.model.PlatFromActivity;
 
 public class SportFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private List<Sport> sportList = new ArrayList<>();
+    private List<PlatFromActivity> platFromActivityList = new ArrayList<>();
     private Context context;
     private String mTitle;
     private FMSportItem adapter;
@@ -48,11 +43,11 @@ public class SportFragment extends Fragment {
     }
 
     private void initData() {
-        sportList.add(new Sport());
-        sportList.add(new Sport());
-        sportList.add(new Sport());
-        sportList.add(new Sport());
-        sportList.add(new Sport());
+        platFromActivityList.add(new PlatFromActivity());
+        platFromActivityList.add(new PlatFromActivity());
+        platFromActivityList.add(new PlatFromActivity());
+        platFromActivityList.add(new PlatFromActivity());
+        platFromActivityList.add(new PlatFromActivity());
     }
 
     @Override
@@ -68,7 +63,7 @@ public class SportFragment extends Fragment {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL, false);
-        adapter = new FMSportItem(sportList);
+        adapter = new FMSportItem(platFromActivityList);
         adapter.setListener(new FMSportItem.OnRecyclerViewItemClickListener() {
             @Override
             public void onClick(View view, int position) {

@@ -89,7 +89,7 @@ public final class SQLStatement {
             "name ,post_user_id ,image_url ,content ,address ,post_time ,start_time ," +
             "end_time ,goal_dis ,joiner ,status ,reason, hot_value, at_server_id)" +
             "values(" +
-            "?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            "?,?,?,?,?,datetime('now'),?,?,?,?,?,?,?,?)";
 
     /**
      * select data

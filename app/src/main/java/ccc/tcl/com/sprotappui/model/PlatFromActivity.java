@@ -4,35 +4,77 @@ package ccc.tcl.com.sprotappui.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.io.Serializable;
 import java.util.Date;
+
+import ccc.tcl.com.sprotappui.utils.TimeTranslator;
 
 /**
  * Created by user on 17-9-7.
  */
 
-public class Sport  implements  Parcelable {
+public class PlatFromActivity implements  Parcelable {
     private int id;
-    private boolean isNew;
+
     private String image_url;
     private String name;
     private String hot_value;
-    private String left_time;
     private String start_time;
     private String end_time;
     private int distance;
-    private String location;
+    private String address;
     private int sponsor;
-    private int[] participant;
+    private String joiner;//int to string
     private String details;
     private String notes;
+    private String post_time;
+    private int at_server_id;
+    private String status;
 
 
-    public Sport() {
-
+    public PlatFromActivity() {
     }
 
-    protected Sport(Parcel in) {
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getJoiner() {
+        return joiner;
+    }
+
+    public void setJoiner(String joiner) {
+        this.joiner = joiner;
+    }
+
+    public String getPost_time() {
+        return post_time;
+    }
+
+
+    public int getAt_server_id() {
+        return at_server_id;
+    }
+
+    public void setAt_server_id(int at_server_id) {
+        this.at_server_id = at_server_id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    private boolean isNew;
+    private String left_time;
+
+    protected PlatFromActivity(Parcel in) {
         id = in.readInt();
         isNew = in.readByte() != 0;
         image_url = in.readString();
@@ -42,23 +84,23 @@ public class Sport  implements  Parcelable {
         end_time = in.readString();
         left_time = in.readString();
         distance = in.readInt();
-        location = in.readString();
+        address = in.readString();
         sponsor = in.readInt();
-        participant = in.createIntArray();
+        joiner = in.readString();
         details = in.readString();
         notes = in.readString();
     }
 
 
-    public static final Creator<Sport> CREATOR = new Creator<Sport>() {
+    public static final Creator<PlatFromActivity> CREATOR = new Creator<PlatFromActivity>() {
         @Override
-        public Sport createFromParcel(Parcel in) {
-            return new Sport(in);
+        public PlatFromActivity createFromParcel(Parcel in) {
+            return new PlatFromActivity(in);
         }
 
         @Override
-        public Sport[] newArray(int size) {
-            return new Sport[size];
+        public PlatFromActivity[] newArray(int size) {
+            return new PlatFromActivity[size];
         }
     };
 
@@ -103,12 +145,10 @@ public class Sport  implements  Parcelable {
     }
 
     public String getLeft_time() {
-        return left_time;
+        return String.valueOf((TimeTranslator.stringToDate(end_time).getTime()
+                - new Date().getTime()/(1000*60*60*24)));
     }
 
-    public void setLeft_time(String left_time) {
-        this.left_time = left_time;
-    }
 
     public String getStart_time() {
         return start_time;
@@ -134,13 +174,6 @@ public class Sport  implements  Parcelable {
         this.distance = distance;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
 
     public int getSponsor() {
         return sponsor;
@@ -150,13 +183,6 @@ public class Sport  implements  Parcelable {
         this.sponsor = sponsor;
     }
 
-    public int[] getParticipant() {
-        return participant;
-    }
-
-    public void setParticipant(int[] participant) {
-        this.participant = participant;
-    }
 
     public String getDetails() {
         return details;
@@ -190,9 +216,9 @@ public class Sport  implements  Parcelable {
         dest.writeString(end_time);
         dest.writeString(left_time);
         dest.writeInt(distance);
-        dest.writeString(location);
+        dest.writeString(address);
         dest.writeInt(sponsor);
-        dest.writeIntArray(participant);
+        dest.writeString(joiner);
         dest.writeString(details);
         dest.writeString(notes);
     }
