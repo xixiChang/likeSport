@@ -118,12 +118,12 @@ public class FinishCreateActivity extends BaseActivity {
 
                 Intent intent = new Intent(this,NewCreateActivity.class);
                 Bundle data = new Bundle();
-                sport.setStart_time(startTime.getText().toString());
-                sport.setEnd_time(endTime.getText().toString());
-                sport.setLocation(locationText);
-                sport.setDistance(Integer.parseInt(distanceText));
-                sport.setNotes(note.getText().toString());
-                data.putParcelable("data",sport);
+                platFromActivity.setStart_time(startTime.getText().toString());
+                platFromActivity.setEnd_time(endTime.getText().toString());
+                platFromActivity.setAddress(locationText);
+                platFromActivity.setDistance(Integer.parseInt(distanceText));
+                platFromActivity.setNotes(note.getText().toString());
+                data.putParcelable("data",platFromActivity);
                 platFromActivity.setStart_time(startTime.getText().toString());
                 platFromActivity.setEnd_time(endTime.getText().toString());
                 platFromActivity.setAddress(location.getText().toString());

@@ -50,9 +50,9 @@ public class CreateActivity extends BaseActivity {
                 platFromActivity.setName(name.getText().toString());
                 platFromActivity.setDetails(detail.getText().toString());
                 data.putParcelable("data", platFromActivity);
-                sport.setName(nameText);
-                sport.setDetails(detailText);
-                data.putParcelable("data",sport);
+                platFromActivity.setName(nameText);
+                platFromActivity.setDetails(detailText);
+                data.putParcelable("data",platFromActivity);
                 intent.putExtras(data);
                 startActivity(intent);
                 finish();

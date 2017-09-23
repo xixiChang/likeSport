@@ -1,14 +1,13 @@
 package ccc.tcl.com.sprotappui.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.TextView;
 
 import ccc.tcl.com.sprotappui.R;
-import ccc.tcl.com.sprotappui.model.Sport;
+import ccc.tcl.com.sprotappui.model.PlatFromActivity;
 
 public class NewCreateActivity extends BaseActivity {
     TextView startTime;
@@ -16,7 +15,7 @@ public class NewCreateActivity extends BaseActivity {
     TextView distance;
     TextView location;
     TextView detail;
-    Sport sport;
+    PlatFromActivity sport;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +33,7 @@ public class NewCreateActivity extends BaseActivity {
         startTime.setText(sport.getStart_time());
         endTime.setText(sport.getEnd_time());
         distance.setText(sport.getDistance() + "KM");
-        location.setText(sport.getLocation());
+        location.setText(sport.getAddress());
         detail.setText(sport.getDetails());
     }
 
