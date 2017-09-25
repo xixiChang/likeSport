@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
 
-    tools:context="ccc.tcl.com.sprotappui.activity.contactActivity"
+    tools:context="ccc.tcl.com.sprotappui.activity.ContactActivity"
     android:weightSum="1">
     <include layout="@layout/toolbar_general"></include>
     <RelativeLayout

@@ -8,7 +8,7 @@ import ccc.tcl.com.sprotappui.ui.SportAppView;
  * Created by user on 17-9-13.
  */
 
-public class SportPresenter implements Presenter {
+public class ActivityPresenter implements Presenter {
 
     @Override
     public void onCreate() {
