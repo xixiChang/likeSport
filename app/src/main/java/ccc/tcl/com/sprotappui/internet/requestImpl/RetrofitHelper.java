@@ -3,6 +3,7 @@ package ccc.tcl.com.sprotappui.internet.requestImpl;
 import java.util.concurrent.TimeUnit;
 
 import ccc.tcl.com.sprotappui.constant.URLConstant;
+import ccc.tcl.com.sprotappui.internet.AuthInterceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -22,6 +23,7 @@ public class RetrofitHelper {
     private RetrofitHelper() {
         OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
         httpClientBuilder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+        httpClientBuilder.addInterceptor(new AuthInterceptor());
 
         this.retrofit = new Retrofit.Builder()
                 .client(httpClientBuilder.build())

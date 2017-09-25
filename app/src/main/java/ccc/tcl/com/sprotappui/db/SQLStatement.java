@@ -38,7 +38,7 @@ public final class SQLStatement {
             "distance integer," +
             "calorie integer," +
             "mean_speed real," +
-            "spent_time time," +
+            "spent_time integer," +
             "start_time time," +
             "end_time time" +
             ")";

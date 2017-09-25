@@ -22,12 +22,12 @@ public class Record {
     /**
      * 0:步行, 1:跑步, 3:骑行
      */
-    private String type;
-    private String step;
+    private int type;
+    private int step;
     private int distance; //单位：ｍ
     private int calorie; //单位：c
     private float mean_speed; //单位：m/s
-    private String spent_time; //HH:mm:ss
+    private int spent_time; //s
     private String start_time; //HH:mm:ss
     private String end_time; //HH:mm:ss
 
@@ -55,19 +55,19 @@ public class Record {
         this.time = time;
     }
 
-    public String getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
     }
 
-    public String getStep() {
+    public int getStep() {
         return step;
     }
 
-    public void setStep(String step) {
+    public void setStep(int step) {
         this.step = step;
     }
 
@@ -95,11 +95,11 @@ public class Record {
         this.mean_speed = mean_speed;
     }
 
-    public String getSpent_time() {
+    public int getSpent_time() {
         return spent_time;
     }
 
-    public void setSpent_time(String spent_time) {
+    public void setSpent_time(int spent_time) {
         this.spent_time = spent_time;
     }
 

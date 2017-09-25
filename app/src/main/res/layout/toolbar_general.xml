@@ -15,6 +15,7 @@
             android:layout_height="?attr/actionBarSize"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:layout_scrollFlags="enterAlways|scroll|snap">
+
         </ccc.tcl.com.sprotappui.customui.ToolBar>
     </android.support.design.widget.AppBarLayout>
 </LinearLayout>
