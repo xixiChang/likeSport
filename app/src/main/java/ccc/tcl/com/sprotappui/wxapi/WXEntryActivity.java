@@ -1,6 +1,4 @@
-package ccc.tcl.com.sprotappui.weixin.callback;
-
-import android.support.v7.app.AppCompatActivity;
+package ccc.tcl.com.sprotappui.wxapi;
 import android.os.Bundle;
 
 import com.umeng.weixin.callback.WXCallbackActivity;

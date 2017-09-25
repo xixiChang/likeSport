@@ -2,16 +2,21 @@ package ccc.tcl.com.sprotappui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.alibaba.mobileim.IYWLoginService;
 import com.alibaba.mobileim.YWLoginParam;
@@ -33,6 +38,7 @@ import ccc.tcl.com.sprotappui.service.IMService;
 import ccc.tcl.com.sprotappui.utils.ViewFindUtils;
 
 import static ccc.tcl.com.sprotappui.App.userInfo;
+import static ccc.tcl.com.sprotappui.R.mipmap.activity;
 import static ccc.tcl.com.sprotappui.service.IMService.mIMKit;
 
 
@@ -67,6 +73,7 @@ public class HomeActivity extends BaseActivity {
         super.setToolBar(toolbar, R.string.toolbar_name_sport, false);
         initIMConnect();
         initView();
+        //setFullScreen(true);
     }
 
 
@@ -106,6 +113,24 @@ public class HomeActivity extends BaseActivity {
         setTabLayout();
         mTabLayout.showMsg(2, 55);
         mTabLayout.setMsgMargin(0, -5, 5);
+
+
+
+//        Window window = this.getWindow();
+//        //设置透明状态栏,这样才能让 ContentView 向上
+//        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//
+//        //需要设置这个 flag 才能调用 setStatusBarColor 来设置状态栏颜色
+//        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+//        //设置状态栏颜色
+//        window.setStatusBarColor(Color.TRANSPARENT);
+//
+//        ViewGroup mContentView = (ViewGroup) this.findViewById(Window.ID_ANDROID_CONTENT);
+//        View mChildView = mContentView.getChildAt(0);
+//        if (mChildView != null) {
+//            //注意不是设置 ContentView 的 FitsSystemWindows, 而是设置 ContentView 的第一个子 View . 使其不为系统 View 预留空间.
+//            ViewCompat.setFitsSystemWindows(mChildView, false);
+//        }
     }
 
     private Random mRandom = new Random();

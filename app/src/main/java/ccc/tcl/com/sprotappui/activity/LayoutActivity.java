@@ -45,8 +45,8 @@ public class LayoutActivity extends BaseActivity {
         drawables[2] = resources.getDrawable(R.drawable.head4,null);
         drawables[3] = resources.getDrawable(R.drawable.head5,null);
         LayerDrawable layerDrawable = new LayerDrawable(drawables);
-        imageView.setBackgroundColor(getResources().getColor(R.color.blue,null));
-        imageView.getBackground().setAlpha(0);
+        Intent intent = getIntent();
+        int position = intent.getIntExtra("id",-1);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -62,7 +62,7 @@ public class LayoutActivity extends BaseActivity {
                 new ShareAction(LayoutActivity.this)
                         .withText("hello")
                         //.withMedia(new UMImage(LayoutActivity.this,new File("")))
-                        .setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
+                        .setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
                         .setCallback(umShareListener)
                         .open();
         }

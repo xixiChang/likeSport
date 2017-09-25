@@ -34,7 +34,7 @@ public class FinishCreateActivity extends BaseActivity {
     PlatFromActivity platFromActivity;
     int[] location_datePicker = new int[2];
     int[] start_textview = new int[2];
-    SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     boolean set_start_time = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,15 +76,16 @@ public class FinishCreateActivity extends BaseActivity {
             }
 
         });
-        startTime.setText(format.format(new Date().getTime()));
-        endTime.setText(format.format(new Date().getTime()));
+        final String currTime = format.format(new Date().getTime());
+        startTime.setText(currTime);
+        endTime.setText(currTime);
         stub = (ViewStub) findViewById(R.id.viewStub);
         stub.setOnInflateListener(new ViewStub.OnInflateListener() {
             @Override
             public void onInflate(ViewStub stub, final View inflated) {//加载完成以后回调//下面的代码也可以写到inflate()返回以后调用
                 ll = (LinearLayout) inflated;
                 DatePicker picker = (DatePicker) findViewById(R.id.datePicker2);
-                picker.init(2013, 1, 4, new DatePicker.OnDateChangedListener() {
+                picker.init(Integer.parseInt(currTime.substring(0,4)), Integer.parseInt(currTime.substring(5,7))-1, Integer.parseInt(currTime.substring(8)), new DatePicker.OnDateChangedListener() {
                     @Override
                     public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         Calendar calendar = Calendar.getInstance();
@@ -93,7 +94,6 @@ public class FinishCreateActivity extends BaseActivity {
                             startTime.setText(format.format(calendar.getTime()));
                         else if (!set_start_time)
                             endTime.setText(format.format(calendar.getTime()));
-                        Toast.makeText(FinishCreateActivity.this, format.format(calendar.getTime()), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -110,8 +110,20 @@ public class FinishCreateActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.finish:
-                Intent intent = new Intent();
+                String locationText = location.getText().toString();
+                String distanceText = distance.getText().toString();
+                if (locationText.isEmpty() || distanceText.isEmpty()) {
+                    break;
+                }
+
+                Intent intent = new Intent(this,NewCreateActivity.class);
                 Bundle data = new Bundle();
+                platFromActivity.setStart_time(startTime.getText().toString());
+                platFromActivity.setEnd_time(endTime.getText().toString());
+                platFromActivity.setAddress(locationText);
+                platFromActivity.setDistance(Integer.parseInt(distanceText));
+                platFromActivity.setNotes(note.getText().toString());
+                data.putParcelable("data",platFromActivity);
                 platFromActivity.setStart_time(startTime.getText().toString());
                 platFromActivity.setEnd_time(endTime.getText().toString());
                 platFromActivity.setAddress(location.getText().toString());
@@ -119,7 +131,8 @@ public class FinishCreateActivity extends BaseActivity {
                 platFromActivity.setNotes(note.getText().toString());
                 data.putParcelable("data", platFromActivity);
                 intent.putExtras(data);
-                Log.d("", "onOptionsItemSelected: ");
+                startActivity(intent);
+                finish();
                 break;
 
         }

@@ -39,5 +39,7 @@
     <string name="camera">相机</string>
     <string name="storage">存储</string>
     <string name="position">定位</string>
+    <string name="sportStatus">运动状态</string>
+    <string name="hisSport">参与活动</string>
 </resources>
 
