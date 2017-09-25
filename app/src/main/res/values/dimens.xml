@@ -26,8 +26,25 @@
     <dimen name="activity_content_size_mid">16sp</dimen>
     <dimen name="activity_content_size_small">14sp</dimen>
 
+    <dimen name="text_recorder_distance_size">60sp</dimen>
+    <dimen name="text_recorder_number_size">22sp</dimen>
+    <dimen name="text_recorder_name_size">16sp</dimen>
+    <dimen name="text_recorder_name_sizeBig">22sp</dimen>
+    <dimen name="text_recorder_buttonText_size">14sp</dimen>
+    <dimen name="text_recorder_button_size">18sp</dimen>
+
     <!--image size-->
     <dimen name="icon_image_size">48dp</dimen>
     <dimen name="user_photo_size">60dp</dimen>
+
+    <!--slider size-->
+    <dimen name="mask_text_size">18dp</dimen>
+    <dimen name="mask_text_margin_left">120dp</dimen>
+    <dimen name="mask_text_margin_top">40dp</dimen>
+    <dimen name="slider_margin_left">28dp</dimen>
+    <dimen name="slider_margin_top">20dp</dimen>
+    <dimen name="slidable_length">208dp</dimen>
+    <dimen name="effective_length">190dp</dimen>
+    <dimen name="effective_velocity">1300dp</dimen>
 </resources>
 

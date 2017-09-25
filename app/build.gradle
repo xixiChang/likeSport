@@ -9,12 +9,21 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
-
+        vectorDrawables.useSupportLibrary = true
+        generatedDensities = []
+    }
+    aaptOptions {
+        additionalParameters "--no-version-vectors"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main() {
+            jniLibs.srcDirs = ['libs']
         }
     }
 }
@@ -53,12 +62,13 @@ dependencies {
     compile 'com.flyco.roundview:FlycoRoundView_Lib:1.1.2@aar'
     compile 'com.flyco.tablayout:FlycoTabLayout_Lib:1.5.0@aar'
     compile 'de.hdodenhof:circleimageview:2.1.0'
-    compile 'com.github.Rukey7:TagLayout:1.0.6'
+//    compile 'com.github.Rukey7:TagLayout:1.0.6'
     compile 'com.flyco.labelview:FlycoLabelView_Lib:1.0.2@aar'
     compile 'com.flyco.dialog:FlycoDialog_Lib:1.2.2@aar'
     compile 'com.flyco.animation:FlycoAnimation_Lib:1.0.0@aar'
     compile 'com.android.support:support-v4:25.1.0'
-    compile 'com.alibaba.mobileim:IMCore:2.0.2.1@aar'
-    compile 'com.alibaba.mobileim:IMKit:2.0.2.1@aar'
-
+//    compile 'com.alibaba.mobileim:IMCore:2.0.2.1@aar'
+//    compile 'com.alibaba.mobileim:IMKit:2.0.2.1@aar'
+//    百度地图
+    compile files('libs/baidumapapi_map_v4_3_1.jar')
 }
