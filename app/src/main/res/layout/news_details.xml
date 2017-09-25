@@ -172,7 +172,7 @@
             android:layout_alignParentBottom="true"
             app:tag_text="点击就送"
             app:tag_text_color="@color/white"
-            app:tag_bg_color="@color/springgreen"
+            app:tag_bg_color="@color/colorAccent"
             app:tag_bg_color_check="@color/greenyellow"
             app:tag_border_color="@color/red"
             app:tag_shape="arc"
