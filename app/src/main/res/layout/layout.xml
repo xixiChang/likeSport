@@ -1,96 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/include"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/user_photo"
-        android:src="@drawable/photo1"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/page_content_margin_top" />
-
-    <TextView
-        android:id="@+id/user_name"
-        android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/user_photo"
-        android:layout_marginTop="@dimen/title_content_margin"
-        android:text="小狐丸"
-        android:textColor="@color/colorAccent"
-        android:textSize="@dimen/activity_content_size_big"
-        android:layout_centerHorizontal="true" />
-
-
-        <LinearLayout
+        android:theme="@style/AppTheme.AppBarOverlay">
+        <ccc.tcl.com.sprotappui.customui.ToolBar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:layout_scrollFlags="enterAlways|scroll|snap">
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:orientation="vertical"
-            android:layout_marginTop="116dp">
-            <TextView
-                android:id="@+id/whole_distance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/black"
-                android:textSize="@dimen/activity_content_size_mid"
-                android:text="56241"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/title_content_margin"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/dimgrey"
-                android:text="@string/whole_distance"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:orientation="vertical"
-            android:layout_marginTop="116dp"
-            >
-            <TextView
-                android:id="@+id/whole_spent_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/black"
-                android:textSize="@dimen/activity_content_size_mid"
-                android:text="78"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/title_content_margin"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/dimgrey"
-                android:text="@string/whole_spent_time"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/page_content_margin_left"
-            android:orientation="vertical"
-            android:layout_marginTop="116dp">
-            <TextView
-                android:id="@+id/whole_consume"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/black"
-                android:textSize="@dimen/activity_content_size_mid"
-                android:text="65122"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/title_content_margin"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/dimgrey"
-                android:text="@string/whole_consume"/>
-        </LinearLayout>
-</RelativeLayout>
+            android:text="asdas"/>
+        </ccc.tcl.com.sprotappui.customui.ToolBar>
+    </android.support.design.widget.AppBarLayout>
+</LinearLayout>

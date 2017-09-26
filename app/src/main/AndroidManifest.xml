@@ -64,13 +64,16 @@
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.AuthoritySettingActivity" />
-        <activity android:name=".activity.NewCreateActivity" />
+        <activity android:name=".activity.NewCreateActivity"
+                  android:theme="@style/beautyTheme" />
         <activity
             android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:exported="true" />
         <activity android:name=".activity.LoginTestActivity" />
-        <activity android:name=".activity.AuthoritySettingActivity" />
-        <activity android:name=".activity.contactActivity"></activity>
+
     </application>
 
 </manifest>

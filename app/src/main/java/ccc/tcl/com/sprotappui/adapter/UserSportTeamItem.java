@@ -56,12 +56,12 @@ public class UserSportTeamItem extends RecyclerView.Adapter<UserSportTeamItem.Vi
         holder.time.setText(data.get(position).getTime());
         holder.value.setText(data.get(position).getValue());
         holder.behavior.setText(data.get(position).getBehavior());
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                listener.onClick(v, position);
-//            }
-//        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onClick(v, position);
+            }
+        });
     }
 
     @Override

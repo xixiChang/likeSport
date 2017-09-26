@@ -58,6 +58,14 @@ public class MySportTeamActivity extends BaseActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context,
                 LinearLayoutManager.VERTICAL, false);
         UserSportTeamItem adapter = new UserSportTeamItem(sports);
+        adapter.setListener(new UserSportTeamItem.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Intent intent = new Intent(context, LayoutActivity.class);
+                intent.putExtra("id",sports.get(position).getId());
+                startActivity(intent);
+            }
+        });
         recycler.setLayoutManager(linearLayoutManager);
         recycler.setAdapter(adapter);
         recycler.setVisibility(View.VISIBLE);

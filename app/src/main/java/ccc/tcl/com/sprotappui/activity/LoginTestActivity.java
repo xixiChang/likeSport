@@ -1,5 +1,6 @@
 package ccc.tcl.com.sprotappui.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.UMShareConfig;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
@@ -30,13 +32,17 @@ public class LoginTestActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 platform = SHARE_MEDIA.WEIXIN;
-                new ShareAction(LoginTestActivity.this)
-                        .withText("hello")
-                        .setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
-                        .setCallback(shareListener)
-                        .open();
+//                new ShareAction(LoginTestActivity.this)
+//                        .withText("hello")
+//                        .setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
+//                        .setCallback(shareListener)
+//                        .open();
+//                UMShareConfig config = new UMShareConfig();
+//                config.isNeedAuthOnGetUserInfo(true);
+//                UMShareAPI.get(LoginTestActivity.this).setShareConfig(config);
+
                 //mShareAPI.doOauthVerify(LoginTestActivity.this, platform, umAuthListener);
-                //mShareAPI.getPlatformInfo(LoginTestActivity.this, platform, umAuthListener);
+                mShareAPI.getPlatformInfo(LoginTestActivity.this, platform, umAuthListener);
             }
         });
     }
@@ -102,6 +108,13 @@ public class LoginTestActivity extends AppCompatActivity {
 
         }
     };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     @Override
     protected void onDestroy() {
         UMShareAPI.get(this).release();

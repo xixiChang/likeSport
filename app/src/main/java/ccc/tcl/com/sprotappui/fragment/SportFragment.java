@@ -68,7 +68,7 @@ public class SportFragment extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 Intent intent = new Intent(context, LayoutActivity.class);
-                intent.putExtra("id",position);
+                intent.putExtra("id",platFromActivityList.get(position).getId());
                 startActivity(intent);
             }
         });

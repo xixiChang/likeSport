@@ -30,6 +30,7 @@ public class FinishCreateActivity extends BaseActivity {
     EditText distance;
     EditText note;
     ViewStub stub;
+    DatePicker picker;
     LinearLayout ll = null;
     PlatFromActivity platFromActivity;
     int[] location_datePicker = new int[2];
@@ -57,6 +58,8 @@ public class FinishCreateActivity extends BaseActivity {
                     stub.inflate();
                 }else if(ll.getVisibility()==View.GONE){
                     ll.setVisibility(View.VISIBLE);
+                    String start = startTime.getText().toString();
+                    picker.updateDate(Integer.parseInt(start.substring(0,4)), Integer.parseInt(start.substring(5,7))-1, Integer.parseInt(start.substring(8)));
                 }
 
             }
@@ -71,6 +74,8 @@ public class FinishCreateActivity extends BaseActivity {
                     stub.inflate();
                 }else if(ll.getVisibility()==View.GONE){
                     ll.setVisibility(View.VISIBLE);
+                    String end = endTime.getText().toString();
+                    picker.updateDate(Integer.parseInt(end.substring(0,4)), Integer.parseInt(end.substring(5,7))-1, Integer.parseInt(end.substring(8)));
                 }
 
             }
@@ -84,7 +89,7 @@ public class FinishCreateActivity extends BaseActivity {
             @Override
             public void onInflate(ViewStub stub, final View inflated) {//加载完成以后回调//下面的代码也可以写到inflate()返回以后调用
                 ll = (LinearLayout) inflated;
-                DatePicker picker = (DatePicker) findViewById(R.id.datePicker2);
+                picker = (DatePicker) findViewById(R.id.datePicker2);
                 picker.init(Integer.parseInt(currTime.substring(0,4)), Integer.parseInt(currTime.substring(5,7))-1, Integer.parseInt(currTime.substring(8)), new DatePicker.OnDateChangedListener() {
                     @Override
                     public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -124,12 +129,7 @@ public class FinishCreateActivity extends BaseActivity {
                 platFromActivity.setDistance(Integer.parseInt(distanceText));
                 platFromActivity.setNotes(note.getText().toString());
                 data.putParcelable("data",platFromActivity);
-                platFromActivity.setStart_time(startTime.getText().toString());
-                platFromActivity.setEnd_time(endTime.getText().toString());
-                platFromActivity.setAddress(location.getText().toString());
-                platFromActivity.setDistance(Integer.parseInt(distance.getText().toString()));
-                platFromActivity.setNotes(note.getText().toString());
-                data.putParcelable("data", platFromActivity);
+
                 intent.putExtras(data);
                 startActivity(intent);
                 finish();
