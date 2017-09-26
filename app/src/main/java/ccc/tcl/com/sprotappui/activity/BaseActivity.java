@@ -83,6 +83,8 @@ public class BaseActivity extends AppCompatActivity {
         }
         return super.dispatchTouchEvent(ev);
     }
+
+
     /**
      * 界面拉伸到状态栏
      * @param isFullScreen

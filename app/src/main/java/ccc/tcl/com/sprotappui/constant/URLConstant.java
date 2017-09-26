@@ -15,8 +15,20 @@ public final class URLConstant {
     public final static String User_Auth_Code = "/user/getauthcode";
 
 
+    /**
+     * 活动记录
+     */
+    public static final String Activity_Post = "/activity/post";
+
+    /**
+     * 文件上传
+     */
+
     public static final String File_Upload = "/file/image";
 
+    /**
+     * 运动记录
+     */
     public final static String Record_Upload = "/record/upload";
 
     public final static String Record_Query_Sum = "/record/query/sum";
