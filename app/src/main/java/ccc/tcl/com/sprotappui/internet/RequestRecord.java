@@ -30,7 +30,6 @@ import static ccc.tcl.com.sprotappui.constant.URLConstant.Record_Upload;
 public interface RequestRecord {
 
     @POST(value = Record_Upload)
-    @FormUrlEncoded
     Observable<ResponseResult> upload(@Body Record record);
 
     /**

@@ -74,6 +74,7 @@
             android:exported="true" />
         <activity android:name=".activity.LoginTestActivity" />
 
+        <activity android:name=".activity.ContactActivity"></activity>
     </application>
 
 </manifest>

@@ -22,7 +22,7 @@ public class WelcomeActivity extends AppCompatActivity {
     public static final int JUMP_TO_HOME = 2603;
     public static final int JUMP_TO_Login = 2604;
 
-    private static final int WELCOME_DELAY_TIME = 3000;
+    private static final int WELCOME_DELAY_TIME = 1000;
 
     private SQLParaWrapper sqlParaWrapper;
     private static final String TAG = "WelcomeActivity";

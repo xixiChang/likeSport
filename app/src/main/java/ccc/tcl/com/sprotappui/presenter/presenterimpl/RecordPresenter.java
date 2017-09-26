@@ -1,6 +1,8 @@
 package ccc.tcl.com.sprotappui.presenter.presenterimpl;
 
 
+import android.util.Log;
+
 import ccc.tcl.com.sprotappui.internet.RequestRecord;
 import ccc.tcl.com.sprotappui.internet.requestImpl.RetrofitHelper;
 import ccc.tcl.com.sprotappui.model.Record;
@@ -57,6 +59,7 @@ public class RecordPresenter implements Presenter {
 
     public void uploadRecord(Record record){
         resultObservable = requestRecord.upload(record);
+        Log.d(TAG, "uploadRecord: " + record.toString());
         mCompositeSubscription.add(subscribeData());
     }
 
@@ -72,6 +75,33 @@ public class RecordPresenter implements Presenter {
 
     public void getByWeekly(){
         resultObservable = (Observable) requestRecord.getByWeekly();
+        mCompositeSubscription.add(subscribeData());
+    }
+
+
+    public void getMax(String type){
+        resultObservable = (Observable) requestRecord.getMax(type);
+        mCompositeSubscription.add(subscribeData());
+    }
+
+    public void getMaxForDay(String type){
+        resultObservable = (Observable) requestRecord.getMaxForDay(type);
+        mCompositeSubscription.add(subscribeData());
+    }
+
+
+    public void getDayAll(String date){
+        resultObservable = (Observable) requestRecord.getDayAll(date);
+        mCompositeSubscription.add(subscribeData());
+    }
+
+    public void getDetails(String id){
+        resultObservable = (Observable) requestRecord.getDetails(id);
+        mCompositeSubscription.add(subscribeData());
+    }
+
+    public void getRating(){
+        resultObservable = (Observable) requestRecord.getRating();
         mCompositeSubscription.add(subscribeData());
     }
 

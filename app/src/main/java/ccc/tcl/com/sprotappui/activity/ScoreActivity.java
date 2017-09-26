@@ -1,7 +1,7 @@
 package ccc.tcl.com.sprotappui.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -9,14 +9,50 @@ import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
+import java.util.Map;
+
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.customui.ToolBar;
+import ccc.tcl.com.sprotappui.model.ResponseResult;
+import ccc.tcl.com.sprotappui.presenter.presenterimpl.RecordPresenter;
+import ccc.tcl.com.sprotappui.ui.SportAppView;
 
 import static ccc.tcl.com.sprotappui.R.id.toolbar;
 
 public class ScoreActivity extends BaseActivity {
+    private static final String VIEW_TYPE_WALK = "0";
+    private static final String VIEW_TYPE_RUN = "1";
+    private static final String TAG = "ScoreActivity";
+
     private ToolBar toolBar;
-    ImageView share;
+    private ImageView share;
+
+    private RecordPresenter recordPresenter;
+    private SportAppView<ResponseResult<Map<String,String>>> sportAppView
+            = new SportAppView<ResponseResult<Map<String, String>>>() {
+        @Override
+        public void onSuccess(ResponseResult<Map<String, String>> response) {
+            if (response.isSuccess()){
+                if (VIEW_TYPE_WALK.equals(response.getType())){
+                    Map<String, String> map = response.getResult();
+                    Log.d(TAG, "onSuccess: type>0" );
+                    Log.d(TAG, "onSuccess: step>" + map.get("step"));
+                    Log.d(TAG, "onSuccess: spent_time>" + map.get("spent_time"));
+                }else if (VIEW_TYPE_RUN.equals(response.getType())){
+                    Map<String, String> map = response.getResult();
+                    Log.d(TAG, "onSuccess: type>1" );
+                    Log.d(TAG, "onSuccess: step>" + map.get("step"));
+                    Log.d(TAG, "onSuccess: spent_time>" + map.get("spent_time"));
+                }
+            }
+        }
+
+        @Override
+        public void onError(String msg) {
+
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +73,18 @@ public class ScoreActivity extends BaseActivity {
         });
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        recordPresenter = new RecordPresenter();
+        recordPresenter.onCreate();
+        recordPresenter.attachView(sportAppView);
+        recordPresenter.getMax(VIEW_TYPE_WALK);
+
+        recordPresenter.getMax(VIEW_TYPE_RUN);
+    }
+
     private UMShareListener umShareListener = new UMShareListener() {
         @Override
         public void onStart(SHARE_MEDIA share_media) {
@@ -58,4 +106,10 @@ public class ScoreActivity extends BaseActivity {
 
         }
     };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        recordPresenter.onStop();
+    }
 }
