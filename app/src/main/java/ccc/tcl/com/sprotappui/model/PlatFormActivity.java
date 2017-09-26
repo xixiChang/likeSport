@@ -77,7 +77,7 @@ public class PlatFormActivity implements  Parcelable {
         left_time = in.readString();
         distance = in.readInt();
         address = in.readString();
-        sponsor = in.readInt();
+        publish_user_id = in.readString();
         joiner = in.readString();
         details = in.readString();
         notes = in.readString();
@@ -114,7 +114,7 @@ public class PlatFormActivity implements  Parcelable {
         dest.writeString(left_time);
         dest.writeInt(distance);
         dest.writeString(address);
-        dest.writeInt(sponsor);
+        dest.writeString(publish_user_id);
         dest.writeString(joiner);
         dest.writeString(details);
         dest.writeString(notes);
