@@ -9,10 +9,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import ccc.tcl.com.sprotappui.R;
-import ccc.tcl.com.sprotappui.model.PlatFromActivity;
+import ccc.tcl.com.sprotappui.model.PlatFormActivity;
 
 public class CreateActivity extends BaseActivity {
-    PlatFromActivity platFromActivity;
+    PlatFormActivity platFormActivity;
     EditText name;
     EditText brief;
     EditText detail;
@@ -23,8 +23,8 @@ public class CreateActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         super.setToolBar(toolbar, R.string.create_activity,true);
         Intent intent = getIntent();
-        platFromActivity = intent.getParcelableExtra("data");
-        Toast.makeText(this, platFromActivity.getImage_url(),Toast.LENGTH_SHORT).show();
+        platFormActivity = intent.getParcelableExtra("data");
+        Toast.makeText(this, platFormActivity.getImage_url(),Toast.LENGTH_SHORT).show();
         name = (EditText) findViewById(R.id.name);
         brief = (EditText) findViewById(R.id.brief);
         detail = (EditText) findViewById(R.id.detail);
@@ -47,12 +47,12 @@ public class CreateActivity extends BaseActivity {
                 }
                 Intent intent = new Intent(this,FinishCreateActivity.class);
                 Bundle data = new Bundle();
-                platFromActivity.setName(name.getText().toString());
-                platFromActivity.setDetails(detail.getText().toString());
-                data.putParcelable("data", platFromActivity);
-                platFromActivity.setName(nameText);
-                platFromActivity.setDetails(detailText);
-                data.putParcelable("data",platFromActivity);
+                platFormActivity.setName(name.getText().toString());
+                platFormActivity.setDetails(detail.getText().toString());
+                data.putParcelable("data", platFormActivity);
+                platFormActivity.setName(nameText);
+                platFormActivity.setDetails(detailText);
+                data.putParcelable("data", platFormActivity);
                 intent.putExtras(data);
                 startActivity(intent);
                 finish();

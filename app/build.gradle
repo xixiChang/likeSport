@@ -11,6 +11,10 @@ android {
         versionName "1.0"
 
     }
+
+    dexOptions{
+        jumboMode true
+    }
     buildTypes {
         release {
             minifyEnabled false

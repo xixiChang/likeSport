@@ -9,6 +9,8 @@ import ccc.tcl.com.sprotappui.App;
  */
 
 public class Record {
+    private String user_id = App.userInfo.getId();
+
     private int id;
 
     /**
@@ -122,6 +124,9 @@ public class Record {
         this.end_time = end_time;
     }
 
+    public String getUser_id() {
+        return App.userInfo.getId();
+    }
 
     @Override
     public String toString() {

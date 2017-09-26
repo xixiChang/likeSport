@@ -7,7 +7,7 @@ import android.view.Menu;
 import android.widget.TextView;
 
 import ccc.tcl.com.sprotappui.R;
-import ccc.tcl.com.sprotappui.model.PlatFromActivity;
+import ccc.tcl.com.sprotappui.model.PlatFormActivity;
 
 public class NewCreateActivity extends BaseActivity {
     TextView startTime;
@@ -15,7 +15,7 @@ public class NewCreateActivity extends BaseActivity {
     TextView distance;
     TextView location;
     TextView detail;
-    PlatFromActivity sport;
+    PlatFormActivity sport;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

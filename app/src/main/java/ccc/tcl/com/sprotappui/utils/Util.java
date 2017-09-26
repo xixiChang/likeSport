@@ -46,4 +46,8 @@ public class Util {
         return false;
     }
 
+    public static boolean isEmpty(String para){
+        return para != null && !"".equals(para);
+    }
+
 }

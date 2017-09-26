@@ -25,7 +25,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import ccc.tcl.com.sprotappui.R;
-import ccc.tcl.com.sprotappui.model.PlatFromActivity;
+import ccc.tcl.com.sprotappui.model.PlatFormActivity;
 
 public class PickPictureActivity extends BaseActivity{
     ImageView imageView;
@@ -82,10 +82,10 @@ public class PickPictureActivity extends BaseActivity{
                 break;
             case R.id.next:
                 Intent intent = new Intent(PickPictureActivity.this,CreateActivity.class);
-                PlatFromActivity platFromActivity = new PlatFromActivity();
-                platFromActivity.setImage_url("image.url");
+                PlatFormActivity platFormActivity = new PlatFormActivity();
+                platFormActivity.setImage_url("image.url");
                 Bundle data = new Bundle();
-                data.putParcelable("data", platFromActivity);
+                data.putParcelable("data", platFormActivity);
                 intent.putExtras(data);
                 startActivity(intent);
                 break;

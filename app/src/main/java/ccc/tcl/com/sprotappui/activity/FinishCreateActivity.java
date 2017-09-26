@@ -13,14 +13,13 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 import ccc.tcl.com.sprotappui.R;
-import ccc.tcl.com.sprotappui.model.PlatFromActivity;
+import ccc.tcl.com.sprotappui.model.PlatFormActivity;
 
 public class FinishCreateActivity extends BaseActivity {
     TextView startTime;
@@ -31,7 +30,7 @@ public class FinishCreateActivity extends BaseActivity {
     EditText note;
     ViewStub stub;
     LinearLayout ll = null;
-    PlatFromActivity platFromActivity;
+    PlatFormActivity platFormActivity;
     int[] location_datePicker = new int[2];
     int[] start_textview = new int[2];
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -43,7 +42,7 @@ public class FinishCreateActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         super.setToolBar(toolbar, R.string.create_activity,true);
         Intent intent0= getIntent();
-        platFromActivity = intent0.getParcelableExtra("data");
+        platFormActivity = intent0.getParcelableExtra("data");
         time_text = (TextView) findViewById(R.id.textView);
         location = (EditText) findViewById(R.id.location);
         distance = (EditText) findViewById(R.id.distance);
@@ -118,18 +117,18 @@ public class FinishCreateActivity extends BaseActivity {
 
                 Intent intent = new Intent(this,NewCreateActivity.class);
                 Bundle data = new Bundle();
-                platFromActivity.setStart_time(startTime.getText().toString());
-                platFromActivity.setEnd_time(endTime.getText().toString());
-                platFromActivity.setAddress(locationText);
-                platFromActivity.setDistance(Integer.parseInt(distanceText));
-                platFromActivity.setNotes(note.getText().toString());
-                data.putParcelable("data",platFromActivity);
-                platFromActivity.setStart_time(startTime.getText().toString());
-                platFromActivity.setEnd_time(endTime.getText().toString());
-                platFromActivity.setAddress(location.getText().toString());
-                platFromActivity.setDistance(Integer.parseInt(distance.getText().toString()));
-                platFromActivity.setNotes(note.getText().toString());
-                data.putParcelable("data", platFromActivity);
+                platFormActivity.setStart_time(startTime.getText().toString());
+                platFormActivity.setEnd_time(endTime.getText().toString());
+                platFormActivity.setAddress(locationText);
+                platFormActivity.setDistance(Integer.parseInt(distanceText));
+                platFormActivity.setNotes(note.getText().toString());
+                data.putParcelable("data", platFormActivity);
+                platFormActivity.setStart_time(startTime.getText().toString());
+                platFormActivity.setEnd_time(endTime.getText().toString());
+                platFormActivity.setAddress(location.getText().toString());
+                platFormActivity.setDistance(Integer.parseInt(distance.getText().toString()));
+                platFormActivity.setNotes(note.getText().toString());
+                data.putParcelable("data", platFormActivity);
                 intent.putExtras(data);
                 startActivity(intent);
                 finish();
