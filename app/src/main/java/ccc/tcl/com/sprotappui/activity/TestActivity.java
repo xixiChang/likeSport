@@ -103,7 +103,7 @@ public class TestActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
-        fileUploadPresenter.onStop();
+        recordPresenter.onStop();
         super.onDestroy();
     }
 }

@@ -13,14 +13,13 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 import ccc.tcl.com.sprotappui.R;
-import ccc.tcl.com.sprotappui.model.PlatFromActivity;
+import ccc.tcl.com.sprotappui.model.PlatFormActivity;
 
 public class FinishCreateActivity extends BaseActivity {
     TextView startTime;
@@ -32,7 +31,7 @@ public class FinishCreateActivity extends BaseActivity {
     ViewStub stub;
     DatePicker picker;
     LinearLayout ll = null;
-    PlatFromActivity platFromActivity;
+    PlatFormActivity platFormActivity;
     int[] location_datePicker = new int[2];
     int[] start_textview = new int[2];
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -44,7 +43,7 @@ public class FinishCreateActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         super.setToolBar(toolbar, R.string.create_activity,true);
         Intent intent0= getIntent();
-        platFromActivity = intent0.getParcelableExtra("data");
+        platFormActivity = intent0.getParcelableExtra("data");
         time_text = (TextView) findViewById(R.id.textView);
         location = (EditText) findViewById(R.id.location);
         distance = (EditText) findViewById(R.id.distance);
