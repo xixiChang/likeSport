@@ -16,12 +16,12 @@ import java.util.List;
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.activity.LayoutActivity;
 import ccc.tcl.com.sprotappui.adapter.FMSportItem;
-import ccc.tcl.com.sprotappui.model.PlatFromActivity;
+import ccc.tcl.com.sprotappui.model.PlatFormActivity;
 
 public class SportFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private List<PlatFromActivity> platFromActivityList = new ArrayList<>();
+    private List<PlatFormActivity> platFormActivityList = new ArrayList<>();
     private Context context;
     private String mTitle;
     private FMSportItem adapter;
@@ -43,11 +43,11 @@ public class SportFragment extends Fragment {
     }
 
     private void initData() {
-        platFromActivityList.add(new PlatFromActivity());
-        platFromActivityList.add(new PlatFromActivity());
-        platFromActivityList.add(new PlatFromActivity());
-        platFromActivityList.add(new PlatFromActivity());
-        platFromActivityList.add(new PlatFromActivity());
+        platFormActivityList.add(new PlatFormActivity());
+        platFormActivityList.add(new PlatFormActivity());
+        platFormActivityList.add(new PlatFormActivity());
+        platFormActivityList.add(new PlatFormActivity());
+        platFormActivityList.add(new PlatFormActivity());
     }
 
     @Override
@@ -63,12 +63,12 @@ public class SportFragment extends Fragment {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL, false);
-        adapter = new FMSportItem(platFromActivityList);
+        adapter = new FMSportItem(platFormActivityList);
         adapter.setListener(new FMSportItem.OnRecyclerViewItemClickListener() {
             @Override
             public void onClick(View view, int position) {
                 Intent intent = new Intent(context, LayoutActivity.class);
-                intent.putExtra("id",position);
+                intent.putExtra("id",platFormActivityList.get(position).getId());
                 startActivity(intent);
             }
         });

@@ -15,6 +15,7 @@ import java.util.List;
 
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.model.ChooseItemModel;
+import ccc.tcl.com.sprotappui.model.PlatFormActivity;
 import ccc.tcl.com.sprotappui.model.UserSport;
 
 
@@ -24,10 +25,10 @@ import ccc.tcl.com.sprotappui.model.UserSport;
 
 public class UserSportTeamItem extends RecyclerView.Adapter<UserSportTeamItem.ViewHolder> {
 
-    private List<UserSport> data;
+    private List<PlatFormActivity> data;
     private OnRecyclerViewItemClickListener listener;
 
-    public UserSportTeamItem(List<UserSport> data) {
+    public UserSportTeamItem(List<PlatFormActivity> data) {
         this.data = data;
     }
 
@@ -50,18 +51,21 @@ public class UserSportTeamItem extends RecyclerView.Adapter<UserSportTeamItem.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.icon.setImageResource(Integer.parseInt(data.get(position).getImageUrl()));
+        holder.icon.setImageResource(Integer.parseInt(data.get(position).getImage_url()));
         holder.name.setText(data.get(position).getName());
         holder.status.setText(data.get(position).getStatus());
-        holder.time.setText(data.get(position).getTime());
-        holder.value.setText(data.get(position).getValue());
-        holder.behavior.setText(data.get(position).getBehavior());
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                listener.onClick(v, position);
-//            }
-//        });
+        holder.time.setText(data.get(position).getStart_time()+" - "+data.get(position).getEnd_time());
+        holder.value.setText(data.get(position).getJoin_num()+" 参与");
+        String behavior = "已参与";
+        if (data.get(position).getUser_id()==data.get(position).getPublish_user_id())
+            behavior = "发起人";
+        holder.behavior.setText(behavior);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onClick(v, position);
+            }
+        });
     }
 
     @Override

@@ -4,6 +4,7 @@ public class ResponseResult<T> {
     private String status;
     private String msg;
     private T result;
+    private String type ;
 
     public String getStatus() {
         return status;
@@ -21,6 +22,14 @@ public class ResponseResult<T> {
         this.msg = msg;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public T getResult() {
         return result;
 
@@ -34,6 +43,7 @@ public class ResponseResult<T> {
     public String toString() {
 
             return "ResponseResult:[status=" + status + ", msg=" + msg
+                    + (type == null ? "": ", type="+ type)
                     + ", result:" + "].";
     }
 

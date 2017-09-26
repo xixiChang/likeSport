@@ -9,7 +9,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewStub;
+import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.umeng.socialize.ShareAction;
@@ -20,6 +25,9 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 
 import ccc.tcl.com.sprotappui.R;
@@ -27,24 +35,24 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class LayoutActivity extends BaseActivity {
     CircleImageView imageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//      setContentView(R.layout.activity_layout);
         setContentView(R.layout.news_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.news_details_toolbar);
         super.setToolBar(toolbar, R.string.activity_main_title,true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setSmoothScrollbarEnabled(true);
-        layoutManager.setAutoMeasureEnabled(true);
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+//        layoutManager.setSmoothScrollbarEnabled(true);
+//        layoutManager.setAutoMeasureEnabled(true);
         imageView = (CircleImageView) findViewById(R.id.circleImageView1);
-        Resources resources = getResources();
-        Drawable[] drawables = new Drawable[4];
-        drawables[0] = resources.getDrawable(R.drawable.head2,null);
-        drawables[1] = resources.getDrawable(R.drawable.head3,null);
-        drawables[2] = resources.getDrawable(R.drawable.head4,null);
-        drawables[3] = resources.getDrawable(R.drawable.head5,null);
-        LayerDrawable layerDrawable = new LayerDrawable(drawables);
+//        Resources resources = getResources();
+//        Drawable[] drawables = new Drawable[4];
+//        drawables[0] = resources.getDrawable(R.drawable.head2,null);
+//        drawables[1] = resources.getDrawable(R.drawable.head3,null);
+//        drawables[2] = resources.getDrawable(R.drawable.head4,null);
+//        drawables[3] = resources.getDrawable(R.drawable.head5,null);
+//        LayerDrawable layerDrawable = new LayerDrawable(drawables);
         Intent intent = getIntent();
         int position = intent.getIntExtra("id",-1);
     }
@@ -96,4 +104,6 @@ public class LayoutActivity extends BaseActivity {
         UMShareAPI.get(this).release();
         super.onDestroy();
     }
+
+
 }

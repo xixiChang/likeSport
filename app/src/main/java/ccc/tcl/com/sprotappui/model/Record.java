@@ -2,17 +2,21 @@ package ccc.tcl.com.sprotappui.model;
 
 import java.util.Date;
 
+import ccc.tcl.com.sprotappui.App;
+
 /**
  * Created by user on 17-9-21.
  */
 
 public class Record {
+    private String user_id = App.userInfo.getId();
+
     private int id;
 
     /**
      * (yyyy-MM-dd)
      */
-    private Date date;
+    private String date;
 
     /**
      *(HH:mm:ss)
@@ -31,6 +35,7 @@ public class Record {
     private String start_time; //HH:mm:ss
     private String end_time; //HH:mm:ss
 
+
     public int getId() {
         return id;
     }
@@ -39,11 +44,11 @@ public class Record {
         this.id = id;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -117,5 +122,17 @@ public class Record {
 
     public void setEnd_time(String end_time) {
         this.end_time = end_time;
+    }
+
+    public String getUser_id() {
+        return App.userInfo.getId();
+    }
+
+    @Override
+    public String toString() {
+        return "Record:[ date=" + date + ", time=" + time + ", type=" + type
+                +", step=" + step + ", start_time=" + start_time + ", end_time=" + end_time
+                +", spent_time=" + spent_time + ", calorie=" + calorie + ", mean_speed=" + mean_speed
+                +", distance=" + distance +"]";
     }
 }

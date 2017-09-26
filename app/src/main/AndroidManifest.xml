@@ -63,6 +63,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity android:name=".activity.AuthoritySettingActivity"></activity>
         <activity android:name=".activity.TraceRecordActivity" />
 
@@ -75,6 +76,22 @@
             android:enabled="true"
             android:process=":remote" >
         </service>
+=======
+        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.AuthoritySettingActivity" />
+        <activity android:name=".activity.NewCreateActivity"
+                  android:theme="@style/beautyTheme" />
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:exported="true" />
+        <activity android:name=".activity.LoginTestActivity" />
+
+        <activity android:name=".activity.ContactActivity"></activity>
+>>>>>>> origin/dev
     </application>
 
 </manifest>

@@ -1,12 +1,18 @@
 package ccc.tcl.com.sprotappui.internet;
 
+import android.support.annotation.VisibleForTesting;
+import android.util.Log;
+
 import java.io.IOException;
 
 import ccc.tcl.com.sprotappui.App;
+import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
+import okio.Buffer;
 
 /**
  * Created by user on 17-9-23.
@@ -17,22 +23,48 @@ import okhttp3.Response;
  * ps:login,register api isn't include
  */
 public class AuthInterceptor implements Interceptor {
+
+    private static final String TAG = "AuthInterceptor";
+
     @Override
     public Response intercept(Chain chain) throws IOException {
-        Request request_0 = chain.request();
-        HttpUrl httpUrl = request_0.url().newBuilder().
-                addQueryParameter("user_id", App.userInfo.getId())
-                .addQueryParameter("session", App.userInfo.getSession())
-                .build();
-        Request request_1 = request_0.newBuilder()
-                .addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
-                .addHeader("Connection", "keep-alive")
-                .method(request_0.method(), request_0.body())
-                .url(httpUrl)
-                .build();
+        Request original = chain.request();
 
-        return chain.proceed(request_1);
+        Request.Builder requestBuilder = original.newBuilder()
+                .header("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
+                .header("Connection", "keep-alive");
+
+        if (original.body() instanceof FormBody) {
+            FormBody.Builder newFormBody = new FormBody.Builder();
+            FormBody oldFormBody = (FormBody) original.body();
+            for (int i = 0; i < oldFormBody.size(); i++) {
+                newFormBody.addEncoded(oldFormBody.encodedName(i), oldFormBody.encodedValue(i));
+            }
+            if (App.userInfo.getId() != null)
+                newFormBody.add("user_id", App.userInfo.getId());
+            if (App.userInfo.getSession() != null)
+            newFormBody.add("session", App.userInfo.getSession());
+            requestBuilder.method(original.method(), newFormBody.build());
+        }
+
+        Request request = requestBuilder.build();
+        return chain.proceed(request);
     }
 
+    @VisibleForTesting
+    @Deprecated
+    private String bodyToString(final RequestBody request) {
+        try {
+            final RequestBody copy = request;
+            final Buffer buffer = new Buffer();
+            if (copy != null)
+                copy.writeTo(buffer);
+            else
+                return "";
+            return buffer.readUtf8();
+        } catch (final IOException e) {
+            return "did not work";
+        }
+    }
 
 }

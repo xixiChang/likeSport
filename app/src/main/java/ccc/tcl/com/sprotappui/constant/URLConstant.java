@@ -8,30 +8,38 @@ public final class URLConstant {
 
     public final static int DEFAULT_TIMEOUT = 5;
 
-    public final static String Base_Url = "http://10.92.61.154:8080/";
+    public final static String Base_Url = "http://10.92.34.187:8080/";
 
     public final static String User_Register = "/user/register";
     public final static String User_Login = "/user/login";
     public final static String User_Auth_Code = "/user/getauthcode";
 
 
+    /**
+     * 活动记录
+     */
+    public static final String Activity_Post = "/activity/post";
+
+    /**
+     * 文件上传
+     */
+
+    public static final String File_Upload = "/file/image";
+
+    /**
+     * 运动记录
+     */
     public final static String Record_Upload = "/record/upload";
 
-    public final static String Record_Query_Sum = "/record/sum";
-    public final static String Record_Query_Month = "/record/month";
-    public final static String Record_Query_Week = "/record/week";
-    public final static String Record_Query_Day_ALL = "/record/dayall";
-    public final static String Record_Query_Details = "/record/details";
-    public final static String Record_Query_MAX = "/record/max";
-    public final static String Record_Query_MaxForDay = "/record/maxforday";
+    public final static String Record_Query_Sum = "/record/query/sum";
+    public final static String Record_Query_Month = "/record/query/month";
+    public final static String Record_Query_Week = "/record/query/week";
+    public final static String Record_Query_Day_ALL = "/record/query/dayall";
+    public final static String Record_Query_Details = "/record/query/details";
+    public final static String Record_Query_MAX = "/record/query/max";
+    public final static String Record_Query_MaxForDay = "/record/query/maxforday";
 
     public final static String Record_Rating = "/record/rating";
-
-
-
-
-
-
 
     public static final String BAICHUAN_APP_KEY = "24624522";
     public static final String BAICHUAN_APP_SECRET = "2992e9309ef7f81e7d845376bd6010a7";

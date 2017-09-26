@@ -12,7 +12,7 @@ import com.flyco.labelview.LabelView;
 import java.util.List;
 
 import ccc.tcl.com.sprotappui.R;
-import ccc.tcl.com.sprotappui.model.PlatFromActivity;
+import ccc.tcl.com.sprotappui.model.PlatFormActivity;
 
 
 /**
@@ -21,7 +21,7 @@ import ccc.tcl.com.sprotappui.model.PlatFromActivity;
 
 public class FMSportItem extends RecyclerView.Adapter<FMSportItem.ViewHolder> {
 
-    private List<PlatFromActivity> data;
+    private List<PlatFormActivity> data;
     private OnRecyclerViewItemClickListener listener;
 
     public interface OnRecyclerViewItemClickListener{
@@ -31,7 +31,7 @@ public class FMSportItem extends RecyclerView.Adapter<FMSportItem.ViewHolder> {
         this.listener = listener;
     }
 
-    public FMSportItem(List<PlatFromActivity> data) {
+    public FMSportItem(List<PlatFormActivity> data) {
         this.data = data;
     }
 

@@ -22,7 +22,7 @@ public class WelcomeActivity extends AppCompatActivity {
     public static final int JUMP_TO_HOME = 2603;
     public static final int JUMP_TO_Login = 2604;
 
-    private static final int WELCOME_DELAY_TIME = 3000;
+    private static final int WELCOME_DELAY_TIME = 1000;
 
     private SQLParaWrapper sqlParaWrapper;
     private static final String TAG = "WelcomeActivity";
@@ -32,11 +32,11 @@ public class WelcomeActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == JUMP_TO_HOME){
-                Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
+                Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }else {
-                Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
+                Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
                 startActivity(intent);
                 finish();
             }

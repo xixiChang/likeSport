@@ -6,7 +6,7 @@ import android.view.Menu;
 
 import ccc.tcl.com.sprotappui.R;
 
-public class contactActivity extends AppCompatActivity {
+public class ContactActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
