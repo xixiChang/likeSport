@@ -20,6 +20,7 @@ import java.util.List;
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.adapter.UserSportTeamItem;
 import ccc.tcl.com.sprotappui.customui.ToolBar;
+import ccc.tcl.com.sprotappui.model.PlatFormActivity;
 import ccc.tcl.com.sprotappui.model.UserSport;
 
 import static ccc.tcl.com.sprotappui.R.id.toolbar;
@@ -30,7 +31,7 @@ public class MySportTeamActivity extends BaseActivity {
     private RecyclerView recycler;
     private RelativeLayout layout;
     private ImageView noDataImage;
-    private List<UserSport> sports;
+    private List<PlatFormActivity> sports;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,20 +75,20 @@ public class MySportTeamActivity extends BaseActivity {
 
     private void initData() {
         sports = new ArrayList<>();
-        UserSport userSport;
+        PlatFormActivity userSport;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
         for (int i=0; i<18; i++){
-            userSport = new UserSport();
+            userSport = new PlatFormActivity();
             String imageID = getResources().getIdentifier(
                     "p" + ((i+1)>9 ? i-8 : i+1), "drawable", getPackageName()) + "";
             userSport.setName("这是活动"+ (i+1));
-            userSport.setImageUrl(imageID);
-            userSport.setBehavior(i%2 == 0 ? "发起人":"参与");
+            userSport.setImage_url(imageID);
+            //userSport.setBehavior(i%2 == 0 ? "发起人":"参与");
             userSport.setStatus( i < 2 ? "正在进行":"已结束");
-            userSport.setTime(simpleDateFormat.format(new Date()) + "-" +
-                    simpleDateFormat.format(new Date()));
-            userSport.setValue((i+1) * 14 +3 + "参与");
+            userSport.setStart_time(simpleDateFormat.format(new Date()));
+            userSport.setEnd_time(simpleDateFormat.format(new Date()));
+            userSport.setJoin_num((i+1) * 14 +3);
             sports.add(userSport);
         }
     }
