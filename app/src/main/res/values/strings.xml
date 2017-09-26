@@ -41,5 +41,6 @@
     <string name="position">定位</string>
     <string name="sportStatus">运动状态</string>
     <string name="hisSport">参与活动</string>
+    <string name="reason">延期原因</string>
 </resources>
 

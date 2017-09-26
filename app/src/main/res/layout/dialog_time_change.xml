@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="1">
     <TextView
         android:text="@string/time"
         android:layout_width="match_parent"
@@ -46,4 +47,20 @@
         android:layout_height="100dp"
         android:layout="@layout/layout_date_picker"
         android:id="@+id/viewStub" />
+    <TextView
+        android:text="@string/reason"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:layout_marginStart="7dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:gravity="start"
+        android:inputType="textMultiLine"
+        android:textCursorDrawable="@drawable/cursor_theme"
+        android:hint="40字以内"
+        android:layout_weight="0.22" />
 </LinearLayout>

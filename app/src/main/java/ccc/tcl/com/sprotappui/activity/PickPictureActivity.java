@@ -88,6 +88,7 @@ public class PickPictureActivity extends BaseActivity{
                 data.putParcelable("data", platFormActivity);
                 intent.putExtras(data);
                 startActivity(intent);
+                finish();
                 break;
         }
         return true;

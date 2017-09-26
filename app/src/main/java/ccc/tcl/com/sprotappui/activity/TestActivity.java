@@ -95,7 +95,7 @@ public class TestActivity extends BaseActivity {
 //                    Toast.makeText(TestActivity.this, "file is not found", Toast.LENGTH_SHORT).show();
 //                    return;
 //                }
-//                fileUploadPresenter.upLoadFile(file, "head");
+               fileUploadPresenter.upLoadFile(file, "head");
                 recordPresenter.uploadRecord(record);
             }
         });

@@ -42,7 +42,7 @@ public class FinishCreateActivity extends BaseActivity {
         setContentView(R.layout.activity_finish_create);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         super.setToolBar(toolbar, R.string.create_activity,true);
-        Intent intent0= getIntent();
+        final Intent intent0= getIntent();
         platFormActivity = intent0.getParcelableExtra("data");
         time_text = (TextView) findViewById(R.id.textView);
         location = (EditText) findViewById(R.id.location);
@@ -60,7 +60,10 @@ public class FinishCreateActivity extends BaseActivity {
                     String start = startTime.getText().toString();
                     picker.updateDate(Integer.parseInt(start.substring(0,4)), Integer.parseInt(start.substring(5,7))-1, Integer.parseInt(start.substring(8)));
                 }
-
+                else if (ll.getVisibility() == View.VISIBLE){
+                    String end = startTime.getText().toString();
+                    picker.updateDate(Integer.parseInt(end.substring(0,4)), Integer.parseInt(end.substring(5,7))-1, Integer.parseInt(end.substring(8)));
+                }
             }
 
         });
@@ -73,6 +76,8 @@ public class FinishCreateActivity extends BaseActivity {
                     stub.inflate();
                 }else if(ll.getVisibility()==View.GONE){
                     ll.setVisibility(View.VISIBLE);
+                }
+                else if (ll.getVisibility() == View.VISIBLE){
                     String end = endTime.getText().toString();
                     picker.updateDate(Integer.parseInt(end.substring(0,4)), Integer.parseInt(end.substring(5,7))-1, Integer.parseInt(end.substring(8)));
                 }
@@ -122,12 +127,12 @@ public class FinishCreateActivity extends BaseActivity {
 
                 Intent intent = new Intent(this,NewCreateActivity.class);
                 Bundle data = new Bundle();
-                platFromActivity.setStart_time(startTime.getText().toString());
-                platFromActivity.setEnd_time(endTime.getText().toString());
-                platFromActivity.setAddress(locationText);
-                platFromActivity.setDistance(Integer.parseInt(distanceText));
-                platFromActivity.setNotes(note.getText().toString());
-                data.putParcelable("data",platFromActivity);
+                platFormActivity.setStart_time(startTime.getText().toString());
+                platFormActivity.setEnd_time(endTime.getText().toString());
+                platFormActivity.setAddress(locationText);
+                platFormActivity.setDistance(Integer.parseInt(distanceText));
+                platFormActivity.setNotes(note.getText().toString());
+                data.putParcelable("data",platFormActivity);
 
                 intent.putExtras(data);
                 startActivity(intent);
@@ -138,7 +143,7 @@ public class FinishCreateActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
     /**
-     * 点击空白处隐藏键盘
+     * 点击空白处隐藏键盘和日期选择器
      * @param ev
      * @return
      */
