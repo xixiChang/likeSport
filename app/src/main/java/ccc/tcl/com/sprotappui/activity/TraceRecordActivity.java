@@ -327,28 +327,6 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 	}
 
 
-	// 保存运动数据到数据库
-/*	public void addRecord() {
-		try {
-			sqlParaWrapper= new SQLParaWrapper(this);
-			sqlParaWrapper.sqLiteDatabase.execSQL(SQLStatement.AddSportRecord);
-
-			String speedValueStr = tvSpeed.getText().toString();
-			String timeValueStr = meter.getText().toString();
-			String distanceValueStr = tvDistance.getText().toString();
-			String stepValueStr = tvStep.getText().toString();
-			ContentValues cv = new ContentValues();
-			*//*cv.put("mean_speed", speedValueStr);
-			cv.put("spent_time", timeValueStr);
-			cv.put("distance", distanceValueStr);*//*
-			cv.put("mean_speed", speedValueStr);
-			cv.put("step", stepValueStr);
-			sqlParaWrapper.sqLiteDatabase.insert(SQLStatement.RECORD_TABLE_NAME, null, cv);
-			sqlParaWrapper.sqLiteDatabase.close();
-		} catch (SQLiteException e) {
-			Log.e(TAG,e.getMessage());
-		}
-	}*/
 
 
 	/*运动结束，停止记录*/
