@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import ccc.tcl.com.sprotappui.R;
 
-
+@Deprecated
 @SuppressLint("ValidFragment")
 public class SimpleCardFragment extends Fragment {
     private String mTitle;

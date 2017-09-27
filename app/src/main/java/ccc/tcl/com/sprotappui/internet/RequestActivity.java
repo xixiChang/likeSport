@@ -1,5 +1,7 @@
 package ccc.tcl.com.sprotappui.internet;
 
+import java.util.List;
+
 import ccc.tcl.com.sprotappui.model.PlatFormActivity;
 import ccc.tcl.com.sprotappui.model.ResponseResult;
 import okhttp3.MultipartBody;
@@ -12,6 +14,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import rx.Observable;
 
+import static ccc.tcl.com.sprotappui.constant.URLConstant.Activity_All;
 import static ccc.tcl.com.sprotappui.constant.URLConstant.Activity_Details;
 import static ccc.tcl.com.sprotappui.constant.URLConstant.Activity_Post;
 import static ccc.tcl.com.sprotappui.constant.URLConstant.File_Upload;
@@ -29,4 +32,8 @@ public interface RequestActivity {
     @POST(value = Activity_Details)
     @FormUrlEncoded
     Observable<ResponseResult> getActivity(@Field("at_server_id") String at_server_id);
+
+    @POST(value = Activity_All)
+    @FormUrlEncoded
+    Observable<ResponseResult<List<PlatFormActivity>>> getAll();
 }

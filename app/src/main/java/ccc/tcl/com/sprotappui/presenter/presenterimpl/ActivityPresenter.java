@@ -41,4 +41,9 @@ public class ActivityPresenter extends BasePresenter {
         mCompositeSubscription.add(subscribeData());
     }
 
+    public void getAll(){
+        resultObservable = (Observable) requestActivity.getAll();
+        mCompositeSubscription.add(subscribeData());
+    }
+
 }
