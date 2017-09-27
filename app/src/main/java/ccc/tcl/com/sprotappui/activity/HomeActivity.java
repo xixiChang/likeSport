@@ -2,21 +2,16 @@ package ccc.tcl.com.sprotappui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 
 import com.alibaba.mobileim.IYWLoginService;
 import com.alibaba.mobileim.YWLoginParam;
@@ -33,12 +28,12 @@ import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.entity.TabEntity;
 import ccc.tcl.com.sprotappui.fragment.MyFragment;
 import ccc.tcl.com.sprotappui.fragment.SimpleCardFragment;
+import ccc.tcl.com.sprotappui.fragment.SportCircleFragment;
 import ccc.tcl.com.sprotappui.fragment.SportFragment;
 import ccc.tcl.com.sprotappui.service.IMService;
 import ccc.tcl.com.sprotappui.utils.ViewFindUtils;
 
 import static ccc.tcl.com.sprotappui.App.userInfo;
-import static ccc.tcl.com.sprotappui.R.mipmap.activity;
 import static ccc.tcl.com.sprotappui.service.IMService.mIMKit;
 
 
@@ -89,10 +84,9 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void initView() {
-        SportFragment sportFragment = SportFragment.getInstance("Switch ViewPager " + mTitles[0]);
-
-        mFragments.add(SimpleCardFragment.getInstance("Switch ViewPager " + mTitles[1]));
-        mFragments.add(sportFragment);
+        mFragments.add(SportFragment.getInstance());
+        SportCircleFragment sportCircleFragment = SportCircleFragment.getInstance("Switch ViewPager " + mTitles[0]);
+        mFragments.add(sportCircleFragment);
         if (mIMKit != null){
             mFragments.add(mIMKit.getConversationFragment());
         }else {
@@ -139,8 +133,8 @@ public class HomeActivity extends BaseActivity {
         Log.d(TAG, "showToolBar: ");
         switch (position) {
             case 0:
-                toolbar.setVisibility(View.VISIBLE);
-                toolbar.setTitle(R.string.toolbar_name_sport);
+                toolbar.setVisibility(View.GONE);
+//                toolbar.setTitle(R.string.toolbar_name_sport);
                 break;
             case 1:
                 toolbar.setVisibility(View.VISIBLE);

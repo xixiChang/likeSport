@@ -29,5 +29,6 @@
     <!--image size-->
     <dimen name="icon_image_size">48dp</dimen>
     <dimen name="user_photo_size">60dp</dimen>
+
 </resources>
 

@@ -6,7 +6,7 @@ import android.os.Parcelable;
 /**
  * Created by user on 17-9-12.
  */
-
+@Deprecated
 public class UserSport {
     private String id;
     private String imageUrl;
