@@ -1,8 +1,6 @@
 package ccc.tcl.com.sprotappui.activity;
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.app.PendingIntent;
+
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.ContentValues;
@@ -27,10 +25,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
@@ -64,15 +59,20 @@ import com.baidu.mapapi.utils.DistanceUtil;
 
 import java.sql.SQLException;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
+import ccc.tcl.com.sprotappui.App;
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.db.AppDBHelper;
 import ccc.tcl.com.sprotappui.db.SQLParaWrapper;
 import ccc.tcl.com.sprotappui.db.SQLStatement;
 import ccc.tcl.com.sprotappui.model.UserSport;
+import ccc.tcl.com.sprotappui.service.StepService;
+import ccc.tcl.com.sprotappui.step_detector.StepDetector;
 import ccc.tcl.com.sprotappui.ui.SlideView;
 import ccc.tcl.com.sprotappui.utils.BaiduMapUtil;
 
@@ -96,6 +96,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 	private TextView nianYueRi;
 	private TextView tvSpeed;
 	private TextView tvUser;
+	private TextView tvStep;
 	private TextView info;
 	private TextView tvPause;
 	private ImageView pause_img;
@@ -125,8 +126,8 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 	float mCurrentZoom = 18f;/*默认地图缩放比例值*/
 
 	private SensorManager mSensorManager;
-//	private static final String TAG ="add TraceRecord";
-
+ 	private static final String TAG ="add TraceRecord";
+//	private UserSport userSport;
 
 
 	/*起点图标*/
@@ -175,6 +176,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		info = (TextView) findViewById(R.id.info);
 		tvUser = (TextView)findViewById(R.id.tv_user);
 		tvPause = (TextView) findViewById(R.id.tv_pause);
+		tvStep = (TextView)findViewById(R.id.tv_step);
 		pause_img = (ImageView) findViewById(R.id.pause_img);
 		go_on_img = (ImageView) findViewById(R.id.go_on_img);
 		userPic = (ImageView) findViewById(R.id.userPic);
@@ -324,6 +326,47 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		slideView.reset();/*解锁完成，重置*/
 	}
 
+
+	// 保存运动数据到数据库
+/*	public void addRecord() {
+		try {
+			sqlParaWrapper= new SQLParaWrapper(this);
+			sqlParaWrapper.sqLiteDatabase.execSQL(SQLStatement.AddSportRecord);
+
+			String speedValueStr = tvSpeed.getText().toString();
+			String timeValueStr = meter.getText().toString();
+			String distanceValueStr = tvDistance.getText().toString();
+			String stepValueStr = tvStep.getText().toString();
+			ContentValues cv = new ContentValues();
+			*//*cv.put("mean_speed", speedValueStr);
+			cv.put("spent_time", timeValueStr);
+			cv.put("distance", distanceValueStr);*//*
+			cv.put("mean_speed", speedValueStr);
+			cv.put("step", stepValueStr);
+			sqlParaWrapper.sqLiteDatabase.insert(SQLStatement.RECORD_TABLE_NAME, null, cv);
+			sqlParaWrapper.sqLiteDatabase.close();
+		} catch (SQLiteException e) {
+			Log.e(TAG,e.getMessage());
+		}
+	}*/
+
+
+	/*运动结束，停止记录*/
+	public void stopRecorder(){
+		TraceRecordActivity.this.rangeTime1=SystemClock.elapsedRealtime()-meter.getBase();
+		meter.stop();//结束记录
+		//如果用户有运动数据
+		if(points.size()>0){
+			stopTrace();
+			endShow();
+		}else{
+			showSimpleDialog();
+		}
+	}
+
+
+
+
 	/*停止地图记录服务并绘制轨迹*/
 	public void stopTrace() {
 		if (mLocClient != null && mLocClient.isStarted()) {
@@ -340,25 +383,11 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 			oFinish.position(points.get(points.size() - 1));
 			oFinish.icon(finishBD);// 设置覆盖物图片
 			mBaiduMap.addOverlay(oFinish); // 在地图上添加此图层
+//			停止记步服务
+			Intent stopStep = new Intent(getApplicationContext(), StepService.class);
+			stopService(stopStep);
 			// 保存此次运动数据
 //			addRecord();
-		}
-	}
-
-
-
-
-	/*运动结束，停止记录*/
-	public void stopRecorder(){
-		TraceRecordActivity.this.rangeTime1=SystemClock.elapsedRealtime()-meter.getBase();
-		meter.stop();//结束记录
-		//如果用户有运动数据
-		if(points.size()>0){
-			/*复位*/
-			stopTrace();
-			endShow();
-		}else{
-			showSimpleDialog();
 		}
 	}
 
@@ -370,22 +399,34 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		lockScreen.setVisibility(View.GONE);
 		progressBarArea.setVisibility(View.GONE);
 		distanceMArea.setVisibility(View.GONE);
-
-		endShowArea.setVisibility(View.VISIBLE);
-//		tvUser.setText(UserSport.getName());
 		top.setVisibility(View.VISIBLE);
-		getDate(nianYueRi);
+//		显示用户名
+		tvUser.setText(App.userInfo.getName());
+//		显示用户头像
+//		userPic.setImageResource();
+//		显示步数
+		String strStep = String.valueOf(StepDetector.CURRENT_STEP);
+		tvStep.setText(strStep);
+//		显示日期
+		nianYueRi.setText(getDate());
 	}
 
 	/*运动结束时显示日期*/
-	public void getDate(TextView tv){
+/*	public void getDate(TextView tv){
 		Calendar c = Calendar.getInstance();
 		int year = c.get(Calendar.YEAR);
 		int month = c.get(Calendar.MONTH) + 1;
 		int day = c.get(Calendar.DAY_OF_MONTH);
 		tv.setText("日期:" + year + "年 " + month + "月 " + day + "日 ");
-	}
+	}*/
 
+   /*运动结束时显示日期*/
+	public String getDate(){
+		SimpleDateFormat sdFmt = new SimpleDateFormat("yyyy-MM-dd");
+		Date now = new Date();
+		String sdFmtStr=String.valueOf(sdFmt.format(now));
+		return sdFmtStr;
+	}
 	/*暂停和继续*/
 	public void pauseRecorder() {
 		if(!PAUSE)/*暂停计时*/
@@ -433,6 +474,9 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		/*里程(米)和速度初始化*/
 		tvDistance.setText("0");
 		tvSpeed.setText("0.00");
+		//开始记步服务
+		Intent startStep = new Intent(getApplicationContext(), StepService.class);
+		startService(startStep);
 
 		updateDataRunnable = new Runnable() {
 
@@ -441,12 +485,6 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 				try {
 					Log.i("TraceRecord", "run");
 					if (points.size() >= 2) {
-
-
-						sqlParaWrapper= new SQLParaWrapper(TraceRecordActivity.this);
-						sqlParaWrapper.sqLiteDatabase.execSQL(SQLStatement.AddSportRecord);
-						ContentValues cv = new ContentValues();
-
 						/*更新距离*/
 						double distanceM = 0;
 						for (int i = 0; i < points.size() - 1; i++) {
@@ -456,11 +494,6 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 							double lat2 = points.get(i + 1).latitude;
 							/*BaiduMapUtil.GetDistance 计算出的结果distanceM是米*/
 							distanceM = distanceM + BaiduMapUtil.GetDistance(lon1, lat1, lon2, lat2);
-
-
-							cv.put("distance", distanceM);
-
-
 						}
 						/*米转换成公里*/
 						double distanceKM = distanceM / 1000;
@@ -516,10 +549,15 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 							tvSpeed.setText(strSpeed);
 						}
 
+						//保存此次运动数据
+						sqlParaWrapper= new SQLParaWrapper(TraceRecordActivity.this);
+						sqlParaWrapper.sqLiteDatabase.execSQL(SQLStatement.AddSportRecord);
+						ContentValues cv = new ContentValues();
+						cv.put("date", getDate());
+						cv.put("distance", distanceM);
 						cv.put("mean_speed", speedMS);
 						cv.put("spent_time", totalSecond);
-
-
+						cv.put("step", StepDetector.CURRENT_STEP);
 						sqlParaWrapper.sqLiteDatabase.insert(SQLStatement.RECORD_TABLE_NAME, null, cv);
 						sqlParaWrapper.sqLiteDatabase.close();
 
@@ -537,28 +575,6 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		handler.post(updateDataRunnable);
 	}
 
-
-	/*public void addRecord() {
-		try {
-			sqlParaWrapper= new SQLParaWrapper(this);
-			sqlParaWrapper.sqLiteDatabase.execSQL(SQLStatement.AddSportRecord);
-
-			String speedValueStr = tvSpeed.getText().toString();
-			String TimeValueStr = meter.getText().toString();
-			String DistanceValueStr = tvDistance.getText().toString();
-			ContentValues cv = new ContentValues();
-			*//*cv.put("mean_speed", speedValueStr);
-			cv.put("spent_time", TimeValueStr);
-			cv.put("distance", DistanceValueStr);*//*
-			cv.put("mean_speed", speedValueStr);
-			cv.put("spent_time", TimeValueStr);
-			cv.put("distance", DistanceValueStr);
-			sqlParaWrapper.sqLiteDatabase.insert(SQLStatement.RECORD_TABLE_NAME, null, cv);
-			sqlParaWrapper.sqLiteDatabase.close();
-		} catch (SQLiteException e) {
-			Log.e(TAG,e.getMessage());
-		}
-	}*/
 
 	/*初始化计时器*/
 	private void initChronometer() {
