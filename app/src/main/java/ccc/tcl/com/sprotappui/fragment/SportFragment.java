@@ -20,6 +20,7 @@ public class SportFragment extends Fragment {
     private static final String TAG = "SportFragment";
     private ListPopupWindow popWnd;
 
+
     public SportFragment() {
     }
 
