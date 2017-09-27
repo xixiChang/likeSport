@@ -34,6 +34,5 @@ public interface RequestActivity {
     Observable<ResponseResult> getActivity(@Field("at_server_id") String at_server_id);
 
     @POST(value = Activity_All)
-    @FormUrlEncoded
     Observable<ResponseResult<List<PlatFormActivity>>> getAll();
 }
