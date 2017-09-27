@@ -19,6 +19,8 @@ public final class URLConstant {
      * 活动记录
      */
     public static final String Activity_Post = "/activity/post";
+    public static final String Activity_Details = "/activity/details";
+    public static final String Activity_All = "/activity/all";
 
     /**
      * 文件上传

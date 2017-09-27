@@ -4,7 +4,7 @@ public class ResponseResult<T> {
     private String status;
     private String msg;
     private T result;
-    private String type ;
+    private String type;
 
     public String getStatus() {
         return status;
@@ -42,12 +42,12 @@ public class ResponseResult<T> {
     @Override
     public String toString() {
 
-            return "ResponseResult:[status=" + status + ", msg=" + msg
-                    + (type == null ? "": ", type="+ type)
-                    + ", result:" + "].";
+        return "ResponseResult:[status=" + status + ", msg=" + msg
+                + (type == null ? "" : ", type=" + type)
+                + ", result:" + "].";
     }
 
-    public boolean isSuccess(){
+    public boolean isSuccess() {
         return status != null && "ok".equals(status);
     }
 }
