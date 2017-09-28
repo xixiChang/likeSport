@@ -31,19 +31,68 @@ public class ActivityPresenter extends BasePresenter {
         requestActivity = helper.retrofit.create(RequestActivity.class);
     }
 
+
+
     public void uploadActivity(PlatFormActivity activity){
         resultObservable = requestActivity.uploadActivity(activity);
         mCompositeSubscription.add(subscribeData());
     }
 
-    public void getActivity(String activity_id){
-        resultObservable = (Observable)requestActivity.getActivity(activity_id);
+
+    public void delayActivity(String at_server_id,
+                              String reason,
+                              String start_time,
+                              String end_time){
+        Map<String, String> map = new HashMap();
+        map.put("at_server_id", at_server_id);
+        map.put("reason", reason);
+        map.put("start_time", start_time);
+        map.put("end_time", end_time);
+        resultObservable = requestActivity.delayActivity(map);
         mCompositeSubscription.add(subscribeData());
     }
+
+    public void cancelActivity(String at_server_id,
+                               String reason){
+        resultObservable = requestActivity.cancelActivity(at_server_id, reason);
+        mCompositeSubscription.add(subscribeData());
+    }
+
+
+    public void getActivity(String activity_id){
+        resultObservable = (Observable) requestActivity.getActivity(activity_id);
+        mCompositeSubscription.add(subscribeData());
+    }
+
+
+    public void getMyActivity(){
+        resultObservable = (Observable) requestActivity.myActivity();
+        mCompositeSubscription.add(subscribeData());
+    }
+
+
+    public void joinActivity(String at_server_id){
+        resultObservable = (Observable) requestActivity.joinActivity(at_server_id);
+        mCompositeSubscription.add(subscribeData());
+    }
+
+
 
     public void getAll(){
         resultObservable = (Observable) requestActivity.getAll();
         mCompositeSubscription.add(subscribeData());
     }
+
+
+    /**
+     * users = platformActivity.getJoiner
+     * @param users
+     */
+    public void getJoinerInfo(String users){
+        resultObservable = (Observable) requestActivity.getJoinerInfo(users);
+        mCompositeSubscription.add(subscribeData());
+    }
+
+
 
 }

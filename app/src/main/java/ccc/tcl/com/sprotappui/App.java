@@ -1,8 +1,8 @@
 package ccc.tcl.com.sprotappui;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.multidex.MultiDexApplication;
 
 import com.alibaba.mobileim.YWAPI;
 import com.alibaba.wxlib.util.SysUtil;
@@ -18,7 +18,7 @@ import static ccc.tcl.com.sprotappui.constant.URLConstant.BAICHUAN_APP_KEY;
  * Created by user on 17-9-14.
  */
 
-public class App extends Application {
+public class App extends MultiDexApplication {
     public static UserInfo userInfo = new UserInfo();
     private static final String NO_USER = "-1";
     private static final String SHARE_MAP = "UserInfo";

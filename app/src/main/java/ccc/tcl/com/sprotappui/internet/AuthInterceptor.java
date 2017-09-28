@@ -34,7 +34,7 @@ public class AuthInterceptor implements Interceptor {
                 .header("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
                 .header("Connection", "keep-alive");
 
-        if (original.body() instanceof FormBody) {
+        if (original.body() instanceof FormBody || original.body() == null) {
             FormBody.Builder newFormBody = new FormBody.Builder();
             FormBody oldFormBody = (FormBody) original.body();
             for (int i = 0; i < oldFormBody.size(); i++) {

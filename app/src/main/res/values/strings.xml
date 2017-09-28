@@ -43,5 +43,35 @@
     <string name="sportStatus">运动状态</string>
     <string name="hisSport">参与活动</string>
     <string name="reason">延期原因</string>
+    <!--百度地图相关字符串-->
+    <string name="TraceRecord_title_name">跑步中</string>
+    <string name="pause">暂停</string>
+    <string name="go_on">继续</string>
+    <string name="go_on_record">继续运动</string>
+    <string name="end_record">结束运动</string>
+    <string name="long_press_to_stop">长按结束</string>
+    <string name="api_fail">apikey验证失败，地图功能无法正常使用</string>
+    <string name="api_success">apikey验证成功</string>
+    <string name="network_fail">网络错误</string>
+    <string name="unlock_success">解锁成功！</string>
+    <string name="GPS_searching">GPS信号搜索中，请稍后...</string>
+    <string name="GPS_weak">GPS信号搜索中，请稍后...</string>
+    <string name="GPS_connecting">GPS信号连接中，请稍后...</string>
+    <string name="record_nothing">您此次运动距离过短，将不会记录数据，是否结束运动？</string>
+    <string name="open_GPS">请打开GPS</string>
+    <string name="open_GPSc">请打开GPS连接</string>
+    <string name="set">设置</string>
+    <string name="GPS_content">打开后直接点击返回键即可，若不打开返回下次将再次出现</string>
+    <string name="cancel">取消</string>
+    <string name="GPS_opened">GPS已开启</string>
+    <string name="network_set">网络设置提示</string>
+    <string name="network_disabled">网络连接不可用,是否进行设置?</string>
+    <string name="distanceM">距离(米)</string>
+    <string name="spend_time">用时(时/分/秒)</string>
+    <string name="speed">时速(公里/小时)</string>
+    <string name="slide_to_unlockScreen">向右滑动解锁</string>
+    <string name="distanceKM">距离(公里)</string>
+    <string name="lockScreen">锁屏</string>
+    <string name="step">步数</string>
 </resources>
 

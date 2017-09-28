@@ -276,7 +276,6 @@ public class PlatFormActivity implements  Parcelable {
     }
 
 
-
     /**
      * postTime 小于７２小时
      * @return boolean

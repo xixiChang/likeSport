@@ -19,8 +19,13 @@ public final class URLConstant {
      * 活动记录
      */
     public static final String Activity_Post = "/activity/post";
+    public static final String Activity_Delay = "/activity/delay";
+    public static final String Activity_Cancel = "/activity/cancel";
     public static final String Activity_Details = "/activity/details";
+    public static final String Activity_My = "/activity/getMyActivity";
+    public static final String Activity_Join = "/activity/join";
     public static final String Activity_All = "/activity/all";
+    public static final String Activity_GetJoinerInfo = "/activity/getJoinerInfo";
 
     /**
      * 文件上传
