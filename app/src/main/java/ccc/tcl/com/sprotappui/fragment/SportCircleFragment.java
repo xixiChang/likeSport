@@ -11,6 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
+import com.lcodecore.tkrefreshlayout.IHeaderView;
+import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
+import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
+import com.lcodecore.tkrefreshlayout.header.SinaRefreshView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,10 +28,13 @@ import ccc.tcl.com.sprotappui.model.ResponseResult;
 import ccc.tcl.com.sprotappui.presenter.presenterimpl.ActivityPresenter;
 import ccc.tcl.com.sprotappui.ui.SportAppView;
 
+
 public class SportCircleFragment extends Fragment {
 
     private static final String TAG = "SportCircleFragment";
 
+
+    private TwinklingRefreshLayout mPullToRefreshView;
     private RecyclerView recyclerView;
     private List<PlatFormActivity> platFormActivityList = new ArrayList<>();
     private Context context;
@@ -36,8 +45,10 @@ public class SportCircleFragment extends Fragment {
     private SportAppView<ResponseResult<List<PlatFormActivity>>> appView = new SportAppView<ResponseResult<List<PlatFormActivity>>>() {
         @Override
         public void onSuccess(ResponseResult<List<PlatFormActivity>> response) {
+            mPullToRefreshView.finishRefreshing();
             if (response.isSuccess()){
-                platFormActivityList = response.getResult();
+                platFormActivityList.clear();
+                platFormActivityList .addAll(response.getResult());
                 adapter.notifyDataSetChanged();
                 Log.d(TAG, "onSuccess: " + platFormActivityList.size());
             }
@@ -97,7 +108,7 @@ public class SportCircleFragment extends Fragment {
 
     private void initView(View view) {
         recyclerView = (RecyclerView) view.findViewById(R.id.fm_sport_recycler_view);
-
+        mPullToRefreshView = (TwinklingRefreshLayout) view.findViewById(R.id.fg_sport_circle_pull_to_refresh);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL, false);
         adapter = new FMSportItem(platFormActivityList);
@@ -111,6 +122,14 @@ public class SportCircleFragment extends Fragment {
         });
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
+
+        mPullToRefreshView.setEnableLoadmore(false);
+        mPullToRefreshView.setOnRefreshListener(new RefreshListenerAdapter() {
+            @Override
+            public void onRefresh(TwinklingRefreshLayout refreshLayout) {
+                activityPresenter.getAll();
+            }
+        });
 
     }
 

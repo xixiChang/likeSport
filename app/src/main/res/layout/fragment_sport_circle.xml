@@ -4,12 +4,24 @@
     android:layout_height="match_parent"
     tools:context="ccc.tcl.com.sprotappui.fragment.SportCircleFragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/fm_sport_recycler_view"
-        android:layout_margin="4dp"
+    <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
+        android:id="@+id/fg_sport_circle_pull_to_refresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/fm_sport_recycler_view"
+            android:layout_margin="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
+
+
+
+
+
 
 </FrameLayout>

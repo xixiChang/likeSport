@@ -27,7 +27,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private TextView loginToReg;
     private Button login;
     private static final int START_AC_REG = 5014;
-    private UserPresenter userPresenter;
+    private UserPresenter userPresenter;//---->RecordPresenter
     private static final String TAG = "LoginActivity";
     private String phone, pwd;
     private SQLParaWrapper sqlParaWrapper;
@@ -40,7 +40,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume() {//***
         super.onResume();
         userPresenter = new UserPresenter();
         userPresenter.onCreate();
@@ -59,9 +59,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     }
 
+    //<UserInfo>换成具体方法的返回值泛型,SportAppView<ResponseResult>不许改动
+    //需要判断返回是否成功 isSuccess
+    //实际有用值responseResult.getResult
+
     private SportAppView<ResponseResult<UserInfo>> sportAppView = new SportAppView<ResponseResult<UserInfo>>() {
         @Override
         public void onSuccess(ResponseResult<UserInfo> responseResult) {
+            ///需要判断responseResult.getType()
             if (responseResult.isSuccess()) {
                 Log.d(TAG, "onSuccess: ");
                 userInfo = responseResult.getResult();
@@ -76,6 +81,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 startActivity(intent);
                 finish();
             }
+            //else responseResult.getMsg()
         }
 
         @Override
@@ -120,7 +126,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     @Override
-    protected void onStop() {
+    protected void onStop() {//**
         super.onStop();
         userPresenter.onStop();
     }
