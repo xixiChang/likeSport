@@ -14,7 +14,11 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
-
+        vectorDrawables.useSupportLibrary = true
+        generatedDensities = []
+    }
+    aaptOptions {
+        additionalParameters "--no-version-vectors"
     }
 
     dexOptions{
@@ -30,7 +34,7 @@ android {
 //            signingConfig signingConfigs.debug
 //            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 //        }
-    }
+//    }
 //    signingConfigs {
 //        debug {
 //            storeFile file('likesport170915.jks')
@@ -38,7 +42,12 @@ android {
 //            keyAlias "key0"
 //            keyPassword "tcl123456"
 //        }
-//    }
+    }
+    sourceSets {
+        main() {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 repositories {
@@ -82,5 +91,6 @@ dependencies {
     compile 'com.android.support:support-v4:25.1.0'
     compile 'com.alibaba.mobileim:IMCore:2.0.2.1@aar'
     compile 'com.alibaba.mobileim:IMKit:2.0.2.1@aar'
-
+//    百度地图
+    compile files('libs/baidumapapi_map_v4_3_1.jar')
 }
