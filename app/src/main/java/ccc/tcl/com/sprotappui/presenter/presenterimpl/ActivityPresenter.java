@@ -36,12 +36,6 @@ public class ActivityPresenter extends BasePresenter {
 
 
 
-    public static final String Activity_Join = "/activity/join";
-    public static final String Activity_All = "/activity/all";
-    public static final String Activity_GetJoinerInfo = "/activity/getJoinerInfo";
-
-
-
     public void uploadActivity(PlatFormActivity activity){
         resultObservable = requestActivity.uploadActivity(activity);
         mCompositeSubscription.add(subscribeData());

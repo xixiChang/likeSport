@@ -32,11 +32,11 @@ public class WelcomeActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == JUMP_TO_HOME){
-                Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
+                Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
                 startActivity(intent);
                 finish();
             }else {
-                Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
+                Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }
