@@ -377,6 +377,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		lockScreen.setVisibility(View.GONE);
 		progressBarArea.setVisibility(View.GONE);
 		distanceMArea.setVisibility(View.GONE);
+		endShowArea.setVisibility(View.VISIBLE);
 		top.setVisibility(View.VISIBLE);
 //		显示用户名
 		tvUser.setText(App.userInfo.getName());
