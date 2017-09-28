@@ -24,7 +24,8 @@
     <string name="msg_setting">消息通知</string>
     <string name="activity_name">活动名称</string>
     <string name="time">起止时间</string>
-    <string name="brief">简介</string>
+    <string name="joiner_limit">参与人数上限</string>
+    <string name="details">详情</string>
     <string name="share_activity">分享</string>
     <string name="user_setting">设置</string>
     <string name="score_walk">健走</string>

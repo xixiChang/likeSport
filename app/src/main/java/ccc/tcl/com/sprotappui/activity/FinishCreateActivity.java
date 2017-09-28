@@ -13,13 +13,19 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.model.PlatFormActivity;
+import ccc.tcl.com.sprotappui.model.ResponseResult;
+import ccc.tcl.com.sprotappui.presenter.presenterimpl.ActivityPresenter;
+import ccc.tcl.com.sprotappui.presenter.presenterimpl.FileUploadPresenter;
+import ccc.tcl.com.sprotappui.ui.SportAppView;
 
 public class FinishCreateActivity extends BaseActivity {
     TextView startTime;
@@ -32,16 +38,27 @@ public class FinishCreateActivity extends BaseActivity {
     DatePicker picker;
     LinearLayout ll = null;
     PlatFormActivity platFormActivity;
+    FileUploadPresenter uploadImage;
+    ActivityPresenter uploadActivity;
     int[] location_datePicker = new int[2];
     int[] start_textview = new int[2];
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     boolean set_start_time = true;
+    String ImageUrl;
+    private static final String TAG = "FinishCreateActivity";
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finish_create);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         super.setToolBar(toolbar, R.string.create_activity,true);
+        initView();
+    }
+
+    private void initView(){
         final Intent intent0= getIntent();
         platFormActivity = intent0.getParcelableExtra("data");
         time_text = (TextView) findViewById(R.id.textView);
@@ -110,6 +127,64 @@ public class FinishCreateActivity extends BaseActivity {
     }
 
     @Override
+    protected void onResume() {
+        uploadImage = new FileUploadPresenter();
+        uploadImage.onCreate();
+        uploadImage.attachView(new SportAppView<ResponseResult<String>>() {
+            @Override
+            public void onSuccess(ResponseResult<String> response) {
+                if (response.isSuccess()){
+                    platFormActivity.setStart_time(startTime.getText().toString());
+                    platFormActivity.setEnd_time(endTime.getText().toString());
+                    platFormActivity.setAddress(location.getText().toString());
+                    platFormActivity.setDistance(Integer.parseInt(distance.getText().toString()));
+                    platFormActivity.setNotes(note.getText().toString());
+                    ImageUrl = response.getResult();
+                    //platFormActivity.setImage_url(response.getResult());
+                    uploadActivity.uploadActivity(platFormActivity);
+                    Toast.makeText(FinishCreateActivity.this,"图片上传成功",Toast.LENGTH_SHORT).show();
+                }
+                else
+                    Toast.makeText(FinishCreateActivity.this,"图片上传失败: "+response.getMsg(),Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onRequestError(String msg) {
+                Toast.makeText(FinishCreateActivity.this,"图片上传失败："+msg,Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        uploadActivity = new ActivityPresenter();
+        uploadActivity.onCreate();
+        uploadActivity.attachView(new SportAppView<ResponseResult>() {
+            @Override
+            public void onSuccess(ResponseResult response) {
+                if (response.isSuccess()){
+                    Intent intent = new Intent(FinishCreateActivity.this,NewCreateActivity.class);
+                    Bundle data = new Bundle();
+                    if (ImageUrl != null)
+                        platFormActivity.setImage_url(ImageUrl);
+                    data.putParcelable("data",platFormActivity);
+                    intent.putExtras(data);
+                    startActivity(intent);
+                    //finish();
+                    Log.d(TAG, "onSuccess: "+response.getMsg());
+                    Toast.makeText(FinishCreateActivity.this,"数据上传成功",Toast.LENGTH_SHORT).show();
+                }
+                else
+                    Toast.makeText(FinishCreateActivity.this,"数据上传失败："+response.getMsg(),Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onRequestError(String msg) {
+                Toast.makeText(FinishCreateActivity.this,"网络链接失败："+msg,Toast.LENGTH_SHORT).show();
+            }
+        });
+        super.onResume();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_finish_create_toolbar,menu);
         return super.onCreateOptionsMenu(menu);
@@ -125,18 +200,12 @@ public class FinishCreateActivity extends BaseActivity {
                     break;
                 }
 
-                Intent intent = new Intent(this,NewCreateActivity.class);
-                Bundle data = new Bundle();
-                platFormActivity.setStart_time(startTime.getText().toString());
-                platFormActivity.setEnd_time(endTime.getText().toString());
-                platFormActivity.setAddress(locationText);
-                platFormActivity.setDistance(Integer.parseInt(distanceText));
-                platFormActivity.setNotes(note.getText().toString());
-                data.putParcelable("data",platFormActivity);
 
-                intent.putExtras(data);
-                startActivity(intent);
-                finish();
+                File image = new File(platFormActivity.getImage_url());
+
+                uploadImage.upLoadFile(image,"activity");
+
+
                 break;
 
         }
@@ -160,5 +229,11 @@ public class FinishCreateActivity extends BaseActivity {
                 ll.setVisibility(View.GONE);
         }
         return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    protected void onDestroy() {
+        uploadImage.onStop();
+        super.onDestroy();
     }
 }

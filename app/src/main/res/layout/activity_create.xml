@@ -31,7 +31,7 @@
         android:textCursorDrawable="@drawable/cursor_theme"
         android:hint="10字以内" />
     <TextView
-        android:text="@string/brief"
+        android:text="@string/joiner_limit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
@@ -42,19 +42,19 @@
 
 
     <EditText
-        android:id="@+id/brief"
+        android:id="@+id/joiner_limit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:paddingStart="10dp"
-        android:inputType="textMultiLine"
+        android:inputType="number"
         android:textCursorDrawable="@drawable/cursor_theme"
         android:gravity="start"
-        android:hint="20字以内"
+        android:hint="1000以内"
         android:layout_weight="0.17" />
 
     <TextView
-        android:text="详情"
+        android:text="@string/details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"

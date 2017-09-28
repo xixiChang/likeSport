@@ -15,7 +15,7 @@
             android:text="运动里程："
             android:textSize="@dimen/activity_content_size_mid"/>
         <TextView
-            android:id="@id/distance"
+            android:id="@+id/distance_show"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"

@@ -45,7 +45,7 @@ public class TestActivity extends BaseActivity {
         }
 
         @Override
-        public void onError(String msg) {
+        public void onRequestError(String msg) {
             Log.d(TAG, "onError: " + msg);
         }
     };

@@ -48,7 +48,7 @@ public class PlatFormActivity implements  Parcelable {
     private int join_num;
     private String hot_value;
     private String joiner;
-    private Timestamp post_time;
+    private String post_time;
 
     /**
      * 客户端二次生成
@@ -67,6 +67,8 @@ public class PlatFormActivity implements  Parcelable {
 
 
     protected PlatFormActivity(Parcel in) {
+        user_id = in.readString();
+        at_server_id = in.readInt();
         id = in.readInt();
         isNew = in.readByte() != 0;
         image_url = in.readString();
@@ -79,6 +81,7 @@ public class PlatFormActivity implements  Parcelable {
         address = in.readString();
         publish_user_id = in.readString();
         joiner = in.readString();
+        join_num_all = in.readInt();
         details = in.readString();
         notes = in.readString();
     }
@@ -104,18 +107,21 @@ public class PlatFormActivity implements  Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
-        dest.writeByte((byte) (isNew ? 1 : 0));
+        dest.writeString(user_id);
+        dest.writeInt(at_server_id);
+        dest.writeInt(id);//
+        dest.writeByte((byte) (isNew ? 1 : 0));//
         dest.writeString(image_url);
         dest.writeString(name);
-        dest.writeString(hot_value);
+        dest.writeString(hot_value);//
         dest.writeString(start_time);
         dest.writeString(end_time);
-        dest.writeString(left_time);
+        dest.writeString(left_time);//
         dest.writeInt(distance);
         dest.writeString(address);
         dest.writeString(publish_user_id);
-        dest.writeString(joiner);
+        dest.writeString(joiner);//
+        dest.writeInt(join_num_all);
         dest.writeString(details);
         dest.writeString(notes);
     }
@@ -197,11 +203,11 @@ public class PlatFormActivity implements  Parcelable {
     }
 
 
-    public Timestamp getPost_time() {
+    public String getPost_time() {
         return post_time;
     }
 
-    public void setPost_time(Timestamp post_time) {
+    public void setPost_time(String post_time) {
         this.post_time = post_time;
     }
 
@@ -270,12 +276,13 @@ public class PlatFormActivity implements  Parcelable {
     }
 
 
+
     /**
      * postTime 小于７２小时
      * @return boolean
      */
     public boolean isNew() {
-        return (new Date().getTime() - post_time.getTime()/(1000*60*60*24)) <= 72 ;
+        return (new Date().getTime() - Long.getLong(post_time)/(1000*60*60*24)) <= 72 ;
     }
 
     /**

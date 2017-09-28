@@ -58,13 +58,23 @@ public class MySportTeamActivity extends BaseActivity {
         initData();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context,
                 LinearLayoutManager.VERTICAL, false);
-        UserSportTeamItem adapter = new UserSportTeamItem(sports);
+        final UserSportTeamItem adapter = new UserSportTeamItem(sports);
         adapter.setListener(new UserSportTeamItem.OnRecyclerViewItemClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Intent intent = new Intent(context, LayoutActivity.class);
-                intent.putExtra("id",sports.get(position).getId());
-                startActivity(intent);
+                if (sports.get(position).getPublish_user_id() !=  sports.get(position).getUser_id()){
+                    Intent intent = new Intent(context, LayoutActivity.class);
+                    Bundle data = new Bundle();
+                    data.putParcelable("data",sports.get(position));
+                    intent.putExtras(data);
+                    startActivity(intent);
+                }
+                else {
+                    Intent intent = new Intent(context, NewCreateActivity.class);
+                    intent.putExtra("data",sports.get(position));
+                    startActivity(intent);
+                }
+
             }
         });
         recycler.setLayoutManager(linearLayoutManager);
@@ -83,12 +93,14 @@ public class MySportTeamActivity extends BaseActivity {
             String imageID = getResources().getIdentifier(
                     "p" + ((i+1)>9 ? i-8 : i+1), "drawable", getPackageName()) + "";
             userSport.setName("这是活动"+ (i+1));
+            userSport.setPublish_user_id(i < 4 ? userSport.getUser_id() : "sasd");
+            userSport.setJoiner(userSport.getUser_id());
             userSport.setImage_url(imageID);
-            //userSport.setBehavior(i%2 == 0 ? "发起人":"参与");
             userSport.setStatus( i < 2 ? "正在进行":"已结束");
             userSport.setStart_time(simpleDateFormat.format(new Date()));
             userSport.setEnd_time(simpleDateFormat.format(new Date()));
             userSport.setJoin_num((i+1) * 14 +3);
+
             sports.add(userSport);
         }
     }

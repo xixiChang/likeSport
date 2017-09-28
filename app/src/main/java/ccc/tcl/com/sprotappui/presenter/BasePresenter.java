@@ -1,6 +1,7 @@
 package ccc.tcl.com.sprotappui.presenter;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import ccc.tcl.com.sprotappui.internet.requestImpl.RetrofitHelper;
 import ccc.tcl.com.sprotappui.model.ResponseResult;
@@ -65,7 +66,8 @@ public class BasePresenter implements Presenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        appView.onError(e.getMessage());
+                        Log.d(TAG, "onError: "+e);
+                        appView.onRequestError(e.getMessage());
                     }
 
                     @Override

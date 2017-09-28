@@ -59,7 +59,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         }
 
         @Override
-        public void onError(String msg) {
+        public void onRequestError(String msg) {
             Log.d(TAG, "onError: " + msg);
         }
     };

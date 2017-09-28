@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewStub;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,13 +31,16 @@ import ccc.tcl.com.sprotappui.model.PlatFormActivity;
 public class NewCreateActivity extends BaseActivity {
     TextView startTime;
     TextView endTime;
-    TextView changeStart;
-    TextView changeEnd;
     TextView distance;
     TextView location;
     TextView detail;
     PlatFormActivity sport;
+
     View dialogView;
+    TextView changeStart;
+    TextView changeEnd;
+    EditText changeReason;
+
     boolean set_start_time = true;
     ViewStub stub;
     LinearLayout ll = null;
@@ -64,6 +70,7 @@ public class NewCreateActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        Log.d("", "onCreateOptionsMenu: "+sport.getUser_id()+"--"+sport.getPublish_user_id());
         getMenuInflater().inflate(R.menu.activity_home_toolbar,menu);
         return super.onCreateOptionsMenu(menu);
     }
@@ -72,7 +79,7 @@ public class NewCreateActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.more:
-                    logoutWindow();
+                logoutWindow();
                 return true;
             case android.R.id.home:
                 finish();
@@ -107,6 +114,7 @@ public class NewCreateActivity extends BaseActivity {
 
                             break;
                         case 1:
+                            //finish();
                         default:
                             break;
                     }
@@ -121,11 +129,15 @@ public class NewCreateActivity extends BaseActivity {
         changeStart = (TextView) dialogView.findViewById(R.id.start_time);
         changeEnd = (TextView) dialogView.findViewById(R.id.end_time);
         stub = (ViewStub) dialogView.findViewById(R.id.viewStub);
+        changeReason = (EditText) dialogView.findViewById(R.id.reason);
+        final InputMethodManager imm = (InputMethodManager) NewCreateActivity.this.getSystemService(INPUT_METHOD_SERVICE);
         changeStart.setText(startTime.getText());
         changeStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 set_start_time = true;
+
+                imm.hideSoftInputFromWindow(changeReason.getWindowToken(), 0);
                 if (ll == null){//inflate只能调用一次，再次调用会报异常
                     stub.inflate();
                 }else if(ll.getVisibility()==View.GONE){
@@ -148,6 +160,7 @@ public class NewCreateActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 set_start_time = false;
+                imm.hideSoftInputFromWindow(changeReason.getWindowToken(), 0);
                 if (ll == null){//inflate只能调用一次，再次调用会报异常
                     stub.inflate();
                 }else if(ll.getVisibility()==View.GONE){
@@ -164,6 +177,14 @@ public class NewCreateActivity extends BaseActivity {
 
             }
 
+        });
+
+        changeReason.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ll != null && ll.getVisibility() == View.VISIBLE)
+                    ll.setVisibility(View.GONE);
+            }
         });
         stub.setOnInflateListener(new ViewStub.OnInflateListener() {
             @Override

@@ -1,5 +1,6 @@
 package ccc.tcl.com.sprotappui.adapter;
 
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.flyco.labelview.LabelView;
 
 import java.util.List;
@@ -40,12 +42,15 @@ public class FMSportItem extends RecyclerView.Adapter<FMSportItem.ViewHolder> {
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_fragement_sport, parent, false);
-
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder,final int position) {
+        PlatFormActivity activity = data.get(position);
+        holder.name.setText(activity.getName());
+        holder.hotValue.setText(activity.getHot_value());
+        Glide.with(holder.itemView).load(activity.getImage_url()).into(holder.image);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

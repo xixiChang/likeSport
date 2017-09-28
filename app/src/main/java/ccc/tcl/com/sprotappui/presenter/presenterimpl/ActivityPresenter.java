@@ -37,7 +37,7 @@ public class ActivityPresenter extends BasePresenter {
     }
 
     public void getActivity(String activity_id){
-        resultObservable = requestActivity.getActivity(activity_id);
+        resultObservable = (Observable)requestActivity.getActivity(activity_id);
         mCompositeSubscription.add(subscribeData());
     }
 

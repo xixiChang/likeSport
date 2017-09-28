@@ -79,7 +79,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
 
         @Override
-        public void onError(String msg) {
+        public void onRequestError(String msg) {
             Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
             Log.d(TAG, "onError: " + msg);
         }

@@ -62,5 +62,6 @@
         android:inputType="textMultiLine"
         android:textCursorDrawable="@drawable/cursor_theme"
         android:hint="40字以内"
-        android:layout_weight="0.22" />
+        android:layout_weight="0.22"
+        android:id="@+id/reason" />
 </LinearLayout>

@@ -30,7 +30,7 @@ import ccc.tcl.com.sprotappui.model.PlatFormActivity;
 public class PickPictureActivity extends BaseActivity{
     ImageView imageView;
     ImageView imageView2;
-    private static final String TAG = "PickPictureActivity";
+    private final String imagePath = Environment.getExternalStorageDirectory()+"/zz/images1.jpg";
     private ActionSheetDialog pick_picture;
     final int PHOTO_REQUEST_CUT = 0;
     final int PHOTO_REQUEST_GALLERY = 1;
@@ -83,7 +83,8 @@ public class PickPictureActivity extends BaseActivity{
             case R.id.next:
                 Intent intent = new Intent(PickPictureActivity.this,CreateActivity.class);
                 PlatFormActivity platFormActivity = new PlatFormActivity();
-                platFormActivity.setImage_url("image.url");
+                platFormActivity.setImage_url(imagePath);
+                platFormActivity.setPublish_user_id(platFormActivity.getUser_id());
                 Bundle data = new Bundle();
                 data.putParcelable("data", platFormActivity);
                 intent.putExtras(data);
@@ -143,7 +144,8 @@ public class PickPictureActivity extends BaseActivity{
 
     private void setPicToView(Intent picdata) {
         Bundle bundle = picdata.getExtras();
-        if (bundle != null) {pick_picture.dismiss();
+        if (bundle != null) {
+            pick_picture.dismiss();
             Bitmap photo_data = bundle.getParcelable("data");
             SaveBitmapToFile(photo_data);
             Drawable drawable = new BitmapDrawable(photo_data);
@@ -187,7 +189,7 @@ public class PickPictureActivity extends BaseActivity{
         pick_picture.show();
     }
     private void SaveBitmapToFile(Bitmap photo_data) {
-        File fphoto = new File(Environment.getExternalStorageDirectory()+"/zz/images1.jpg");
+        File fphoto = new File(imagePath);
         try {
             FileOutputStream fos = new FileOutputStream(fphoto);
             Log.d("", "SaveBitmapToFile: ");

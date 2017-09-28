@@ -48,7 +48,7 @@ public class ScoreActivity extends BaseActivity {
         }
 
         @Override
-        public void onError(String msg) {
+        public void onRequestError(String msg) {
 
         }
     };

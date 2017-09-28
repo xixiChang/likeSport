@@ -8,5 +8,5 @@ package ccc.tcl.com.sprotappui.ui;
 
 public interface SportAppView<T> {
     void onSuccess(T response);
-    void onError(String msg);
+    void onRequestError(String msg);
 }

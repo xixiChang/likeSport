@@ -14,7 +14,7 @@ import ccc.tcl.com.sprotappui.model.PlatFormActivity;
 public class CreateActivity extends BaseActivity {
     PlatFormActivity platFormActivity;
     EditText name;
-    EditText brief;
+    EditText joiner_limit;
     EditText detail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class CreateActivity extends BaseActivity {
         platFormActivity = intent.getParcelableExtra("data");
         Toast.makeText(this, platFormActivity.getImage_url(),Toast.LENGTH_SHORT).show();
         name = (EditText) findViewById(R.id.name);
-        brief = (EditText) findViewById(R.id.brief);
+        joiner_limit = (EditText) findViewById(R.id.joiner_limit);
         detail = (EditText) findViewById(R.id.detail);
     }
 
@@ -49,9 +49,7 @@ public class CreateActivity extends BaseActivity {
                 Bundle data = new Bundle();
                 platFormActivity.setName(name.getText().toString());
                 platFormActivity.setDetails(detail.getText().toString());
-                data.putParcelable("data", platFormActivity);
-                platFormActivity.setName(nameText);
-                platFormActivity.setDetails(detailText);
+                platFormActivity.setJoin_num_all(Integer.parseInt(joiner_limit.getText().toString()));
                 data.putParcelable("data", platFormActivity);
                 intent.putExtras(data);
                 startActivity(intent);
