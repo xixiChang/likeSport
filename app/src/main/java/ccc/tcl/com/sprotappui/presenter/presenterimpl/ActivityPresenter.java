@@ -46,4 +46,6 @@ public class ActivityPresenter extends BasePresenter {
         mCompositeSubscription.add(subscribeData());
     }
 
+
+
 }

@@ -48,7 +48,7 @@ public class PlatFormActivity implements  Parcelable {
     private int join_num;
     private String hot_value;
     private String joiner;
-    private Timestamp post_time;
+    private String post_time;
 
     /**
      * 客户端二次生成
@@ -197,14 +197,6 @@ public class PlatFormActivity implements  Parcelable {
     }
 
 
-    public Timestamp getPost_time() {
-        return post_time;
-    }
-
-    public void setPost_time(Timestamp post_time) {
-        this.post_time = post_time;
-    }
-
     public int getJoin_num_all() {
         return join_num_all;
     }
@@ -275,7 +267,7 @@ public class PlatFormActivity implements  Parcelable {
      * @return boolean
      */
     public boolean isNew() {
-        return (new Date().getTime() - post_time.getTime()/(1000*60*60*24)) <= 72 ;
+        return (new Date().getTime() - Long.getLong(post_time)/(1000*60*60*24)) <= 72 ;
     }
 
     /**

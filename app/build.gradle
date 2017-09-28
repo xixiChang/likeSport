@@ -25,20 +25,20 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-        debug {
-            minifyEnabled false
-            signingConfig signingConfigs.debug
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
+//        debug {
+//            minifyEnabled false
+//            signingConfig signingConfigs.debug
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//        }
     }
-    signingConfigs {
-        debug {
-            storeFile file('likesport170915.jks')
-            storePassword "tcl123456"
-            keyAlias "key0"
-            keyPassword "tcl123456"
-        }
-    }
+//    signingConfigs {
+//        debug {
+//            storeFile file('likesport170915.jks')
+//            storePassword "tcl123456"
+//            keyAlias "key0"
+//            keyPassword "tcl123456"
+//        }
+//    }
 }
 
 repositories {

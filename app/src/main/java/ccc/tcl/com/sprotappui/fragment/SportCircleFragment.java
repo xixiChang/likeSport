@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +18,38 @@ import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.activity.LayoutActivity;
 import ccc.tcl.com.sprotappui.adapter.FMSportItem;
 import ccc.tcl.com.sprotappui.model.PlatFormActivity;
+import ccc.tcl.com.sprotappui.model.ResponseResult;
+import ccc.tcl.com.sprotappui.presenter.presenterimpl.ActivityPresenter;
+import ccc.tcl.com.sprotappui.ui.SportAppView;
 
 public class SportCircleFragment extends Fragment {
+
+    private static final String TAG = "SportCircleFragment";
 
     private RecyclerView recyclerView;
     private List<PlatFormActivity> platFormActivityList = new ArrayList<>();
     private Context context;
     private String mTitle;
     private FMSportItem adapter;
+    private ActivityPresenter activityPresenter;
+
+    private SportAppView<ResponseResult<List<PlatFormActivity>>> appView = new SportAppView<ResponseResult<List<PlatFormActivity>>>() {
+        @Override
+        public void onSuccess(ResponseResult<List<PlatFormActivity>> response) {
+            if (response.isSuccess()){
+                platFormActivityList = response.getResult();
+                adapter.notifyDataSetChanged();
+                Log.d(TAG, "onSuccess: " + platFormActivityList.size());
+            }
+            else
+                Log.d(TAG, "onSuccess: msg>>>>" + response.getMsg());
+        }
+
+        @Override
+        public void onError(String msg) {
+            Log.e(TAG, "onError: " + msg );
+        }
+    };
 
     public SportCircleFragment() {
     }
@@ -40,6 +65,18 @@ public class SportCircleFragment extends Fragment {
         super.onCreate(savedInstanceState);
         context = getContext();
         initData();
+        activityPresenter = new ActivityPresenter();
+    }
+
+    /**
+     * fragment 生命周期
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        activityPresenter.onCreate();
+        activityPresenter.attachView(appView);
+        activityPresenter.getAll();
     }
 
     private void initData() {
@@ -77,4 +114,9 @@ public class SportCircleFragment extends Fragment {
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        activityPresenter.onStop();
+    }
 }
