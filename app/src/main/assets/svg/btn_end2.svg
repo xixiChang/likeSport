@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="51px" height="50px" viewBox="0 0 51 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>btn_停止-hl</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="btn_停止-hl">
+            <g>
+                <g id="ic-停止-中">
+                    <g>
+                        <circle id="Oval-5-Copy-2" stroke-opacity="0.437188632" stroke="#02CDBD" stroke-width="2" cx="25" cy="25" r="24"></circle>
+                        <path d="M48.8663587,22.4521452 C47.6824279,11.2323318 38.7676682,2.3175721 27.5478548,1.13364126 L48.8663587,22.4521452 Z" id="Oval-5-Copy-4" stroke="#02CDBD" stroke-width="2"></path>
+                        <path d="M25,2 C25.2698339,2 25.9743347,1.99313354 27.1009521,2.08952332 C28.2275696,2.18591309 26.335434,1.24779815 26.335434,0.96534729 C26.335434,0.41306254 25.5522847,0 25,0 C24.4477153,0 24,0.44771525 24,1 C24,1.55228475 24.4477153,2 25,2 Z" id="Oval" fill="#02CDBD"></path>
+                        <path d="M47.9492757,25.1329416 C48.3315383,25.1839977 48.5914981,25.1766531 50.2074859,25.506314 C51.8234737,25.8359749 49.0550352,24.137342 49.0550352,23.8548911 C49.0550352,23.3026064 48.9446454,23.2449191 48.3871306,23.179555 C47.8296158,23.1141908 47.1895123,23.098181 47.0848266,24.0276539 C47.0176602,24.6240044 47.4079353,25.0606388 47.9492757,25.1329416 Z" id="Oval-Copy" fill="#02CDBD" transform="translate(48.895590, 24.350847) scale(-1, 1) rotate(-97.000000) translate(-48.895590, -24.350847) "></path>
+                    </g>
+                </g>
+                <g id="Group-5" transform="translate(13.000000, 13.000000)">
+                    <g id="停止-cease_fill">
+                        <path d="M17.0441715,19 L7.95582856,19 C6.87564324,19 6.00000003,18.1243568 6.00000003,17.0441715 L6,7.95582854 C6,6.87564321 6.87564321,6 7.95582853,6 L17.0441715,6 C18.1243568,6 19,6.87564321 19,7.95582854 L19,17.0441715 C19,18.1243568 18.1243568,19 17.0441715,19 Z" id="Shape" stroke="#000000" fill-rule="nonzero"></path>
+                        <rect id="Rectangle" opacity="0.8" x="0" y="0" width="24" height="24"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
