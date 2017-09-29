@@ -37,7 +37,7 @@ public class AuthInterceptor implements Interceptor {
                 .header("session", App.userInfo.getSession());
 
 
-        if (original.body() instanceof FormBody || original.body() == null) {
+        if (original.body() instanceof FormBody ) {
             FormBody.Builder newFormBody = new FormBody.Builder();
             FormBody oldFormBody = (FormBody) original.body();
             for (int i = 0; i < oldFormBody.size(); i++) {
@@ -45,8 +45,12 @@ public class AuthInterceptor implements Interceptor {
             }
             if (App.userInfo.getId() != null)
                 newFormBody.add("user_id", App.userInfo.getId());
-            if (App.userInfo.getSession() != null)
-            newFormBody.add("session", App.userInfo.getSession());
+            requestBuilder.method(original.method(), newFormBody.build());
+        }
+
+        if (original.body().contentLength() == 0){
+            FormBody.Builder newFormBody = new FormBody.Builder();
+            newFormBody.add("user_id", App.userInfo.getId());
             requestBuilder.method(original.method(), newFormBody.build());
         }
 
