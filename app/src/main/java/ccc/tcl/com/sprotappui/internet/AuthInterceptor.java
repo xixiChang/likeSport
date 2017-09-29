@@ -1,13 +1,11 @@
 package ccc.tcl.com.sprotappui.internet;
 
 import android.support.annotation.VisibleForTesting;
-import android.util.Log;
 
 import java.io.IOException;
 
 import ccc.tcl.com.sprotappui.App;
 import okhttp3.FormBody;
-import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -32,10 +30,14 @@ public class AuthInterceptor implements Interceptor {
 
         Request.Builder requestBuilder = original.newBuilder()
                 .header("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
-                .header("Connection", "keep-alive")
-                .header("user_id", App.userInfo.getId())
-                .header("session", App.userInfo.getSession());
+                .header("Connection", "keep-alive");
 
+        if (App.userInfo.getId() != null) {
+            requestBuilder.header("user_id", App.userInfo.getId());
+        }
+        if (App.userInfo.getSession() != null) {
+            requestBuilder.header("session", App.userInfo.getSession());
+        }
 
         if (original.body() instanceof FormBody ) {
             FormBody.Builder newFormBody = new FormBody.Builder();
@@ -48,7 +50,8 @@ public class AuthInterceptor implements Interceptor {
             requestBuilder.method(original.method(), newFormBody.build());
         }
 
-        if (original.body().contentLength() == 0){
+
+        if (original.body() != null && original.body().contentLength() == 0){
             FormBody.Builder newFormBody = new FormBody.Builder();
             newFormBody.add("user_id", App.userInfo.getId());
             requestBuilder.method(original.method(), newFormBody.build());
