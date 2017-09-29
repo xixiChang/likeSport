@@ -9,9 +9,6 @@
     android:layout_height="match_parent"
     tools:context="ccc.tcl.com.sprotappui.activity.TraceRecordActivity"
     >
-
-
-
     <com.baidu.mapapi.map.MapView
         android:id="@+id/bmapView"
         android:layout_width="fill_parent"
@@ -84,6 +81,7 @@
                 android:textSize="@dimen/text_recorder_name_sizeBig"
                 android:textIsSelectable="true" />
         </LinearLayout>
+
     </RelativeLayout>
 
 
@@ -270,7 +268,7 @@
                 android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-                <ccc.tcl.com.sprotappui.ui.SlideView
+                <com.example.user.ui.SlideView
                     android:id="@+id/slider"
                     android:layout_width="320dp"
                     android:layout_height="70dp"
@@ -432,12 +430,12 @@
                 </LinearLayout>
             </LinearLayout>
 
-           <!-- <RelativeLayout
-                android:id="@+id/line5"
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/black" >
-            </RelativeLayout>-->
+            <!-- <RelativeLayout
+                 android:id="@+id/line5"
+                 android:layout_width="match_parent"
+                 android:layout_height="1px"
+                 android:background="@color/black" >
+             </RelativeLayout>-->
         </LinearLayout>
 
         <LinearLayout

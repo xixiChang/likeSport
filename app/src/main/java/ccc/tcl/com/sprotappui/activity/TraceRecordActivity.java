@@ -1,42 +1,38 @@
 package ccc.tcl.com.sprotappui.activity;
 
-
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.database.sqlite.SQLiteException;
+import android.database.sqlite.SQLiteDatabase;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.location.Location;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.provider.Settings;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.database.sqlite.SQLiteDatabase;
+
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -57,11 +53,8 @@ import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
 
-import java.sql.SQLException;
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -70,11 +63,11 @@ import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.db.AppDBHelper;
 import ccc.tcl.com.sprotappui.db.SQLParaWrapper;
 import ccc.tcl.com.sprotappui.db.SQLStatement;
-import ccc.tcl.com.sprotappui.model.UserSport;
 import ccc.tcl.com.sprotappui.service.StepService;
 import ccc.tcl.com.sprotappui.step_detector.StepDetector;
 import ccc.tcl.com.sprotappui.ui.SlideView;
 import ccc.tcl.com.sprotappui.utils.BaiduMapUtil;
+import static ccc.tcl.com.sprotappui.db.SQLStatement.DBName;
 
 /*实现实时动态画运动轨迹*/
 
@@ -124,11 +117,11 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 	boolean isFirstLoc = true; /*是否首次定位*/
 	private MyLocationData locData;
 	float mCurrentZoom = 18f;/*默认地图缩放比例值*/
-
+	double lastX;
 	private SensorManager mSensorManager;
- 	private static final String TAG ="add TraceRecord";
-//	private UserSport userSport;
-
+	private static final String TAG ="add TraceRecord";
+	//	private UserSport userSport;
+	private String strDistanceM,speedMSStr,totalSecondStr;
 
 	/*起点图标*/
 	BitmapDescriptor startBD;
@@ -259,7 +252,9 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		option.setScanSpan(1000);
 		mLocClient.setLocOption(option);
 		mLocClient.start();
+		//开始记录
 		startRecorder();
+
 	}
 
 
@@ -331,7 +326,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 
 	/*运动结束，停止记录*/
 	public void stopRecorder(){
-		TraceRecordActivity.this.rangeTime1=SystemClock.elapsedRealtime()-meter.getBase();
+		TraceRecordActivity.this.rangeTime1= SystemClock.elapsedRealtime()-meter.getBase();
 		meter.stop();//结束记录
 		//如果用户有运动数据
 		if(points.size()>0){
@@ -341,8 +336,6 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 			showSimpleDialog();
 		}
 	}
-
-
 
 
 	/*停止地图记录服务并绘制轨迹*/
@@ -361,13 +354,32 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 			oFinish.position(points.get(points.size() - 1));
 			oFinish.icon(finishBD);// 设置覆盖物图片
 			mBaiduMap.addOverlay(oFinish); // 在地图上添加此图层
-//			停止记步服务
-			Intent stopStep = new Intent(getApplicationContext(), StepService.class);
+			//停止记步服务
+			Intent stopStep = new Intent(this, StepService.class);
 			stopService(stopStep);
 			// 保存此次运动数据
-//			addRecord();
+			addRecord();
 		}
 	}
+
+	// 保存运动数据
+	public void addRecord(){
+		//保存此次运动数据
+		AppDBHelper dbHelper = new AppDBHelper(TraceRecordActivity.this, DBName, null, 1);
+		//得到一个可写的数据库
+		SQLiteDatabase db =dbHelper.getWritableDatabase();
+		ContentValues cv = new ContentValues();
+		cv.put("date", getDate());
+		cv.put("distance", strDistanceM);
+		cv.put("mean_speed", speedMSStr);
+		cv.put("spent_time", totalSecondStr);
+		cv.put("step", StepDetector.CURRENT_STEP);
+		//调用insert方法，将数据插入数据库
+		db.insert(SQLStatement.RECORD_TABLE_NAME, null, cv);
+		//关闭数据库
+		db.close();
+	}
+
 
 	/*运动结束时的显示信息*/
 	public void endShow(){
@@ -391,15 +403,6 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 	}
 
 	/*运动结束时显示日期*/
-/*	public void getDate(TextView tv){
-		Calendar c = Calendar.getInstance();
-		int year = c.get(Calendar.YEAR);
-		int month = c.get(Calendar.MONTH) + 1;
-		int day = c.get(Calendar.DAY_OF_MONTH);
-		tv.setText("日期:" + year + "年 " + month + "月 " + day + "日 ");
-	}*/
-
-   /*运动结束时显示日期*/
 	public String getDate(){
 		SimpleDateFormat sdFmt = new SimpleDateFormat("yyyy-MM-dd");
 		Date now = new Date();
@@ -450,12 +453,13 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		initChronometer();
 		meter.start();
 
+		//开始记步服务
+		Intent startStep = new Intent(this, StepService.class);
+		startService(startStep);
+
 		/*里程(米)和速度初始化*/
 		tvDistance.setText("0");
 		tvSpeed.setText("0.00");
-		//开始记步服务
-		Intent startStep = new Intent(getApplicationContext(), StepService.class);
-		startService(startStep);
 
 		updateDataRunnable = new Runnable() {
 
@@ -477,7 +481,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 						/*米转换成公里*/
 						double distanceKM = distanceM / 1000;
 						/*显示米*/
-						String strDistanceM = String.valueOf(distanceM);
+						strDistanceM = String.valueOf(distanceM);
 						/*显示公里*/
 						String strDistanceKM = String.valueOf(distanceKM);
 
@@ -527,19 +531,8 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 							strSpeed = strSpeed.substring(0, pointIndex + 3);
 							tvSpeed.setText(strSpeed);
 						}
-
-						//保存此次运动数据
-						sqlParaWrapper= new SQLParaWrapper(TraceRecordActivity.this);
-						sqlParaWrapper.sqLiteDatabase.execSQL(SQLStatement.AddSportRecord);
-						ContentValues cv = new ContentValues();
-						cv.put("date", getDate());
-						cv.put("distance", distanceM);
-						cv.put("mean_speed", speedMS);
-						cv.put("spent_time", totalSecond);
-						cv.put("step", StepDetector.CURRENT_STEP);
-						sqlParaWrapper.sqLiteDatabase.insert(SQLStatement.RECORD_TABLE_NAME, null, cv);
-						sqlParaWrapper.sqLiteDatabase.close();
-
+						speedMSStr=String.valueOf(speedMS);
+						totalSecondStr=String.valueOf(totalSecond);
 					}
 
 				} catch (Exception e) {
@@ -654,8 +647,6 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		return false;
 	}
 
-
-
 	/*
 	 * 判断网络是否连接成功，连接成功不做任何操作
 	 */
@@ -686,9 +677,6 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		}).show();
 	}
 
-
-
-	double lastX;
 
 	@Override
 	public void onSensorChanged(SensorEvent sensorEvent) {
