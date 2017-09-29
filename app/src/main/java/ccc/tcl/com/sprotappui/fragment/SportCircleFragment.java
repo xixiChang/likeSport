@@ -64,16 +64,16 @@ public class SportCircleFragment extends Fragment {
                 Log.d(TAG, "onSuccess: " + platFormActivityList.size());
             }
             else
-                Log.d(TAG, "onSuccess: msg>>>>" + response.getMsg());
+                Toast.makeText(context,"数据加载失败:"+response.getMsg(),Toast.LENGTH_SHORT).show();
         }
 
         @Override
-        public void onError(String msg) {
-            Log.e(TAG, "onError: " + msg );
+        public void onRequestError(String msg) {
+            Toast.makeText(context,"网络链接失败:"+msg,Toast.LENGTH_SHORT).show();
         }
     };
 
-    private ActivityPresenter downloadActivity;
+
     public SportCircleFragment() {
     }
 
@@ -83,12 +83,13 @@ public class SportCircleFragment extends Fragment {
         return sf;
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = getContext();
 
-        initData();
+        //initData();
         activityPresenter = new ActivityPresenter();
     }
 
@@ -97,36 +98,16 @@ public class SportCircleFragment extends Fragment {
      */
     @Override
     public void onResume() {
-        downloadActivity = new ActivityPresenter();
-        downloadActivity.onCreate();
-        downloadActivity.attachView(new SportAppView<ResponseResult<List<PlatFormActivity>>>(){
-            @Override
-            public void onSuccess(ResponseResult<List<PlatFormActivity>> response) {
-                if (response.isSuccess()){
-                    platFormActivityList.clear();
-                    platFormActivityList.addAll(response.getResult());
-                    adapter.notifyDataSetChanged();
-                }
-                else
-                    Toast.makeText(context,"数据加载失败:"+response.getMsg(),Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onRequestError(String msg) {
-                Toast.makeText(context,"网络链接失败:"+msg,Toast.LENGTH_SHORT).show();
-                Log.d("qqqqq", "onError: "+msg);
-            }
-        });
+        activityPresenter.attachView(appView);
         super.onResume();
         activityPresenter.onCreate();
-        activityPresenter.attachView(appView);
-        activityPresenter.getAll();
+        activityPresenter.getAllByPage(0);
     }
 
     private void initData() {
 
      //   downloadActivity.getAll();
-        platFormActivityList.add(new PlatFormActivity());
+          platFormActivityList.add(new PlatFormActivity());
 //        platFormActivityList.add(new PlatFormActivity());
 //        platFormActivityList.add(new PlatFormActivity());
 //        platFormActivityList.add(new PlatFormActivity());
@@ -175,14 +156,11 @@ public class SportCircleFragment extends Fragment {
 
 
     }
-    public void update(){
-        downloadActivity.getAll();
 
-    }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        downloadActivity.onStop();
+        activityPresenter.onStop();
     }
 }

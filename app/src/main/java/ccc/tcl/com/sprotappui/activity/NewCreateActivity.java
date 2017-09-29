@@ -27,6 +27,9 @@ import java.util.Date;
 
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.model.PlatFormActivity;
+import ccc.tcl.com.sprotappui.model.ResponseResult;
+import ccc.tcl.com.sprotappui.presenter.presenterimpl.ActivityPresenter;
+import ccc.tcl.com.sprotappui.ui.SportAppView;
 
 public class NewCreateActivity extends BaseActivity {
     TextView startTime;
@@ -36,17 +39,19 @@ public class NewCreateActivity extends BaseActivity {
     TextView detail;
     PlatFormActivity sport;
 
-    View dialogView;
+    View changeView;
+    View cancelView;
     TextView changeStart;
     TextView changeEnd;
     EditText changeReason;
-
+    EditText cancelReason;
     boolean set_start_time = true;
     ViewStub stub;
     LinearLayout ll = null;
     DatePicker picker;
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     private ActionSheetDialog logoutDialog;
+    ActivityPresenter presenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,17 +60,40 @@ public class NewCreateActivity extends BaseActivity {
         sport = intent.getParcelableExtra("data");
         Toolbar toolbar = (Toolbar) findViewById(R.id.news_details_toolbar);
         super.setToolBar(toolbar, " ",true);
-        startTime = (TextView) findViewById(R.id.start_time);
-        endTime = (TextView) findViewById(R.id.end_time);
-        distance = (TextView) findViewById(R.id.distance);
-        location = (TextView) findViewById(R.id.location);
-        detail =(TextView) findViewById(R.id.detail);
+        startTime = (TextView) findViewById(R.id.start_time_show);
+        endTime = (TextView) findViewById(R.id.end_time_show);
+        distance = (TextView) findViewById(R.id.distance_show);
+        location = (TextView) findViewById(R.id.location_show);
+        detail =(TextView) findViewById(R.id.detail_show);
 
         startTime.setText(sport.getStart_time());
         endTime.setText(sport.getEnd_time());
         distance.setText(sport.getDistance() + "KM");
         location.setText(sport.getAddress());
         detail.setText(sport.getDetails());
+
+        presenter = new ActivityPresenter();
+    }
+
+    @Override
+    protected void onResume() {
+        presenter.onCreate();
+        presenter.attachView(new SportAppView<ResponseResult>() {
+            @Override
+            public void onSuccess(ResponseResult response) {
+                if (response.isSuccess())
+                    Toast.makeText(NewCreateActivity.this,"操作成功",Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(NewCreateActivity.this,"操作失败"+response.getMsg(),Toast.LENGTH_SHORT).show();
+                //finish();
+            }
+
+            @Override
+            public void onRequestError(String msg) {
+                Toast.makeText(NewCreateActivity.this,"操作失败"+msg,Toast.LENGTH_SHORT).show();
+            }
+        });
+        super.onResume();
     }
 
     @Override
@@ -102,19 +130,33 @@ public class NewCreateActivity extends BaseActivity {
                         case 0:
                             logoutDialog.cancel();
                             initChangeDialog();
-                            new AlertDialog.Builder(NewCreateActivity.this).setView(dialogView)
+                            new AlertDialog.Builder(NewCreateActivity.this).setView(changeView)
                                     .setPositiveButton("确定", new DialogInterface.OnClickListener()
                                     {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            Toast.makeText(NewCreateActivity.this,startTime.getText()+"--"+endTime.getText(),Toast.LENGTH_SHORT).show();
+                                            presenter.delayActivity(sport.getAt_server_id()+"",changeReason.getText().toString(),startTime.getText().toString()
+                                                    ,endTime.getText().toString());
+                                            //Toast.makeText(NewCreateActivity.this,startTime.getText()+"--"+endTime.getText(),Toast.LENGTH_SHORT).show();
                                         }
                                     })
                                     .setNegativeButton("取消",null).create().show();
 
                             break;
                         case 1:
-                            //finish();
+                            logoutDialog.cancel();
+                            new AlertDialog.Builder(NewCreateActivity.this).setMessage(R.string.cancelActivity)
+                                    .setPositiveButton("确定", new DialogInterface.OnClickListener()
+                                    {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            presenter.cancelActivity(""+sport.getAt_server_id()," ");
+                                            //Toast.makeText(NewCreateActivity.this,startTime.getText()+"--"+endTime.getText(),Toast.LENGTH_SHORT).show();
+                                        }
+                                    })
+                                    .setNegativeButton("取消",null).create().show();
+
+
                         default:
                             break;
                     }
@@ -125,11 +167,11 @@ public class NewCreateActivity extends BaseActivity {
     }
 
     private void initChangeDialog(){
-        dialogView = getLayoutInflater().inflate(R.layout.dialog_time_change,null);
-        changeStart = (TextView) dialogView.findViewById(R.id.start_time);
-        changeEnd = (TextView) dialogView.findViewById(R.id.end_time);
-        stub = (ViewStub) dialogView.findViewById(R.id.viewStub);
-        changeReason = (EditText) dialogView.findViewById(R.id.reason);
+        changeView = getLayoutInflater().inflate(R.layout.dialog_time_change,null);
+        changeStart = (TextView) changeView.findViewById(R.id.start_time);
+        changeEnd = (TextView) changeView.findViewById(R.id.end_time);
+        stub = (ViewStub) changeView.findViewById(R.id.viewStub);
+        changeReason = (EditText) changeView.findViewById(R.id.reason);
         final InputMethodManager imm = (InputMethodManager) NewCreateActivity.this.getSystemService(INPUT_METHOD_SERVICE);
         changeStart.setText(startTime.getText());
         changeStart.setOnClickListener(new View.OnClickListener() {
@@ -205,5 +247,9 @@ public class NewCreateActivity extends BaseActivity {
                 });
             }
         });
+    }
+
+    private void initCancelDialog(){
+
     }
 }

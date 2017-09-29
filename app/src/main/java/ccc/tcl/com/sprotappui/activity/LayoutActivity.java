@@ -18,6 +18,7 @@ import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import ccc.tcl.com.sprotappui.R;
+import ccc.tcl.com.sprotappui.constant.URLConstant;
 import ccc.tcl.com.sprotappui.model.PlatFormActivity;
 import ccc.tcl.com.sprotappui.model.ResponseResult;
 import ccc.tcl.com.sprotappui.presenter.presenterimpl.ActivityPresenter;
@@ -34,16 +35,56 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
     TextView address;
     TextView distance;
     TextView details;
-    TagView join;
-    ActivityPresenter loadActivity;
+    TagView joinButton;
+    ActivityPresenter loadPresenter;
+    ActivityPresenter joinPresenter;
     PlatFormActivity activity;
+
+    private SportAppView load = new SportAppView<ResponseResult<PlatFormActivity>>() {
+        @Override
+        public void onSuccess(ResponseResult<PlatFormActivity> response) {
+            if (response.isSuccess()){
+                if (response.getType().equals("details"))
+                    handleActivityDetails(response.getResult());
+                if (response.getType().equals("join"))
+                    Toast.makeText(LayoutActivity.this, "已加入肯德基豪华午餐", Toast.LENGTH_SHORT).show();
+            }
+            else if (!response.isSuccess()) {
+                if (response.getType().equals("details"))
+                    Toast.makeText(LayoutActivity.this, "数据加载失败：" + response.getMsg(), Toast.LENGTH_SHORT).show();
+                if (response.getType().equals("join"))
+                    Toast.makeText(LayoutActivity.this, "参加活动失败", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        public void onRequestError(String msg) {
+            Toast.makeText(LayoutActivity.this,"网络连接失败:"+msg,Toast.LENGTH_SHORT).show();
+        }
+    };
+    private SportAppView join = new SportAppView<ResponseResult>() {
+        @Override
+        public void onSuccess(ResponseResult response) {
+            if (response.isSuccess())
+                Toast.makeText(LayoutActivity.this, "已加入肯德基豪华午餐", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(LayoutActivity.this, "参加活动失败" + response.getMsg(), Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onRequestError(String msg) {
+            Toast.makeText(LayoutActivity.this, "网络连接失败" + msg, Toast.LENGTH_SHORT).show();
+        }
+    };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.news_details_toolbar);
         super.setToolBar(toolbar, R.string.activity_main_title,true);
-        join = (TagView) findViewById(R.id.join);
+        joinButton = (TagView) findViewById(R.id.join);
         imageView = (CircleImageView) findViewById(R.id.circleImageView1);
         photo = (ImageView) findViewById(R.id.news_details_photo);
         name = (TextView) findViewById(R.id.item_fm_sport_name);
@@ -60,8 +101,8 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
         name.setText(activity.getName());
         Glide.with(this).load(activity.getImage_url()).into(photo);
         hotValue.setText(activity.getHot_value());
-        loadActivity = new ActivityPresenter();
-
+        loadPresenter = new ActivityPresenter();
+        joinPresenter = new ActivityPresenter();
 //        startTime.setText("111");
 //        endTime.setText("111");
 //        distance.setText("111");
@@ -72,24 +113,11 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     protected void onResume() {
-        loadActivity.onCreate();
-        loadActivity.attachView(new SportAppView<ResponseResult<PlatFormActivity>>() {
-            @Override
-            public void onSuccess(ResponseResult<PlatFormActivity> response) {
-                if (response.isSuccess()){
-                    handleActivityDetails(response.getResult());
-                }
-                else if (!response.isSuccess()) {
-                    Toast.makeText(LayoutActivity.this, "数据加载失败：" + response.getMsg(), Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onRequestError(String msg) {
-                Toast.makeText(LayoutActivity.this,"网络链接失败:"+msg,Toast.LENGTH_SHORT).show();
-            }
-        });
-        loadActivity.getActivity(String.valueOf(activity.getAt_server_id()));
+        loadPresenter.onCreate();
+        loadPresenter.attachView(load);
+        joinPresenter.onCreate();
+        joinPresenter.attachView(join);
+        loadPresenter.getActivity(String.valueOf(activity.getAt_server_id()));
         super.onResume();
     }
 
@@ -105,7 +133,7 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.join:
-
+                loadPresenter.joinActivity(String.valueOf(activity.getAt_server_id()));
                 break;
             default:
                 break;
@@ -157,13 +185,13 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     protected void onDestroy() {
-        loadActivity.onStop();
+        loadPresenter.onStop();
         UMShareAPI.get(this).release();
         super.onDestroy();
     }
 
     private void initView(){
-        join = (TagView) findViewById(R.id.join);
+        joinButton = (TagView) findViewById(R.id.join);
         imageView = (CircleImageView) findViewById(R.id.circleImageView1);
         photo = (ImageView) findViewById(R.id.news_details_photo);
         name = (TextView) findViewById(R.id.item_fm_sport_name);
@@ -179,7 +207,7 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
         name.setText(activity.getName());
         Glide.with(this).load(activity.getImage_url()).into(photo);
         hotValue.setText(activity.getHot_value());
-        loadActivity = new ActivityPresenter();
+        loadPresenter = new ActivityPresenter();
 
 //        Resources resources = getResources();
 //        Drawable[] drawables = new Drawable[4];

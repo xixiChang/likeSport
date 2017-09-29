@@ -140,7 +140,7 @@ public class FinishCreateActivity extends BaseActivity {
                     platFormActivity.setDistance(Integer.parseInt(distance.getText().toString()));
                     platFormActivity.setNotes(note.getText().toString());
                     ImageUrl = response.getResult();
-                    //platFormActivity.setImage_url(response.getResult());
+                    platFormActivity.setImage_url(response.getResult());
                     uploadActivity.uploadActivity(platFormActivity);
                     Toast.makeText(FinishCreateActivity.this,"图片上传成功",Toast.LENGTH_SHORT).show();
                 }
@@ -163,8 +163,7 @@ public class FinishCreateActivity extends BaseActivity {
                 if (response.isSuccess()){
                     Intent intent = new Intent(FinishCreateActivity.this,NewCreateActivity.class);
                     Bundle data = new Bundle();
-                    if (ImageUrl != null)
-                        platFormActivity.setImage_url(ImageUrl);
+
                     data.putParcelable("data",platFormActivity);
                     intent.putExtras(data);
                     startActivity(intent);

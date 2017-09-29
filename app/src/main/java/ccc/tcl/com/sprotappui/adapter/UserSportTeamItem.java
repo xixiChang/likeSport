@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.flyco.labelview.LabelView;
 
 import org.w3c.dom.Text;
@@ -51,7 +52,8 @@ public class UserSportTeamItem extends RecyclerView.Adapter<UserSportTeamItem.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.icon.setImageResource(Integer.parseInt(data.get(position).getImage_url()));
+        Glide.with(holder.itemView).load(data.get(position).getImage_url()).into(holder.icon);
+        //holder.icon.setImageResource(Integer.parseInt(data.get(position).getImage_url()));
         holder.name.setText(data.get(position).getName());
         holder.status.setText(data.get(position).getStatus());
         holder.time.setText(data.get(position).getStart_time()+" - "+data.get(position).getEnd_time());

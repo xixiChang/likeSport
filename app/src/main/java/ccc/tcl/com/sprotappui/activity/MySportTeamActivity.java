@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,7 +22,10 @@ import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.adapter.UserSportTeamItem;
 import ccc.tcl.com.sprotappui.customui.ToolBar;
 import ccc.tcl.com.sprotappui.model.PlatFormActivity;
+import ccc.tcl.com.sprotappui.model.ResponseResult;
 import ccc.tcl.com.sprotappui.model.UserSport;
+import ccc.tcl.com.sprotappui.presenter.presenterimpl.ActivityPresenter;
+import ccc.tcl.com.sprotappui.ui.SportAppView;
 
 import static ccc.tcl.com.sprotappui.R.id.toolbar;
 
@@ -31,18 +35,44 @@ public class MySportTeamActivity extends BaseActivity {
     private RecyclerView recycler;
     private RelativeLayout layout;
     private ImageView noDataImage;
-    private List<PlatFormActivity> sports;
-
+    private List<PlatFormActivity> sports = new ArrayList<>();
+    private UserSportTeamItem adapter;
+    ActivityPresenter presenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_sport_team);
         toolBar = (ToolBar) findViewById(toolbar);
         super.setToolBar(toolBar, R.string.user_sport_team, true);
+        adapter = new UserSportTeamItem(sports);
         initView();
     }
 
+    @Override
+    protected void onResume() {
+        presenter.onCreate();
+        presenter.attachView(new SportAppView<ResponseResult<List<PlatFormActivity>>>() {
+            @Override
+            public void onSuccess(ResponseResult<List<PlatFormActivity>> response) {
+                if (response.isSuccess()){
+                    sports.clear();
+                    sports.addAll(response.getResult());
+                    adapter.notifyDataSetChanged();
+                }
+                else
+                    Toast.makeText(MySportTeamActivity.this,"获取数据失败"+response.getMsg(),Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onRequestError(String msg) {
+                Toast.makeText(MySportTeamActivity.this,"网络连接失败"+msg,Toast.LENGTH_SHORT).show();
+            }
+        });
+        super.onResume();
+    }
+
     private void initView() {
+        presenter = new ActivityPresenter();
         noDataImage = (ImageView) findViewById(R.id.no_data_image);
         recycler = (RecyclerView) findViewById(R.id.recycler);
         layout = (RelativeLayout) findViewById(R.id.no_data_layout);
@@ -55,10 +85,13 @@ public class MySportTeamActivity extends BaseActivity {
     }
 
     private void showRecycler() {
-        initData();
+        presenter.getMyActivity();
+        //initData();
+        if (sports.isEmpty())
+            return;
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context,
                 LinearLayoutManager.VERTICAL, false);
-        final UserSportTeamItem adapter = new UserSportTeamItem(sports);
+
         adapter.setListener(new UserSportTeamItem.OnRecyclerViewItemClickListener() {
             @Override
             public void onClick(View view, int position) {
@@ -84,7 +117,7 @@ public class MySportTeamActivity extends BaseActivity {
     }
 
     private void initData() {
-        sports = new ArrayList<>();
+
         PlatFormActivity userSport;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
