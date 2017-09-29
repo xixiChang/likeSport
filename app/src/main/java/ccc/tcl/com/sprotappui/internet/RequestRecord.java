@@ -39,7 +39,7 @@ public interface RequestRecord {
      */
     @POST(value = Record_Query_Sum)
     @FormUrlEncoded
-    Observable<ResponseResult<Map<String, String>>> getAllSum();
+    Observable<ResponseResult<Map<String, String>>> getAllSum(@Field("u_id") String user_id);
 
 
     /**
@@ -48,17 +48,15 @@ public interface RequestRecord {
      * @return list
      */
     @POST(value = Record_Query_Month)
-    @FormUrlEncoded
     Observable<ResponseResult<List<Map<String, String>>>> getByMonthly();
 
 
     /**
-     * 获取用户历史记录的步数,按月分组
+     * 获取用户历史记录的步数,按周分组
      * map key:week, step
      * @return list
      */
     @POST(value = Record_Query_Week)
-    @FormUrlEncoded
     Observable<ResponseResult<List<Map<String, String>>>> getByWeekly();
 
 

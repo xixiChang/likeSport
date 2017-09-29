@@ -6,6 +6,8 @@ import android.support.multidex.MultiDexApplication;
 
 import com.alibaba.mobileim.YWAPI;
 import com.alibaba.wxlib.util.SysUtil;
+import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
+import com.lcodecore.tkrefreshlayout.header.SinaRefreshView;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 
@@ -37,6 +39,8 @@ public class App extends MultiDexApplication {
         }
         initIMKit();
         initUmeng();
+
+        TwinklingRefreshLayout.setDefaultHeader(SinaRefreshView.class.getName());
     }
 
     private String getBaseData(SharedPreferences s) {

@@ -32,7 +32,10 @@ public class AuthInterceptor implements Interceptor {
 
         Request.Builder requestBuilder = original.newBuilder()
                 .header("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
-                .header("Connection", "keep-alive");
+                .header("Connection", "keep-alive")
+                .header("user_id", App.userInfo.getId())
+                .header("session", App.userInfo.getSession());
+
 
         if (original.body() instanceof FormBody || original.body() == null) {
             FormBody.Builder newFormBody = new FormBody.Builder();

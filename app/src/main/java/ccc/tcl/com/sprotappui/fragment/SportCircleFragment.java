@@ -3,8 +3,6 @@ package ccc.tcl.com.sprotappui.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+
+import com.lcodecore.tkrefreshlayout.IHeaderView;
+import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
+import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
+import com.lcodecore.tkrefreshlayout.header.SinaRefreshView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,11 +31,37 @@ import ccc.tcl.com.sprotappui.ui.SportAppView;
 
 public class SportCircleFragment extends Fragment {
 
+    private static final String TAG = "SportCircleFragment";
+
+
+    private TwinklingRefreshLayout mPullToRefreshView;
     private RecyclerView recyclerView;
     private List<PlatFormActivity> platFormActivityList = new ArrayList<>();
     private Context context;
     private String mTitle;
     private FMSportItem adapter;
+    private ActivityPresenter activityPresenter;
+
+    private SportAppView<ResponseResult<List<PlatFormActivity>>> appView = new SportAppView<ResponseResult<List<PlatFormActivity>>>() {
+        @Override
+        public void onSuccess(ResponseResult<List<PlatFormActivity>> response) {
+            mPullToRefreshView.finishRefreshing();
+            if (response.isSuccess()){
+                platFormActivityList.clear();
+                platFormActivityList .addAll(response.getResult());
+                adapter.notifyDataSetChanged();
+                Log.d(TAG, "onSuccess: " + platFormActivityList.size());
+            }
+            else
+                Log.d(TAG, "onSuccess: msg>>>>" + response.getMsg());
+        }
+
+        @Override
+        public void onError(String msg) {
+            Log.e(TAG, "onError: " + msg );
+        }
+    };
+
     private ActivityPresenter downloadActivity;
     public SportCircleFragment() {
     }
@@ -42,15 +72,18 @@ public class SportCircleFragment extends Fragment {
         return sf;
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = getContext();
 
         initData();
+        activityPresenter = new ActivityPresenter();
     }
 
+    /**
+     * fragment 生命周期
+     */
     @Override
     public void onResume() {
         downloadActivity = new ActivityPresenter();
@@ -74,6 +107,9 @@ public class SportCircleFragment extends Fragment {
             }
         });
         super.onResume();
+        activityPresenter.onCreate();
+        activityPresenter.attachView(appView);
+        activityPresenter.getAll();
     }
 
     private void initData() {
@@ -96,7 +132,7 @@ public class SportCircleFragment extends Fragment {
 
     private void initView(View view) {
         recyclerView = (RecyclerView) view.findViewById(R.id.fm_sport_recycler_view);
-
+        mPullToRefreshView = (TwinklingRefreshLayout) view.findViewById(R.id.fg_sport_circle_pull_to_refresh);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL, false);
         adapter = new FMSportItem(platFormActivityList);
@@ -112,6 +148,14 @@ public class SportCircleFragment extends Fragment {
         });
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
+
+        mPullToRefreshView.setEnableLoadmore(false);
+        mPullToRefreshView.setOnRefreshListener(new RefreshListenerAdapter() {
+            @Override
+            public void onRefresh(TwinklingRefreshLayout refreshLayout) {
+                activityPresenter.getAll();
+            }
+        });
 
     }
     public void update(){

@@ -29,8 +29,8 @@ public class RecordPresenter extends BasePresenter {
         mCompositeSubscription.add(subscribeData());
     }
 
-    public void getAllSum(){
-        resultObservable = (Observable) requestRecord.getAllSum();
+    public void getAllSum(String user_id){
+        resultObservable = (Observable) requestRecord.getAllSum(user_id);
         mCompositeSubscription.add(subscribeData());
     }
 
