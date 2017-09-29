@@ -67,6 +67,11 @@
         <activity android:name=".activity.AuthoritySettingActivity"></activity>
         <activity android:name=".activity.TraceRecordActivity" />
 
+        <service android:name="ccc.tcl.com.sprotappui.service.StepService"
+            android:enabled="true"
+            android:exported="true">
+        </service>
+
         <!--百度地图SDK申请的KEY，要和应用的SHA1对应-->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
