@@ -87,6 +87,11 @@ public class ActivityPresenter extends BasePresenter {
     }
 
 
+    public void getAllByPage(int current_size){
+        resultObservable = (Observable) requestActivity.getAllByPage(current_size);
+        mCompositeSubscription.add(subscribeData());
+    }
+
     /**
      * users = platformActivity.getJoiner
      * @param users
