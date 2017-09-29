@@ -11,11 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
-import com.lcodecore.tkrefreshlayout.IHeaderView;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
-import com.lcodecore.tkrefreshlayout.header.SinaRefreshView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +29,8 @@ import ccc.tcl.com.sprotappui.ui.SportAppView;
 public class SportCircleFragment extends Fragment {
 
     private static final String TAG = "SportCircleFragment";
+    private static final String Request_Type_More = "onLoadMore";
+    private static final String Request_Type_Flush = "onRefresh";
 
 
     private TwinklingRefreshLayout mPullToRefreshView;
@@ -46,9 +45,21 @@ public class SportCircleFragment extends Fragment {
         @Override
         public void onSuccess(ResponseResult<List<PlatFormActivity>> response) {
             mPullToRefreshView.finishRefreshing();
+            mPullToRefreshView.finishLoadmore();
             if (response.isSuccess()){
-                platFormActivityList.clear();
-                platFormActivityList .addAll(response.getResult());
+                /**
+                 * 刷新
+                 */
+                if (Request_Type_Flush.equals(response.getType())){
+                    platFormActivityList.clear();
+                    platFormActivityList .addAll(response.getResult());
+                }
+                /**
+                 * 加载更多
+                 */
+                else if (Request_Type_More.equals(response.getType())){
+                    platFormActivityList .addAll(response.getResult());
+                }
                 adapter.notifyDataSetChanged();
                 Log.d(TAG, "onSuccess: " + platFormActivityList.size());
             }
@@ -123,13 +134,19 @@ public class SportCircleFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
 
-        mPullToRefreshView.setEnableLoadmore(false);
+
         mPullToRefreshView.setOnRefreshListener(new RefreshListenerAdapter() {
             @Override
             public void onRefresh(TwinklingRefreshLayout refreshLayout) {
-                activityPresenter.getAll();
+                activityPresenter.getAllByPage(0);
+            }
+
+            @Override
+            public void onLoadMore(TwinklingRefreshLayout refreshLayout) {
+                activityPresenter.getAllByPage(platFormActivityList.size());
             }
         });
+
 
     }
 
