@@ -3,6 +3,7 @@ package ccc.tcl.com.sprotappui.internet;
 import java.util.List;
 import java.util.Map;
 
+import ccc.tcl.com.sprotappui.data.UserInfo;
 import ccc.tcl.com.sprotappui.model.PlatFormActivity;
 import ccc.tcl.com.sprotappui.model.ResponseResult;
 import retrofit2.http.Body;
@@ -59,5 +60,5 @@ public interface RequestActivity {
 
     @POST(value = Activity_GetJoinerInfo)
     @FormUrlEncoded
-    Observable<ResponseResult> getJoinerInfo(@Field("userIdList") String users);
+    Observable<ResponseResult<List<UserInfo>>> getJoinerInfo(@Field("userIdList") String users);
 }

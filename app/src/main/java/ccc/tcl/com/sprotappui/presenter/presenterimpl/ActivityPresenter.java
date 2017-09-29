@@ -90,6 +90,7 @@ public class ActivityPresenter extends BasePresenter {
     /**
      * users = platformActivity.getJoiner
      * @param users
+     * @return List<UserInfo> userinfo 仅有id,image_url,name,im_uid字段，　其余为空
      */
     public void getJoinerInfo(String users){
         resultObservable = (Observable) requestActivity.getJoinerInfo(users);
