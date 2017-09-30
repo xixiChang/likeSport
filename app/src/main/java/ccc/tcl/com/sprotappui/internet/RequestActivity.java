@@ -48,7 +48,8 @@ public interface RequestActivity {
     Observable<ResponseResult<PlatFormActivity>> getActivity(@Field("at_server_id") String at_server_id);
 
     @POST(value = Activity_My)
-    Observable<ResponseResult<List<PlatFormActivity>>> myActivity();
+    @FormUrlEncoded
+    Observable<ResponseResult<List<PlatFormActivity>>> myActivity(@Field("user_id") String user_id);
 
 
     @POST(value = Activity_Join)

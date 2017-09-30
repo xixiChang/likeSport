@@ -49,4 +49,9 @@ public class UserPresenter extends BasePresenter {
         mCompositeSubscription.add(subscribeData());
     }
 
+    public void getUserInfo(String user_id){
+        resultObservable = (Observable) requestUser.getUserInfo(user_id);
+        mCompositeSubscription.add(subscribeData());
+    }
+
 }

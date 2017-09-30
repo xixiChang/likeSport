@@ -42,10 +42,13 @@ public class AuthInterceptor implements Interceptor {
         if (original.body() instanceof FormBody ) {
             FormBody.Builder newFormBody = new FormBody.Builder();
             FormBody oldFormBody = (FormBody) original.body();
+            boolean hasUserId = false;
             for (int i = 0; i < oldFormBody.size(); i++) {
+                if (oldFormBody.encodedName(0).equals("user_id"))
+                    hasUserId = true;
                 newFormBody.addEncoded(oldFormBody.encodedName(i), oldFormBody.encodedValue(i));
             }
-            if (App.userInfo.getId() != null)
+            if (App.userInfo.getId() != null && !hasUserId)
                 newFormBody.add("user_id", App.userInfo.getId());
             requestBuilder.method(original.method(), newFormBody.build());
         }

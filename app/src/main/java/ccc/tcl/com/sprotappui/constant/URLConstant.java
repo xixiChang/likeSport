@@ -13,6 +13,7 @@ public final class URLConstant {
     public final static String User_Register = "/user/register";
     public final static String User_Login = "/user/login";
     public final static String User_Auth_Code = "/user/getauthcode";
+    public final static String User_Get_Info = "/user/getuserinfo";
 
 
     /**
@@ -46,6 +47,7 @@ public final class URLConstant {
     public final static String Record_Query_Details = "/record/query/details";
     public final static String Record_Query_MAX = "/record/query/max";
     public final static String Record_Query_MaxForDay = "/record/query/maxforday";
+    public final static String Record_Query_TypeSum = "/record/query/gettypesum";
 
     public final static String Record_Rating = "/record/rating";
 

@@ -12,6 +12,7 @@ import retrofit2.http.POST;
 import rx.Observable;
 
 import static ccc.tcl.com.sprotappui.constant.URLConstant.User_Auth_Code;
+import static ccc.tcl.com.sprotappui.constant.URLConstant.User_Get_Info;
 import static ccc.tcl.com.sprotappui.constant.URLConstant.User_Login;
 import static ccc.tcl.com.sprotappui.constant.URLConstant.User_Register;
 
@@ -33,4 +34,8 @@ public interface RequestUser {
     @POST(value = User_Auth_Code)
     @FormUrlEncoded
     Observable<ResponseResult<UserInfo>> userAuthCode(@Field("phone") String phoneNum);
+
+    @POST(value = User_Get_Info)
+    @FormUrlEncoded
+    Observable<ResponseResult<UserInfo>> getUserInfo(@Field("user_id") String user_id);
 }

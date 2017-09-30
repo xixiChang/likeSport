@@ -70,4 +70,9 @@ public class RecordPresenter extends BasePresenter {
         resultObservable = (Observable) requestRecord.getRating();
         mCompositeSubscription.add(subscribeData());
     }
+
+    public void getTypeSum(String user_id){
+        resultObservable = (Observable) requestRecord.getTypeSum(user_id);
+        mCompositeSubscription.add(subscribeData());
+    }
 }
