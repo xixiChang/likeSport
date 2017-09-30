@@ -9,7 +9,7 @@
     android:background="@color/grey_background">
     <include layout="@layout/toolbar_general"></include>
     <android.support.v7.widget.SwitchCompat
-        android:id="@+id/switch1"
+        android:id="@+id/camera"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/camera"
@@ -21,7 +21,7 @@
         android:layout_marginTop="2px"/>
 
     <android.support.v7.widget.SwitchCompat
-        android:id="@+id/switch2"
+        android:id="@+id/storage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/storage"
@@ -33,7 +33,7 @@
         android:layout_marginTop="2px"/>
 
     <android.support.v7.widget.SwitchCompat
-        android:id="@+id/switch3"
+        android:id="@+id/location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/position"
@@ -45,7 +45,7 @@
         android:layout_marginTop="2px"/>
 
     <android.support.v7.widget.SwitchCompat
-        android:id="@+id/switch4"
+        android:id="@+id/vibrate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/vibrate"

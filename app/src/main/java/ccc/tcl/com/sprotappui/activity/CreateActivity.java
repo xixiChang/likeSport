@@ -3,19 +3,28 @@ package ccc.tcl.com.sprotappui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.model.PlatFormActivity;
 
-public class CreateActivity extends BaseActivity {
-    PlatFormActivity platFormActivity;
-    EditText name;
-    EditText joiner_limit;
-    EditText detail;
+public class CreateActivity extends BaseActivity{
+    private PlatFormActivity platFormActivity;
+    private EditText name;
+    private EditText joiner_limit;
+    private EditText detail;
+    private TextView nameTextCount;
+    private TextView detailTextCount;
+
+    private final int NAME_TEXT_MAX_COUNT = 10;
+    private final int DETAILS_MAX_COUNT = 40;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,9 +34,8 @@ public class CreateActivity extends BaseActivity {
         Intent intent = getIntent();
         platFormActivity = intent.getParcelableExtra("data");
         Toast.makeText(this, platFormActivity.getImage_url(),Toast.LENGTH_SHORT).show();
-        name = (EditText) findViewById(R.id.name);
-        joiner_limit = (EditText) findViewById(R.id.joiner_limit);
-        detail = (EditText) findViewById(R.id.detail);
+        initView();
+
     }
 
     @Override
@@ -58,5 +66,78 @@ public class CreateActivity extends BaseActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private TextWatcher nameWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            nameTextCount.setText(count + "/" + NAME_TEXT_MAX_COUNT);
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if (s.length() > NAME_TEXT_MAX_COUNT) {
+                s.delete(s.length() - 1, s.length());
+                name.setText(s);
+                name.setSelection(NAME_TEXT_MAX_COUNT);
+            }
+        }
+    };
+
+    private TextWatcher detailWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            detailTextCount.setText(count + "/" + DETAILS_MAX_COUNT);
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if (s.length() > DETAILS_MAX_COUNT) {
+                s.delete(s.length() - 1, s.length());
+                detail.setText(s);
+                detail.setSelection(DETAILS_MAX_COUNT);
+            }
+        }
+    };
+    private TextWatcher joinWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if (s.length() > 3) {
+                s.delete(s.length() - 1, s.length());
+                joiner_limit.setText(s);
+                joiner_limit.setSelection(3);
+            }
+        }
+    };
+
+    private void initView(){
+        name = (EditText) findViewById(R.id.name);
+        joiner_limit = (EditText) findViewById(R.id.joiner_limit);
+        detail = (EditText) findViewById(R.id.detail);
+        nameTextCount = (TextView) findViewById(R.id.name_text_count);
+        detailTextCount = (TextView) findViewById(R.id.details_text_count);
+        name.addTextChangedListener(nameWatcher);
+        detail.addTextChangedListener(detailWatcher);
+        joiner_limit.addTextChangedListener(joinWatcher);
     }
 }

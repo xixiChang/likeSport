@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="0dp"
-    android:paddingLeft="0dp"
-    android:paddingRight="0dp"
-    android:paddingTop="0dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
     android:orientation="vertical"
     tools:context="ccc.tcl.com.sprotappui.activity.FinishCreateActivity"
     android:weightSum="1">
@@ -34,6 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            android:textSize="@dimen/activity_content_size_mid"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
         <TextView
             android:layout_width="wrap_content"
@@ -47,6 +48,7 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:layout_alignParentEnd="true"
+            android:textSize="@dimen/activity_content_size_mid"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
     </RelativeLayout>
 
@@ -71,16 +73,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
-        android:paddingBottom="10dp"
+
         android:paddingStart="10dp"
         android:inputType="text"
         android:textCursorDrawable="@drawable/cursor_theme"
-
         android:gravity="start"
-        android:hint="40字以内"
+        android:hint="20字以内"
         android:backgroundTint="@color/springgreen"
         android:lines="?android:attr/scrollbarDefaultDelayBeforeFade" />
-
+    <TextView
+        android:id="@+id/address_text_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:textAlignment="viewEnd"
+        android:text="0/20"/>
     <TextView
         android:text="@string/day_distance"
         android:layout_width="match_parent"
@@ -99,7 +106,7 @@
         android:padding="20dp"
         android:textCursorDrawable="@drawable/cursor_theme"
         android:backgroundTint="@color/springgreen"
-        android:hint="20字以内"
+        android:hint="10000以内"
         tools:numeric="integer"
         android:inputType="number" />
     <TextView
@@ -122,6 +129,11 @@
         android:backgroundTint="@color/springgreen"
         android:hint="20字以内"
         android:layout_weight="0.36" />
-
+    <TextView
+        android:id="@+id/note_text_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="viewEnd"
+        android:text="0/40"/>
 
 </LinearLayout>

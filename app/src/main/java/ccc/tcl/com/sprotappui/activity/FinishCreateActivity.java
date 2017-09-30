@@ -3,6 +3,8 @@ package ccc.tcl.com.sprotappui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,7 +33,9 @@ public class FinishCreateActivity extends BaseActivity {
     TextView startTime;
     TextView endTime;
     TextView time_text;
-    EditText location;
+    TextView addressTextCount;
+    TextView noteTextCount;
+    EditText address;
     EditText distance;
     EditText note;
     ViewStub stub;
@@ -42,12 +46,72 @@ public class FinishCreateActivity extends BaseActivity {
     ActivityPresenter uploadActivity;
     int[] location_datePicker = new int[2];
     int[] start_textview = new int[2];
+    private int ADDRESS_MAX_COUNT = 20;
+    private int NOTE_MAX_COUNT = 40;
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     boolean set_start_time = true;
     String ImageUrl;
     private static final String TAG = "FinishCreateActivity";
+    private TextWatcher addressWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+        }
 
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            addressTextCount.setText(count + "/" + ADDRESS_MAX_COUNT);
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if (s.length() > ADDRESS_MAX_COUNT) {
+                s.delete(s.length() - 1, s.length());
+                address.setText(s);
+                address.setSelection(ADDRESS_MAX_COUNT);
+            }
+        }
+    };
+    private TextWatcher noteWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            noteTextCount.setText(count + "/" + NOTE_MAX_COUNT);
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if (s.length() > NOTE_MAX_COUNT) {
+                s.delete(s.length() - 1, s.length());
+                note.setText(s);
+                note.setSelection(NOTE_MAX_COUNT);
+            }
+        }
+    };
+    private TextWatcher distanceWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if (s.length() > 4) {
+                s.delete(s.length() - 1, s.length());
+                distance.setText(s);
+                distance.setSelection(4);
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +126,15 @@ public class FinishCreateActivity extends BaseActivity {
         final Intent intent0= getIntent();
         platFormActivity = intent0.getParcelableExtra("data");
         time_text = (TextView) findViewById(R.id.textView);
-        location = (EditText) findViewById(R.id.location);
+        address = (EditText) findViewById(R.id.location);
         distance = (EditText) findViewById(R.id.distance);
         note = (EditText) findViewById(R.id.note);
         startTime = (TextView) findViewById(R.id.start_time);
+        addressTextCount = (TextView) findViewById(R.id.address_text_count);
+        noteTextCount = (TextView) findViewById(R.id.note_text_count);
+        address.addTextChangedListener(addressWatcher);
+        note.addTextChangedListener(noteWatcher);
+        distance.addTextChangedListener(distanceWatcher);
         startTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,7 +171,8 @@ public class FinishCreateActivity extends BaseActivity {
             }
 
         });
-        final String currTime = format.format(new Date().getTime());
+        final Date curr = new Date();
+        final String currTime = format.format(curr.getTime());
         startTime.setText(currTime);
         endTime.setText(currTime);
         stub = (ViewStub) findViewById(R.id.viewStub);
@@ -122,6 +192,7 @@ public class FinishCreateActivity extends BaseActivity {
                             endTime.setText(format.format(calendar.getTime()));
                     }
                 });
+                picker.setMinDate(curr.getTime());
             }
         });
     }
@@ -136,7 +207,7 @@ public class FinishCreateActivity extends BaseActivity {
                 if (response.isSuccess()){
                     platFormActivity.setStart_time(startTime.getText().toString());
                     platFormActivity.setEnd_time(endTime.getText().toString());
-                    platFormActivity.setAddress(location.getText().toString());
+                    platFormActivity.setAddress(address.getText().toString());
                     platFormActivity.setDistance(Integer.parseInt(distance.getText().toString()));
                     platFormActivity.setNotes(note.getText().toString());
                     ImageUrl = response.getResult();
@@ -167,7 +238,7 @@ public class FinishCreateActivity extends BaseActivity {
                     data.putParcelable("data",platFormActivity);
                     intent.putExtras(data);
                     startActivity(intent);
-                    //finish();
+                    finish();
                     Log.d(TAG, "onSuccess: "+response.getMsg());
                     Toast.makeText(FinishCreateActivity.this,"数据上传成功",Toast.LENGTH_SHORT).show();
                 }
@@ -193,7 +264,7 @@ public class FinishCreateActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.finish:
-                String locationText = location.getText().toString();
+                String locationText = address.getText().toString();
                 String distanceText = distance.getText().toString();
                 if (locationText.isEmpty() || distanceText.isEmpty()) {
                     break;
