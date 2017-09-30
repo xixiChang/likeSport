@@ -25,6 +25,7 @@ public final class URLConstant {
     public static final String Activity_My = "/activity/getMyActivity";
     public static final String Activity_Join = "/activity/join";//
     public static final String Activity_All = "/activity/all";
+    public static final String Activity_AllByPage = "/activity/allByPage";
     public static final String Activity_GetJoinerInfo = "/activity/getJoinerInfo";//
 
     /**

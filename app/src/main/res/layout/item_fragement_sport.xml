@@ -14,6 +14,7 @@
         android:id="@+id/item_fm_sport_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scaleType="fitXY"
         android:src="@drawable/photo1"/>
 
     <RelativeLayout
@@ -21,7 +22,7 @@
         android:layout_height="wrap_content"
         android:background="@color/skyblue"
         android:alpha="0.6"
-        android:padding="6dp"
+        android:padding="2dp"
         android:layout_gravity="bottom">
         <TextView
             android:id="@+id/item_fm_sport_name"
@@ -35,7 +36,7 @@
         <TextView
             android:id="@+id/item_fm_sport_hot_text"
             android:layout_below="@+id/item_fm_sport_name"
-            android:layout_marginTop="@dimen/page_content_margin_top"
+            android:layout_marginTop="@dimen/activity_vertical_margin_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="热度:"/>
@@ -43,7 +44,7 @@
             android:id="@+id/item_fm_sport_hot_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/page_content_margin_top"
+            android:layout_marginTop="@dimen/activity_vertical_margin_small"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_below="@+id/item_fm_sport_name"
             android:layout_toRightOf="@+id/item_fm_sport_hot_text"
@@ -55,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="@dimen/page_content_margin_top"
+            android:layout_marginTop="@dimen/activity_vertical_margin_small"
             android:layout_below="@+id/item_fm_sport_name"
             android:textSize="@dimen/activity_content_size_mid"
             android:text="30小时"/>
@@ -64,20 +65,20 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/item_fm_sport_left_time"
             android:layout_below="@+id/item_fm_sport_name"
-            android:layout_marginTop="@dimen/page_content_margin_top"
+            android:layout_marginTop="@dimen/activity_vertical_margin_small"
             android:layout_marginRight="5dp"
             android:text="距离活动结束还有:"/>
     </RelativeLayout>
 
-    <!--<com.flyco.labelview.LabelView-->
-        <!--xmlns:lv="http://schemas.android.com/apk/res-auto"-->
-        <!--android:id="@+id/item_fm_sport_is_new"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="left|top"-->
-        <!--lv:lv_background_color="#3F9FE0"-->
-        <!--lv:lv_text="Hot"-->
-        <!--lv:lv_text_size="12sp"/>-->
+    <com.flyco.labelview.LabelView
+        xmlns:lv="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/item_fm_sport_is_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|top"
+        lv:lv_background_color="@color/app_red"
+        lv:lv_text="NEW"
+        lv:lv_text_size="12sp"/>
 
 
 </android.support.v7.widget.CardView>

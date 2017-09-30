@@ -14,6 +14,7 @@ import retrofit2.http.POST;
 import rx.Observable;
 
 import static ccc.tcl.com.sprotappui.constant.URLConstant.Activity_All;
+import static ccc.tcl.com.sprotappui.constant.URLConstant.Activity_AllByPage;
 import static ccc.tcl.com.sprotappui.constant.URLConstant.Activity_Cancel;
 import static ccc.tcl.com.sprotappui.constant.URLConstant.Activity_Delay;
 import static ccc.tcl.com.sprotappui.constant.URLConstant.Activity_Details;
@@ -56,9 +57,10 @@ public interface RequestActivity {
 
 
     @POST(value = Activity_All)
+    @Deprecated
     Observable<ResponseResult<List<PlatFormActivity>>> getAll();
 
-    @POST(value = Activity_All)
+    @POST(value = Activity_AllByPage)
     @FormUrlEncoded
     Observable<ResponseResult<List<PlatFormActivity>>> getAllByPage(@Field("current_size") int current_size);
 

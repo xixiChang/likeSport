@@ -1,8 +1,11 @@
 package ccc.tcl.com.sprotappui.activity;
 
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -20,6 +23,14 @@ import static ccc.tcl.com.sprotappui.utils.Util.isShouldHideInput;
  */
 
 public class BaseActivity extends AppCompatActivity {
+
+    protected PermissionResult result;
+    protected boolean hasRequestPermission = false;
+
+    protected interface PermissionResult{
+        void onGranted(String name, int code);
+        void onDenied(int code);
+    }
 
     /**
      *
@@ -97,5 +108,37 @@ public class BaseActivity extends AppCompatActivity {
             getWindow().setNavigationBarColor(Color.TRANSPARENT);
             //getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
+    }
+
+
+
+    protected void initPM(PermissionResult result){
+        this.result = result;
+    }
+
+
+    protected boolean checkPermission(String name){
+        return ContextCompat.checkSelfPermission(this,
+                name) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    protected void requestPermission(String name, int code){
+        ActivityCompat.requestPermissions(BaseActivity.this, new String[]{name}, code);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (hasRequestPermission){
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                result.onGranted(permissions[0], requestCode);
+            else{
+                result.onDenied(requestCode);
+                //Toast.makeText(this, "你拒绝的应用权限", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        else
+            super.onRequestPermissionsResult(requestCode, permissions,  grantResults);
+
     }
 }

@@ -47,7 +47,7 @@ public class FinishCreateActivity extends BaseActivity {
     String ImageUrl;
     private static final String TAG = "FinishCreateActivity";
 
-
+    private String oriangal_image_url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +61,7 @@ public class FinishCreateActivity extends BaseActivity {
     private void initView(){
         final Intent intent0= getIntent();
         platFormActivity = intent0.getParcelableExtra("data");
+        oriangal_image_url = platFormActivity.getImage_url();
         time_text = (TextView) findViewById(R.id.textView);
         location = (EditText) findViewById(R.id.location);
         distance = (EditText) findViewById(R.id.distance);
@@ -144,8 +145,10 @@ public class FinishCreateActivity extends BaseActivity {
                     uploadActivity.uploadActivity(platFormActivity);
                     Toast.makeText(FinishCreateActivity.this,"图片上传成功",Toast.LENGTH_SHORT).show();
                 }
-                else
+                else{
+                    platFormActivity.setImage_url(oriangal_image_url);
                     Toast.makeText(FinishCreateActivity.this,"图片上传失败: "+response.getMsg(),Toast.LENGTH_SHORT).show();
+                }
 
             }
 
@@ -222,8 +225,6 @@ public class FinishCreateActivity extends BaseActivity {
             if (null!=ll)
                 ll.getLocationInWindow(location_datePicker);
             time_text.getLocationInWindow(start_textview);
-            Log.d("111", "dispatchTouchEvent: evY"+ev.getY());
-            Log.d("111", "dispatchTouchEvent: viewY"+location_datePicker[1]);
             if (ll != null && (ev.getY() >  ll.getY()+location_datePicker[1] || ev.getY() < start_textview[1]))
                 ll.setVisibility(View.GONE);
         }

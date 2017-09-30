@@ -12,6 +12,7 @@ public class UserInfo {
     private String session;
     private String image_url;
     private String im_uid;
+    private String retain;
     private int login_method = 2;
 
     public String getId() {
@@ -68,6 +69,14 @@ public class UserInfo {
 
     public void setIm_uid(String im_uid) {
         this.im_uid = im_uid;
+    }
+
+    public String getRetain() {
+        return retain;
+    }
+
+    public void setRetain(String retain) {
+        this.retain = retain;
     }
 
     public int getLogin_method() {

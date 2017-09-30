@@ -1,6 +1,7 @@
 package ccc.tcl.com.sprotappui.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -46,18 +47,18 @@ public class HomeActivity extends BaseActivity {
 
     private String[] mTitles = {"运动", "运动圈", "消息", "我的"};
     private int[] mIconUnselectIds = {
-            R.mipmap.table_run_click, R.mipmap.tab_speech_unselect,
-            R.mipmap.home_icon_message, R.mipmap.tab_more_unselect};
+            R.mipmap.table_run_unclick, R.mipmap.tab_circle_unclick,
+            R.mipmap.tab_message_unclick, R.mipmap.tab_mine_unclick};
     private int[] mIconSelectIds = {
-            R.mipmap.table_run_unclick, R.mipmap.tab_speech_select,
-            R.mipmap.tab_contact_select, R.mipmap.tab_more_select};
+            R.mipmap.table_run_click, R.mipmap.tab_circle_click,
+            R.mipmap.tab_message_click, R.mipmap.tab_mine_click};
 
     private View mDecorView;
     private ViewPager mViewPager;
     private CommonTabLayout mTabLayout;
     private Toolbar toolbar;
     private FragmentManager fragmentManager;
-    SportCircleFragment sportCircleFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,9 +84,8 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void initView() {
-        mFragments.add(SportFragment.getInstance("运动"));
-
-        sportCircleFragment = SportCircleFragment.getInstance("Switch ViewPager " + mTitles[0]);
+        mFragments.add(SportFragment.getInstance());
+        SportCircleFragment sportCircleFragment = SportCircleFragment.getInstance();
         mFragments.add(sportCircleFragment);
         if (mIMKit != null){
             mFragments.add(mIMKit.getConversationFragment());
@@ -223,8 +223,7 @@ public class HomeActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.more:
-                //sportCircleFragment.update();
-                //startActivity(new Intent(mContext, TestActivity.class));
+                startActivity(new Intent(mContext, TestActivity.class));
                 return true;
             default:
                 break;

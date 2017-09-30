@@ -1,33 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_cut"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="0dp"
-    android:paddingLeft="0dp"
-    android:paddingRight="0dp"
-    android:paddingTop="0dp"
     tools:context=".activity.PickPictureActivity"
     android:orientation="vertical">
+
     <include layout="@layout/toolbar_general"></include>
-    <ImageView
-        android:layout_width="131dp"
-        android:layout_height="119dp"
-        app:srcCompat="@mipmap/bg_pick_pic"
-        android:id="@+id/imageView2"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="70dp" />
-
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        app:srcCompat="@mipmap/ic_pick_pic"
-        android:id="@+id/imageView"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="115dp" />
 
 
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_marginTop="@dimen/activity_horizontal_margin_small"
+        android:layout_width="match_parent"
+        android:background="@color/gainsboro"
+        android:layout_height="200dp">
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/imageView"
+            android:src="@mipmap/ic_pick_pic"
+            android:layout_gravity="center" />
+    </FrameLayout>
 
-</FrameLayout>
+
+
+
+
+
+</LinearLayout>

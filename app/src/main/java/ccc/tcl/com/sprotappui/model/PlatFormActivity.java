@@ -4,7 +4,6 @@ package ccc.tcl.com.sprotappui.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 import ccc.tcl.com.sprotappui.App;
@@ -281,7 +280,8 @@ public class PlatFormActivity implements  Parcelable {
      * @return boolean
      */
     public boolean isNew() {
-        return (new Date().getTime() - Long.getLong(post_time)/(1000*60*60*24)) <= 72 ;
+        Date date = TimeTranslator.stringToDateTime(post_time);
+        return (new Date().getTime() - date.getTime())/(1000*60*60*24) <= 72 ;
     }
 
     /**

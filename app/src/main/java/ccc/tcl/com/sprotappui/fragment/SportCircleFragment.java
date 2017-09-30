@@ -26,6 +26,7 @@ import ccc.tcl.com.sprotappui.model.ResponseResult;
 import ccc.tcl.com.sprotappui.presenter.presenterimpl.ActivityPresenter;
 import ccc.tcl.com.sprotappui.ui.SportAppView;
 
+
 public class SportCircleFragment extends Fragment {
 
     private static final String TAG = "SportCircleFragment";
@@ -37,7 +38,6 @@ public class SportCircleFragment extends Fragment {
     private RecyclerView recyclerView;
     private List<PlatFormActivity> platFormActivityList = new ArrayList<>();
     private Context context;
-    private String mTitle;
     private FMSportItem adapter;
     private ActivityPresenter activityPresenter;
 
@@ -73,45 +73,35 @@ public class SportCircleFragment extends Fragment {
         }
     };
 
-
     public SportCircleFragment() {
     }
 
-    public static SportCircleFragment getInstance(String title) {
+    public static SportCircleFragment getInstance() {
         SportCircleFragment sf = new SportCircleFragment();
-        sf.mTitle = title;
         return sf;
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = getContext();
-
-        //initData();
         activityPresenter = new ActivityPresenter();
     }
 
     /**
      * fragment 生命周期
      */
+
     @Override
-    public void onResume() {
-        activityPresenter.attachView(appView);
-        super.onResume();
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         activityPresenter.onCreate();
+        activityPresenter.attachView(appView);
         activityPresenter.getAllByPage(0);
     }
 
     private void initData() {
 
-     //   downloadActivity.getAll();
-          platFormActivityList.add(new PlatFormActivity());
-//        platFormActivityList.add(new PlatFormActivity());
-//        platFormActivityList.add(new PlatFormActivity());
-//        platFormActivityList.add(new PlatFormActivity());
-//        platFormActivityList.add(new PlatFormActivity());
     }
 
     @Override

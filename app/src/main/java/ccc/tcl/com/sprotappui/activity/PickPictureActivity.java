@@ -1,14 +1,16 @@
 package ccc.tcl.com.sprotappui.activity;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -16,49 +18,71 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+import ccc.tcl.com.sprotappui.BuildConfig;
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.model.PlatFormActivity;
+import ccc.tcl.com.sprotappui.utils.PictureCutUtil;
 
-public class PickPictureActivity extends BaseActivity{
-    ImageView imageView;
-    ImageView imageView2;
-    private final String imagePath = Environment.getExternalStorageDirectory()+"/zz/images1.jpg";
+public class PickPictureActivity extends BaseActivity {
+    private static final String TAG = "PickPictureActivity";
+
+    private FrameLayout frameLayout;
+    private ImageView imageView;
+    private File file;
+    private String filename = System.currentTimeMillis() + ".jpg";
+    private Uri outputFileUri;
+    private Uri resultUri;
+
+    private PictureCutUtil pictureCutUtil;
+    private String imagePath = "storage/emulated/0/sportImage.jpg";
+
     private ActionSheetDialog pick_picture;
-    final int PHOTO_REQUEST_CUT = 0;
-    final int PHOTO_REQUEST_GALLERY = 1;
-    final int PHOTO_REQUEST_TAKE = 2;
+    private final int PHOTO_REQUEST_CUT = 0;
+    private final int PHOTO_REQUEST_GALLERY = 1;
+    private final int PHOTO_REQUEST_TAKE = 2;
+
+
+    private final int Request_Permission_CAMERA = 1695;
+    private final int Request_Permission_Write = 1696;
+    private final int Request_Permission_Read = 1697;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pick_picture);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        super.setToolBar(toolbar, R.string.create_activity, true);
+
         imageView = (ImageView) findViewById(R.id.imageView);
-        imageView .setOnClickListener(new View.OnClickListener() {
+        frameLayout = (FrameLayout) findViewById(R.id.frame_layout) ;
+        frameLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PopupWindow();
             }
         });
-        imageView2 = (ImageView) findViewById(R.id.imageView2);
-        imageView2 .setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                 PopupWindow();
-            }
-        });
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        super.setToolBar(toolbar, R.string.create_activity,true);
-        File tmpDir = new File(Environment.getExternalStorageDirectory() + "/zz"  );
-        if (!tmpDir.exists()){
-            tmpDir.mkdir();
-        }
+        pictureCutUtil = new PictureCutUtil(this);
+
+        initFile();
+        hasRequestPermission = true;
+        super.initPM(permissionResult);
+    }
+
+    private void initFile() {
+        resultUri =  Uri.parse("storage/emulated/0/sportImage.jpg");
     }
 
     @Override
@@ -69,7 +93,7 @@ public class PickPictureActivity extends BaseActivity{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 final AlertDialog.Builder builder = new AlertDialog.Builder(this).setMessage("确定要放弃创建吗");
                 builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -78,10 +102,10 @@ public class PickPictureActivity extends BaseActivity{
                         PickPictureActivity.this.finish();
                     }
                 });
-                builder.setNegativeButton("取消",null).create().show();
+                builder.setNegativeButton("取消", null).create().show();
                 break;
             case R.id.next:
-                Intent intent = new Intent(PickPictureActivity.this,CreateActivity.class);
+                Intent intent = new Intent(PickPictureActivity.this, CreateActivity.class);
                 PlatFormActivity platFormActivity = new PlatFormActivity();
                 platFormActivity.setImage_url(imagePath);
                 platFormActivity.setPublish_user_id(platFormActivity.getUser_id());
@@ -100,85 +124,113 @@ public class PickPictureActivity extends BaseActivity{
         switch (requestCode) {
             case PHOTO_REQUEST_GALLERY:
                 if (data != null)
-                    startPhotoZoom(data.getData(), 0);
+                    startPhotoZoom2(data.getData());
                 break;
             case PHOTO_REQUEST_CUT:
                 if (data != null) {
-                    setPicToView(data);
+                    setPicToView();
                     break;
                 }
                 break;
             case PHOTO_REQUEST_TAKE:
-//                if(data == null){
-//                    return;
-//                }else{
-                    //Bundle extras = data.getExtras();
-                    //if (extras != null){
-                        //获得拍的照片
-                        //Bitmap bm = extras.getParcelable("data");
-                        File fphoto = new File(Environment.getExternalStorageDirectory()+File.separator+"/zz/images1.jpg");
-                        startPhotoZoom(Uri.fromFile(fphoto),0);
-                    //}
-                //}
+                startPhotoZoom1(outputFileUri);
                 break;
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void startPhotoZoom(Uri uri, int size) {
+    /**
+     * @param uri
+     * @param xSize
+     * @param ySize
+     */
+    /**
+     * 裁剪图片方法实现
+     *
+     * @param uri
+     */
+    public void startPhotoZoom1(Uri uri) {
         Intent intent = new Intent("com.android.camera.action.CROP");
+
+        Uri outPutUri = Uri.fromFile(file);
         intent.setDataAndType(uri, "image/*");
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, outPutUri);
+        intent.putExtra("noFaceDetection", false);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
 
         intent.putExtra("crop", "true");
-
-        intent.putExtra("aspectX", 1);
-        intent.putExtra("aspectY", 1);
-
-        intent.putExtra("outputX", size);
-        intent.putExtra("outputY", size);
-        intent.putExtra("return-data", true);
-
-        startActivityForResult(intent, PHOTO_REQUEST_CUT);
-
-    }
-
-    private void setPicToView(Intent picdata) {
-        Bundle bundle = picdata.getExtras();
-        if (bundle != null) {
-            pick_picture.dismiss();
-            Bitmap photo_data = bundle.getParcelable("data");
-            SaveBitmapToFile(photo_data);
-            Drawable drawable = new BitmapDrawable(photo_data);
-            imageView2.setImageDrawable(drawable);
-
+        intent.putExtra("aspectX", 800);
+        intent.putExtra("aspectY", 400);
+        intent.putExtra("outputX", 800);
+        intent.putExtra("outputY", 400);
+        intent.putExtra("return-data", false);
+        File out = new File(imagePath);
+        if (!out.getParentFile().exists()) {
+            out.getParentFile().mkdirs();
         }
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(out));
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+        startActivityForResult(intent, PHOTO_REQUEST_CUT);
     }
 
-    private void PopupWindow(){
-        if (pick_picture == null){
-            pick_picture = new ActionSheetDialog(PickPictureActivity.this,new String[]{"拍照","从相册中选择"},null);
+    /**
+     * 裁剪图片方法实现
+     *
+     * @param uri
+     */
+    public void startPhotoZoom2(Uri uri) {
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setDataAndType(uri, "image/*");
+        intent.putExtra("crop", "true");
+        intent.putExtra("aspectX", 800);
+        intent.putExtra("aspectY", 400);
+        intent.putExtra("outputX", 800);
+        intent.putExtra("outputY", 400);
+        intent.putExtra("return-data", false);
+        File out = new File(imagePath);
+        if (!out.getParentFile().exists()) {
+            out.getParentFile().mkdirs();
+        }
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(out));
+        startActivityForResult(intent, PHOTO_REQUEST_CUT);
+    }
+
+
+    private void setPicToView() {
+        imageView.setVisibility(View.GONE);
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(resultUri.getPath());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Bitmap bitmap= BitmapFactory.decodeStream(fis);
+        SaveBitmapToFile(bitmap);
+        frameLayout.setBackground(new BitmapDrawable(null, bitmap ));
+    }
+
+
+
+
+
+    private void PopupWindow() {
+        if (pick_picture == null) {
+            pick_picture = new ActionSheetDialog(PickPictureActivity.this, new String[]{"拍照", "从相册中选择"}, null);
             pick_picture.cancelText("取消")
                     .isTitleShow(false)
                     .create();
             pick_picture.setOnOperItemClickL(new OnOperItemClickL() {
                 @Override
                 public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    switch (position){
+                    switch (position) {
                         case 0:
-                            //构建隐式Intent
-                            Intent intent1 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                            //更改系统相片存储路径
-                            Uri photoUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory()+File.separator+"/zz/images1.jpg"));
-                            intent1.putExtra(MediaStore.EXTRA_OUTPUT,photoUri);
-                            //调用系统相机
-                            startActivityForResult(intent1, PHOTO_REQUEST_TAKE);
+                            startTakePhoto();
                             pick_picture.dismiss();
                             break;
 
                         case 1:
-                            Intent intent = new Intent(Intent.ACTION_PICK, null);
-                            intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,"image/*");
-                            startActivityForResult(intent, PHOTO_REQUEST_GALLERY);
+                            startPickPhoto();
                             pick_picture.dismiss();
                             break;
                     }
@@ -188,18 +240,66 @@ public class PickPictureActivity extends BaseActivity{
         }
         pick_picture.show();
     }
-    private void SaveBitmapToFile(Bitmap photo_data) {
-        File fphoto = new File(imagePath);
-        try {
-            FileOutputStream fos = new FileOutputStream(fphoto);
-            Log.d("", "SaveBitmapToFile: ");
-            photo_data.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-            fos.flush();
-            fos.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+    private void startPickPhoto() {
+        if (!checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, Request_Permission_Write);
+            return;
         }
+
+        if (!checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            requestPermission(Manifest.permission.READ_EXTERNAL_STORAGE, Request_Permission_Read);
+            return;
+        }
+
+        Intent intent = new Intent(Intent.ACTION_PICK, null);
+        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+        startActivityForResult(intent, PHOTO_REQUEST_GALLERY);
     }
+
+
+    private void startTakePhoto() {
+        if (!checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, Request_Permission_Write);
+            return;
+        }
+
+        if (!checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            requestPermission(Manifest.permission.READ_EXTERNAL_STORAGE, Request_Permission_Read);
+            return;
+        }
+
+
+        if (!checkPermission(Manifest.permission.CAMERA)) {
+            requestPermission(Manifest.permission.CAMERA, Request_Permission_CAMERA);
+            return;
+        }
+
+        file = new File(Environment.getExternalStorageDirectory(), filename);
+        outputFileUri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".fileProvider", file);
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+        startActivityForResult(intent, PHOTO_REQUEST_TAKE);
+    }
+
+    private void SaveBitmapToFile(Bitmap photo_data) {
+        File imageFile = pictureCutUtil.cutPictureQuality(photo_data, "activity");
+        //imagePath = imageFile.getAbsolutePath();
+    }
+
+    private BaseActivity.PermissionResult permissionResult = new PermissionResult() {
+        @Override
+        public void onGranted(String name, int code) {
+            Log.d(TAG, "onGranted: ");
+            if (code == Request_Permission_CAMERA)
+                startTakePhoto();
+        }
+
+        @Override
+        public void onDenied(int code) {
+            Log.d(TAG, "onDenied: ");
+            Toast.makeText(PickPictureActivity.this, "你怕是点错了吧", Toast.LENGTH_SHORT).show();
+        }
+    };
 }

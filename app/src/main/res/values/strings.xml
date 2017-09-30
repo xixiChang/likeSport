@@ -43,6 +43,8 @@
     <string name="sportStatus">运动状态</string>
     <string name="hisSport">参与活动</string>
     <string name="reason">延期原因</string>
+
+    <string name="joiner">参加活动</string>
     <!--百度地图相关字符串-->
     <string name="TraceRecord_title_name">跑步中</string>
     <string name="pause">暂停</string>

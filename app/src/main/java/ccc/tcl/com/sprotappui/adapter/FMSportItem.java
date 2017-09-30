@@ -1,6 +1,5 @@
 package ccc.tcl.com.sprotappui.adapter;
 
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,6 +49,8 @@ public class FMSportItem extends RecyclerView.Adapter<FMSportItem.ViewHolder> {
         PlatFormActivity activity = data.get(position);
         holder.name.setText(activity.getName());
         holder.hotValue.setText(activity.getHot_value());
+        if (activity.isNew())
+            holder.label.setVisibility(View.VISIBLE);
         Glide.with(holder.itemView).load(activity.getImage_url()).into(holder.image);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +75,7 @@ public class FMSportItem extends RecyclerView.Adapter<FMSportItem.ViewHolder> {
         ViewHolder(View itemView) {
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.item_fm_sport_image);
-            //label = (LabelView) itemView.findViewById(R.id.item_fm_sport_is_new);
+            label = (LabelView) itemView.findViewById(R.id.item_fm_sport_is_new);
             name = (TextView) itemView.findViewById(R.id.item_fm_sport_name);
             hotValue = (TextView) itemView.findViewById(R.id.item_fm_sport_hot_value);
             leftTime = (TextView) itemView.findViewById(R.id.item_fm_sport_left_time);
