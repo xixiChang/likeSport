@@ -10,10 +10,13 @@ public final class URLConstant {
 
 //    public final static String Base_Url = "http://119.29.95.86:8080/";
     public final static String Base_Url = "http://10.92.34.187:8080/";
+
+
     public final static String User_Register = "/user/register";
     public final static String User_Login = "/user/login";
     public final static String User_Auth_Code = "/user/getauthcode";
     public final static String User_Get_Info = "/user/getuserinfo";
+    public final static String User_Update = "/user/modifyInfo";
 
 
     /**

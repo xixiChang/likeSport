@@ -1,12 +1,12 @@
 package ccc.tcl.com.sprotappui.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.model.ResponseResult;
@@ -54,6 +54,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         public void onSuccess(ResponseResult<String> response) {
             if (response.isSuccess()){
                 Log.d(TAG, "onSuccess: " + response.toString());
+                Toast.makeText(RegisterActivity.this, "发送成功,　请查收哦～", Toast.LENGTH_SHORT).show();
             }
             Log.d(TAG, "onSuccess: " + response.getMsg());
         }
