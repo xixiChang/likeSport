@@ -294,6 +294,7 @@ public class PlatFormActivity implements  Parcelable {
                 - new Date().getTime()/(1000*60*60*24)));
     }
 
+    @Deprecated
     public String[] getJoinerIdArray(){
         return Util.isEmpty(joiner) ? null : joiner.split("|");
     }

@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import ccc.tcl.com.sprotappui.App;
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.adapter.UserSportTeamItem;
 import ccc.tcl.com.sprotappui.customui.ToolBar;
@@ -89,7 +90,7 @@ public class MySportTeamActivity extends BaseActivity {
     }
 
     private void initRecycler() {
-        presenter.getMyActivity();
+        presenter.getMyActivity(App.userInfo.getId());
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context,
                 LinearLayoutManager.VERTICAL, false);

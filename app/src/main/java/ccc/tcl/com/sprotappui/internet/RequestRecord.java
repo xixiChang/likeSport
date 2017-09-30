@@ -18,6 +18,7 @@ import static ccc.tcl.com.sprotappui.constant.URLConstant.Record_Query_MAX;
 import static ccc.tcl.com.sprotappui.constant.URLConstant.Record_Query_MaxForDay;
 import static ccc.tcl.com.sprotappui.constant.URLConstant.Record_Query_Month;
 import static ccc.tcl.com.sprotappui.constant.URLConstant.Record_Query_Sum;
+import static ccc.tcl.com.sprotappui.constant.URLConstant.Record_Query_TypeSum;
 import static ccc.tcl.com.sprotappui.constant.URLConstant.Record_Query_Week;
 import static ccc.tcl.com.sprotappui.constant.URLConstant.Record_Rating;
 import static ccc.tcl.com.sprotappui.constant.URLConstant.Record_Upload;
@@ -108,6 +109,14 @@ public interface RequestRecord {
      * @return list<RateItem>
      */
     @POST(value = Record_Rating)
-    @FormUrlEncoded
     Observable<ResponseResult<List<RateItem>>> getRating();
+
+    /**
+     * 获取某一用户每个类型的distance和
+     * @return map<key, value>
+     * key: 0:步行, 1:跑步, 3:骑行
+     */
+    @POST(value = Record_Query_TypeSum)
+    @FormUrlEncoded
+    Observable<ResponseResult<Map<String, String>>> getTypeSum(@Field("user_id") String user_id);
 }

@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import java.util.HashMap;
 import java.util.Map;
 
+import ccc.tcl.com.sprotappui.data.UpdateUser;
 import ccc.tcl.com.sprotappui.internet.RequestUser;
 import ccc.tcl.com.sprotappui.presenter.BasePresenter;
 import rx.Observable;
@@ -46,6 +47,16 @@ public class UserPresenter extends BasePresenter {
         map.put("password", pwd);
         map.put("method", String.valueOf(method));
         resultObservable = (Observable) requestUser.userLogin(map);
+        mCompositeSubscription.add(subscribeData());
+    }
+
+    public void getUserInfo(String user_id){
+        resultObservable = (Observable) requestUser.getUserInfo(user_id);
+        mCompositeSubscription.add(subscribeData());
+    }
+
+    public void updateUser(UpdateUser user){
+        resultObservable = (Observable) requestUser.updateUser(user);
         mCompositeSubscription.add(subscribeData());
     }
 
