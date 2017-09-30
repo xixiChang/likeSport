@@ -76,6 +76,9 @@
             android:enabled="true"
             android:process=":remote"></service>
 
+        <service android:name="ccc.tcl.com.sprotappui.service.StepService"
+            android:enabled="true"
+            android:exported="true"></service>
         <activity
             android:name=".activity.NewCreateActivity"
             android:theme="@style/beautyTheme" />
