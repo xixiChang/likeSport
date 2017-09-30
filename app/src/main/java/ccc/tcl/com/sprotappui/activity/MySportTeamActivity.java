@@ -23,7 +23,6 @@ import ccc.tcl.com.sprotappui.adapter.UserSportTeamItem;
 import ccc.tcl.com.sprotappui.customui.ToolBar;
 import ccc.tcl.com.sprotappui.model.PlatFormActivity;
 import ccc.tcl.com.sprotappui.model.ResponseResult;
-import ccc.tcl.com.sprotappui.model.UserSport;
 import ccc.tcl.com.sprotappui.presenter.presenterimpl.ActivityPresenter;
 import ccc.tcl.com.sprotappui.ui.SportAppView;
 
@@ -57,7 +56,12 @@ public class MySportTeamActivity extends BaseActivity {
                 if (response.isSuccess()){
                     sports.clear();
                     sports.addAll(response.getResult());
+                    if (!sports.isEmpty()) {
+                        recycler.setVisibility(View.VISIBLE);
+                        layout.setVisibility(View.GONE);
+                    }
                     adapter.notifyDataSetChanged();
+
                 }
                 else
                     Toast.makeText(MySportTeamActivity.this,"获取数据失败"+response.getMsg(),Toast.LENGTH_SHORT).show();
@@ -79,23 +83,21 @@ public class MySportTeamActivity extends BaseActivity {
         noDataImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showRecycler();
+                initRecycler();
             }
         });
     }
 
-    private void showRecycler() {
+    private void initRecycler() {
         presenter.getMyActivity();
-        //initData();
-        if (sports.isEmpty())
-            return;
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context,
                 LinearLayoutManager.VERTICAL, false);
 
         adapter.setListener(new UserSportTeamItem.OnRecyclerViewItemClickListener() {
             @Override
             public void onClick(View view, int position) {
-                if (sports.get(position).getPublish_user_id() !=  sports.get(position).getUser_id()){
+                if (!sports.get(position).getPublish_user_id().equals(sports.get(position).getUser_id())){
                     Intent intent = new Intent(context, LayoutActivity.class);
                     Bundle data = new Bundle();
                     data.putParcelable("data",sports.get(position));
@@ -104,7 +106,9 @@ public class MySportTeamActivity extends BaseActivity {
                 }
                 else {
                     Intent intent = new Intent(context, NewCreateActivity.class);
-                    intent.putExtra("data",sports.get(position));
+                    Bundle data = new Bundle();
+                    data.putParcelable("data",sports.get(position));
+                    intent.putExtras(data);
                     startActivity(intent);
                 }
 
@@ -112,8 +116,7 @@ public class MySportTeamActivity extends BaseActivity {
         });
         recycler.setLayoutManager(linearLayoutManager);
         recycler.setAdapter(adapter);
-        recycler.setVisibility(View.VISIBLE);
-        layout.setVisibility(View.GONE);
+
     }
 
     private void initData() {

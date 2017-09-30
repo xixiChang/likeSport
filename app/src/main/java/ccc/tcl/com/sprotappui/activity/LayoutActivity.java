@@ -18,7 +18,6 @@ import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import ccc.tcl.com.sprotappui.R;
-import ccc.tcl.com.sprotappui.constant.URLConstant;
 import ccc.tcl.com.sprotappui.model.PlatFormActivity;
 import ccc.tcl.com.sprotappui.model.ResponseResult;
 import ccc.tcl.com.sprotappui.presenter.presenterimpl.ActivityPresenter;
@@ -35,6 +34,7 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
     TextView address;
     TextView distance;
     TextView details;
+    TextView joinerNum;
     TagView joinButton;
     ActivityPresenter loadPresenter;
     ActivityPresenter joinPresenter;
@@ -46,8 +46,11 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
             if (response.isSuccess()){
                 if (response.getType().equals("details"))
                     handleActivityDetails(response.getResult());
-                if (response.getType().equals("join"))
+                if (response.getType().equals("join")) {
+                    joinButton.setText("已参加");
+                    joinButton.setEnabled(false);
                     Toast.makeText(LayoutActivity.this, "已加入肯德基豪华午餐", Toast.LENGTH_SHORT).show();
+                }
             }
             else if (!response.isSuccess()) {
                 if (response.getType().equals("details"))
@@ -85,6 +88,7 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
         Toolbar toolbar = (Toolbar) findViewById(R.id.news_details_toolbar);
         super.setToolBar(toolbar, R.string.activity_main_title,true);
         joinButton = (TagView) findViewById(R.id.join);
+        joinButton.setOnClickListener(this);
         imageView = (CircleImageView) findViewById(R.id.circleImageView1);
         photo = (ImageView) findViewById(R.id.news_details_photo);
         name = (TextView) findViewById(R.id.item_fm_sport_name);
@@ -95,6 +99,7 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
         distance = (TextView) findViewById(R.id.distance_show);
         address = (TextView) findViewById(R.id.location_show);
         details = (TextView) findViewById(R.id.detail_show);
+        joinerNum = (TextView) findViewById(R.id.joiner_num);
 
         Intent intent = getIntent();
         activity = intent.getParcelableExtra("data");
@@ -127,6 +132,13 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
         distance.setText(result.getDistance()+"");
         address.setText(result.getAddress());
         details.setText(result.getDetails());
+        joinerNum.setText("参与者 （" + result.getJoin_num() + "/" + result.getJoin_num_all() + "）");
+        if (result.getJoiner().contains(result.getUser_id())) {
+            joinButton.setText("已参加");
+            //joinButton.setClickable(false);
+            joinButton.setEnabled(false);
+        }
+
     }
 
     @Override

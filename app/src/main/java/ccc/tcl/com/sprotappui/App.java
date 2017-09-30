@@ -24,7 +24,11 @@ public class App extends MultiDexApplication {
     public static UserInfo userInfo = new UserInfo();
     private static final String NO_USER = "-1";
     private static final String SHARE_MAP = "UserInfo";
-
+    public static boolean cameraPermission = false;
+    public static boolean vibratePermission = false;
+    public static boolean storagePermission = false;
+    public static boolean notificationPermission = false;
+    public static boolean voicePermission = false;
     @Override
     public void onCreate() {
         super.onCreate();

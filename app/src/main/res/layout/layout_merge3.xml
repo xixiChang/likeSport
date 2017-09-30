@@ -12,12 +12,13 @@
             android:layout_marginRight="2px"
             android:layout_weight="1"
             android:textAlignment="center"
-            android:text="发起人"
+            android:text="@string/publisher"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:background="@color/white"
             android:textSize="@dimen/activity_content_size_mid"/>
         <TextView
+            android:id="@+id/joiner_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="5"

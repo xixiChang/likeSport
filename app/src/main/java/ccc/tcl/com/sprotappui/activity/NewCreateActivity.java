@@ -20,6 +20,9 @@ import android.widget.Toast;
 
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -32,6 +35,8 @@ import ccc.tcl.com.sprotappui.presenter.presenterimpl.ActivityPresenter;
 import ccc.tcl.com.sprotappui.ui.SportAppView;
 
 public class NewCreateActivity extends BaseActivity {
+    TextView name;
+    TextView hotValue;
     TextView startTime;
     TextView endTime;
     TextView distance;
@@ -45,13 +50,17 @@ public class NewCreateActivity extends BaseActivity {
     TextView changeEnd;
     EditText changeReason;
     EditText cancelReason;
+    TextView reason;
     boolean set_start_time = true;
     ViewStub stub;
     LinearLayout ll = null;
     DatePicker picker;
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     private ActionSheetDialog logoutDialog;
-    ActivityPresenter presenter;
+    private ActivityPresenter presenter;
+    private String changeStartTemp;
+    private String changeEndTemp;
+    private String reasonTemp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,17 +69,15 @@ public class NewCreateActivity extends BaseActivity {
         sport = intent.getParcelableExtra("data");
         Toolbar toolbar = (Toolbar) findViewById(R.id.news_details_toolbar);
         super.setToolBar(toolbar, " ",true);
+        name = (TextView) findViewById(R.id.item_fm_sport_name);
+        hotValue = (TextView) findViewById(R.id.item_fm_sport_hot_value);
         startTime = (TextView) findViewById(R.id.start_time_show);
         endTime = (TextView) findViewById(R.id.end_time_show);
         distance = (TextView) findViewById(R.id.distance_show);
         location = (TextView) findViewById(R.id.location_show);
         detail =(TextView) findViewById(R.id.detail_show);
-
-        startTime.setText(sport.getStart_time());
-        endTime.setText(sport.getEnd_time());
-        distance.setText(sport.getDistance() + "KM");
-        location.setText(sport.getAddress());
-        detail.setText(sport.getDetails());
+        reason = (TextView) findViewById(R.id.update);
+        updateData();
 
         presenter = new ActivityPresenter();
     }
@@ -78,11 +85,35 @@ public class NewCreateActivity extends BaseActivity {
     @Override
     protected void onResume() {
         presenter.onCreate();
-        presenter.attachView(new SportAppView<ResponseResult>() {
+        presenter.attachView(new SportAppView<ResponseResult<PlatFormActivity>>() {
             @Override
-            public void onSuccess(ResponseResult response) {
-                if (response.isSuccess())
-                    Toast.makeText(NewCreateActivity.this,"操作成功",Toast.LENGTH_SHORT).show();
+            public void onSuccess(ResponseResult<PlatFormActivity> response) {
+                if (response.isSuccess()){
+                    //取消活动
+                    if (response.getType().equals("cancel")) {
+                        sport.setStatus("3");
+                        sport.setReason(reasonTemp);
+                        updateData();
+                        Toast.makeText(NewCreateActivity.this, "操作成功", Toast.LENGTH_SHORT).show();
+                        //finish();
+                    }
+                    //改期
+                    else if (response.getType().equals("delay")){
+                        sport.setStart_time(changeStartTemp);
+                        sport.setEnd_time(changeEndTemp);
+                        sport.setStatus("1");
+                        sport.setReason(reasonTemp);
+                        updateData();
+                        Toast.makeText(NewCreateActivity.this, "操作成功", Toast.LENGTH_SHORT).show();
+                    }
+                    //请求数据
+                    else if (response.getType().equals("details")){
+                        sport = response.getResult();
+                        updateData();
+                    }
+
+                }
+
                 else
                     Toast.makeText(NewCreateActivity.this,"操作失败"+response.getMsg(),Toast.LENGTH_SHORT).show();
                 //finish();
@@ -90,9 +121,12 @@ public class NewCreateActivity extends BaseActivity {
 
             @Override
             public void onRequestError(String msg) {
-                Toast.makeText(NewCreateActivity.this,"操作失败"+msg,Toast.LENGTH_SHORT).show();
+                Toast.makeText(NewCreateActivity.this,"网络连接失败"+msg,Toast.LENGTH_SHORT).show();
             }
         });
+
+        if (sport.getAddress() == null)
+            presenter.getActivity(String.valueOf(sport.getAt_server_id()));
         super.onResume();
     }
 
@@ -117,9 +151,27 @@ public class NewCreateActivity extends BaseActivity {
         return true;
     }
 
+    private void updateData(){
+        name.setText(sport.getName());
+        hotValue.setText(sport.getHot_value());
+        startTime.setText(sport.getStart_time());
+        endTime.setText(sport.getEnd_time());
+        distance.setText(sport.getDistance() + "KM");
+        location.setText(sport.getAddress());
+        detail.setText(sport.getDetails());
+        reason.setVisibility(View.GONE);
+        if (sport.getReason() != null && sport.getStatus().equals("1")) {
+            reason.setText("由于 " + sport.getReason() + ",活动已改期。");
+            reason.setVisibility(View.VISIBLE);
+        }
+        if (sport.getReason() != null && sport.getStatus().equals("3")) {
+            reason.setText("由于 " + sport.getReason() + ",活动已取消。");
+            reason.setVisibility(View.VISIBLE);
+        }
+    }
     private void logoutWindow() {
         if (logoutDialog == null) {
-            logoutDialog = new ActionSheetDialog(this, new String[]{"改期","取消活动"}, null);
+            logoutDialog = new ActionSheetDialog(this, new String[]{"分享","改期","取消活动"}, null);
             logoutDialog.cancelText("哎呀，点错了")
                     .isTitleShow(false)
                     .create();
@@ -129,29 +181,47 @@ public class NewCreateActivity extends BaseActivity {
                     switch (position) {
                         case 0:
                             logoutDialog.cancel();
+                            new ShareAction(NewCreateActivity.this)
+                                    .withText("hello")
+                                    //.withMedia(new UMImage(LayoutActivity.this,new File("")))
+                                    .setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
+                                    .setCallback(umShareListener)
+                                    .open();
+                            break;
+                        case 1:
+                            logoutDialog.cancel();
                             initChangeDialog();
+                            if (ll != null) {
+                                stub.inflate();
+                                ll.setVisibility(View.GONE);
+                            }
                             new AlertDialog.Builder(NewCreateActivity.this).setView(changeView)
                                     .setPositiveButton("确定", new DialogInterface.OnClickListener()
                                     {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            presenter.delayActivity(sport.getAt_server_id()+"",changeReason.getText().toString(),startTime.getText().toString()
-                                                    ,endTime.getText().toString());
-                                            //Toast.makeText(NewCreateActivity.this,startTime.getText()+"--"+endTime.getText(),Toast.LENGTH_SHORT).show();
+                                            changeStartTemp = changeStart.getText().toString();
+                                            changeEndTemp = changeEnd.getText().toString();
+                                            reasonTemp = changeReason.getText().toString();
+                                            presenter.delayActivity(sport.getAt_server_id()+"",reasonTemp,changeStartTemp,changeEndTemp);
+
                                         }
                                     })
                                     .setNegativeButton("取消",null).create().show();
 
                             break;
-                        case 1:
+                        case 2:
                             logoutDialog.cancel();
-                            new AlertDialog.Builder(NewCreateActivity.this).setMessage(R.string.cancelActivity)
+                            initCancelDialog();
+
+                            new AlertDialog.Builder(NewCreateActivity.this).setView(cancelView)
                                     .setPositiveButton("确定", new DialogInterface.OnClickListener()
                                     {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            presenter.cancelActivity(""+sport.getAt_server_id()," ");
-                                            //Toast.makeText(NewCreateActivity.this,startTime.getText()+"--"+endTime.getText(),Toast.LENGTH_SHORT).show();
+                                            reasonTemp = cancelReason.getText().toString();
+                                            presenter.cancelActivity(""+sport.getAt_server_id(),""+cancelReason.getText().toString());
+
                                         }
                                     })
                                     .setNegativeButton("取消",null).create().show();
@@ -178,7 +248,6 @@ public class NewCreateActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 set_start_time = true;
-
                 imm.hideSoftInputFromWindow(changeReason.getWindowToken(), 0);
                 if (ll == null){//inflate只能调用一次，再次调用会报异常
                     stub.inflate();
@@ -232,7 +301,8 @@ public class NewCreateActivity extends BaseActivity {
             @Override
             public void onInflate(ViewStub stub, final View inflated) {//加载完成以后回调//下面的代码也可以写到inflate()返回以后调用
                 ll = (LinearLayout) inflated;
-                final String currTime = format.format(new Date().getTime());
+                Date curr = new Date();
+                final String currTime = format.format(curr.getTime());
                 picker = (DatePicker) ll.findViewById(R.id.datePicker2);
                 picker.init(Integer.parseInt(currTime.substring(0,4)), Integer.parseInt(currTime.substring(5,7))-1, Integer.parseInt(currTime.substring(8)), new DatePicker.OnDateChangedListener() {
                     @Override
@@ -245,11 +315,35 @@ public class NewCreateActivity extends BaseActivity {
                             changeEnd.setText(format.format(calendar.getTime()));
                     }
                 });
+                picker.setMinDate(curr.getTime());
             }
         });
     }
 
     private void initCancelDialog(){
-
+        cancelView = getLayoutInflater().inflate(R.layout.dialog_cancel_activity,null);
+        cancelReason = (EditText) cancelView.findViewById(R.id.cancel_reason);
     }
+
+    private UMShareListener umShareListener = new UMShareListener() {
+        @Override
+        public void onStart(SHARE_MEDIA share_media) {
+
+        }
+
+        @Override
+        public void onResult(SHARE_MEDIA share_media) {
+
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA share_media) {
+
+        }
+    };
 }
