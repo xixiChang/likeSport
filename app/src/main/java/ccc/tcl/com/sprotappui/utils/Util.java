@@ -1,10 +1,15 @@
 package ccc.tcl.com.sprotappui.utils;
 
 import android.content.Context;
+import android.provider.ContactsContract;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by user on 17-8-8.
@@ -48,6 +53,21 @@ public class Util {
 
     public static boolean isEmpty(String para){
         return para == null || "".equals(para);
+    }
+
+    public static List<String> stringToList(String para){
+        if (Util.isEmpty(para))
+            return null;
+        para = para.replace("[", "");
+        para = para.replace("]", "");
+        List<String> result = new ArrayList<>();
+        for (String s : para.split(",")){
+            result.add(s);
+        }
+
+        return result;
+
+
     }
 
     public static String getSpeed(String dis, String time){

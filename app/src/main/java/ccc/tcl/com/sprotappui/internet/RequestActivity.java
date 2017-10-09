@@ -66,6 +66,5 @@ public interface RequestActivity {
     Observable<ResponseResult<List<PlatFormActivity>>> getAllByPage(@Field("current_size") int current_size);
 
     @POST(value = Activity_GetJoinerInfo)
-    @FormUrlEncoded
-    Observable<ResponseResult<List<UserInfo>>> getJoinerInfo(@Field("userIdList") String users);
+    Observable<ResponseResult<List<UserInfo>>> getJoinerInfo(@Body List<String> users);
 }

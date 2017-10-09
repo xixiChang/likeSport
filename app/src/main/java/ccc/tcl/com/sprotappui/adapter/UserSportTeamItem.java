@@ -18,6 +18,7 @@ import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.model.ChooseItemModel;
 import ccc.tcl.com.sprotappui.model.PlatFormActivity;
 import ccc.tcl.com.sprotappui.model.UserSport;
+import ccc.tcl.com.sprotappui.utils.Util;
 
 
 /**
@@ -59,8 +60,12 @@ public class UserSportTeamItem extends RecyclerView.Adapter<UserSportTeamItem.Vi
         holder.time.setText(data.get(position).getStart_time()+" - "+data.get(position).getEnd_time());
         holder.value.setText(data.get(position).getJoin_num()+" 参与");
         String behavior = "已参与";
-        if (data.get(position).getUser_id()==data.get(position).getPublish_user_id())
+        //if (data.get(position).getJoiner().contains(data.get(position).getUser_id()))
+        //if (Util.stringToList(data.get(position).getJoiner()).contains(data.get(position).getUser_id()))
+
+        if (data.get(position).getUser_id().equals(data.get(position).getPublish_user_id()))
             behavior = "发起人";
+
         holder.behavior.setText(behavior);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

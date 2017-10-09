@@ -1,10 +1,12 @@
 package ccc.tcl.com.sprotappui.data;
 
+import java.io.Serializable;
+
 /**
  * Created by user on 17-9-14.
  */
 
-public class UserInfo {
+public class UserInfo implements Serializable{
     private String id;
     private String name;
     private String phone;

@@ -224,7 +224,10 @@ public class HomeActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.more:
-                startActivity(new Intent(mContext, Test2Activity.class));
+                //sportCircleFragment.update();
+                //startActivity(new Intent(mContext, TestActivity.class));
+                Intent create = new Intent(this,PickPictureActivity.class);
+                startActivity(create);
                 return true;
             default:
                 break;

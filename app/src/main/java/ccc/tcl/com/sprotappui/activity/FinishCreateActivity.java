@@ -50,7 +50,7 @@ public class FinishCreateActivity extends BaseActivity {
     private int NOTE_MAX_COUNT = 40;
     private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     private boolean set_start_time = true;
-    private String ImageUrl;
+
     private static final String TAG = "FinishCreateActivity";
 
     private String oriangal_image_url;
@@ -203,78 +203,67 @@ public class FinishCreateActivity extends BaseActivity {
         uploadImage = new FileUploadPresenter();
         uploadImage.onCreate();
         uploadImage.attachView(new SportAppView<ResponseResult<String>>() {
-                                   @Override
-                                   public void onSuccess(ResponseResult<String> response) {
-                                       if (response.isSuccess()) {
-                                           platFormActivity.setStart_time(startTime.getText().toString());
-                                           platFormActivity.setEnd_time(endTime.getText().toString());
-                                           platFormActivity.setAddress(address.getText().toString());
-                                           platFormActivity.setDistance(Integer.parseInt(distance.getText().toString()));
-                                           platFormActivity.setNotes(note.getText().toString());
-                                           ImageUrl = response.getResult();
-                                           platFormActivity.setImage_url(response.getResult());
-                                           uploadActivity.uploadActivity(platFormActivity);
-                                           Toast.makeText(FinishCreateActivity.this, "图片上传成功", Toast.LENGTH_SHORT).show();
-                                       } else {
-                                           platFormActivity.setImage_url(oriangal_image_url);
-                                           Toast.makeText(FinishCreateActivity.this, "图片上传失败: " + response.getMsg(), Toast.LENGTH_SHORT).show();
+            @Override
+            public void onSuccess(ResponseResult<String> response) {
+                if (response.isSuccess()) {
+                    platFormActivity.setStart_time(startTime.getText().toString());
+                    platFormActivity.setEnd_time(endTime.getText().toString());
+                    platFormActivity.setAddress(address.getText().toString());
+                    platFormActivity.setDistance(Integer.parseInt(distance.getText().toString()));
+                    platFormActivity.setNotes(note.getText().toString());
+                    platFormActivity.setImage_url(response.getResult());
+                    uploadActivity.uploadActivity(platFormActivity);
+                    Toast.makeText(FinishCreateActivity.this, "图片上传成功", Toast.LENGTH_SHORT).show();
+                } else {
+                    platFormActivity.setImage_url(oriangal_image_url);
+                    Toast.makeText(FinishCreateActivity.this, "图片上传失败: " + response.getMsg(), Toast.LENGTH_SHORT).show();
 
-                                       }
-                                   }
+                }
+            }
 
-                                   @Override
-                                   public void onRequestError(String msg) {
-                                       Toast.makeText(FinishCreateActivity.this, "图片上传失败：" + msg, Toast.LENGTH_SHORT).show();
-                                   }
-                               }
+            @Override
+            public void onRequestError(String msg) {
+                Toast.makeText(FinishCreateActivity.this,"图片上传失败："+msg,Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        );
-
-
-        uploadActivity = new
-
-                ActivityPresenter();
-
+        uploadActivity = new ActivityPresenter();
         uploadActivity.onCreate();
-        uploadActivity.attachView(new SportAppView<ResponseResult>()
+        uploadActivity.attachView(new SportAppView<ResponseResult>() {
+            @Override
+            public void onSuccess(ResponseResult response) {
+                if (response.isSuccess()){
+                    Intent intent = new Intent(FinishCreateActivity.this,NewCreateActivity.class);
+                    Bundle data = new Bundle();
 
-                                  {
-                                      @Override
-                                      public void onSuccess(ResponseResult response) {
-                                          if (response.isSuccess()) {
-                                              Intent intent = new Intent(FinishCreateActivity.this, NewCreateActivity.class);
-                                              Bundle data = new Bundle();
+                    data.putParcelable("data",platFormActivity);
+                    intent.putExtras(data);
+                    startActivity(intent);
+                    finish();
+                    Log.d(TAG, "onSuccess: "+response.getMsg());
+                    Toast.makeText(FinishCreateActivity.this,"数据上传成功",Toast.LENGTH_SHORT).show();
+                }
+                else
+                    Toast.makeText(FinishCreateActivity.this,"数据上传失败："+response.getMsg(),Toast.LENGTH_SHORT).show();
+            }
 
-                                              data.putParcelable("data", platFormActivity);
-                                              intent.putExtras(data);
-                                              startActivity(intent);
-                                              finish();
-                                              Log.d(TAG, "onSuccess: " + response.getMsg());
-                                              Toast.makeText(FinishCreateActivity.this, "数据上传成功", Toast.LENGTH_SHORT).show();
-                                          } else
-                                              Toast.makeText(FinishCreateActivity.this, "数据上传失败：" + response.getMsg(), Toast.LENGTH_SHORT).show();
-                                      }
-
-                                      @Override
-                                      public void onRequestError(String msg) {
-                                          Toast.makeText(FinishCreateActivity.this, "网络链接失败：" + msg, Toast.LENGTH_SHORT).show();
-                                      }
-                                  }
-
-        );
+            @Override
+            public void onRequestError(String msg) {
+                Toast.makeText(FinishCreateActivity.this,"网络链接失败："+msg,Toast.LENGTH_SHORT).show();
+            }
+        });
         super.onResume();
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_finish_create_toolbar, menu);
+        getMenuInflater().inflate(R.menu.activity_finish_create_toolbar,menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+        switch (item.getItemId()){
             case R.id.finish:
                 String locationText = address.getText().toString();
                 String distanceText = distance.getText().toString();
@@ -282,12 +271,8 @@ public class FinishCreateActivity extends BaseActivity {
                     break;
                 }
 
-
                 File image = new File(platFormActivity.getImage_url());
-
-                uploadImage.upLoadFile(image, "activity");
-
-
+                uploadImage.upLoadFile(image,"activity");
                 break;
 
         }
@@ -296,7 +281,6 @@ public class FinishCreateActivity extends BaseActivity {
 
     /**
      * 点击空白处隐藏键盘和日期选择器
-     *
      * @param ev
      * @return
      */
@@ -304,10 +288,10 @@ public class FinishCreateActivity extends BaseActivity {
     public boolean dispatchTouchEvent(MotionEvent ev) {
 
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-            if (null != ll)
+            if (null!=ll)
                 ll.getLocationInWindow(location_datePicker);
             time_text.getLocationInWindow(start_textview);
-            if (ll != null && (ev.getY() > ll.getY() + location_datePicker[1] || ev.getY() < start_textview[1]))
+            if (ll != null && (ev.getY() >  ll.getY()+location_datePicker[1] || ev.getY() < start_textview[1]))
                 ll.setVisibility(View.GONE);
         }
         return super.dispatchTouchEvent(ev);
@@ -319,4 +303,3 @@ public class FinishCreateActivity extends BaseActivity {
         super.onDestroy();
     }
 }
-

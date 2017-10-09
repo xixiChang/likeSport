@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +35,7 @@ import ccc.tcl.com.sprotappui.model.ResponseResult;
 import ccc.tcl.com.sprotappui.presenter.presenterimpl.ActivityPresenter;
 import ccc.tcl.com.sprotappui.ui.SportAppView;
 
-public class NewCreateActivity extends BaseActivity {
+public class NewCreateActivity extends BaseActivity implements View.OnClickListener{
     TextView name;
     TextView hotValue;
     TextView startTime;
@@ -61,6 +62,7 @@ public class NewCreateActivity extends BaseActivity {
     private String changeStartTemp;
     private String changeEndTemp;
     private String reasonTemp;
+    private FrameLayout head_images;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +79,8 @@ public class NewCreateActivity extends BaseActivity {
         location = (TextView) findViewById(R.id.location_show);
         detail =(TextView) findViewById(R.id.detail_show);
         reason = (TextView) findViewById(R.id.update);
+        head_images = (FrameLayout) findViewById(R.id.head_images);
+        head_images.setOnClickListener(this);
         updateData();
 
         presenter = new ActivityPresenter();
@@ -149,6 +153,19 @@ public class NewCreateActivity extends BaseActivity {
                 break;
         }
         return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.head_images:
+                Intent intent = new Intent(this,JoinerActivity.class);
+                intent.putExtra("users",sport.getJoiner());
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
     }
 
     private void updateData(){

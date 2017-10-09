@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/more"
+        android:id="@+id/add_contact"
         android:icon="@mipmap/add_contact"
         android:title="add_contact"
         app:showAsAction="always">

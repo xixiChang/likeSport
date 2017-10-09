@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +40,7 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
     ActivityPresenter loadPresenter;
     ActivityPresenter joinPresenter;
     PlatFormActivity activity;
+    FrameLayout headImages;
 
     private SportAppView load = new SportAppView<ResponseResult<PlatFormActivity>>() {
         @Override
@@ -89,6 +91,8 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
         super.setToolBar(toolbar, R.string.activity_main_title,true);
         joinButton = (TagView) findViewById(R.id.join);
         joinButton.setOnClickListener(this);
+        headImages = (FrameLayout) findViewById(R.id.head_images);
+        headImages.setOnClickListener(this);
         imageView = (CircleImageView) findViewById(R.id.circleImageView1);
         photo = (ImageView) findViewById(R.id.news_details_photo);
         name = (TextView) findViewById(R.id.item_fm_sport_name);
@@ -127,6 +131,7 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
     }
 
     private void handleActivityDetails(PlatFormActivity result) {
+        activity = result;
         startTime.setText(result.getStart_time());
         endTime.setText(result.getEnd_time());
         distance.setText(result.getDistance()+"");
@@ -146,6 +151,11 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
         switch (v.getId()){
             case R.id.join:
                 loadPresenter.joinActivity(String.valueOf(activity.getAt_server_id()));
+                break;
+            case R.id.head_images:
+                Intent intent = new Intent(this,JoinerActivity.class);
+                intent.putExtra("users",activity.getJoiner());
+                startActivity(intent);
                 break;
             default:
                 break;

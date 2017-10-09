@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.customui.ToolBar;
@@ -37,5 +38,11 @@ public class SettingActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+        clearAppCache();
+    }
+
+    private void clearAppCache(){
+        //this.clearAppCache();
+        Toast.makeText(this,""+this.getCacheDir().getFreeSpace(),Toast.LENGTH_LONG).show();
     }
 }

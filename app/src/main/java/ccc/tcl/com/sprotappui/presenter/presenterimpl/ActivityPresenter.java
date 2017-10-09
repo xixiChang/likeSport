@@ -2,6 +2,7 @@ package ccc.tcl.com.sprotappui.presenter.presenterimpl;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import ccc.tcl.com.sprotappui.internet.RequestActivity;
@@ -87,7 +88,7 @@ public class ActivityPresenter extends BasePresenter {
      * @param users
      * @return List<UserInfo> userinfo 仅有id,image_url,name,im_uid字段，　其余为空
      */
-    public void getJoinerInfo(String users){
+    public void getJoinerInfo(List<String> users){
         resultObservable = (Observable) requestActivity.getJoinerInfo(users);
         mCompositeSubscription.add(subscribeData());
     }
