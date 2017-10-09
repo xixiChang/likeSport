@@ -116,7 +116,6 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 	double lastX;
 	private SensorManager mSensorManager;
 	private static final String TAG ="add TraceRecord";
-	//	private UserSport userSport;
 	private String strDistanceM,speedMSStr,totalSecondStr;
 	private  int distanceMi,totalSecondi,speedMSi;
 

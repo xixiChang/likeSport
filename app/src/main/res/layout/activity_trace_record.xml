@@ -81,10 +81,7 @@
                 android:textSize="@dimen/text_recorder_name_sizeBig"
                 android:textIsSelectable="true" />
         </LinearLayout>
-
-
     </RelativeLayout>
-
 
     <RelativeLayout
         android:id="@+id/RecordArea"
