@@ -1,6 +1,5 @@
 package ccc.tcl.com.sprotappui.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -24,11 +23,9 @@ import android.provider.Settings;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,16 +58,12 @@ import java.util.List;
 import ccc.tcl.com.sprotappui.App;
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.db.AppDBHelper;
-import ccc.tcl.com.sprotappui.db.SQLParaWrapper;
 import ccc.tcl.com.sprotappui.db.SQLStatement;
 import ccc.tcl.com.sprotappui.model.Record;
-import ccc.tcl.com.sprotappui.model.ResponseResult;
 import ccc.tcl.com.sprotappui.service.StepService;
 import ccc.tcl.com.sprotappui.step_detector.StepDetector;
 import ccc.tcl.com.sprotappui.ui.SlideView;
-import ccc.tcl.com.sprotappui.ui.SportAppView;
 import ccc.tcl.com.sprotappui.utils.BaiduMapUtil;
-import ccc.tcl.com.sprotappui.presenter.presenterimpl.RecordPresenter;
 import static ccc.tcl.com.sprotappui.db.SQLStatement.DBName;
 
 /*实现实时动态画运动轨迹*/
@@ -107,7 +100,6 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 
 	Runnable updateDataRunnable;
 	Handler handler = new Handler();
-	private SQLParaWrapper sqlParaWrapper;
 	// 定位相关
 	LocationClient mLocClient;
 	public MyLocationListenner myListener = new MyLocationListenner();
@@ -126,7 +118,8 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 	private static final String TAG ="add TraceRecord";
 	//	private UserSport userSport;
 	private String strDistanceM,speedMSStr,totalSecondStr;
-	private RecordPresenter recordPresenter;
+	private  int distanceMi,totalSecondi,speedMSi;
+
 	/*起点图标*/
 	BitmapDescriptor startBD;
 	/*终点图标*/
@@ -142,17 +135,8 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 	}
 
-	private SportAppView<ResponseResult> sportAppView = new SportAppView<ResponseResult>() {
-		@Override
-		public void onSuccess(ResponseResult response) {
-			Log.d(TAG, "onSuccess: " + response.toString());
-		}
 
-		@Override
-		public void onRequestError(String msg) {
-			Log.d(TAG, "onError: " + msg);
-		}
-	};
+
 
 	/*构造广播监听类，监听 SDK key 验证以及网络异常广播*/
 	public class SDKReceiver extends BroadcastReceiver {
@@ -191,6 +175,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		go_on_img = (ImageView) findViewById(R.id.go_on_img);
 		userPic = (ImageView) findViewById(R.id.userPic);
 
+
 		end = (LinearLayout) findViewById(R.id.btnEnd);
 		pause = (LinearLayout) findViewById(R.id.btnPause);
 		lockScreen = (LinearLayout) findViewById(R.id.lockScreen);
@@ -211,6 +196,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		lockScreen.setOnClickListener(this);
 		share.setOnClickListener(this);
 		back.setOnClickListener(this);
+
 
 		TestGPS();
 		isNetworkConn(TraceRecordActivity.this);
@@ -271,8 +257,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		mLocClient.start();
 		//开始记录
 		startRecorder();
-		recordPresenter = new RecordPresenter();
-		recordPresenter.uploadRecord(record);
+
 	}
 
 
@@ -299,10 +284,10 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 				break;
 			/*运动结束，点击返回*/
 			case R.id.back:
-				/*Intent intent = new Intent();
-				intent.setClass(TraceRecord.this,
-						PrevActivity.class);
-				startActivity(intent);*/
+				Intent intent = new Intent();
+				intent.setClass(TraceRecordActivity.this,
+						HomeActivity.class);
+				startActivity(intent);
 				break;
 		}
 	}
@@ -386,9 +371,9 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 	public void addRecordR(){
 		record = new Record();
 		record.setDate(getDate());
-		record.setDistance(Integer.valueOf(strDistanceM));
-		record.setSpent_time(Integer.valueOf(totalSecondStr));
-		record.setMean_speed(Integer.valueOf(speedMSStr));
+		record.setDistance(distanceMi);
+		record.setSpent_time(totalSecondi);
+		record.setMean_speed(speedMSi);
 		record.setStep(StepDetector.CURRENT_STEP);
 		record.setType(0);
 
@@ -513,6 +498,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 							/*BaiduMapUtil.GetDistance 计算出的结果distanceM是米*/
 							distanceM = distanceM + BaiduMapUtil.GetDistance(lon1, lat1, lon2, lat2);
 						}
+						distanceMi=(int) distanceM;
 						/*米转换成公里*/
 						double distanceKM = distanceM / 1000;
 						/*显示米*/
@@ -552,6 +538,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 						second = Double.parseDouble(strSecond);
 
 						totalSecond = hour * 60 * 60 + minute * 60 + second;
+						totalSecondi=(int) totalSecond;
 						//hour = (hour * 60 * 60 + minute * 60 + second ) / 60 / 60;
 						hour = totalSecond / 60 / 60;
 						// 更新速度
@@ -559,6 +546,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 
 						double speedMS = distanceM / totalSecond;
 
+						speedMSi=(int) speedMS;
 						String strSpeed = String.valueOf(speed);
 						// 将速度speed保留2位小数点
 						if (strSpeed.contains(".")) {
@@ -869,8 +857,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		// 为系统的方向传感器注册监听器
 		mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
 				SensorManager.SENSOR_DELAY_UI);
-		recordPresenter.onCreate();
-		recordPresenter.attachView(sportAppView);
+
 	}
 
 	@Override

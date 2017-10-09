@@ -82,6 +82,7 @@
                 android:textIsSelectable="true" />
         </LinearLayout>
 
+
     </RelativeLayout>
 
 
@@ -268,7 +269,7 @@
                 android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-                <com.example.user.ui.SlideView
+                <ccc.tcl.com.sprotappui.ui.SlideView
                     android:id="@+id/slider"
                     android:layout_width="320dp"
                     android:layout_height="70dp"
@@ -476,6 +477,5 @@
 
 
     </RelativeLayout>
-
 
 </RelativeLayout>
