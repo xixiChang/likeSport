@@ -18,7 +18,8 @@ import static ccc.tcl.com.sprotappui.constant.URLConstant.Record_Query_MAX;
 import static ccc.tcl.com.sprotappui.constant.URLConstant.Record_Query_MaxForDay;
 import static ccc.tcl.com.sprotappui.constant.URLConstant.Record_Query_Month;
 import static ccc.tcl.com.sprotappui.constant.URLConstant.Record_Query_Sum;
-import static ccc.tcl.com.sprotappui.constant.URLConstant.Record_Query_TypeSum;
+import static ccc.tcl.com.sprotappui.constant.URLConstant.Record_Query_TypeSumAll;
+import static ccc.tcl.com.sprotappui.constant.URLConstant.Record_Query_TypeSumDay;
 import static ccc.tcl.com.sprotappui.constant.URLConstant.Record_Query_Week;
 import static ccc.tcl.com.sprotappui.constant.URLConstant.Record_Rating;
 import static ccc.tcl.com.sprotappui.constant.URLConstant.Record_Upload;
@@ -112,11 +113,21 @@ public interface RequestRecord {
     Observable<ResponseResult<List<RateItem>>> getRating();
 
     /**
-     * 获取某一用户每个类型的distance和
+     * 获取某一用户每个类型的distance和(一天)
      * @return map<key, value>
-     * key: 0:步行, 1:跑步, 3:骑行
+     * key1: 0:步行, 1:跑步, 3:骑行
+     * key2: spent_time
      */
-    @POST(value = Record_Query_TypeSum)
+    @POST(value = Record_Query_TypeSumDay)
     @FormUrlEncoded
-    Observable<ResponseResult<Map<String, String>>> getTypeSum(@Field("user_id") String user_id);
+    Observable<ResponseResult<List<Map<String, String>>>> getTypeSumDay(@Field("user_id") String user_id);
+
+    /**
+     * 获取某一用户每个类型的distance和(历史)
+     * @return map<key, value>
+     * key1: 0:步行, 1:跑步, 3:骑行
+     */
+    @POST(value = Record_Query_TypeSumAll)
+    @FormUrlEncoded
+    Observable<ResponseResult<Map<String, String>>> getTypeSumAll(@Field("user_id") String user_id);
 }

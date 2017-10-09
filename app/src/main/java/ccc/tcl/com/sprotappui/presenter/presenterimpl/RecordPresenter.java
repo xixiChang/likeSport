@@ -71,8 +71,14 @@ public class RecordPresenter extends BasePresenter {
         mCompositeSubscription.add(subscribeData());
     }
 
-    public void getTypeSum(String user_id){
-        resultObservable = (Observable) requestRecord.getTypeSum(user_id);
+    public void getTypeSumDay(String user_id){
+        resultObservable = (Observable) requestRecord.getTypeSumDay(user_id);
+        mCompositeSubscription.add(subscribeData());
+    }
+
+
+    public void getTypeSumAll(String user_id){
+        resultObservable = (Observable) requestRecord.getTypeSumAll(user_id);
         mCompositeSubscription.add(subscribeData());
     }
 }

@@ -53,7 +53,7 @@
         <activity
             android:name=".activity.MsgSettingActivity"
             android:label="@string/title_activity_msg_setting" />
-        <activity android:name=".activity.LoginActivity"></activity>
+        <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.TestActivity" />
         <activity android:name=".activity.WelcomeActivity">
@@ -74,7 +74,7 @@
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote"></service>
+            android:process=":remote" />
 
         <activity
             android:name=".activity.NewCreateActivity"
@@ -98,7 +98,8 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".activity.JoinerActivity"></activity>
+        <activity android:name=".activity.JoinerActivity" />
+        <activity android:name=".activity.Test2Activity"></activity>
     </application>
 
 </manifest>

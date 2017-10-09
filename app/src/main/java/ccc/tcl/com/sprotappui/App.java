@@ -5,12 +5,15 @@ import android.content.SharedPreferences;
 import android.support.multidex.MultiDexApplication;
 
 import com.alibaba.mobileim.YWAPI;
+import com.alibaba.mobileim.aop.AdviceBinder;
+import com.alibaba.mobileim.aop.PointCutEnum;
 import com.alibaba.wxlib.util.SysUtil;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.lcodecore.tkrefreshlayout.header.SinaRefreshView;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 
+import ccc.tcl.com.sprotappui.customui.CustomConversationListUI;
 import ccc.tcl.com.sprotappui.data.UserInfo;
 
 import static ccc.tcl.com.sprotappui.constant.URLConstant.BAICHUAN_APP_KEY;
@@ -61,6 +64,8 @@ public class App extends MultiDexApplication {
         }
         if (SysUtil.isMainProcess()) {
             YWAPI.init(this, BAICHUAN_APP_KEY);
+            AdviceBinder.bindAdvice(PointCutEnum.CONVERSATION_FRAGMENT_UI_POINTCUT,
+                    CustomConversationListUI.class);
         }
     }
     /**

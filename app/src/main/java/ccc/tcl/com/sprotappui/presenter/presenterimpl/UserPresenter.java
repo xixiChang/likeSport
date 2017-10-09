@@ -10,7 +10,6 @@ import ccc.tcl.com.sprotappui.internet.RequestUser;
 import ccc.tcl.com.sprotappui.presenter.BasePresenter;
 import rx.Observable;
 
-
 /**
  * Created by user on 17-9-13.
  */

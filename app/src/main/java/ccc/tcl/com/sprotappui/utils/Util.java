@@ -50,4 +50,15 @@ public class Util {
         return para == null || "".equals(para);
     }
 
+    public static String getSpeed(String dis, String time){
+        double s = Integer.parseInt(time)/Integer.parseInt(dis);
+        int m = (int) Math.floor(s);
+        int ss = (int) (60 * (s - m));
+        if (ss == 60){
+            m ++;
+            ss = 0;
+        }
+        return m + "'" + ss + "''";
+    }
+
 }

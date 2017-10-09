@@ -9,7 +9,7 @@ public final class URLConstant {
     public final static int DEFAULT_TIMEOUT = 5;
 
 //    public final static String Base_Url = "http://119.29.95.86:8080/";
-    public final static String Base_Url = "http://10.92.34.187:8080/";
+    public final static String Base_Url = "http://10.92.34.142:8080/";
 
 
     public final static String User_Register = "/user/register";
@@ -50,7 +50,8 @@ public final class URLConstant {
     public final static String Record_Query_Details = "/record/query/details";
     public final static String Record_Query_MAX = "/record/query/max";
     public final static String Record_Query_MaxForDay = "/record/query/maxforday";
-    public final static String Record_Query_TypeSum = "/record/query/gettypesum";
+    public final static String Record_Query_TypeSumDay = "/record/query/gettypesumforday";
+    public final static String Record_Query_TypeSumAll = "/record/query/gettypesumall";
 
     public final static String Record_Rating = "/record/rating";
 

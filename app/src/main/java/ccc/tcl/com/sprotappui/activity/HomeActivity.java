@@ -46,9 +46,10 @@ public class HomeActivity extends BaseActivity {
     private static final String TAG = "HomeActivity";
 
     private String[] mTitles = {"运动", "运动圈", "消息", "我的"};
-    private int[] mIconUnselectIds = {
+    private int[] mIconUnSelectIds = {
             R.mipmap.table_run_unclick, R.mipmap.tab_circle_unclick,
             R.mipmap.tab_message_unclick, R.mipmap.tab_mine_unclick};
+
     private int[] mIconSelectIds = {
             R.mipmap.table_run_click, R.mipmap.tab_circle_click,
             R.mipmap.tab_message_click, R.mipmap.tab_mine_click};
@@ -66,8 +67,8 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.activity_home);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         super.setToolBar(toolbar, R.string.toolbar_name_sport, false);
-        initIMConnect();
         initView();
+        initIMConnect();
         //setFullScreen(true);
     }
 
@@ -96,7 +97,7 @@ public class HomeActivity extends BaseActivity {
         fragmentManager = getSupportFragmentManager();
 
         for (int i = 0; i < mTitles.length; i++) {
-            mTabEntities.add(new TabEntity(mTitles[i], mIconSelectIds[i], mIconUnselectIds[i]));
+            mTabEntities.add(new TabEntity(mTitles[i], mIconSelectIds[i], mIconUnSelectIds[i]));
         }
 
         mDecorView = getWindow().getDecorView();
@@ -223,7 +224,7 @@ public class HomeActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.more:
-                startActivity(new Intent(mContext, TestActivity.class));
+                startActivity(new Intent(mContext, Test2Activity.class));
                 return true;
             default:
                 break;

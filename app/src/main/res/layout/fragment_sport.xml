@@ -1,9 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ccc.tcl.com.sprotappui.fragment.SportCircleFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragment.SportFragment">
 
     <!--<ccc.tcl.com.sprotappui.customui.ToolBar-->
         <!--android:id="@+id/toolbar"-->
