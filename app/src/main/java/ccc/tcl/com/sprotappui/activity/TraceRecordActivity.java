@@ -86,7 +86,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 	private LinearLayout progressBarArea;
 	private LinearLayout endShowArea;
 	private LinearLayout distanceMArea;
-
+	private LinearLayout stepArea;
 	private TextView tvDistance;
 	private TextView endDistance;
 	private TextView nianYueRi;
@@ -110,8 +110,11 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 	LocationClient mLocClient;
 	public MyLocationListenner myListener = new MyLocationListenner();
 	private int mCurrentDirection = 0;
+	/*卡路里计算公式系数，K0为步行，K1为跑步，K2为骑行*/
+	private static final double K0=0.8214,K1=1.036,K2=0.6142,WEIGHT=60;
 	private double mCurrentLat = 0.0;
 	private double mCurrentLon = 0.0;
+	private double K = 0.0;
 	private Record record;
 	MapView mMapView;
 	BaiduMap mBaiduMap;
@@ -123,7 +126,8 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 	private SensorManager mSensorManager;
 	private static final String TAG ="add TraceRecord";
 	private String strDistanceM,speedMSStr,totalSecondStr;
-	private  int distanceMi,totalSecondi,speedMSi;
+	private String sportType;
+	private  int distanceMi,totalSecondi,speedMSi,typei,calorie;
 
 	/*起点图标*/
 	BitmapDescriptor startBD;
@@ -191,6 +195,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		progressBarArea = (LinearLayout) findViewById(R.id.progressBarArea);
 		endShowArea = (LinearLayout) findViewById(R.id.endShowArea);
 		distanceMArea = (LinearLayout) findViewById(R.id.distanceMArea);
+		stepArea= (LinearLayout) findViewById(R.id.stepArea);
 		top = (RelativeLayout) findViewById(R.id.top);
 		share = (RelativeLayout) findViewById(R.id.share);
 		back = (RelativeLayout) findViewById(R.id.back);
@@ -387,7 +392,8 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		record.setSpent_time(totalSecondi);
 		record.setMean_speed(speedMSi);
 		record.setStep(StepDetector.CURRENT_STEP);
-		record.setType(0);
+		record.setType(typei);
+		record.setCalorie(calorie);
 
 		Log.d(TAG, "addRecordData: date>>> " + record.getDate());
 
@@ -424,14 +430,24 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		distanceMArea.setVisibility(View.GONE);
 		endShowArea.setVisibility(View.VISIBLE);
 		top.setVisibility(View.VISIBLE);
-//		显示用户名
+		//显示用户名
 		tvUser.setText(App.userInfo.getName());
-//		显示用户头像
-//		userPic.setImageResource();
-//		显示步数
-		String strStep = String.valueOf(StepDetector.CURRENT_STEP);
-		tvStep.setText(strStep);
-//		显示日期
+		//显示用户头像
+		//userPic.setImageResource();
+
+		/*获取上个页面用户选择的运动类型type*/
+		Intent intent = getIntent();
+		sportType = intent.getStringExtra("type");
+		typei=Integer.parseInt(sportType);
+		/*骑行不显示步数*/
+		if(typei == 2){
+			stepArea.setVisibility(View.GONE);
+		}else {
+		//显示步数
+			String strStep = String.valueOf(StepDetector.CURRENT_STEP);
+			tvStep.setText(strStep);
+		}
+		//显示日期
 		nianYueRi.setText(getDate());
 	}
 
@@ -512,6 +528,21 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 							distanceM = distanceM + BaiduMapUtil.GetDistance(lon1, lat1, lon2, lat2);
 						}
 						distanceMi=(int) distanceM;
+
+
+						/*根据运动类型计算消耗卡路里*/
+						switch (typei) {
+							case 0:
+								K = K0;
+							case 1:
+								K = K1;
+							case 2:
+								K = K2;
+								break;
+						}
+						/*运动卡路里计算公式*/
+						double calorieSum=WEIGHT * distanceMi * K;
+						calorie=(int) calorieSum;
 						/*米转换成公里*/
 						double distanceKM = distanceM / 1000;
 						/*显示米*/
