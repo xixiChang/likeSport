@@ -934,7 +934,6 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 
 	}
 
-
 	/**
 	 * SportAppView<ResponseResult<?>>
 	 *     ?对应调用方法（ｐａｃｋａｇｅ－>internet）的返回类型
