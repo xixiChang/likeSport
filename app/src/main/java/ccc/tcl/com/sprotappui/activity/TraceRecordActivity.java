@@ -63,9 +63,12 @@ import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.db.AppDBHelper;
 import ccc.tcl.com.sprotappui.db.SQLStatement;
 import ccc.tcl.com.sprotappui.model.Record;
+import ccc.tcl.com.sprotappui.model.ResponseResult;
+import ccc.tcl.com.sprotappui.presenter.presenterimpl.RecordPresenter;
 import ccc.tcl.com.sprotappui.service.StepService;
 import ccc.tcl.com.sprotappui.step_detector.StepDetector;
 import ccc.tcl.com.sprotappui.ui.SlideView;
+import ccc.tcl.com.sprotappui.ui.SportAppView;
 import ccc.tcl.com.sprotappui.utils.BaiduMapUtil;
 import static ccc.tcl.com.sprotappui.db.SQLStatement.DBName;
 
@@ -137,6 +140,9 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 	}
 
+
+
+	private RecordPresenter recordPresenter;
 
 
 
@@ -264,6 +270,9 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 
 
 
+
+
+
 	/*点击相应按钮区域*/
 	@Override
 	public void onClick(View view) {
@@ -381,6 +390,8 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		record.setType(0);
 
 		Log.d(TAG, "addRecordData: date>>> " + record.getDate());
+
+		recordPresenter.uploadRecord(record);
 
 	}
 
@@ -883,7 +894,37 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
 				SensorManager.SENSOR_DELAY_UI);
 
+
+        /**
+		 * 初始化RecordPresrnter
+		 */
+		recordPresenter.onCreate();
+		recordPresenter.attachView(sportAppView);
+
 	}
+
+
+	/**
+	 * SportAppView<ResponseResult<?>>
+	 *     ?对应调用方法（ｐａｃｋａｇｅ－>internet）的返回类型
+	 */
+	private SportAppView<ResponseResult> sportAppView = new SportAppView<ResponseResult>() {
+		@Override
+		public void onSuccess(ResponseResult response) {
+			if (response.isSuccess()){
+				Log.d(TAG, "onSuccess: ");
+				Toast.makeText(TraceRecordActivity.this, "上传运动记录成功", Toast.LENGTH_SHORT).show();
+			}
+			else {
+				Log.d(TAG, "onSuccess: " + response.getMsg());//数据引起
+			}
+		}
+
+		@Override
+		public void onRequestError(String msg) {
+			Log.e(TAG, "onRequestError: " + msg);
+		}
+	};
 
 	@Override
 	protected void onStop() {
@@ -914,6 +955,14 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		finishBD.recycle();
 		super.onDestroy();
 		unregisterReceiver(mReceiver);
+
+
+		recordPresenter.onStop();
 	}
+
+
+	/**
+	 * 在合理的逻辑下调用方法：recordPresenter.uploadRecord()
+	 */
 
 }

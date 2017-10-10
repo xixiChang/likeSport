@@ -2,7 +2,7 @@ package ccc.tcl.com.sprotappui.model;
 
 public class ResponseResult<T> {
     private String status;//成功与否状态标志
-    private String msg;//
+    private String msg;//错误消息（ｗｈｙ）
     private T result;
     private String type;
 
