@@ -6,7 +6,7 @@
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$APPLICATION_HOME_DIR$/gradle/gradle-2.14.1/caches/modules-2/files-2.1/com.flyco.tablayout/FlycoTabLayout_Lib/1.5.0/394b18586cd26fcac6963fe4caee531af374217f/FlycoTabLayout_Lib-1.5.0-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.flyco.tablayout/FlycoTabLayout_Lib/1.5.0/394b18586cd26fcac6963fe4caee531af374217f/FlycoTabLayout_Lib-1.5.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

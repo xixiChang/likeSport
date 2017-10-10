@@ -6,17 +6,19 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+//import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import ccc.tcl.com.sprotappui.App;
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.adapter.UserSportTeamItem;
-import ccc.tcl.com.sprotappui.constant.URLConstant;
+import ccc.tcl.com.sprotappui.customui.ToolBar;
 import ccc.tcl.com.sprotappui.data.UserInfo;
 import ccc.tcl.com.sprotappui.model.PlatFormActivity;
 import ccc.tcl.com.sprotappui.model.ResponseResult;
@@ -26,10 +28,7 @@ import ccc.tcl.com.sprotappui.ui.SportAppView;
 import ccc.tcl.com.sprotappui.utils.Util;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static ccc.tcl.com.sprotappui.service.IMService.mIMKit;
-
 public class ContactActivity extends BaseActivity {
-    private static final String TAG = "ContactActivity";
     private Toolbar toolBar;
     private UserInfo userInfo;
     private RecordPresenter recordPresenter;
@@ -76,6 +75,7 @@ public class ContactActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact);
         toolBar = (Toolbar) findViewById(R.id.contact_toolbar);
+
 
         Intent intent0 = getIntent();
         userInfo = (UserInfo) intent0.getSerializableExtra("userInfo");
@@ -133,8 +133,10 @@ public class ContactActivity extends BaseActivity {
         recordPresenter.attachView(userView);
         activityPresenter.attachView(activityView);
         if (!Util.isEmpty(userInfo.getId()))
-            recordPresenter.getTypeSumAll(userInfo.getId());
-        //presenter;
+//            recordPresenter.getTypeSum(userInfo.getId());
+            //presenter;
+        if (!Util.isEmpty(userInfo.getId()))
+            activityPresenter.getMyActivity(userInfo.getId());
         super.onResume();
     }
 
@@ -144,25 +146,10 @@ public class ContactActivity extends BaseActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.add_contact){
-            openChatUI();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     @Override
     protected void onDestroy() {
         recordPresenter.onStop();
         activityPresenter.onStop();
         super.onDestroy();
-    }
-
-    private void openChatUI(){
-        Intent intent = mIMKit.getChattingActivityIntent(userInfo.getIm_uid(), URLConstant.BAICHUAN_APP_KEY);
-        startActivity(intent);
     }
 }

@@ -1,22 +1,30 @@
 package ccc.tcl.com.sprotappui.activity;
 
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import ccc.tcl.com.sprotappui.App;
 import ccc.tcl.com.sprotappui.R;
+import ccc.tcl.com.sprotappui.constant.URLConstant;
 import ccc.tcl.com.sprotappui.model.Record;
 import ccc.tcl.com.sprotappui.model.ResponseResult;
 import ccc.tcl.com.sprotappui.presenter.presenterimpl.FileUploadPresenter;
 import ccc.tcl.com.sprotappui.presenter.presenterimpl.RecordPresenter;
 import ccc.tcl.com.sprotappui.ui.SportAppView;
+import ccc.tcl.com.sprotappui.utils.TimeTranslator;
+
+/*import static ccc.tcl.com.sprotappui.service.IMService.mIMKit;*/
 
 @Deprecated
 public class TestActivity extends BaseActivity {
@@ -33,7 +41,6 @@ public class TestActivity extends BaseActivity {
     private SportAppView<ResponseResult> sportAppView = new SportAppView<ResponseResult>() {
         @Override
         public void onSuccess(ResponseResult response) {
-            //判断response.ｉsSuccess
             Log.d(TAG, "onSuccess: " + response.toString());
         }
 
@@ -89,7 +96,7 @@ public class TestActivity extends BaseActivity {
 //                    return;
 //                }
                fileUploadPresenter.upLoadFile(file, "head");
-                recordPresenter.uploadRecord(record);//上传运动记录
+                recordPresenter.uploadRecord(record);
             }
         });
     }

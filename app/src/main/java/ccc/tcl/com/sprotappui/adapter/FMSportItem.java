@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 import com.flyco.labelview.LabelView;
 
 import java.util.List;
@@ -51,7 +51,7 @@ public class FMSportItem extends RecyclerView.Adapter<FMSportItem.ViewHolder> {
         holder.hotValue.setText(activity.getHot_value());
         if (activity.isNew())
             holder.label.setVisibility(View.VISIBLE);
-        Glide.with(holder.itemView).load(activity.getImage_url()).into(holder.image);
+//        Glide.with(holder.itemView).load(activity.getImage_url()).into(holder.image);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

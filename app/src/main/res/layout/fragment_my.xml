@@ -107,7 +107,7 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <com.dl7.tag.TagView
+   <!--<com.dl7.tag.TagView
         android:id="@+id/user_logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -120,7 +120,7 @@
         app:tag_vertical_padding="@dimen/button_padding_top"
         app:tag_horizontal_padding="@dimen/button_padding_left"
         app:tag_press_feedback="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"/>-->
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/choose_items"

@@ -8,6 +8,7 @@ import ccc.tcl.com.sprotappui.model.Record;
 import ccc.tcl.com.sprotappui.model.ResponseResult;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 import rx.Observable;
@@ -33,6 +34,10 @@ public interface RequestRecord {
 
     @POST(value = Record_Upload)
     Observable<ResponseResult> upload(@Body Record record);
+
+/*    @POST(value = Record_Insert)
+    @FormUrlEncoded
+    Observable<ResponseResult> insertRecord(@FieldMap Map<String, String> recordInfo);*/
 
     /**
      * 获取用户所有历史记录的总值

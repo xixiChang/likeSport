@@ -2,15 +2,15 @@ package ccc.tcl.com.sprotappui.service;
 
 import android.util.Log;
 
-import com.alibaba.mobileim.YWAPI;
-import com.alibaba.mobileim.YWIMKit;
+/*import com.alibaba.mobileim.YWAPI;
+import com.alibaba.mobileim.YWIMKit;*/
 
 import java.io.IOException;
 
 import ccc.tcl.com.sprotappui.App;
 import ccc.tcl.com.sprotappui.constant.URLConstant;
-import com.alibaba.mobileim.YWAPI;
-import com.alibaba.mobileim.YWIMKit;
+/*import com.alibaba.mobileim.YWAPI;
+import com.alibaba.mobileim.YWIMKit;*/
 
 import ccc.tcl.com.sprotappui.App;
 import ccc.tcl.com.sprotappui.constant.URLConstant;
@@ -20,12 +20,12 @@ import ccc.tcl.com.sprotappui.constant.URLConstant;
  */
 
 public class IMService {
-    public static YWIMKit mIMKit;
+/*    public static YWIMKit mIMKit;*/
     private static final String TAG = "IMService";
 
     public IMService(){
         try {
-            mIMKit = YWAPI.getIMKitInstance(App.userInfo.getIm_uid(), URLConstant.BAICHUAN_APP_KEY);
+            /*mIMKit = YWAPI.getIMKitInstance(App.userInfo.getIm_uid(), URLConstant.BAICHUAN_APP_KEY);*/
         }catch (Exception e){
             Log.d(TAG, "IMService: " + e.getMessage());
         }

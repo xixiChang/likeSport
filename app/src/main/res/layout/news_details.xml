@@ -36,7 +36,7 @@
                 android:scaleType="centerCrop"
                 android:src="@mipmap/activity"
                 app:layout_collapseMode="parallax" />
-            <TextView
+           <!-- <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
@@ -44,7 +44,7 @@
                 android:textSize="@dimen/activity_content_size_big"
                 android:background="@color/skyblue"
                 android:alpha="0.6"
-                android:visibility="gone"/>
+                android:visibility="gone"/>-->
             <android.support.v7.widget.Toolbar
                 android:id="@+id/news_details_toolbar"
                 android:layout_width="match_parent"
@@ -168,7 +168,7 @@
                 android:text="温馨提示"
                 android:textSize="@dimen/activity_content_size_mid" />
 
-        <com.dl7.tag.TagView
+        <!--<com.dl7.tag.TagView
             android:id="@+id/join"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -184,7 +184,7 @@
             app:tag_border_color="@color/red"
             app:tag_shape="arc"
             app:tag_press_feedback="true"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"/>-->
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

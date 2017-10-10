@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
-import com.dl7.tag.TagView;
+/*import com.dl7.tag.TagView;*/
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
 
@@ -34,7 +34,7 @@ public class MyFragment extends Fragment {
     private RecyclerView recyclerView;
     private static List<ChooseItemModel> itemsInfos;
 
-    private TagView logout;
+/*    private TagView logout;*/
 
     private ActionSheetDialog logoutDialog;
     private Context context;
@@ -73,14 +73,14 @@ public class MyFragment extends Fragment {
 
     private void initView(View view) {
         recyclerView = (RecyclerView) view.findViewById(R.id.choose_items);
-        logout = (TagView) view.findViewById(R.id.user_logout_button);
+       /* logout = (TagView) view.findViewById(R.id.user_logout_button);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 logoutWindow();
             }
-        });
+        });*/
     }
 
     private void setRecyclerViewAdapter() {

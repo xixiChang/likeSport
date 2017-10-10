@@ -12,14 +12,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.TextView;
 
-import com.alibaba.mobileim.IYWLoginService;
-import com.alibaba.mobileim.YWLoginParam;
-import com.alibaba.mobileim.channel.event.IWxCallback;
-import com.flyco.dialog.listener.OnOperItemClickL;
-import com.flyco.dialog.widget.NormalListDialog;
+//import com.alibaba.mobileim.IYWLoginService;
+//import com.alibaba.mobileim.YWLoginParam;
+//import com.alibaba.mobileim.channel.event.IWxCallback;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
@@ -38,10 +34,10 @@ import ccc.tcl.com.sprotappui.service.IMService;
 import ccc.tcl.com.sprotappui.utils.ViewFindUtils;
 
 import static ccc.tcl.com.sprotappui.App.userInfo;
-import static ccc.tcl.com.sprotappui.service.IMService.mIMKit;
+//import static ccc.tcl.com.sprotappui.service.IMService.mIMKit;
 
 
-public class HomeActivity extends BaseActivity implements View.OnClickListener {
+public class HomeActivity extends BaseActivity {
 
     private Context mContext = this;
     private ArrayList<Fragment> mFragments = new ArrayList<>();
@@ -50,7 +46,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = "HomeActivity";
 
     private String[] mTitles = {"运动", "运动圈", "消息", "我的"};
-    private String[] types = {"步行", "跑步", "骑行"};
     private int[] mIconUnSelectIds = {
             R.mipmap.table_run_unclick, R.mipmap.tab_circle_unclick,
             R.mipmap.tab_message_unclick, R.mipmap.tab_mine_unclick};
@@ -63,11 +58,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     private ViewPager mViewPager;
     private CommonTabLayout mTabLayout;
     private Toolbar toolbar;
-    private TextView sportTypeSpinner;
     private FragmentManager fragmentManager;
-
-    private NormalListDialog normalListDialog;
-    private SportFragment sportFragment;
 
 
     @Override
@@ -75,7 +66,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        super.setToolBar(toolbar, "", false);
+        super.setToolBar(toolbar, R.string.toolbar_name_sport, false);
         initView();
         initIMConnect();
         //setFullScreen(true);
@@ -83,9 +74,9 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
 
     private void initIMConnect() {
-        if (mIMKit == null){
-            new IMService();
-        }
+//        if (mIMKit == null){
+//            new IMService();
+//        }
         try {
             connect();
         } catch (Exception e) {
@@ -94,17 +85,14 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void initView() {
-        sportTypeSpinner = (TextView) findViewById(R.id.home_sport_type);
-
-        sportFragment = SportFragment.getInstance();
-        mFragments.add(sportFragment);
+        mFragments.add(SportFragment.getInstance());
         SportCircleFragment sportCircleFragment = SportCircleFragment.getInstance();
         mFragments.add(sportCircleFragment);
-        if (mIMKit != null){
-            mFragments.add(mIMKit.getConversationFragment());
-        }else {
-            mFragments.add(SimpleCardFragment.getInstance("Switch ViewPager " + mTitles[2]));
-        }
+//        if (mIMKit != null){
+//            mFragments.add(mIMKit.getConversationFragment());
+//        }else {
+//            mFragments.add(SimpleCardFragment.getInstance("Switch ViewPager " + mTitles[2]));
+//        }
         mFragments.add(MyFragment.getInstance());
         fragmentManager = getSupportFragmentManager();
 
@@ -122,26 +110,39 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         mTabLayout.setMsgMargin(0, -5, 5);
 
 
-        sportTypeSpinner.setOnClickListener(this);
+
+//        Window window = this.getWindow();
+//        //设置透明状态栏,这样才能让 ContentView 向上
+//        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//
+//        //需要设置这个 flag 才能调用 setStatusBarColor 来设置状态栏颜色
+//        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+//        //设置状态栏颜色
+//        window.setStatusBarColor(Color.TRANSPARENT);
+//
+//        ViewGroup mContentView = (ViewGroup) this.findViewById(Window.ID_ANDROID_CONTENT);
+//        View mChildView = mContentView.getChildAt(0);
+//        if (mChildView != null) {
+//            //注意不是设置 ContentView 的 FitsSystemWindows, 而是设置 ContentView 的第一个子 View . 使其不为系统 View 预留空间.
+//            ViewCompat.setFitsSystemWindows(mChildView, false);
+//        }
     }
 
     private Random mRandom = new Random();
 
     private void showToolBar(int position) {
+        Log.d(TAG, "showToolBar: ");
         switch (position) {
             case 0:
-                toolbar.setVisibility(View.VISIBLE);
-                sportTypeSpinner.setVisibility(View.VISIBLE);
-                toolbar.setTitle("");
+                toolbar.setVisibility(View.GONE);
+//                toolbar.setTitle(R.string.toolbar_name_sport);
                 break;
             case 1:
                 toolbar.setVisibility(View.VISIBLE);
-                sportTypeSpinner.setVisibility(View.GONE);
                 toolbar.setTitle(R.string.toolbar_name_sport_circle);
                 break;
             case 2:
                 toolbar.setVisibility(View.VISIBLE);
-                sportTypeSpinner.setVisibility(View.GONE);
                 toolbar.setTitle(R.string.toolbar_name_contacts);
                 break;
             case 3:
@@ -150,9 +151,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
             default:
                 break;
         }
-
-        if (normalListDialog != null && normalListDialog.isShowing())
-            normalListDialog.superDismiss();
     }
 
     private void setTabLayout() {
@@ -194,43 +192,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         mViewPager.setCurrentItem(0);
     }
 
-    /**
-     * Called when a view has been clicked.
-     *
-     * @param v The view that was clicked.
-     */
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.home_sport_type:
-                showPopupWindow();
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void showPopupWindow() {
-        if (normalListDialog == null){
-            normalListDialog = new NormalListDialog(this, types);
-            normalListDialog.isTitleShow(false);
-            normalListDialog.widthScale(0.7f);
-            normalListDialog.layoutAnimation(null);
-//            normalListDialog.showAtLocation(Gravity.TOP, 0, 50);
-            normalListDialog.setOnOperItemClickL(new OnOperItemClickL() {
-                @Override
-                public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    if (normalListDialog.isShowing())
-                        normalListDialog.superDismiss();
-                    sportTypeSpinner.setText(types[position]);
-                    sportFragment.setSport_Type(position);
-                }
-            });
-
-        }
-        normalListDialog.show();
-    }
-
     private class MyPagerAdapter extends FragmentPagerAdapter {
         public MyPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -265,8 +226,9 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
             case R.id.more:
                 //sportCircleFragment.update();
                 //startActivity(new Intent(mContext, TestActivity.class));
-                Intent create = new Intent(this,Test2Activity.class);
-                startActivity(create);
+//                Intent create = new Intent(this,PickPictureActivity.class);
+//                startActivity(create);
+                startActivity(new Intent(mContext, TraceRecordActivity.class));
                 return true;
             default:
                 break;
@@ -275,28 +237,28 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void connect() {
-        IYWLoginService loginService = mIMKit.getLoginService();
-        YWLoginParam loginParam = YWLoginParam.createLoginParam(userInfo.getIm_uid(),
-                userInfo.getSession());
-        loginService.login(loginParam, new IWxCallback() {
-
-            @Override
-            public void onSuccess(Object... arg0) {
-                Log.i(TAG, "onSuccess: " + arg0);
-            }
-
-            @Override
-            public void onProgress(int arg0) {
-                // TODO Auto-generated method stub
-                Log.d(TAG, "onProgress: ");
-            }
-
-            @Override
-            public void onError(int errCode, String description) {
-                //如果登录失败，errCode为错误码,description是错误的具体描述信息
-                Log.e(TAG, "onError: " + errCode + ">" + description);
-            }
-        });
+//        IYWLoginService loginService = mIMKit.getLoginService();
+//        YWLoginParam loginParam = YWLoginParam.createLoginParam(userInfo.getIm_uid(),
+//                userInfo.getSession());
+//        loginService.login(loginParam, new IWxCallback() {
+//
+//            @Override
+//            public void onSuccess(Object... arg0) {
+//                Log.i(TAG, "onSuccess: " + arg0);
+//            }
+//
+//            @Override
+//            public void onProgress(int arg0) {
+//                // TODO Auto-generated method stub
+//                Log.d(TAG, "onProgress: ");
+//            }
+//
+//            @Override
+//            public void onError(int errCode, String description) {
+//                //如果登录失败，errCode为错误码,description是错误的具体描述信息
+//                Log.e(TAG, "onError: " + errCode + ">" + description);
+//            }
+//        });
     }
 
 

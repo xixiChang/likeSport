@@ -139,7 +139,7 @@
             android:textSize="@dimen/activity_content_size_big" />
     </RelativeLayout>
 
-    <com.dl7.tag.TagView
+    <!--<com.dl7.tag.TagView
         android:id="@+id/login_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -155,6 +155,6 @@
         app:tag_text="开始运动"
         app:tag_text_color="@color/white"
         app:tag_text_size="@dimen/activity_content_size_big"
-        app:tag_vertical_padding="@dimen/button_padding_top" />
+        app:tag_vertical_padding="@dimen/button_padding_top" />-->
 
 </RelativeLayout>

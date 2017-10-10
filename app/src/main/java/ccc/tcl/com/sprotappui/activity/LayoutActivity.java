@@ -11,8 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.dl7.tag.TagView;
+//import com.bumptech.glide.Glide;
+//import com.dl7.tag.TagView;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
@@ -36,7 +36,7 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
     TextView distance;
     TextView details;
     TextView joinerNum;
-    TagView joinButton;
+//    TagView joinButton;
     ActivityPresenter loadPresenter;
     ActivityPresenter joinPresenter;
     PlatFormActivity activity;
@@ -49,8 +49,8 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
                 if (response.getType().equals("details"))
                     handleActivityDetails(response.getResult());
                 if (response.getType().equals("join")) {
-                    joinButton.setText("已参加");
-                    joinButton.setEnabled(false);
+//                    joinButton.setText("已参加");
+//                    joinButton.setEnabled(false);
                     Toast.makeText(LayoutActivity.this, "已加入肯德基豪华午餐", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -89,8 +89,8 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
         setContentView(R.layout.news_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.news_details_toolbar);
         super.setToolBar(toolbar, R.string.activity_main_title,true);
-        joinButton = (TagView) findViewById(R.id.join);
-        joinButton.setOnClickListener(this);
+//        joinButton = (TagView) findViewById(R.id.join);
+//        joinButton.setOnClickListener(this);
         headImages = (FrameLayout) findViewById(R.id.head_images);
         headImages.setOnClickListener(this);
         imageView = (CircleImageView) findViewById(R.id.circleImageView1);
@@ -108,7 +108,7 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
         Intent intent = getIntent();
         activity = intent.getParcelableExtra("data");
         name.setText(activity.getName());
-        Glide.with(this).load(activity.getImage_url()).into(photo);
+//        Glide.with(this).load(activity.getImage_url()).into(photo);
         hotValue.setText(activity.getHot_value());
         loadPresenter = new ActivityPresenter();
         joinPresenter = new ActivityPresenter();
@@ -139,9 +139,9 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
         details.setText(result.getDetails());
         joinerNum.setText("参与者 （" + result.getJoin_num() + "/" + result.getJoin_num_all() + "）");
         if (result.getJoiner().contains(result.getUser_id())) {
-            joinButton.setText("已参加");
-            //joinButton.setClickable(false);
-            joinButton.setEnabled(false);
+//            joinButton.setText("已参加");
+//            //joinButton.setClickable(false);
+//            joinButton.setEnabled(false);
         }
 
     }
@@ -149,9 +149,9 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.join:
-                loadPresenter.joinActivity(String.valueOf(activity.getAt_server_id()));
-                break;
+//            case R.id.join:
+//                loadPresenter.joinActivity(String.valueOf(activity.getAt_server_id()));
+//                break;
             case R.id.head_images:
                 Intent intent = new Intent(this,JoinerActivity.class);
                 intent.putExtra("users", activity.getJoiner());
@@ -213,7 +213,7 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
     }
 
     private void initView(){
-        joinButton = (TagView) findViewById(R.id.join);
+//        joinButton = (TagView) findViewById(R.id.join);
         imageView = (CircleImageView) findViewById(R.id.circleImageView1);
         photo = (ImageView) findViewById(R.id.news_details_photo);
         name = (TextView) findViewById(R.id.item_fm_sport_name);
@@ -227,7 +227,7 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
         Intent intent = getIntent();
         activity = intent.getParcelableExtra("data");
         name.setText(activity.getName());
-        Glide.with(this).load(activity.getImage_url()).into(photo);
+//        Glide.with(this).load(activity.getImage_url()).into(photo);
         hotValue.setText(activity.getHot_value());
         loadPresenter = new ActivityPresenter();
 

@@ -86,18 +86,18 @@ dependencies {
     compile 'com.flyco.roundview:FlycoRoundView_Lib:1.1.2@aar'
     compile 'com.flyco.tablayout:FlycoTabLayout_Lib:1.5.0@aar'
     compile 'de.hdodenhof:circleimageview:2.1.0'
-    compile 'com.github.Rukey7:TagLayout:1.0.6'
+//    compile 'com.github.Rukey7:TagLayout:1.0.6'
     //下拉刷新
-    compile 'com.lcodecorex:tkrefreshlayout:1.0.7'
+//    compile 'com.lcodecorex:tkrefreshlayout:1.0.7'
     //图表
-    compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
+//    compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
     compile 'com.flyco.labelview:FlycoLabelView_Lib:1.0.2@aar'
     compile 'com.flyco.dialog:FlycoDialog_Lib:1.2.2@aar'
     compile 'com.flyco.animation:FlycoAnimation_Lib:1.0.0@aar'
-    compile 'com.alibaba.mobileim:IMCore:2.0.2.1@aar'
-    compile 'com.alibaba.mobileim:IMKit:2.0.2.1@aar'
-    compile 'com.github.bumptech.glide:glide:4.1.1'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.1.1'
+//    compile 'com.alibaba.mobileim:IMCore:2.0.2.1@aar'
+//    compile 'com.alibaba.mobileim:IMKit:2.0.2.1@aar'
+//    compile 'com.github.bumptech.glide:glide:4.1.1'
+//    annotationProcessor 'com.github.bumptech.glide:compiler:4.1.1'
 //    百度地图
     compile files('libs/baidumapapi_map_v4_3_1.jar')
 }

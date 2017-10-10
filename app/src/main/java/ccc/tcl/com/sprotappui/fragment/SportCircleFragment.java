@@ -12,8 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
-import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
+/*import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
+import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;*/
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,7 @@ public class SportCircleFragment extends Fragment {
     private static final String Request_Type_Flush = "onRefresh";
 
 
-    private TwinklingRefreshLayout mPullToRefreshView;
+/*    private TwinklingRefreshLayout mPullToRefreshView;*/
     private RecyclerView recyclerView;
     private List<PlatFormActivity> platFormActivityList = new ArrayList<>();
     private Context context;
@@ -44,8 +44,8 @@ public class SportCircleFragment extends Fragment {
     private SportAppView<ResponseResult<List<PlatFormActivity>>> appView = new SportAppView<ResponseResult<List<PlatFormActivity>>>() {
         @Override
         public void onSuccess(ResponseResult<List<PlatFormActivity>> response) {
-            mPullToRefreshView.finishRefreshing();
-            mPullToRefreshView.finishLoadmore();
+          /*  mPullToRefreshView.finishRefreshing();
+            mPullToRefreshView.finishLoadmore();*/
             if (response.isSuccess()){
                 /**
                  * 刷新
@@ -104,17 +104,17 @@ public class SportCircleFragment extends Fragment {
 
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_sport_circle, container, false);
-        initView(view);
-        return view;
-    }
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//                             Bundle savedInstanceState) {
+//        View view =  inflater.inflate(R.layout.fragment_sport_circle, container, false);
+//        initView(view);
+//        return view;
+//    }
 
     private void initView(View view) {
         recyclerView = (RecyclerView) view.findViewById(R.id.fm_sport_recycler_view);
-        mPullToRefreshView = (TwinklingRefreshLayout) view.findViewById(R.id.fg_sport_circle_pull_to_refresh);
+        /*mPullToRefreshView = (TwinklingRefreshLayout) view.findViewById(R.id.fg_sport_circle_pull_to_refresh);*/
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL, false);
         adapter = new FMSportItem(platFormActivityList);
@@ -132,7 +132,7 @@ public class SportCircleFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
 
-        mPullToRefreshView.setOnRefreshListener(new RefreshListenerAdapter() {
+        /*mPullToRefreshView.setOnRefreshListener(new RefreshListenerAdapter() {
             @Override
             public void onRefresh(TwinklingRefreshLayout refreshLayout) {
                 activityPresenter.getAllByPage(0);
@@ -142,7 +142,7 @@ public class SportCircleFragment extends Fragment {
             public void onLoadMore(TwinklingRefreshLayout refreshLayout) {
                 activityPresenter.getAllByPage(platFormActivityList.size());
             }
-        });
+        });*/
 
 
     }

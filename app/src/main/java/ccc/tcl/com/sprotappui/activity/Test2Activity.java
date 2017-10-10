@@ -7,12 +7,12 @@ import android.widget.Toast;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
+//import com.github.mikephil.charting.charts.BarChart;
+//import com.github.mikephil.charting.components.Legend;
+//import com.github.mikephil.charting.components.XAxis;
+//import com.github.mikephil.charting.data.BarData;
+//import com.github.mikephil.charting.data.BarDataSet;
+//import com.github.mikephil.charting.data.BarEntry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,11 +32,11 @@ public class Test2Activity extends BaseActivity {
     private String[] mTitles = {"周", "年", "总"};
     private int[] nullID = {0, 0, 0};
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
-    private BarChart chart;
-
-    private List<BarEntry> entries = new ArrayList<>();
-    private BarData barData;
-    private BarDataSet barDataSet;
+//    private BarChart chart;
+//
+//    private List<BarEntry> entries = new ArrayList<>();
+//    private BarData barData;
+//    private BarDataSet barDataSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,27 +52,27 @@ public class Test2Activity extends BaseActivity {
     }
 
     private void initData() {
-        entries.add(new BarEntry(1f, 300f));
-        entries.add(new BarEntry(2f, 400f));
-        entries.add(new BarEntry(3f, 350f));
-        entries.add(new BarEntry(4f, 450f));
-        entries.add(new BarEntry(5f, 670f));
-        entries.add(new BarEntry(6f, 900f));
-        entries.add(new BarEntry(7f, 300f));
-        entries.add(new BarEntry(8f, 400f));
-        entries.add(new BarEntry(9f, 350f));
-        entries.add(new BarEntry(20f, 450f));
-        entries.add(new BarEntry(25f, 450f));
-        entries.add(new BarEntry(28f, 450f));
-        entries.add(new BarEntry(30f, 450f));
-
-        barDataSet = new BarDataSet(entries, null);
-        barDataSet.setColor(R.color.blueviolet);
-
-
-        barData = new BarData(barDataSet);
-        chart.setData(barData);
-        chart.invalidate();
+//        entries.add(new BarEntry(1f, 300f));
+//        entries.add(new BarEntry(2f, 400f));
+//        entries.add(new BarEntry(3f, 350f));
+//        entries.add(new BarEntry(4f, 450f));
+//        entries.add(new BarEntry(5f, 670f));
+//        entries.add(new BarEntry(6f, 900f));
+//        entries.add(new BarEntry(7f, 300f));
+//        entries.add(new BarEntry(8f, 400f));
+//        entries.add(new BarEntry(9f, 350f));
+//        entries.add(new BarEntry(20f, 450f));
+//        entries.add(new BarEntry(25f, 450f));
+//        entries.add(new BarEntry(28f, 450f));
+//        entries.add(new BarEntry(30f, 450f));
+//
+//        barDataSet = new BarDataSet(entries, null);
+//        barDataSet.setColor(R.color.blueviolet);
+//
+//
+//        barData = new BarData(barDataSet);
+//        chart.setData(barData);
+//        chart.invalidate();
 
 
         for (int i = 0; i < mTitles.length; i++) {
@@ -81,17 +81,17 @@ public class Test2Activity extends BaseActivity {
     }
 
     private void initView() {
-        chart = (BarChart) findViewById(R.id.chart);
-        chart.setTouchEnabled(false);
-        chart.getXAxis().setDrawGridLines(false);
-        chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
-        chart.getAxisLeft().setDrawGridLines(false);
-        chart.getAxisRight().setEnabled(false);
-
-        chart.setDescription(null);
-
-        Legend legend = chart.getLegend();
-        legend.setEnabled(false);
+//        chart = (BarChart) findViewById(R.id.chart);
+//        chart.setTouchEnabled(false);
+//        chart.getXAxis().setDrawGridLines(false);
+//        chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+//        chart.getAxisLeft().setDrawGridLines(false);
+//        chart.getAxisRight().setEnabled(false);
+//
+//        chart.setDescription(null);
+//
+//        Legend legend = chart.getLegend();
+//        legend.setEnabled(false);
 //        legend.setPosition(Legend.LegendPosition.ABOVE_CHART_CENTER);
 
         mTabLayout = (CommonTabLayout) findViewById(R.id.history_tab);
@@ -106,8 +106,8 @@ public class Test2Activity extends BaseActivity {
             @Override
             public void onTabSelect(int position) {
                 Toast.makeText(Test2Activity.this, position+"", Toast.LENGTH_SHORT).show();
-                getDataFromServer();
-                flushChart();
+//                getDataFromServer();
+//                flushChart();
             }
 
             @Override
@@ -117,17 +117,17 @@ public class Test2Activity extends BaseActivity {
         });
     }
 
-    private void getDataFromServer() {
-        if (entries.size() > 0)
-            entries.remove(0);
-    }
+//    private void getDataFromServer() {
+//        if (entries.size() > 0)
+//            entries.remove(0);
+//    }
 
-    private void flushChart() {
-        barDataSet.notifyDataSetChanged();
-        barData.notifyDataChanged();
-        chart.notifyDataSetChanged();
-        chart.invalidate();
-    }
+//    private void flushChart() {
+//        barDataSet.notifyDataSetChanged();
+//        barData.notifyDataChanged();
+//        chart.notifyDataSetChanged();
+//        chart.invalidate();
+//    }
 
 
 }

@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -47,7 +47,7 @@ public class JoinerItem extends RecyclerView.Adapter<JoinerItem.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Glide.with(holder.itemView).load(data.get(position).getImage_url()).into(holder.image);
+//        Glide.with(holder.itemView).load(data.get(position).getImage_url()).into(holder.image);
         holder.name.setText(data.get(position).getName());
         holder.retain.setText(data.get(position).getRetain());
 

@@ -1,6 +1,6 @@
 package ccc.tcl.com.sprotappui.utils;
 
-import com.alibaba.util.StringUtils;
+//import com.alibaba.util.StringUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,7 +11,7 @@ import java.util.Locale;
 public class TimeTranslator {
 
     public static Date stringToDateTime(String para) {
-        if (!StringUtils.isBlank(para) && para.length() > 20)
+//        if (!StringUtils.isBlank(para) && para.length() > 20)
             para = para.substring(0, 20);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = null;

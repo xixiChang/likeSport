@@ -40,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:text="@string/aliwx_check_code_change"
+
                 android:textSize="@dimen/activity_content_size_big"
                 android:background="@color/skyblue"
                 android:alpha="0.6"/>

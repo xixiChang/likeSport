@@ -4,12 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.multidex.MultiDexApplication;
 
-import com.alibaba.mobileim.YWAPI;
-import com.alibaba.mobileim.aop.AdviceBinder;
-import com.alibaba.mobileim.aop.PointCutEnum;
-import com.alibaba.wxlib.util.SysUtil;
-import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
-import com.lcodecore.tkrefreshlayout.header.SinaRefreshView;
+//import com.alibaba.mobileim.YWAPI;
+//import com.alibaba.mobileim.aop.AdviceBinder;
+//import com.alibaba.mobileim.aop.PointCutEnum;
+//import com.alibaba.wxlib.util.SysUtil;
+//import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
+//import com.lcodecore.tkrefreshlayout.header.SinaRefreshView;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 
@@ -44,10 +44,10 @@ public class App extends MultiDexApplication {
         if (!userID.equals(NO_USER)){
             userInfo.setId(userID);
         }
-        initIMKit();
+//        initIMKit();
         initUmeng();
 
-        TwinklingRefreshLayout.setDefaultHeader(SinaRefreshView.class.getName());
+//        TwinklingRefreshLayout.setDefaultHeader(SinaRefreshView.class.getName());
     }
 
     private String getBaseData(SharedPreferences s) {
@@ -57,17 +57,17 @@ public class App extends MultiDexApplication {
     /**
      * 初始化即时通讯组件
      */
-    private void initIMKit() {
-        SysUtil.setApplication(this);
-        if (SysUtil.isTCMSServiceProcess(this)) {
-            return;
-        }
-        if (SysUtil.isMainProcess()) {
-            YWAPI.init(this, BAICHUAN_APP_KEY);
-            AdviceBinder.bindAdvice(PointCutEnum.CONVERSATION_FRAGMENT_UI_POINTCUT,
-                    CustomConversationListUI.class);
-        }
-    }
+//    private void initIMKit() {
+//        SysUtil.setApplication(this);
+//        if (SysUtil.isTCMSServiceProcess(this)) {
+//            return;
+//        }
+//        if (SysUtil.isMainProcess()) {
+//            YWAPI.init(this, BAICHUAN_APP_KEY);
+//            AdviceBinder.bindAdvice(PointCutEnum.CONVERSATION_FRAGMENT_UI_POINTCUT,
+//                    CustomConversationListUI.class);
+//        }
+//    }
     /**
      * 初始化umeng
      */

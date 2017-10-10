@@ -3,6 +3,9 @@ package ccc.tcl.com.sprotappui.presenter.presenterimpl;
 
 import android.util.Log;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import ccc.tcl.com.sprotappui.internet.RequestRecord;
 import ccc.tcl.com.sprotappui.model.Record;
 import ccc.tcl.com.sprotappui.presenter.BasePresenter;
@@ -28,6 +31,17 @@ public class RecordPresenter extends BasePresenter {
         Log.d(TAG, "uploadRecord: " + record.toString());
         mCompositeSubscription.add(subscribeData());
     }
+
+   /* public void insertRecord(String date,String distance,String mean_speed, String spent_time,String step){
+        Map<String, String> map = new HashMap();
+        map.put("date", date);
+        map.put("distance", distance);
+        map.put("mean_speed", mean_speed);
+        map.put("spent_time", spent_time);
+        map.put("step", step);
+        resultObservable = requestRecord.insertRecord(map);
+        mCompositeSubscription.add(subscribeData());
+    }*/
 
     public void getAllSum(String user_id){
         resultObservable = (Observable) requestRecord.getAllSum(user_id);

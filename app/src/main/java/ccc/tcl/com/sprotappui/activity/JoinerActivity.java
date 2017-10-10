@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+//import com.alibaba.util.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +30,6 @@ public class JoinerActivity extends BaseActivity {
     private List<UserInfo> userList = new ArrayList<>();
 
     private String users;
-    private JoinerItem adapter;
 
     private ActivityPresenter activityPresenter;
     private SportAppView<ResponseResult<List<UserInfo>>> sportAppView = new SportAppView<ResponseResult<List<UserInfo>>>() {
@@ -37,7 +38,6 @@ public class JoinerActivity extends BaseActivity {
             if (response.isSuccess()){
                 userList.clear();
                 userList.addAll(response.getResult());
-                adapter.notifyDataSetChanged();
             }
             else
                 Toast.makeText(JoinerActivity.this, "获取数据失败:" + response.getMsg(), Toast.LENGTH_SHORT).show();
@@ -57,11 +57,11 @@ public class JoinerActivity extends BaseActivity {
         setContentView(R.layout.activity_joiner);
         toolBar = (ToolBar) findViewById(R.id.toolbar);
         super.setToolBar(toolBar, R.string.joiner, true);
+        initView();
 
         Intent intent = getIntent();
         users = intent.getStringExtra("users");
         Log.d(TAG, "onCreate: ");
-        initView();
     }
 
     @Override
@@ -70,6 +70,7 @@ public class JoinerActivity extends BaseActivity {
         activityPresenter.onCreate();
         activityPresenter.attachView(sportAppView);
         if (users != null){
+
             activityPresenter.getJoinerInfo(Util.stringToList(users));
         }
         super.onResume();
@@ -80,7 +81,7 @@ public class JoinerActivity extends BaseActivity {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false);
-        adapter = new JoinerItem(userList);
+        JoinerItem adapter = new JoinerItem(userList);
         adapter.setListener(new JoinerItem.OnRecyclerViewItemClickListener() {
             @Override
             public void onClick(View view, int position) {

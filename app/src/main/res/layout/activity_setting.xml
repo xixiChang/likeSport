@@ -138,7 +138,7 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <com.dl7.tag.TagView
+<!--   <com.dl7.tag.TagView
         android:id="@+id/login_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -155,5 +155,5 @@
         app:tag_border_color = "@color/darkturquoise"
         app:tag_bg_color_check="@color/red"
         app:tag_text_color = "@color/white"
-        app:tag_text="退出"/>
+        app:tag_text="退出"/>-->
 </RelativeLayout>
