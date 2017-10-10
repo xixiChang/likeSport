@@ -56,7 +56,10 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 Log.d(TAG, "onSuccess: " + response.toString());
                 Toast.makeText(RegisterActivity.this, "发送成功,　请查收哦～", Toast.LENGTH_SHORT).show();
             }
-            Log.d(TAG, "onSuccess: " + response.getMsg());
+            else {
+                Toast.makeText(RegisterActivity.this, "发送失败：" + response.getMsg(), Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "onSuccess: " + response.getMsg());
+            }
         }
 
         @Override

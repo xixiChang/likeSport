@@ -8,7 +8,7 @@ public final class URLConstant {
 
     public final static int DEFAULT_TIMEOUT = 5;
 
-//    public final static String Base_Url = "http://119.29.95.86:8080/";
+    //   public final static String Base_Url = "http://119.29.95.86:8080/";
     public final static String Base_Url = "http://10.92.34.142:8080/";
 
 

@@ -19,7 +19,17 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:layout_scrollFlags="enterAlways|scroll|snap"/>
+            app:layout_scrollFlags="enterAlways|scroll|snap">
+            <TextView
+                android:id="@+id/home_sport_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/activity_content_size_x_big"
+                android:textColor="@color/black_word_point"
+                android:drawableEnd="@mipmap/ic_keyboard_arrow"
+                android:text="步行"/>
+            </ccc.tcl.com.sprotappui.customui.ToolBar>
+
     </android.support.design.widget.AppBarLayout>
 
 

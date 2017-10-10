@@ -154,7 +154,7 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
                 break;
             case R.id.head_images:
                 Intent intent = new Intent(this,JoinerActivity.class);
-                intent.putExtra("users",activity.getJoiner());
+                intent.putExtra("users", activity.getJoiner());
                 startActivity(intent);
                 break;
             default:

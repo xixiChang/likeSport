@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class TimeTranslator {
 
@@ -45,30 +46,14 @@ public class TimeTranslator {
     }
 
 
-    public static String secToTime(int time) {
-        String timeStr = null;
-        int hour = 0;
-        int minute = 0;
-        int second = 0;
-        if (time <= 0)
-            return "00:00";
-        else {
-            minute = time / 60;
-            if (minute < 60) {
-                second = time % 60;
-                timeStr = unitFormat(minute) + ":" + unitFormat(second);
-            } else {
-                hour = minute / 60;
-                if (hour > 23)
-                    return "23:59:59";
-                minute = minute % 60;
-                second = time - hour * 3600 - minute * 60;
-                timeStr = unitFormat(hour) + ":" + unitFormat(minute) + ":" + unitFormat(second);
-            }
-        }
-        return timeStr;
+    public static String secToTime(int cnt) {
+        int hour = cnt / 3600;
+        int min = cnt % 3600 / 60;
+        int second = cnt % 60;
+        return String.format(Locale.CHINA, "%02d:%02d:%02d", hour, min, second);
     }
 
+    @Deprecated
     public static String unitFormat(int i) {
         String retStr = null;
         if (i >= 0 && i < 10)

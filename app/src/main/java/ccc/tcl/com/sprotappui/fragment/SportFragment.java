@@ -21,13 +21,13 @@ import ccc.tcl.com.sprotappui.utils.TimeTranslator;
 import ccc.tcl.com.sprotappui.utils.Util;
 
 public class SportFragment extends Fragment {
-    private static final String Type_Walk = "0";
-    private static final String Type_Run = "1";
-    private static final String Type_Ride = "2";
+    private String sportType = "0";
 
     private RecordPresenter recordPresenter;
 
-    private TextView diatance, time, speed;
+    private TextView distance, time, speed;
+
+    private List<Map<String, String>> result;
 
 
     public SportFragment() {
@@ -46,7 +46,7 @@ public class SportFragment extends Fragment {
     }
 
     private void initView(View view) {
-        diatance = (TextView) view.findViewById(R.id.daily_distance);
+        distance = (TextView) view.findViewById(R.id.daily_distance);
         time = (TextView) view.findViewById(R.id.fragment_sport_time);
         speed = (TextView) view.findViewById(R.id.fragment_sport_speed);
     }
@@ -73,7 +73,8 @@ public class SportFragment extends Fragment {
         @Override
         public void onSuccess(ResponseResult<List<Map<String, String>>> response) {
             if (response.isSuccess()) {
-                flushDataShow(response.getResult());
+                result = response.getResult();
+                flushDataShow();
             } else
                 Toast.makeText(getContext(), "获取数据失败:" + response.getMsg(), Toast.LENGTH_SHORT).show();
         }
@@ -84,20 +85,27 @@ public class SportFragment extends Fragment {
         }
     };
 
-    private void flushDataShow(List<Map<String, String>> result) {
+    private void flushDataShow() {
         if (result == null || result.size() == 0)
             return;
-
         for (Map<String, String> map : result) {
-            if (Type_Walk.equals(map.get("type"))) {
+            if (sportType.equals(map.get("type"))) {
                 String sD = map.get("distance");
                 String sT = map.get("spent_time");
-                diatance.setText(sD);
+                distance.setText(sD);
                 time.setText(TimeTranslator.secToTime(Integer.parseInt(sT)));
                 speed.setText(Util.getSpeed(sD, sT));
+                return;
             }
         }
 
+        distance.setText("0");
+        time.setText("00:00:00");
+        speed.setText("N/A");
     }
 
+    public void setSport_Type(int position) {
+        this.sportType = String.valueOf(position);
+        flushDataShow();
+    }
 }

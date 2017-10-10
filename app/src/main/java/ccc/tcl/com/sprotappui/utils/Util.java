@@ -1,13 +1,11 @@
 package ccc.tcl.com.sprotappui.utils;
 
 import android.content.Context;
-import android.provider.ContactsContract;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,12 +49,13 @@ public class Util {
         return false;
     }
 
-    public static boolean isEmpty(String para){
+    public static boolean isEmpty(String para) {
         return para == null || "".equals(para);
     }
 
+
     public static List<String> stringToList(String para){
-        if (Util.isEmpty(para))
+        if (isEmpty(para))
             return null;
         para = para.replace("[", "");
         para = para.replace("]", "");
@@ -64,21 +63,18 @@ public class Util {
         for (String s : para.split(",")){
             result.add(s);
         }
-
         return result;
-
-
     }
 
     public static String getSpeed(String dis, String time){
         double s = Integer.parseInt(time)/Integer.parseInt(dis);
         int m = (int) Math.floor(s);
         int ss = (int) (60 * (s - m));
-        if (ss == 60){
-            m ++;
+        if (ss == 60) {
+            m++;
             ss = 0;
         }
-        return m + "'" + ss + "''";
+        return m + "'" + ss + "\"";
     }
 
 }
