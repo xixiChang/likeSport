@@ -49,6 +49,9 @@ import com.baidu.mapapi.map.Polyline;
 import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -279,7 +282,10 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 				break;
 			/*运动结束，点击分享*/
 			case R.id.share:
-
+				new ShareAction(TraceRecordActivity.this)
+						.setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
+						.setCallback(umShareListener)
+						.open();
 				break;
 			/*运动结束，点击返回*/
 			case R.id.back:
@@ -322,8 +328,6 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		});
 		slideView.reset();/*解锁完成，重置*/
 	}
-
-
 
 
 	/*运动结束，停止记录*/
@@ -402,7 +406,6 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 
 	/*运动结束时的显示信息*/
 	public void endShow(){
-
 		end.setVisibility(View.GONE);
 		pause.setVisibility(View.GONE);
 		lockScreen.setVisibility(View.GONE);
@@ -725,6 +728,29 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 	public void onAccuracyChanged(Sensor sensor, int i) {
 
 	}
+
+	/*友盟分享*/
+	private UMShareListener umShareListener = new UMShareListener() {
+		@Override
+		public void onStart(SHARE_MEDIA share_media) {
+
+		}
+
+		@Override
+		public void onResult(SHARE_MEDIA share_media) {
+
+		}
+
+		@Override
+		public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+
+		}
+
+		@Override
+		public void onCancel(SHARE_MEDIA share_media) {
+
+		}
+	};
 
 	/*定位SDK监听函数*/
 	public class MyLocationListenner implements BDLocationListener {
