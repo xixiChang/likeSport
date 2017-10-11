@@ -59,7 +59,7 @@
     <string name="GPS_searching">GPS信号搜索中，请稍后...</string>
     <string name="GPS_weak">GPS信号搜索中，请稍后...</string>
     <string name="GPS_connecting">GPS信号连接中，请稍后...</string>
-    <string name="record_nothing">您此次运动距离过短，将不会记录数据，是否结束运动？</string>
+    <string name="record_nothing">是否结束运动？</string>
     <string name="open_GPS">请打开GPS</string>
     <string name="open_GPSc">请打开GPS连接</string>
     <string name="set">设置</string>
