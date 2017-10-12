@@ -4,10 +4,6 @@
     android:id="@+id/activity_create"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="0dp"
-    android:paddingLeft="10dp"
-    android:paddingRight="12dp"
-    android:paddingTop="10dp"
     android:orientation="vertical"
     tools:context="ccc.tcl.com.sprotappui.activity.CreateActivity"
     android:weightSum="1">

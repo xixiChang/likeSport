@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 //import com.bumptech.glide.Glide;
+import com.bumptech.glide.Glide;
 import com.flyco.labelview.LabelView;
 
 import java.util.List;
@@ -49,9 +50,10 @@ public class FMSportItem extends RecyclerView.Adapter<FMSportItem.ViewHolder> {
         PlatFormActivity activity = data.get(position);
         holder.name.setText(activity.getName());
         holder.hotValue.setText(activity.getHot_value());
+        holder.leftTime.setText("距离活动结束还有：" + activity.getLeft_time() + "天");
         if (activity.isNew())
             holder.label.setVisibility(View.VISIBLE);
-//        Glide.with(holder.itemView).load(activity.getImage_url()).into(holder.image);
+        Glide.with(holder.itemView).load(activity.getImage_url()).into(holder.image);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

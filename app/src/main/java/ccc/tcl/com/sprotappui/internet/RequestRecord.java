@@ -3,6 +3,7 @@ package ccc.tcl.com.sprotappui.internet;
 import java.util.List;
 import java.util.Map;
 
+import ccc.tcl.com.sprotappui.model.DayRate;
 import ccc.tcl.com.sprotappui.model.RateItem;
 import ccc.tcl.com.sprotappui.model.Record;
 import ccc.tcl.com.sprotappui.model.ResponseResult;

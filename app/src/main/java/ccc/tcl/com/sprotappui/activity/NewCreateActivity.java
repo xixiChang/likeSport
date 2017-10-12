@@ -34,15 +34,19 @@ import ccc.tcl.com.sprotappui.model.PlatFormActivity;
 import ccc.tcl.com.sprotappui.model.ResponseResult;
 import ccc.tcl.com.sprotappui.presenter.presenterimpl.ActivityPresenter;
 import ccc.tcl.com.sprotappui.ui.SportAppView;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class NewCreateActivity extends BaseActivity implements View.OnClickListener{
-    TextView name;
+    private TextView name;
     TextView hotValue;
     TextView startTime;
     TextView endTime;
     TextView distance;
     TextView location;
     TextView detail;
+    TextView leftTime;
+    TextView joiner;
+    CircleImageView publisher;
     PlatFormActivity sport;
 
     View changeView;
@@ -79,6 +83,9 @@ public class NewCreateActivity extends BaseActivity implements View.OnClickListe
         location = (TextView) findViewById(R.id.location_show);
         detail =(TextView) findViewById(R.id.detail_show);
         reason = (TextView) findViewById(R.id.update);
+        leftTime = (TextView) findViewById(R.id.item_fm_sport_left_time);
+        joiner = (TextView) findViewById(R.id.joiner_num);
+        publisher = (CircleImageView) findViewById(R.id.publisher);
         head_images = (FrameLayout) findViewById(R.id.head_images);
         head_images.setOnClickListener(this);
         updateData();
@@ -176,6 +183,9 @@ public class NewCreateActivity extends BaseActivity implements View.OnClickListe
         distance.setText(sport.getDistance() + "KM");
         location.setText(sport.getAddress());
         detail.setText(sport.getDetails());
+        leftTime.setText(sport.getLeft_time()+"天");
+        joiner.setText("参与者（0 / "+ sport.getJoin_num_all() + "）");
+
         reason.setVisibility(View.GONE);
         if (sport.getReason() != null && sport.getStatus().equals("1")) {
             reason.setText("由于 " + sport.getReason() + ",活动已改期。");

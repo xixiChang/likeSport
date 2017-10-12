@@ -10,15 +10,15 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//import com.bumptech.glide.Glide;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import ccc.tcl.com.sprotappui.App;
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.adapter.UserSportTeamItem;
-import ccc.tcl.com.sprotappui.customui.ToolBar;
 import ccc.tcl.com.sprotappui.data.UserInfo;
 import ccc.tcl.com.sprotappui.model.PlatFormActivity;
 import ccc.tcl.com.sprotappui.model.ResponseResult;
@@ -42,15 +42,21 @@ public class ContactActivity extends BaseActivity {
     private TextView rideDistance;
     private RecyclerView recycler;
     private UserSportTeamItem adapter;
-    private SportAppView userView = new SportAppView() {
+    private SportAppView recordView = new SportAppView<ResponseResult<Map<String, String>>>() {
         @Override
-        public void onSuccess(Object response) {
-
+        public void onSuccess(ResponseResult<Map<String, String>> response) {
+            if (response.isSuccess()){
+                walkDistance.setText(Util.isEmpty(response.getResult().get("0")) ? "0" : response.getResult().get("0"));
+                runDistance.setText(Util.isEmpty(response.getResult().get("1")) ? "0" : response.getResult().get("1"));
+                rideDistance.setText(Util.isEmpty(response.getResult().get("2")) ? "0" : response.getResult().get("2"));
+            }
+            else
+                Toast.makeText(ContactActivity.this,"获取数据失败"+response.getMsg(),Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onRequestError(String msg) {
-
+            Toast.makeText(ContactActivity.this,"网络连接失败"+msg,Toast.LENGTH_SHORT).show();
         }
     };
     private SportAppView activityView = new SportAppView<ResponseResult<List<PlatFormActivity>>>() {
@@ -89,11 +95,12 @@ public class ContactActivity extends BaseActivity {
         signature = (TextView) findViewById(R.id.user_signature);
         runDistance = (TextView) findViewById(R.id.run_distance);
         walkDistance = (TextView) findViewById(R.id.walk_distance);
-        runDistance = (TextView) findViewById(R.id.ride_distance);
+        rideDistance = (TextView) findViewById(R.id.ride_distance);
         recycler = (RecyclerView) findViewById(R.id.user_activity);
+        //recordPresenter.getTypeSumAll(App.userInfo.getId());
         initRecycler();
-//        Glide.with(this).load(userInfo.getImage_url()).into(userImage);
-//        signature.setText(userInfo.getRetain());
+        Glide.with(this).load(userInfo.getImage_url()).into(userImage);
+        signature.setText(userInfo.getRetain());
 
     }
 
@@ -130,10 +137,10 @@ public class ContactActivity extends BaseActivity {
     protected void onResume() {
         recordPresenter.onCreate();
         activityPresenter.onCreate();
-        recordPresenter.attachView(userView);
+        recordPresenter.attachView(recordView);
         activityPresenter.attachView(activityView);
         if (!Util.isEmpty(userInfo.getId()))
-//            recordPresenter.getTypeSum(userInfo.getId());
+            recordPresenter.getTypeSumAll(userInfo.getId());
             //presenter;
         if (!Util.isEmpty(userInfo.getId()))
             activityPresenter.getMyActivity(userInfo.getId());

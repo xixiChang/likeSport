@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/*import com.bumptech.glide.Glide;*/
+import com.bumptech.glide.Glide;
 import com.flyco.labelview.LabelView;
 
 import org.w3c.dom.Text;
@@ -53,15 +53,15 @@ public class UserSportTeamItem extends RecyclerView.Adapter<UserSportTeamItem.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-     /*   Glide.with(holder.itemView).load(data.get(position).getImage_url()).into(holder.icon);*/
-        //holder.icon.setImageResource(Integer.parseInt(data.get(position).getImage_url()));
+        Glide.with(holder.itemView).load(data.get(position).getImage_url()).into(holder.icon);
         holder.name.setText(data.get(position).getName());
-        holder.status.setText(data.get(position).getStatus());
+        String[] status = {"正常","延期","完成","取消"};
+        holder.status.setText(status[Integer.parseInt(data.get(position).getStatus())]);
         holder.time.setText(data.get(position).getStart_time()+" - "+data.get(position).getEnd_time());
         holder.value.setText(data.get(position).getJoin_num()+" 参与");
         String behavior = "已参与";
-        //if (data.get(position).getJoiner().contains(data.get(position).getUser_id()))
-        //if (Util.stringToList(data.get(position).getJoiner()).contains(data.get(position).getUser_id()))
+//        if (data.get(position).getJoiner().contains(data.get(position).getUser_id()))
+//        if (Util.stringToList(data.get(position).getJoiner()).contains(data.get(position).getUser_id()))
 
         if (data.get(position).getUser_id().equals(data.get(position).getPublish_user_id()))
             behavior = "发起人";

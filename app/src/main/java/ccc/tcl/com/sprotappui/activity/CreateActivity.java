@@ -33,7 +33,6 @@ public class CreateActivity extends BaseActivity{
         super.setToolBar(toolbar, R.string.create_activity,true);
         Intent intent = getIntent();
         platFormActivity = intent.getParcelableExtra("data");
-        Toast.makeText(this, platFormActivity.getImage_url(),Toast.LENGTH_SHORT).show();
         initView();
 
     }

@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import org.w3c.dom.Text;
 
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.List;
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.model.ChooseItemModel;
 import ccc.tcl.com.sprotappui.model.DayRate;
+import ccc.tcl.com.sprotappui.model.RateItem;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
@@ -23,9 +26,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DayRateItem extends RecyclerView.Adapter<DayRateItem.ViewHolder> {
 
-    private List<DayRate> data;
+    private List<RateItem> data;
 
-    public DayRateItem(List<DayRate> data) {
+    public DayRateItem(List<RateItem> data) {
         this.data = data;
     }
 
@@ -40,11 +43,12 @@ public class DayRateItem extends RecyclerView.Adapter<DayRateItem.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.rating.setText(data.get(position).getRating() + "");
-        holder.image.setImageResource(Integer.parseInt(data.get(position).getImage_url()));//will be modified
-        holder.name.setText(data.get(position).getUserName());
-        holder.desc.setText(data.get(position).getUserDesc());
-        holder.dist.setText(data.get(position).getUserDist());
+        //holder.rating.setText(data.get(position).getRating() + "");
+        Glide.with(holder.itemView).load(data.get(position).getImage_url()).into(holder.image);
+        //holder.image.setImageResource(Integer.parseInt(data.get(position).getImage_url()));//will be modified
+        holder.name.setText(data.get(position).getName());
+        holder.desc.setText(data.get(position).getRetain());
+        holder.dist.setText(data.get(position).getStep());
 
     }
 

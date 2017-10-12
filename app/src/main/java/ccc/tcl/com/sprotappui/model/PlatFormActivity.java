@@ -290,8 +290,9 @@ public class PlatFormActivity implements  Parcelable {
      * time unit:hour
      */
     public String getLeft_time() {
-        return String.valueOf((TimeTranslator.stringToDate(end_time).getTime()
-                - new Date().getTime()/(1000*60*60*24)));
+        Date date = TimeTranslator.stringToDate(end_time);
+        long s = date.getTime() - new Date().getTime();
+        return String.valueOf(s/(1000*60*60*24));
     }
 
     @Deprecated

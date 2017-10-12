@@ -9,14 +9,14 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activity.HomeActivity"
     android:clipToPadding="true"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="false">
     <RelativeLayout
         android:id="@+id/relative"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="10dp"
-        android:background="@mipmap/activity"
-        android:fitsSystemWindows="true">
+        android:background="@mipmap/bg_my"
+        android:fitsSystemWindows="false">
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/user_photo"
             android:src="@drawable/photo1"
@@ -24,6 +24,7 @@
             android:layout_height="60dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:fitsSystemWindows="true"
             android:layout_marginTop="@dimen/page_content_margin_top" />
 
         <TextView
@@ -107,7 +108,7 @@
         </LinearLayout>
     </RelativeLayout>
 
-   <!--<com.dl7.tag.TagView
+   <com.dl7.tag.TagView
         android:id="@+id/user_logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -120,7 +121,7 @@
         app:tag_vertical_padding="@dimen/button_padding_top"
         app:tag_horizontal_padding="@dimen/button_padding_left"
         app:tag_press_feedback="true"
-        android:layout_centerHorizontal="true"/>-->
+        android:layout_centerHorizontal="true"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/choose_items"
