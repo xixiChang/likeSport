@@ -13,9 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-//import com.alibaba.mobileim.IYWLoginService;
-//import com.alibaba.mobileim.YWLoginParam;
-//import com.alibaba.mobileim.channel.event.IWxCallback;
+import com.alibaba.mobileim.IYWLoginService;
+import com.alibaba.mobileim.YWLoginParam;
+import com.alibaba.mobileim.channel.event.IWxCallback;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
@@ -34,7 +34,7 @@ import ccc.tcl.com.sprotappui.service.IMService;
 import ccc.tcl.com.sprotappui.utils.ViewFindUtils;
 
 import static ccc.tcl.com.sprotappui.App.userInfo;
-//import static ccc.tcl.com.sprotappui.service.IMService.mIMKit;
+import static ccc.tcl.com.sprotappui.service.IMService.mIMKit;
 
 
 public class HomeActivity extends BaseActivity {
@@ -46,10 +46,9 @@ public class HomeActivity extends BaseActivity {
     private static final String TAG = "HomeActivity";
 
     private String[] mTitles = {"运动", "运动圈", "消息", "我的"};
-    private int[] mIconUnSelectIds = {
+    private int[] mIconUnselectIds = {
             R.mipmap.table_run_unclick, R.mipmap.tab_circle_unclick,
             R.mipmap.tab_message_unclick, R.mipmap.tab_mine_unclick};
-
     private int[] mIconSelectIds = {
             R.mipmap.table_run_click, R.mipmap.tab_circle_click,
             R.mipmap.tab_message_click, R.mipmap.tab_mine_click};
@@ -67,16 +66,16 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.activity_home);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         super.setToolBar(toolbar, R.string.toolbar_name_sport, false);
-        initView();
         initIMConnect();
+        initView();
         //setFullScreen(true);
     }
 
 
     private void initIMConnect() {
-//        if (mIMKit == null){
-//            new IMService();
-//        }
+        if (mIMKit == null){
+            new IMService();
+        }
         try {
             connect();
         } catch (Exception e) {
@@ -88,16 +87,16 @@ public class HomeActivity extends BaseActivity {
         mFragments.add(SportFragment.getInstance());
         SportCircleFragment sportCircleFragment = SportCircleFragment.getInstance();
         mFragments.add(sportCircleFragment);
-//        if (mIMKit != null){
-//            mFragments.add(mIMKit.getConversationFragment());
-//        }else {
-//            mFragments.add(SimpleCardFragment.getInstance("Switch ViewPager " + mTitles[2]));
-//        }
+        if (mIMKit != null){
+            mFragments.add(mIMKit.getConversationFragment());
+        }else {
+            mFragments.add(SimpleCardFragment.getInstance("Switch ViewPager " + mTitles[2]));
+        }
         mFragments.add(MyFragment.getInstance());
         fragmentManager = getSupportFragmentManager();
 
         for (int i = 0; i < mTitles.length; i++) {
-            mTabEntities.add(new TabEntity(mTitles[i], mIconSelectIds[i], mIconUnSelectIds[i]));
+            mTabEntities.add(new TabEntity(mTitles[i], mIconSelectIds[i], mIconUnselectIds[i]));
         }
 
         mDecorView = getWindow().getDecorView();
@@ -226,9 +225,10 @@ public class HomeActivity extends BaseActivity {
             case R.id.more:
                 //sportCircleFragment.update();
                 //startActivity(new Intent(mContext, TestActivity.class));
-//                Intent create = new Intent(this,PickPictureActivity.class);
-//                startActivity(create);
-                startActivity(new Intent(mContext, TraceRecordActivity.class));
+                if (mViewPager.getCurrentItem()==2)
+                    break;
+                Intent create = new Intent(this,PickPictureActivity.class);
+                startActivity(create);
                 return true;
             default:
                 break;
@@ -237,28 +237,28 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void connect() {
-//        IYWLoginService loginService = mIMKit.getLoginService();
-//        YWLoginParam loginParam = YWLoginParam.createLoginParam(userInfo.getIm_uid(),
-//                userInfo.getSession());
-//        loginService.login(loginParam, new IWxCallback() {
-//
-//            @Override
-//            public void onSuccess(Object... arg0) {
-//                Log.i(TAG, "onSuccess: " + arg0);
-//            }
-//
-//            @Override
-//            public void onProgress(int arg0) {
-//                // TODO Auto-generated method stub
-//                Log.d(TAG, "onProgress: ");
-//            }
-//
-//            @Override
-//            public void onError(int errCode, String description) {
-//                //如果登录失败，errCode为错误码,description是错误的具体描述信息
-//                Log.e(TAG, "onError: " + errCode + ">" + description);
-//            }
-//        });
+        IYWLoginService loginService = mIMKit.getLoginService();
+        YWLoginParam loginParam = YWLoginParam.createLoginParam(userInfo.getIm_uid(),
+                userInfo.getSession());
+        loginService.login(loginParam, new IWxCallback() {
+
+            @Override
+            public void onSuccess(Object... arg0) {
+                Log.i(TAG, "onSuccess: " + arg0);
+            }
+
+            @Override
+            public void onProgress(int arg0) {
+                // TODO Auto-generated method stub
+                Log.d(TAG, "onProgress: ");
+            }
+
+            @Override
+            public void onError(int errCode, String description) {
+                //如果登录失败，errCode为错误码,description是错误的具体描述信息
+                Log.e(TAG, "onError: " + errCode + ">" + description);
+            }
+        });
     }
 
 

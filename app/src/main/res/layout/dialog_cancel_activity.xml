@@ -3,13 +3,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="@dimen/slider_margin_left"
     android:weightSum="1">
 
     <TextView
         android:text="@string/cancelActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/page_content_margin_top"
         android:paddingBottom="10dp"/>
 
     <EditText
@@ -19,6 +19,6 @@
         android:hint="@string/askReason"
         android:inputType="textMultiLine"
         android:gravity="start"
-
+        android:layout_margin="@dimen/page_content_margin_top"
         android:layout_weight="0.11" />
 </LinearLayout>

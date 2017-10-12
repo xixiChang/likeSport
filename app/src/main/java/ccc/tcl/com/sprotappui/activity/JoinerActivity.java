@@ -90,7 +90,6 @@ public class JoinerActivity extends BaseActivity {
                 data.putSerializable("userInfo",userList.get(position));
                 userInfo.putExtras(data);
                 startActivity(userInfo);
-                Toast.makeText(JoinerActivity.this, userList.get(position).getName(), Toast.LENGTH_SHORT).show();
             }
         });
         recyclerView.addItemDecoration(new RecycleViewDivider(this, LinearLayoutManager.VERTICAL, 2, R.color.darkgrey));

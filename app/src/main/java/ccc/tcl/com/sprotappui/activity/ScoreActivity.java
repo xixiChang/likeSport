@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
@@ -23,7 +24,10 @@ public class ScoreActivity extends BaseActivity {
     private static final String VIEW_TYPE_WALK = "0";
     private static final String VIEW_TYPE_RUN = "1";
     private static final String TAG = "ScoreActivity";
-
+    private TextView walkScore;
+    private TextView walkTime;
+    private TextView runScore;
+    private TextView runTime;
     private ToolBar toolBar;
     private ImageView share;
 
@@ -35,21 +39,25 @@ public class ScoreActivity extends BaseActivity {
             if (response.isSuccess()){
                 if (VIEW_TYPE_WALK.equals(response.getType())){
                     Map<String, String> map = response.getResult();
-                    Log.d(TAG, "onSuccess: type>0" );
-                    Log.d(TAG, "onSuccess: step>" + map.get("step"));
-                    Log.d(TAG, "onSuccess: spent_time>" + map.get("spent_time"));
+                    walkScore.setText(map.get("step"));
+                    walkTime.setText(map.get("spent_time"));
+                    Log.d(TAG, "onSuccess: type>>> 0" );
+                    Log.d(TAG, "onSuccess: step>>> " + map.get("step"));
+                    Log.d(TAG, "onSuccess: spent_time>>> " + map.get("spent_time"));
                 }else if (VIEW_TYPE_RUN.equals(response.getType())){
                     Map<String, String> map = response.getResult();
-                    Log.d(TAG, "onSuccess: type>1" );
-                    Log.d(TAG, "onSuccess: step>" + map.get("step"));
-                    Log.d(TAG, "onSuccess: spent_time>" + map.get("spent_time"));
+                    runScore.setText(map.get("distance"));
+                    runTime.setText(map.get("spent_time"));
+                    Log.d(TAG, "onSuccess: type>>> 1" );
+                    Log.d(TAG, "onSuccess: step>>> " + map.get("step"));
+                    Log.d(TAG, "onSuccess: spent_time>>> " + map.get("spent_time"));
                 }
             }
         }
 
         @Override
         public void onRequestError(String msg) {
-
+            Log.d(TAG, "onRequestError: "+msg);
         }
     };
 
@@ -59,6 +67,10 @@ public class ScoreActivity extends BaseActivity {
         setContentView(R.layout.activity_score);
         toolBar = (ToolBar) findViewById(toolbar);
         super.setToolBar(toolBar, R.string.user_score, true);
+        walkScore = (TextView) findViewById(R.id.user_score_walk);
+        runScore = (TextView) findViewById(R.id.user_score_run);
+        walkTime = (TextView) findViewById(R.id.user_score_walk_time);
+        runTime = (TextView) findViewById(R.id.user_score_run_time);
         share = (ImageView) findViewById(R.id.user_score_share_walk);
         share.setOnClickListener(new View.OnClickListener() {
             @Override

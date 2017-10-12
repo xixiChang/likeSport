@@ -109,8 +109,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="@dimen/page_content_margin_top"
                     android:layout_below="@+id/item_fm_sport_name"
-                    android:textSize="@dimen/activity_content_size_mid"
-                    android:text="30小时"/>
+                    android:textSize="@dimen/activity_content_size_mid"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

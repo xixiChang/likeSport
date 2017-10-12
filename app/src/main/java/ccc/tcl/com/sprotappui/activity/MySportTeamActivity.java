@@ -73,6 +73,7 @@ public class MySportTeamActivity extends BaseActivity {
                 Toast.makeText(MySportTeamActivity.this,"网络连接失败"+msg,Toast.LENGTH_SHORT).show();
             }
         });
+        initRecycler();
         super.onResume();
     }
 
@@ -81,6 +82,7 @@ public class MySportTeamActivity extends BaseActivity {
         noDataImage = (ImageView) findViewById(R.id.no_data_image);
         recycler = (RecyclerView) findViewById(R.id.recycler);
         layout = (RelativeLayout) findViewById(R.id.no_data_layout);
+
         noDataImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

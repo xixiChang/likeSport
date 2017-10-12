@@ -2,16 +2,17 @@ package ccc.tcl.com.sprotappui.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.widget.Switch;
 
 import ccc.tcl.com.sprotappui.R;
 
 public class AuthoritySettingActivity extends BaseActivity {
-    Switch camera;
-    Switch storage;
-    Switch location;
-    Switch vibrate;
+    SwitchCompat camera;
+    SwitchCompat storage;
+    SwitchCompat location;
+    SwitchCompat vibrate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,10 +23,10 @@ public class AuthoritySettingActivity extends BaseActivity {
     }
 
     private void initView(){
-        camera = (Switch) findViewById(R.id.camera);
-        storage = (Switch) findViewById(R.id.storage);
-        location = (Switch) findViewById(R.id.location);
-        vibrate = (Switch) findViewById(R.id.vibrate);
+        camera = (SwitchCompat) findViewById(R.id.camera);
+        storage = (SwitchCompat) findViewById(R.id.storage);
+        location = (SwitchCompat) findViewById(R.id.location);
+        vibrate = (SwitchCompat) findViewById(R.id.vibrate);
 
 
     }

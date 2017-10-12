@@ -65,7 +65,7 @@ public class SportFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         recordPresenter.onCreate();
         recordPresenter.attachView(sportAppView);
-        recordPresenter.getTypeSumDay(App.userInfo.getId());
+        //recordPresenter.getTypeSumDay(App.userInfo.getId());
     }
 
     private SportAppView<ResponseResult<List<Map<String, String>>>> sportAppView

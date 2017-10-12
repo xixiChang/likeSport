@@ -11,14 +11,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-/*import com.dl7.tag.TagView;*/
+import com.bumptech.glide.Glide;
+import com.dl7.tag.TagView;
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import ccc.tcl.com.sprotappui.App;
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.activity.DayRateActivity;
 import ccc.tcl.com.sprotappui.activity.MySportTeamActivity;
@@ -26,7 +31,14 @@ import ccc.tcl.com.sprotappui.activity.ScoreActivity;
 import ccc.tcl.com.sprotappui.activity.SettingActivity;
 import ccc.tcl.com.sprotappui.adapter.ChooseItem;
 import ccc.tcl.com.sprotappui.customui.RecycleViewDivider;
+import ccc.tcl.com.sprotappui.data.UserInfo;
 import ccc.tcl.com.sprotappui.model.ChooseItemModel;
+import ccc.tcl.com.sprotappui.model.Record;
+import ccc.tcl.com.sprotappui.model.ResponseResult;
+import ccc.tcl.com.sprotappui.presenter.presenterimpl.RecordPresenter;
+import ccc.tcl.com.sprotappui.presenter.presenterimpl.UserPresenter;
+import ccc.tcl.com.sprotappui.ui.SportAppView;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class MyFragment extends Fragment {
@@ -34,11 +46,53 @@ public class MyFragment extends Fragment {
     private RecyclerView recyclerView;
     private static List<ChooseItemModel> itemsInfos;
 
-/*    private TagView logout;*/
+    private TagView logout;
 
     private ActionSheetDialog logoutDialog;
     private Context context;
 
+    private CircleImageView userPhoto;
+    private TextView userName;
+    private TextView totalDistance;
+    private TextView totalTime;
+    private TextView totalConsume;
+    private UserInfo userInfo;
+    private UserPresenter userPresenter;
+    private SportAppView userView = new SportAppView<ResponseResult<UserInfo>>() {
+        @Override
+        public void onSuccess(ResponseResult<UserInfo> response) {
+            if (response.isSuccess()){
+                userInfo = response.getResult();
+                Glide.with(MyFragment.this).load(userInfo.getImage_url()).into(userPhoto);
+                userName.setText(userInfo.getName());
+            }
+            else
+                Toast.makeText(context,"数据请求失败"+response.getMsg(),Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onRequestError(String msg) {
+            Toast.makeText(context,"数据连接失败"+msg,Toast.LENGTH_SHORT).show();
+        }
+    };
+    private RecordPresenter recordPresenter;
+    private SportAppView recordView = new SportAppView<ResponseResult<Map<String,String>>>() {
+        @Override
+        public void onSuccess(ResponseResult<Map<String,String>> response) {
+            if (response.isSuccess()){
+                totalDistance.setText(response.getResult().get("distance"));
+                totalTime.setText(response.getResult().get("spent_time"));
+                totalConsume.setText(response.getResult().get("calorie"));
+            }
+            else
+                Toast.makeText(context,"数据请求失败"+response.getMsg(),Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onRequestError(String msg) {
+            Toast.makeText(context,"数据连接失败"+msg,Toast.LENGTH_SHORT).show();
+        }
+    };
 
     public MyFragment() {
 
@@ -60,6 +114,8 @@ public class MyFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = getContext();
+        userPresenter = new UserPresenter();
+        recordPresenter = new RecordPresenter();
     }
 
     @Override
@@ -73,14 +129,26 @@ public class MyFragment extends Fragment {
 
     private void initView(View view) {
         recyclerView = (RecyclerView) view.findViewById(R.id.choose_items);
-       /* logout = (TagView) view.findViewById(R.id.user_logout_button);
+        logout = (TagView) view.findViewById(R.id.user_logout_button);
+        userPhoto = (CircleImageView) view.findViewById(R.id.user_photo);
+        userName = (TextView) view.findViewById(R.id.user_name);
+        totalDistance = (TextView) view.findViewById(R.id.whole_distance);
+        totalTime = (TextView) view.findViewById(R.id.whole_spent_time);
+        totalConsume = (TextView) view.findViewById(R.id.whole_consume);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 logoutWindow();
             }
-        });*/
+        });
+        userPresenter.onCreate();
+        userPresenter.attachView(userView);
+        userPresenter.getUserInfo(App.userInfo.getId());
+
+        recordPresenter.onCreate();
+        recordPresenter.attachView(recordView);
+        recordPresenter.getAllSum(App.userInfo.getId());
     }
 
     private void setRecyclerViewAdapter() {
@@ -134,6 +202,7 @@ public class MyFragment extends Fragment {
                 intent.setClass(context, ScoreActivity.class);
                 break;
             case 1:
+                intent.putExtra("data",new String[]{userInfo.getName(),userInfo.getImage_url()});
                 intent.setClass(context, DayRateActivity.class);
                 break;
             case 2:
