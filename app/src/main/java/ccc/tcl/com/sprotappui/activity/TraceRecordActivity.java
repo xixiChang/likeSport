@@ -385,12 +385,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 				+",type:"+record.getType()+",mean speed:"+record.getMean_speed()+",calorie:"+record.getCalorie()
 				+",step:"+record.getStep()+",start time:"+record.getStart_time()+",end time:"+record.getEnd_time()
 				+",distance:"+record.getDistance()+",user id:"+record.getUser_id()+",id:"+record.getId());
-		Log.i(TAG, "addRecordData string:" + getDate() + "," + strDistanceM + "," + speedMSStr + ","
-				+ totalSecond + "," + StepDetector.CURRENT_STEP);
-		Log.i(TAG, "addRecordData int:" + "," + distanceMi + "," + speedMSi + ","
-				+ totalSecond + "," + StepDetector.CURRENT_STEP);
-		Toast.makeText(TraceRecordActivity.this, distanceMi + "," + speedMSi + ","
-				+ totalSecond + "," + StepDetector.CURRENT_STEP,Toast.LENGTH_LONG).show();
+
 	}
 
 	// 保存运动数据到本地
