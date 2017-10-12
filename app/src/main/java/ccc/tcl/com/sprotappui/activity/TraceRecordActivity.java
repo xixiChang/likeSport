@@ -3,12 +3,10 @@ package ccc.tcl.com.sprotappui.activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.database.sqlite.SQLiteDatabase;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -49,19 +47,18 @@ import com.baidu.mapapi.map.Polyline;
 import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
-import com.umeng.socialize.ShareAction;
-import com.umeng.socialize.UMShareListener;
-import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+
 
 import ccc.tcl.com.sprotappui.App;
 import ccc.tcl.com.sprotappui.R;
-import ccc.tcl.com.sprotappui.db.AppDBHelper;
-import ccc.tcl.com.sprotappui.db.SQLStatement;
 import ccc.tcl.com.sprotappui.model.Record;
 import ccc.tcl.com.sprotappui.model.ResponseResult;
 import ccc.tcl.com.sprotappui.presenter.presenterimpl.RecordPresenter;
@@ -70,7 +67,6 @@ import ccc.tcl.com.sprotappui.step_detector.StepDetector;
 import ccc.tcl.com.sprotappui.ui.SlideView;
 import ccc.tcl.com.sprotappui.ui.SportAppView;
 import ccc.tcl.com.sprotappui.utils.BaiduMapUtil;
-import static ccc.tcl.com.sprotappui.db.SQLStatement.DBName;
 
 /*实现实时动态画运动轨迹*/
 
@@ -115,7 +111,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 	private double mCurrentLat = 0.0;
 	private double mCurrentLon = 0.0;
 	private double K = 0.0;
-	private double totalSecond=0;
+	private int minute, second, hour,totalSecond;
 	private Record record;
 	private MapView mMapView;
 	private BaiduMap mBaiduMap;
@@ -125,9 +121,9 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 	double lastX;
 	private SensorManager mSensorManager;
 	private static final String TAG ="add TraceRecord";
-	private String strDistanceM,speedMSStr,totalSecondStr;
 	private String start_time,end_time,this_time;
-	private  int distanceMi,totalSecondi,speedMSi,calorie,typei;
+	private String strDistanceM,speedMSStr,totalSecondStr;
+	private  int distanceMi,speedMSi,calorie,typei;
 	private RecordPresenter recordPresenter;
 	/*起点图标*/
 	BitmapDescriptor startBD;
@@ -142,8 +138,10 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 	}
 	/*构造广播监听类，监听 SDK key 验证以及网络异常广播*/
 	public class SDKReceiver extends BroadcastReceiver {
+
 		public void onReceive(Context context, Intent intent) {
 			String s = intent.getAction();
+
 			if (s.equals(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_ERROR)) {
 				Toast.makeText(TraceRecordActivity.this, R.string.api_fail,Toast.LENGTH_SHORT).show();
 			} else if (s.equals(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_OK)) {
@@ -155,13 +153,13 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 	}
 
 
-	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		SDKInitializer.initialize(getApplicationContext());
 		setContentView(R.layout.activity_trace_record);
 		startBD = BitmapDescriptorFactory.fromResource(R.drawable.ic_me_history_startpoint);
 		finishBD = BitmapDescriptorFactory.fromResource(R.drawable.ic_me_history_finishpoint);
+
 		tvDistance = (TextView)findViewById(R.id.tv_distance);
 		endDistance = (TextView)findViewById(R.id.end_distance);
 		nianYueRi = (TextView)findViewById(R.id.nianYueRi);
@@ -173,6 +171,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		pause_img = (ImageView) findViewById(R.id.pause_img);
 		go_on_img = (ImageView) findViewById(R.id.go_on_img);
 		userPic = (ImageView) findViewById(R.id.userPic);
+
 		end = (LinearLayout) findViewById(R.id.btnEnd);
 		pause = (LinearLayout) findViewById(R.id.btnPause);
 		lockScreen = (LinearLayout) findViewById(R.id.lockScreen);
@@ -180,10 +179,10 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		progressBarArea = (LinearLayout) findViewById(R.id.progressBarArea);
 		endShowArea = (LinearLayout) findViewById(R.id.endShowArea);
 		distanceMArea = (LinearLayout) findViewById(R.id.distanceMArea);
-		stepArea= (LinearLayout) findViewById(R.id.stepArea);
 		top = (RelativeLayout) findViewById(R.id.top);
 		share = (RelativeLayout) findViewById(R.id.share);
 		back = (RelativeLayout) findViewById(R.id.back);
+
 		meter = (Chronometer)findViewById(R.id.chronometer1);
 
 
@@ -193,7 +192,6 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		lockScreen.setOnClickListener(this);
 		share.setOnClickListener(this);
 		back.setOnClickListener(this);
-
 
 		TestGPS();
 		isNetworkConn(TraceRecordActivity.this);
@@ -311,7 +309,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		slideView.setSlideListener(new SlideView.SlideListener() {
 			@Override
 			public void onDone() {
-				Toast.makeText(TraceRecordActivity.this, R.string.unlock_success, Toast.LENGTH_SHORT).show();
+				Toast.makeText(TraceRecordActivity.this,R.string.unlock_success, Toast.LENGTH_SHORT).show();
 				lockScreenArea.setVisibility(View.GONE);
 				lockScreen.setVisibility(View.VISIBLE);
 				end.setVisibility(View.VISIBLE);
@@ -322,32 +320,37 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		});
 		slideView.reset();/*解锁完成，重置*/
 	}
+
+
+
+
 	/*运动结束，停止记录*/
 	public void stopRecorder(){
-		TraceRecordActivity.this.rangeTime1= SystemClock.elapsedRealtime()-meter.getBase();
+		TraceRecordActivity.this.rangeTime1=SystemClock.elapsedRealtime()-meter.getBase();
 		meter.stop();//结束记录
 		//如果用户有运动数据
-		if(points.size()> 0){
+		if(points.size()>0){
 			stopTrace();
 			endShow();
 		}else{
 			showSimpleDialog();
 		}
 	}
+
 	/*停止地图记录服务并绘制轨迹*/
 	public void stopTrace() {
-		// 保存运动数据到本地
-		//addRecord();
 		// 保存运动数据到服务器
 		addRecordR();
 		if (mLocClient != null && mLocClient.isStarted()) {
 			mLocClient.stop();
 			progressBarArea.setVisibility(View.GONE);
+
 			if (isFirstLoc) {
 				points.clear();
 				last = new LatLng(0, 0);
 				return;
 			}
+
 			MarkerOptions oFinish = new MarkerOptions();// 地图标记覆盖物参数配置类
 			oFinish.position(points.get(points.size() - 1));
 			oFinish.icon(finishBD);// 设置覆盖物图片
@@ -355,6 +358,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 			//停止记步服务
 			Intent stopStep = new Intent(this, StepService.class);
 			stopService(stopStep);
+
 		}
 	}
 
@@ -363,7 +367,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		record = new Record();
 		record.setDate(getDate());
 		record.setDistance(distanceMi);
-		record.setSpent_time(totalSecondi);
+		record.setSpent_time(totalSecond);
 		record.setMean_speed(speedMSi);
 		record.setStep(StepDetector.CURRENT_STEP);
 		record.setType(typei);
@@ -371,14 +375,22 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		record.setStart_time("02:22:22");
 		record.setEnd_time("09:22:22");
 		record.setTime("22:22:22");
-		Log.i(TAG, "addRecordData:" + record.getDate()+",spent time:"+record.getSpent_time()
-				+",type:"+record.getType()+",mean speed:"+record.getMean_speed()+",calorie:"+record.getCalorie()
-				+",step:"+record.getStep()+",start time:"+record.getStart_time()+",end time:"+record.getEnd_time()
-				+",distance:"+record.getDistance()+",user id:"+record.getUser_id()+",id:"+record.getId());
+
 		recordPresenter=new RecordPresenter();
 		recordPresenter.onCreate();
 		recordPresenter.uploadRecord(record);
 		recordPresenter.attachView(sportAppView);
+
+		Log.i(TAG, "addRecordData:" + record.getDate()+",spent time:"+record.getSpent_time()
+				+",type:"+record.getType()+",mean speed:"+record.getMean_speed()+",calorie:"+record.getCalorie()
+				+",step:"+record.getStep()+",start time:"+record.getStart_time()+",end time:"+record.getEnd_time()
+				+",distance:"+record.getDistance()+",user id:"+record.getUser_id()+",id:"+record.getId());
+		Log.i(TAG, "addRecordData string:" + getDate() + "," + strDistanceM + "," + speedMSStr + ","
+				+ totalSecond + "," + StepDetector.CURRENT_STEP);
+		Log.i(TAG, "addRecordData int:" + "," + distanceMi + "," + speedMSi + ","
+				+ totalSecond + "," + StepDetector.CURRENT_STEP);
+		Toast.makeText(TraceRecordActivity.this, distanceMi + "," + speedMSi + ","
+				+ totalSecond + "," + StepDetector.CURRENT_STEP,Toast.LENGTH_LONG).show();
 	}
 
 	// 保存运动数据到本地
@@ -427,6 +439,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		//显示日期
 		nianYueRi.setText(getDate());
 	}
+
 	/*运动结束时显示日期*/
 	public String getDate(){
 		SimpleDateFormat sdFmt = new SimpleDateFormat("yyyy-MM-dd");
@@ -478,6 +491,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		initChronometer();
 		meter.start();
 
+
 		//开始记步服务
 		Intent startStep = new Intent(this, StepService.class);
 		startService(startStep);
@@ -487,10 +501,29 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		tvSpeed.setText("0.00");
 
 		updateDataRunnable = new Runnable() {
+
 			@Override
 			public void run() {
 				try {
 					Log.i("TraceRecord", "run");
+
+					/*换算时间，以01:20:55这个用时为例
+						[0] 1小时
+						[1] 20分钟
+						[2] 55秒钟*/
+					String showTime = meter.getText().toString();
+						/*对用时进行单位换算成小时*/
+					String strHour = showTime.split(":")[0];
+					String strMinute = showTime.split(":")[1];
+					String strSecond = showTime.split(":")[2];
+					hour = Integer.parseInt(strHour);
+					minute = Integer.parseInt(strMinute);
+					second = Integer.parseInt(strSecond);
+
+					totalSecond = hour * 60 * 60 + minute * 60 + second;
+
+					totalSecondStr=String.valueOf(totalSecond);
+
 					if (points.size() >= 2) {
 						/*更新距离*/
 						double distanceM = 0;
@@ -502,8 +535,10 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 							/*BaiduMapUtil.GetDistance 计算出的结果distanceM是米*/
 							distanceM = distanceM + BaiduMapUtil.GetDistance(lon1, lat1, lon2, lat2);
 						}
-						/*distanceMi=(int) distanceM;*/
-						distanceMi=(new Double(distanceM)).intValue();
+						/*显示米*/
+						strDistanceM = String.valueOf(distanceM);
+						distanceMi=Integer.parseInt(strDistanceM);
+
 
 						/*根据运动类型计算消耗卡路里*/
 						switch (typei) {
@@ -517,15 +552,10 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 						}
 						/*运动卡路里计算公式*/
 						double calorieSum=WEIGHT * distanceMi * K;
-						calorie=(new Double(calorieSum)).intValue();
-						/*calorie=(int) calorieSum;*/
-						/*String calorieSumStr = String.valueOf(calorieSum);
-						calorie=Integer.parseInt(calorieSumStr);*/
+						calorie=Integer.parseInt(String.valueOf(calorieSum));
 
 						/*米转换成公里*/
 						double distanceKM = distanceM / 1000;
-						/*显示米*/
-						strDistanceM = String.valueOf(distanceM);
 						/*显示公里*/
 						String strDistanceKM = String.valueOf(distanceKM);
 
@@ -545,33 +575,12 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 							endDistance.setText(strDistanceKM);
 						}
 
-						/*换算时间，以01:20:55这个用时为例
-						[0] 1小时
-						[1] 20分钟
-						[2] 55秒钟*/
-						String showTime = meter.getText().toString();
-						double minute = 0, second = 0, hour = 0;
-
-						/*对用时进行单位换算成小时*/
-						String strHour = showTime.split(":")[0];
-						String strMinute = showTime.split(":")[1];
-						String strSecond = showTime.split(":")[2];
-						hour = Double.parseDouble(strHour);
-						minute = Double.parseDouble(strMinute);
-						second = Double.parseDouble(strSecond);
-
-						totalSecond = hour * 60 * 60 + minute * 60 + second;
-
 						//hour = (hour * 60 * 60 + minute * 60 + second ) / 60 / 60;
 						hour = totalSecond / 60 / 60;
 						// 更新速度
 						double speed = distanceKM / hour;
 
 						double speedMS = distanceM / totalSecond;
-
-						/*speedMSi=(int) speedMS;*/
-						speedMSi=(new Double(speedMS)).intValue();
-						/*speedMSi=Integer.parseInt(speedMSStr);*/
 
 						String strSpeed = String.valueOf(speed);
 						// 将速度speed保留2位小数点
@@ -580,11 +589,8 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 							strSpeed = strSpeed.substring(0, pointIndex + 3);
 							tvSpeed.setText(strSpeed);
 						}
-						speedMSStr=String.valueOf(speedMS);
-						totalSecondStr = String.valueOf(totalSecond);
-						/*totalSecondi=(int) totalSecond;*/
-						/*totalSecondi=Integer.parseInt(totalSecondStr);*/
-						totalSecondi=(new Double(totalSecond)).intValue();
+						speedMSi=Integer.parseInt(String.valueOf(speedMS));
+
 					}
 
 				} catch (Exception e) {
@@ -598,6 +604,8 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		/*让updateDataRunnable运行*/
 		handler.post(updateDataRunnable);
 	}
+
+
 	/*初始化计时器*/
 	private void initChronometer() {
 		meter.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
@@ -614,8 +622,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 				String hh = h < 10 ? "0" + h : h + "";
 				String mm = m < 10 ? "0" + m : m + "";
 				String ss = s < 10 ? "0" + s : s + "";
-				this_time=hh + ":" + mm + ":" + ss;
-				cArg.setText(this_time);
+				cArg.setText(hh + ":" + mm + ":" + ss);
 			}
 		});
 		meter.setBase(SystemClock.elapsedRealtime());
@@ -697,6 +704,8 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		}
 		return false;
 	}
+
+
 
 	/*
 	 * 判断网络是否连接成功，连接成功不做任何操作
@@ -908,11 +917,6 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		// 为系统的方向传感器注册监听器
 		mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
 				SensorManager.SENSOR_DELAY_UI);
-		/**
-		 * 初始化RecordPresrnter
-		 */
-
-
 	}
 	private SportAppView<ResponseResult> sportAppView = new SportAppView<ResponseResult>() {
 		@Override
@@ -951,10 +955,12 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		if (mLocClient != null && mLocClient.isStarted()) {
 			mLocClient.stop();
 		}
+
 		//复位
 		points.clear();
 		last = new LatLng(0, 0);
 		isFirstLoc = true;
+
 		// 关闭定位图层
 		mBaiduMap.setMyLocationEnabled(false);
 		mMapView.getMap().clear();
@@ -964,7 +970,6 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		finishBD.recycle();
 		super.onDestroy();
 		unregisterReceiver(mReceiver);
-		recordPresenter.onStop();
 	}
 
 
