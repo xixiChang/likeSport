@@ -1,5 +1,6 @@
 package ccc.tcl.com.sprotappui.activity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -70,7 +71,7 @@ import ccc.tcl.com.sprotappui.utils.BaiduMapUtil;
 
 /*实现实时动态画运动轨迹*/
 
-public class TraceRecordActivity extends BaseActivity implements SensorEventListener,View.OnClickListener, View.OnLongClickListener {
+public class TraceRecordActivity extends Activity implements SensorEventListener,View.OnClickListener, View.OnLongClickListener {
 	private SDKReceiver mReceiver;
 	private LinearLayout end;
 	private LinearLayout pause;
@@ -94,6 +95,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 	private ImageView pause_img;
 	private ImageView go_on_img;
 	private ImageView userPic;
+
 	private long rangeTime;
 	private long rangeTime1;
 	private long totalTime = 0;
@@ -106,32 +108,34 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 	LocationClient mLocClient;
 	public MyLocationListenner myListener = new MyLocationListenner();
 	private int mCurrentDirection = 0;
-	/*卡路里计算公式系数，K0为步行，K1为跑步，K2为骑行*/
-	private static final double K0=0.8214,K1=1.036,K2=0.6142,WEIGHT=60;
-	private double mCurrentLat = 0.0;
-	private double mCurrentLon = 0.0;
-	private double K = 0.0;
+	private double mCurrentLat = 0.000;
+	private double mCurrentLon = 0.000;
 	private int minute, second, hour,totalSecond;
 	private Record record;
-	private MapView mMapView;
-	private BaiduMap mBaiduMap;
+	MapView mMapView;
+	BaiduMap mBaiduMap;
+
 	boolean isFirstLoc = true; /*是否首次定位*/
 	private MyLocationData locData;
 	float mCurrentZoom = 18f;/*默认地图缩放比例值*/
-	double lastX;
+
 	private SensorManager mSensorManager;
 	private static final String TAG ="add TraceRecord";
 	private String start_time,end_time,this_time;
 	private String strDistanceM,speedMSStr,totalSecondStr;
-	private  int distanceMi,speedMSi,calorie,typei;
+	private  int distanceMi,calorie,typei;
+	private double speedMSi;
 	private RecordPresenter recordPresenter;
 	/*起点图标*/
 	BitmapDescriptor startBD;
+	/*终点图标*/
 	BitmapDescriptor finishBD;
+
 	List<LatLng> points = new ArrayList<LatLng>();/*位置点集合*/
 	Polyline mPolyline;/*运动轨迹图层*/
 	LatLng last = new LatLng(0, 0);/*上一个定位点*/
 	MapStatus.Builder builder;
+
 	/*开启这个后就可以正常使用Selector这样的DrawableContainers了*/
 	static {
 		AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
@@ -153,6 +157,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 	}
 
 
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		SDKInitializer.initialize(getApplicationContext());
@@ -179,6 +184,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		progressBarArea = (LinearLayout) findViewById(R.id.progressBarArea);
 		endShowArea = (LinearLayout) findViewById(R.id.endShowArea);
 		distanceMArea = (LinearLayout) findViewById(R.id.distanceMArea);
+		stepArea= (LinearLayout) findViewById(R.id.stepArea);
 		top = (RelativeLayout) findViewById(R.id.top);
 		share = (RelativeLayout) findViewById(R.id.share);
 		back = (RelativeLayout) findViewById(R.id.back);
@@ -256,6 +262,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 	}
 
 
+
 	/*点击相应按钮区域*/
 	@Override
 	public void onClick(View view) {
@@ -288,7 +295,6 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 				break;
 		}
 	}
-
 
 	/*长按结束*/
 	@Override
@@ -328,6 +334,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 	public void stopRecorder(){
 		TraceRecordActivity.this.rangeTime1=SystemClock.elapsedRealtime()-meter.getBase();
 		meter.stop();//结束记录
+		end_time=getHms();
 		//如果用户有运动数据
 		if(points.size()>0){
 			stopTrace();
@@ -337,9 +344,10 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		}
 	}
 
+
 	/*停止地图记录服务并绘制轨迹*/
 	public void stopTrace() {
-		// 保存运动数据到服务器
+		// 保存此次运动数据
 		addRecordR();
 		if (mLocClient != null && mLocClient.isStarted()) {
 			mLocClient.stop();
@@ -364,6 +372,10 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 
 	// 保存运动数据到服务器
 	public void addRecordR(){
+		/*获取上个页面用户选择的运动类型type*/
+		Intent intent = getIntent();
+		typei= intent.getIntExtra("type", -1);
+
 		record = new Record();
 		record.setDate(getDate());
 		record.setDistance(distanceMi);
@@ -372,9 +384,9 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		record.setStep(StepDetector.CURRENT_STEP);
 		record.setType(typei);
 		record.setCalorie(calorie);
-		record.setStart_time("02:22:22");
-		record.setEnd_time("09:22:22");
-		record.setTime("22:22:22");
+		record.setStart_time(start_time);
+		record.setEnd_time(end_time);
+		record.setTime(getHms());
 
 		recordPresenter=new RecordPresenter();
 		recordPresenter.onCreate();
@@ -388,25 +400,10 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 
 	}
 
-	// 保存运动数据到本地
-	/*public void addRecord(){
-		//保存此次运动数据
-		AppDBHelper dbHelper = new AppDBHelper(TraceRecordActivity.this, DBName, null, 1);
-		//得到一个可写的数据库
-		SQLiteDatabase db =dbHelper.getWritableDatabase();
-		ContentValues cv = new ContentValues();
-		cv.put("date", getDate());
-		cv.put("distance", strDistanceM);
-		cv.put("mean_speed", speedMSStr);
-		cv.put("spent_time", totalSecondStr);
-		cv.put("step", StepDetector.CURRENT_STEP);
-		//调用insert方法，将数据插入数据库
-		db.insert(SQLStatement.RECORD_TABLE_NAME, null, cv);
-		//关闭数据库
-		db.close();
-	}*/
+
 	/*运动结束时的显示信息*/
 	public void endShow(){
+
 		end.setVisibility(View.GONE);
 		pause.setVisibility(View.GONE);
 		lockScreen.setVisibility(View.GONE);
@@ -414,15 +411,10 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		distanceMArea.setVisibility(View.GONE);
 		endShowArea.setVisibility(View.VISIBLE);
 		top.setVisibility(View.VISIBLE);
-		//显示用户名
+//		显示用户名
 		tvUser.setText(App.userInfo.getName());
-		//显示用户头像
-		//userPic.setImageResource();
-
-		/*获取上个页面用户选择的运动类型type*/
-		Intent intent = getIntent();
-		typei = intent.getIntExtra("type",-1);
-
+//		显示用户头像
+//		userPic.setImageResource();
 		/*骑行不显示步数*/
 		if(typei == 2){
 			stepArea.setVisibility(View.GONE);
@@ -431,7 +423,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 			String strStep = String.valueOf(StepDetector.CURRENT_STEP);
 			tvStep.setText(strStep);
 		}
-		//显示日期
+//		显示日期
 		nianYueRi.setText(getDate());
 	}
 
@@ -442,6 +434,15 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		String sdFmtStr=String.valueOf(sdFmt.format(now));
 		return sdFmtStr;
 	}
+
+	/*显示当前时分秒*/
+	public String getHms(){
+		SimpleDateFormat sdFmt = new SimpleDateFormat("HH:mm:ss");
+		Date now = new Date();
+		String sdFmtStr=String.valueOf(sdFmt.format(now));
+		return sdFmtStr;
+	}
+
 	/*暂停和继续*/
 	public void pauseRecorder() {
 		if(!PAUSE)/*暂停计时*/
@@ -485,7 +486,7 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		}
 		initChronometer();
 		meter.start();
-
+		start_time=getHms();
 
 		//开始记步服务
 		Intent startStep = new Intent(this, StepService.class);
@@ -516,7 +517,6 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 					second = Integer.parseInt(strSecond);
 
 					totalSecond = hour * 60 * 60 + minute * 60 + second;
-
 					totalSecondStr=String.valueOf(totalSecond);
 
 					if (points.size() >= 2) {
@@ -530,27 +530,12 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 							/*BaiduMapUtil.GetDistance 计算出的结果distanceM是米*/
 							distanceM = distanceM + BaiduMapUtil.GetDistance(lon1, lat1, lon2, lat2);
 						}
-						/*显示米*/
-						strDistanceM = String.valueOf(distanceM);
-						distanceMi=Integer.parseInt(strDistanceM);
-
-
-						/*根据运动类型计算消耗卡路里*/
-						switch (typei) {
-							case 0:
-								K = K0;
-							case 1:
-								K = K1;
-							case 2:
-								K = K2;
-								break;
-						}
-						/*运动卡路里计算公式*/
-						double calorieSum=WEIGHT * distanceMi * K;
-						calorie=Integer.parseInt(String.valueOf(calorieSum));
 
 						/*米转换成公里*/
 						double distanceKM = distanceM / 1000;
+						/*显示米*/
+						strDistanceM = String.valueOf(distanceM);
+
 						/*显示公里*/
 						String strDistanceKM = String.valueOf(distanceKM);
 
@@ -559,9 +544,9 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 							int pointIndex = strDistanceM.indexOf(".");
 							strDistanceM = strDistanceM.substring(0,
 									pointIndex);
+							tvDistance.setText(strDistanceM);
 						}
-						tvDistance.setText(strDistanceM);
-
+						distanceMi=Integer.parseInt(strDistanceM);
 						// 公里数保留2位小数点
 						if (strDistanceKM.contains(".")) {
 							int pointIndex = strDistanceKM.indexOf(".");
@@ -569,14 +554,8 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 									pointIndex + 3);
 							endDistance.setText(strDistanceKM);
 						}
-
-						//hour = (hour * 60 * 60 + minute * 60 + second ) / 60 / 60;
-						hour = totalSecond / 60 / 60;
-						// 更新速度
-						double speed = distanceKM / hour;
-
 						double speedMS = distanceM / totalSecond;
-
+						double speed=speedMS * 3.6;
 						String strSpeed = String.valueOf(speed);
 						// 将速度speed保留2位小数点
 						if (strSpeed.contains(".")) {
@@ -584,7 +563,8 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 							strSpeed = strSpeed.substring(0, pointIndex + 3);
 							tvSpeed.setText(strSpeed);
 						}
-						speedMSi=Integer.parseInt(String.valueOf(speedMS));
+						/*speedMSStr=String.valueOf(speedMS);*/
+						speedMSi=Double.parseDouble(String.valueOf(speedMS));
 
 					}
 
@@ -732,6 +712,9 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		}).show();
 	}
 
+
+
+	double lastX;
 
 	@Override
 	public void onSensorChanged(SensorEvent sensorEvent) {
@@ -913,12 +896,13 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
 				SensorManager.SENSOR_DELAY_UI);
 	}
+
 	private SportAppView<ResponseResult> sportAppView = new SportAppView<ResponseResult>() {
 		@Override
 		public void onSuccess(ResponseResult response) {
 			if (response.isSuccess()){
 				Log.d(TAG, "onSuccess: ");
-				Toast.makeText(TraceRecordActivity.this, "上传运动记录成功", Toast.LENGTH_SHORT).show();
+				Toast.makeText(TraceRecordActivity.this, "上传运动记录成功", 			Toast.LENGTH_SHORT).show();
 			}
 			else {
 				Log.d(TAG, "onSuccess: " + response.getMsg());//数据引起
@@ -929,12 +913,6 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 			Log.e(TAG, "onRequestError: " + msg);
 		}
 	};
-
-	/**
-	 * SportAppView<ResponseResult<?>>
-	 *     ?对应调用方法（ｐａｃｋａｇｅ－>internet）的返回类型
-	 */
-
 
 	@Override
 	protected void onStop() {
@@ -966,6 +944,5 @@ public class TraceRecordActivity extends BaseActivity implements SensorEventList
 		super.onDestroy();
 		unregisterReceiver(mReceiver);
 	}
-
 
 }
