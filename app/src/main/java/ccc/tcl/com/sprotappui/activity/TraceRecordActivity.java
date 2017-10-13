@@ -110,6 +110,9 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 	private int mCurrentDirection = 0;
 	private double mCurrentLat = 0.000;
 	private double mCurrentLon = 0.000;
+	private static final double K0=0.8214,K1=1.036,K2=0.6142;
+	private double K=1.00;
+	private int WEIGHT=60;
 	private int minute, second, hour,totalSecond;
 	private Record record;
 	MapView mMapView;
@@ -372,10 +375,6 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 
 	// 保存运动数据到服务器
 	public void addRecordR(){
-		/*获取上个页面用户选择的运动类型type*/
-		Intent intent = getIntent();
-		typei= intent.getIntExtra("type", -1);
-
 		record = new Record();
 		record.setDate(getDate());
 		record.setDistance(distanceMi);
@@ -519,6 +518,35 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 					totalSecond = hour * 60 * 60 + minute * 60 + second;
 					totalSecondStr=String.valueOf(totalSecond);
 
+					/*获取上个页面用户选择的运动类型type*/
+					Intent intent = getIntent();
+					typei= intent.getIntExtra("type", -1);
+
+					/*根据运动类型计算消耗卡路里*/
+					switch(typei){
+						case 0:
+							K = K0;
+							break;
+						case 1:
+							K = K1;
+							break;
+						case 2:
+							K = K2;
+							break;
+						default:
+							K = 1.00;
+							break;
+					}
+					/*运动卡路里计算公式*/
+					double calorieSum=WEIGHT * distanceMi * K;
+					String strcalorieSum = String.valueOf(calorieSum);
+					if (strcalorieSum.contains(".")) {
+						int pointIndex = strcalorieSum.indexOf(".");
+						strcalorieSum = strcalorieSum.substring(0, pointIndex);
+					}
+					calorie=Integer.parseInt(strcalorieSum);
+
+
 					if (points.size() >= 2) {
 						/*更新距离*/
 						double distanceM = 0;
@@ -547,6 +575,9 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 							tvDistance.setText(strDistanceM);
 						}
 						distanceMi=Integer.parseInt(strDistanceM);
+
+
+
 						// 公里数保留2位小数点
 						if (strDistanceKM.contains(".")) {
 							int pointIndex = strDistanceKM.indexOf(".");
