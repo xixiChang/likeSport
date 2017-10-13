@@ -8,6 +8,8 @@ import android.widget.Switch;
 
 import ccc.tcl.com.sprotappui.R;
 
+import static android.support.v7.appcompat.R.styleable.SwitchCompat;
+
 public class AuthoritySettingActivity extends BaseActivity {
     SwitchCompat camera;
     SwitchCompat storage;
