@@ -79,6 +79,7 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
             Toast.makeText(LayoutActivity.this,"网络连接失败:"+msg,Toast.LENGTH_SHORT).show();
         }
     };
+
     private SportAppView join = new SportAppView<ResponseResult<List<UserInfo>>>() {
         @Override
         public void onSuccess(ResponseResult<List<UserInfo>> response) {
