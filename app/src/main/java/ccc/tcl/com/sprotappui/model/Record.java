@@ -1,5 +1,10 @@
 package ccc.tcl.com.sprotappui.model;
 
+import android.util.JsonReader;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.Date;
 
 import ccc.tcl.com.sprotappui.App;
@@ -30,7 +35,8 @@ public class Record {
     private int step;
     private int distance; //单位：ｍ
     private int calorie; //单位：c
-    private float mean_speed; //单位：m/s
+    /*    private float mean_speed; //单位：m/s*/
+    private double mean_speed;//单位：m/s
     private int spent_time; //s
     private String start_time; //HH:mm:ss
     private String end_time; //HH:mm:ss
@@ -92,13 +98,21 @@ public class Record {
         this.calorie = calorie;
     }
 
-    public float getMean_speed() {
+/*    public float getMean_speed() {
         return mean_speed;
     }
 
     public void setMean_speed(float mean_speed) {
         this.mean_speed = mean_speed;
+    }*/
+
+    public double getMean_speed() {
+        return mean_speed;
     }
+    public void setMean_speed(double mean_speed) {
+        this.mean_speed = mean_speed;
+    }
+
 
     public int getSpent_time() {
         return spent_time;
@@ -130,6 +144,7 @@ public class Record {
 
     @Override
     public String toString() {
+
         return "Record:[ date=" + date + ", time=" + time + ", type=" + type
                 +", step=" + step + ", start_time=" + start_time + ", end_time=" + end_time
                 +", spent_time=" + spent_time + ", calorie=" + calorie + ", mean_speed=" + mean_speed
