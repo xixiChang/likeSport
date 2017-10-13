@@ -33,7 +33,7 @@ import static ccc.tcl.com.sprotappui.R.id.toolbar;
 
 public class DayRateActivity extends BaseActivity {
     private List<RateItem> rates;
-    private ToolBar toolBar;
+    private Toolbar toolBar;
     private TextView dayDistance, dayConsume, userName;
     private CircleImageView headImage;
     private RecyclerView recyclerView;
@@ -64,7 +64,7 @@ public class DayRateActivity extends BaseActivity {
         Intent intent = getIntent();
         data = intent.getStringArrayExtra("data");
         context = this;
-        toolBar = (ToolBar) findViewById(toolbar);
+        toolBar = (Toolbar) findViewById(R.id.contact_toolbar);
         super.setToolBar(toolBar, R.string.day_rate, true);
 
         initView();
@@ -95,7 +95,6 @@ public class DayRateActivity extends BaseActivity {
         userName.setText(data[0]);
         Glide.with(this).load(data[1]).into(headImage);
         //headImage.setImageResource(R.drawable.photo1);
-
         userPresenter = new UserPresenter();
         recordPresenter = new RecordPresenter();
     }

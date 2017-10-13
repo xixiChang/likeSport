@@ -41,7 +41,8 @@
         <activity android:name=".activity.BaseActivity" />
         <activity android:name=".activity.HomeActivity"
             android:theme="@style/beautyTheme" />
-        <activity android:name=".activity.DayRateActivity" />
+        <activity android:name=".activity.DayRateActivity"
+            android:theme="@style/beautyTheme"/>
         <activity android:name=".activity.ScoreActivity" />
         <activity
             android:name=".activity.LayoutActivity"

@@ -105,6 +105,8 @@ public class PickPictureActivity extends BaseActivity {
                 builder.setNegativeButton("取消", null).create().show();
                 break;
             case R.id.next:
+                if (imageView.getVisibility() == View.VISIBLE)
+                    break;
                 Intent intent = new Intent(PickPictureActivity.this, CreateActivity.class);
                 PlatFormActivity platFormActivity = new PlatFormActivity();
                 platFormActivity.setImage_url(imagePath);
