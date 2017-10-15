@@ -60,6 +60,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import com.bumptech.glide.Glide;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -67,6 +69,7 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import ccc.tcl.com.sprotappui.App;
 import ccc.tcl.com.sprotappui.R;
+import ccc.tcl.com.sprotappui.data.UserInfo;
 import ccc.tcl.com.sprotappui.model.Record;
 import ccc.tcl.com.sprotappui.model.ResponseResult;
 import ccc.tcl.com.sprotappui.presenter.presenterimpl.RecordPresenter;
@@ -75,6 +78,7 @@ import ccc.tcl.com.sprotappui.step_detector.StepDetector;
 import ccc.tcl.com.sprotappui.ui.SlideView;
 import ccc.tcl.com.sprotappui.ui.SportAppView;
 import ccc.tcl.com.sprotappui.utils.BaiduMapUtil;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /*实现实时动态画运动轨迹*/
 
@@ -101,8 +105,7 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 	private TextView tvPause;
 	private ImageView pause_img;
 	private ImageView go_on_img;
-	private ImageView userPic;
-
+	private CircleImageView userPic;
 	private long rangeTime;
 	private long rangeTime1;
 	private long totalTime = 0;
@@ -187,7 +190,7 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 		tvStep = (TextView)findViewById(R.id.tv_step);
 		pause_img = (ImageView) findViewById(R.id.pause_img);
 		go_on_img = (ImageView) findViewById(R.id.go_on_img);
-		userPic = (ImageView) findViewById(R.id.userPic);
+		userPic = (CircleImageView) findViewById(R.id.userPic);
 
 		end = (LinearLayout) findViewById(R.id.btnEnd);
 		pause = (LinearLayout) findViewById(R.id.btnPause);
@@ -405,7 +408,7 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 		recordPresenter=new RecordPresenter();
 		recordPresenter.onCreate();
 		recordPresenter.uploadRecord(record);
-		recordPresenter.attachView(sportAppView);
+		recordPresenter.attachView(recordView);
 
 		Log.i(TAG, "addRecordData:" + record.getDate() + ",spent time:" + record.getSpent_time()
 				+ ",type:" + record.getType() + ",mean speed:" + record.getMean_speed() + ",calorie:" + record.getCalorie()
@@ -417,7 +420,6 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 
 	/*运动结束时的显示信息*/
 	public void endShow(){
-
 		end.setVisibility(View.GONE);
 		pause.setVisibility(View.GONE);
 		lockScreen.setVisibility(View.GONE);
@@ -425,21 +427,22 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 		distanceMArea.setVisibility(View.GONE);
 		endShowArea.setVisibility(View.VISIBLE);
 		top.setVisibility(View.VISIBLE);
-//		显示用户名
+		/*显示用户名和头像*/
 		tvUser.setText(App.userInfo.getName());
-//		显示用户头像
-//		userPic.setImageResource();
+		Glide.with(TraceRecordActivity.this).load(App.userInfo.getImage_url()).into(userPic);
 		/*骑行不显示步数*/
 		if(typei == 2){
 			stepArea.setVisibility(View.GONE);
 		}else {
-			//显示步数
+			/*显示步数*/
 			String strStep = String.valueOf(StepDetector.CURRENT_STEP);
 			tvStep.setText(strStep);
 		}
-//		显示日期
+		/*显示日期*/
 		nianYueRi.setText(getDate());
 	}
+
+
 
 	/*禁用系统的返回键*/
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -952,22 +955,24 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 				SensorManager.SENSOR_DELAY_UI);
 	}
 
-	private SportAppView<ResponseResult> sportAppView = new SportAppView<ResponseResult>() {
+	private SportAppView<ResponseResult> recordView = new SportAppView<ResponseResult>() {
 		@Override
 		public void onSuccess(ResponseResult response) {
 			if (response.isSuccess()){
 				Log.d(TAG, "onSuccess: ");
-				Toast.makeText(TraceRecordActivity.this, "上传运动记录成功", 			Toast.LENGTH_SHORT).show();
+				Toast.makeText(TraceRecordActivity.this, "上传运动记录成功",Toast.LENGTH_SHORT).show();
 			}
 			else {
 				Log.d(TAG, "onSuccess: " + response.getMsg());//数据引起
 			}
 		}
+
 		@Override
 		public void onRequestError(String msg) {
 			Log.e(TAG, "onRequestError: " + msg);
 		}
 	};
+
 
 	@Override
 	protected void onStop() {
@@ -1008,12 +1013,12 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 	private void requestPermission() {
 		if (ContextCompat.checkSelfPermission(this,
 				Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-			//第一次被拒绝后，第二次访问时，向用户说明为什么需要此权限
+		//第一次被拒绝后，第二次访问时，向用户说明为什么需要此权限
 			if (ActivityCompat.shouldShowRequestPermissionRationale(this,
 					Manifest.permission.ACCESS_COARSE_LOCATION)) {
 				Toast.makeText(this, "开启后使用定位功能", Toast.LENGTH_SHORT).show();
 			}
-			//若权限没有开启，则请求权限
+		//若权限没有开启，则请求权限
 			ActivityCompat.requestPermissions(this,
 					new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
 					Location_Permission);
@@ -1028,10 +1033,10 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 		if (requestCode == Location_Permission) {
 			if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-				//请求权限成功
+		//请求权限成功
 				Toast.makeText(TraceRecordActivity.this, "请求权限成功！", Toast.LENGTH_SHORT).show();
-			} else {
-				//请求失败
+		} else {
+		//请求失败
 				Toast.makeText(TraceRecordActivity.this, "请求权限失败！", Toast.LENGTH_SHORT).show();
 			}
 		}
