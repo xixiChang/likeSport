@@ -2,11 +2,18 @@ package ccc.tcl.com.sprotappui.activity;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteException;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,11 +33,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private EditText inputPhone, inputPwd;
     private TextView loginToReg;
     private Button login;
+    private ImageView passwordShow;
     private static final int START_AC_REG = 5014;
-    private UserPresenter userPresenter;//---->RecordPresenter
+    private UserPresenter userPresenter;
     private static final String TAG = "LoginActivity";
     private String phone, pwd;
     private SQLParaWrapper sqlParaWrapper;
+    private boolean passwordDisplayTag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +49,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     @Override
-    protected void onResume() {//***
+    protected void onResume() {
         super.onResume();
         userPresenter = new UserPresenter();
         userPresenter.onCreate();
@@ -48,25 +57,30 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void initView() {
+        //隐藏该活动状态栏
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+        }
         inputPhone = (EditText) findViewById(R.id.user_login_phone);
         inputPwd = (EditText) findViewById(R.id.user_login_pwd);
-        loginToReg = (TextView) findViewById(R.id.login_to_register);
+
         login = (Button) findViewById(R.id.login_button);
+        loginToReg = (TextView) findViewById(R.id.login_to_register);
+        passwordShow=(ImageView) findViewById(R.id.password_show);
 
         loginToReg.setOnClickListener(this);
         login.setOnClickListener(this);
-
+        passwordShow.setOnClickListener(this);
 
     }
-
-    //<UserInfo>换成具体方法的返回值泛型,SportAppView<ResponseResult>不许改动
-    //需要判断返回是否成功 isSuccess
-    //实际有用值responseResult.getResult
 
     private SportAppView<ResponseResult<UserInfo>> sportAppView = new SportAppView<ResponseResult<UserInfo>>() {
         @Override
         public void onSuccess(ResponseResult<UserInfo> responseResult) {
-            ///需要判断responseResult.getType()
             if (responseResult.isSuccess()) {
                 Log.d(TAG, "onSuccess: ");
                 userInfo = responseResult.getResult();
@@ -76,12 +90,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 Log.d(TAG, "onSuccess: pwd>" + userInfo.getSession());
 
                 saveUserInfoToDB();
-
-                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                 finish();
             }
-            //else responseResult.getMsg()
         }
 
         @Override
@@ -97,13 +108,22 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.login_to_register:
-                Intent intent = new Intent(this, RegisterActivity.class);
-                startActivityForResult(intent, START_AC_REG);
+                startActivity(new Intent(this,RegisterActivity.class));
                 break;
             case R.id.login_button:
                 phone = inputPhone.getText().toString();
                 pwd = inputPwd.getText().toString();
-                userPresenter.userLogin(phone, pwd, 0);
+                userPresenter.userLogin(phone, pwd, 0);//做判断
+                break;
+            case R.id.password_show:
+                if (!passwordDisplayTag) {
+                    // 设置 EditText 的 input type  显示 密码
+                    inputPwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                } else {
+                    // 隐藏 密码
+                    inputPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+                passwordDisplayTag = !passwordDisplayTag;
                 break;
         }
     }
@@ -124,9 +144,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             }
         }
     }
-
     @Override
-    protected void onStop() {//**
+    protected void onStop() {
         super.onStop();
         userPresenter.onStop();
     }

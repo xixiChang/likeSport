@@ -27,7 +27,6 @@ import java.util.Random;
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.entity.TabEntity;
 import ccc.tcl.com.sprotappui.fragment.MyFragment;
-import ccc.tcl.com.sprotappui.fragment.SimpleCardFragment;
 import ccc.tcl.com.sprotappui.fragment.SportCircleFragment;
 import ccc.tcl.com.sprotappui.fragment.SportFragment;
 import ccc.tcl.com.sprotappui.service.IMService;
@@ -65,7 +64,10 @@ public class HomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        super.setToolBar(toolbar, R.string.toolbar_name_sport, false);
+        toolbar.setVisibility(View.GONE);
+        String flag=getIntent().getStringExtra("type");
+        Log.d("SimpleCardFragment", "onCreate: "+flag);
+//        super.setToolBar(toolbar, R.string.toolbar_name_sport, false);
         initIMConnect();
         initView();
         //setFullScreen(true);
@@ -90,7 +92,7 @@ public class HomeActivity extends BaseActivity {
         if (mIMKit != null){
             mFragments.add(mIMKit.getConversationFragment());
         }else {
-            mFragments.add(SimpleCardFragment.getInstance("Switch ViewPager " + mTitles[2]));
+            mFragments.add(SportFragment.getInstance());
         }
         mFragments.add(MyFragment.getInstance());
         fragmentManager = getSupportFragmentManager();

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="ccc.tcl.com.sprotappui.activity.Test2Activity">
+    tools:context="ccc.tcl.com.sprotappui.activity.RecordActivity">
     <include layout="@layout/toolbar_general"
         android:id="@+id/top"></include>
 

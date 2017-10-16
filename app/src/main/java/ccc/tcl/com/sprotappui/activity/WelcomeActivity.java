@@ -37,13 +37,13 @@ public class WelcomeActivity extends AppCompatActivity {
                 finish();
             }else {
                 Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
-                //Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
+//                Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
                 startActivity(intent);
                 finish();
-
             }
         }
     };
+
 
 
     @Override
@@ -58,7 +58,7 @@ public class WelcomeActivity extends AppCompatActivity {
         @Override
         public void run() {
             int msgWhat = JUMP_TO_Login;
-            //int msgWhat =JUMP_TO_HOME;
+//            int msgWhat =JUMP_TO_HOME;
             //*****************************************
             long startTime = System.currentTimeMillis();
 

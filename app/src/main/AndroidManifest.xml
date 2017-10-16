@@ -27,8 +27,8 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="59b4d0b4734be43ee60000f9" >
-        </meta-data>
+            android:value="59b4d0b4734be43ee60000f9" />
+
         <activity android:name=".activity.MainActivity">
 
             <!-- <intent-filter> -->
@@ -39,7 +39,8 @@
             <!-- </intent-filter> -->
         </activity>
         <activity android:name=".activity.BaseActivity" />
-        <activity android:name=".activity.HomeActivity"
+        <activity
+            android:name=".activity.HomeActivity"
             android:theme="@style/beautyTheme" />
         <activity android:name=".activity.DayRateActivity"
             android:theme="@style/beautyTheme"/>
@@ -74,16 +75,17 @@
         <!-- 百度地图SDK申请的KEY，要和应用的SHA1对应 -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="18xHsLKOqED3Mpa0xEojAiaIu0umsF5k" />
+            android:value="GxGquQIieGUwWBO2CSYGnbypPnh4OAR7" />
 
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote" />
-
-        <service android:name="ccc.tcl.com.sprotappui.service.StepService"
+        <service
+            android:name=".service.StepService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
         <activity
             android:name=".activity.NewCreateActivity"
             android:theme="@style/beautyTheme" />
@@ -96,7 +98,7 @@
         <activity android:name=".activity.LoginTestActivity" />
         <activity
             android:name=".activity.ContactActivity"
-            android:theme="@style/beautyTheme"/>
+            android:theme="@style/beautyTheme" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -109,7 +111,10 @@
         </provider>
 
         <activity android:name=".activity.JoinerActivity" />
-        <activity android:name=".activity.Test2Activity"></activity>
+
+        <activity android:name=".activity.CountTimerActivity" />
+        <activity android:name=".activity.RecordActivity" />
+
     </application>
 
 </manifest>
