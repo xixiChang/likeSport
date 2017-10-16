@@ -15,10 +15,12 @@ import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
 import com.umeng.socialize.ShareAction;
@@ -46,6 +48,7 @@ public class NewCreateActivity extends BaseActivity implements View.OnClickListe
     TextView detail;
     TextView leftTime;
     TextView joiner;
+    private ImageView sportIamge;
     CircleImageView publisher;
     PlatFormActivity sport;
 
@@ -76,6 +79,7 @@ public class NewCreateActivity extends BaseActivity implements View.OnClickListe
         Toolbar toolbar = (Toolbar) findViewById(R.id.news_details_toolbar);
         super.setToolBar(toolbar, " ",true);
         name = (TextView) findViewById(R.id.item_fm_sport_name);
+        sportIamge = (ImageView) findViewById(R.id.news_details_photo);
         hotValue = (TextView) findViewById(R.id.item_fm_sport_hot_value);
         startTime = (TextView) findViewById(R.id.start_time_show);
         endTime = (TextView) findViewById(R.id.end_time_show);
@@ -184,8 +188,8 @@ public class NewCreateActivity extends BaseActivity implements View.OnClickListe
         location.setText(sport.getAddress());
         detail.setText(sport.getDetails());
         leftTime.setText(sport.getLeft_time()+"天");
-        joiner.setText("参与者（0 / "+ sport.getJoin_num_all() + "）");
-
+        joiner.setText("参与者（" + sport.getJoin_num() + " / "+ sport.getJoin_num_all() + "）");
+        Glide.with(this).load(sport.getImage_url()).into(sportIamge);
         reason.setVisibility(View.GONE);
         if (sport.getReason() != null && sport.getStatus().equals("1")) {
             reason.setText("由于 " + sport.getReason() + ",活动已改期。");

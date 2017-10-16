@@ -29,7 +29,8 @@ public class ScoreActivity extends BaseActivity {
     private TextView runScore;
     private TextView runTime;
     private ToolBar toolBar;
-    private ImageView share;
+    private ImageView shareWalk;
+    private ImageView shareRun;
 
     private RecordPresenter recordPresenter;
     private SportAppView<ResponseResult<Map<String,String>>> sportAppView
@@ -71,8 +72,20 @@ public class ScoreActivity extends BaseActivity {
         runScore = (TextView) findViewById(R.id.user_score_run);
         walkTime = (TextView) findViewById(R.id.user_score_walk_time);
         runTime = (TextView) findViewById(R.id.user_score_run_time);
-        share = (ImageView) findViewById(R.id.user_score_share_walk);
-        share.setOnClickListener(new View.OnClickListener() {
+        shareWalk = (ImageView) findViewById(R.id.user_score_share_walk);
+        shareRun = (ImageView) findViewById(R.id.user_score_share_run);
+        shareWalk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new ShareAction(ScoreActivity.this)
+                        .withText("hello")
+                        //.withMedia(new UMImage(LayoutActivity.this,new File("")))
+                        .setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
+                        .setCallback(umShareListener)
+                        .open();
+            }
+        });
+        shareRun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new ShareAction(ScoreActivity.this)

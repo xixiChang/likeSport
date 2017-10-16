@@ -148,6 +148,7 @@ public class MyFragment extends Fragment {
 
         recordPresenter.onCreate();
         recordPresenter.attachView(recordView);
+        String id = App.userInfo.getId();
         recordPresenter.getAllSum(App.userInfo.getId());
     }
 

@@ -92,9 +92,9 @@
                 android:drawableTop="@mipmap/icon_walk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/page_content_margin_left"
-                android:drawablePadding="12dp"
-                android:paddingTop="20dp"
+                android:layout_marginLeft="@dimen/slider_margin_left"
+                android:drawablePadding="@dimen/page_content_margin_left"
+                android:paddingTop="@dimen/slider_margin_top"
                 android:layout_below="@+id/sport_status"
                 android:text="0"
                 android:textAlignment="center"
@@ -107,8 +107,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:drawablePadding="12dp"
-                android:paddingTop="20dp"
+                android:drawablePadding="@dimen/page_content_margin_left"
+                android:paddingTop="@dimen/slider_margin_top"
                 android:layout_below="@+id/sport_status"
                 android:text="0"
                 android:textAlignment="center"
@@ -120,9 +120,9 @@
                 android:drawableTop="@mipmap/icon_ride"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="310dp"
-                android:drawablePadding="12dp"
-                android:paddingTop="20dp"
+                android:layout_marginLeft="310dp"
+                android:drawablePadding="@dimen/page_content_margin_left"
+                android:paddingTop="@dimen/slider_margin_top"
                 android:layout_below="@+id/sport_status"
                 android:text="0"
                 android:textAlignment="center"
@@ -132,19 +132,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/walk_distance"
-                android:paddingLeft="24dp"
+                android:layout_alignLeft="@+id/walk_distance"
+
                 android:text="km" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/walk_distance"
+                android:layout_below="@+id/run_distance"
                 android:layout_centerHorizontal="true"
                 android:text="km" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/walk_distance"
-                android:paddingLeft="324dp"
+                android:layout_below="@+id/ride_distance"
+                android:layout_alignLeft="@+id/ride_distance"
                 android:text="km" />
         </RelativeLayout>
         <TextView
