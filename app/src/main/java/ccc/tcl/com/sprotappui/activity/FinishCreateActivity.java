@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import ccc.tcl.com.sprotappui.App;
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.model.PlatFormActivity;
 import ccc.tcl.com.sprotappui.model.ResponseResult;
@@ -235,7 +236,7 @@ public class FinishCreateActivity extends BaseActivity {
                 if (response.isSuccess()){
                     Intent intent = new Intent(FinishCreateActivity.this,NewCreateActivity.class);
                     Bundle data = new Bundle();
-
+                    platFormActivity.setJoiner("[" + App.userInfo.getId() + "]");
                     data.putParcelable("data",platFormActivity);
                     intent.putExtras(data);
                     startActivity(intent);
