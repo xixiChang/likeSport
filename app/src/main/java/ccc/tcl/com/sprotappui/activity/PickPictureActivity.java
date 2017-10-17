@@ -82,7 +82,7 @@ public class PickPictureActivity extends BaseActivity {
     }
 
     private void initFile() {
-        resultUri =  Uri.parse("storage/emulated/0/sportImage.jpg");
+        resultUri =  Uri.parse(imagePath);
     }
 
     @Override
@@ -238,7 +238,6 @@ public class PickPictureActivity extends BaseActivity {
                     }
                 }
             });
-
         }
         pick_picture.show();
     }

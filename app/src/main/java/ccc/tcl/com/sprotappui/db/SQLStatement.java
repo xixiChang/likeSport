@@ -24,7 +24,8 @@ public final class SQLStatement {
             "session text," +
             "image_url text," +
             "im_uid text," +
-            "login_method int" +
+            "login_method int," +
+            "retain text" +
             ")";
 
 
@@ -164,12 +165,14 @@ public final class SQLStatement {
             "select * from " + ACTIVITY_TABLE_NAME ;
 
     /**
-     * update date
+     * update data
      */
 
     public static final String UpdateUser =
             "update user " +
-            " set image_url = ? " +
+            " set image_url = ?," +
+            "name = ?," +
+            "retain = ?" +
             " where id = ?";
 
     public static final String UpdateActivityTime =

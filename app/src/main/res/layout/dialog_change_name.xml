@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/name_edit"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/activity_vertical_padding_big"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin_small"
+        android:layout_marginBottom="@dimen/activity_vertical_margin_small">
+        <TextView
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:textSize="@dimen/activity_content_size_big"
+            android:layout_marginEnd="@dimen/activity_vertical_margin"
+            android:layout_centerVertical="true"
+            android:text="取消"
+            />
+        <TextView
+            android:id="@+id/commit"
+            android:layout_toLeftOf="@+id/cancel"
+            android:layout_marginRight="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/activity_content_size_x_big"
+            android:text="确定"/>
+    </RelativeLayout>
+</LinearLayout>

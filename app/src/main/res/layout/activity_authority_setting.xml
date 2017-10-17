@@ -8,6 +8,7 @@
     android:orientation="vertical"
     android:background="@color/grey_background">
     <include layout="@layout/toolbar_general"></include>
+
     <android.support.v7.widget.SwitchCompat
         android:id="@+id/camera"
         android:layout_width="match_parent"
