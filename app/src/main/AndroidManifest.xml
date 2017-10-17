@@ -85,6 +85,10 @@
             android:name=".service.StepService"
             android:enabled="true"
             android:exported="true" />
+        <service
+            android:name=".service.RegisterCodeTimerService"
+            android:enabled="true"
+            android:exported="true" />
         android:exported="true"/>
         <activity
             android:name=".activity.NewCreateActivity"

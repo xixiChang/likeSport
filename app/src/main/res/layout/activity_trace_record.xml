@@ -81,7 +81,9 @@
                 android:textSize="@dimen/text_recorder_name_sizeBig"
                 android:textIsSelectable="true" />
         </LinearLayout>
+
     </RelativeLayout>
+
 
     <RelativeLayout
         android:id="@+id/RecordArea"
@@ -351,12 +353,21 @@
                     android:layout_weight="0.15"
                     android:orientation="vertical" >
 
-                    <ImageView
+                    <!--<ImageView
                         android:id="@+id/userPic"
                         android:src="@drawable/photo1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        />
+                        />-->
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/userPic"
+                        android:src="@drawable/photo1"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/page_content_margin_top" />
+
                     <TextView
                         android:id="@+id/tv_user"
                         android:layout_width="wrap_content"
@@ -474,5 +485,6 @@
 
 
     </RelativeLayout>
+
 
 </RelativeLayout>

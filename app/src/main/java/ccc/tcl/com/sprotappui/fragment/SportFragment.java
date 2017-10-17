@@ -40,7 +40,7 @@ import ccc.tcl.com.sprotappui.activity.CountTimerActivity;
 import ccc.tcl.com.sprotappui.activity.RecordActivity;
 
 
-import ccc.tcl.com.sprotappui.activity.RecordActivity;
+
 
 import ccc.tcl.com.sprotappui.constant.Constant;
 import ccc.tcl.com.sprotappui.model.Record;

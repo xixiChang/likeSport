@@ -18,14 +18,5 @@
         </style>
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
     <style name="beautyTheme" parent="AppTheme"></style>
-    <!--隐藏状态栏-->
-    <style name="AppTheme.Base" parent="Theme.AppCompat.Light">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-    <style name="BaseAppTheme" parent="AppTheme">
-        <item name="colorPrimary">@color/transparent_color</item>    <!-- 状态栏 -->
-        <item name="colorPrimaryDark">@color/transparent_color</item> <!-- toolbar -->
-        <item name="colorAccent">@color/colorAccent</item>  <!-- 重点 -->
-    </style>
+
 </resources>
