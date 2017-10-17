@@ -75,7 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_marginTop="457dp"
         android:layout_marginStart="210dp"
-        android:text="用时(h)"
+        android:text="用时(s)"
         android:textSize="12dp" />
     <ImageView
         android:layout_height="40dp"
@@ -115,7 +115,7 @@
         android:layout_width="wrap_content"
         android:layout_marginTop="542dp"
         android:layout_marginStart="48dp"
-        android:text="平均速度(s/h)"
+        android:text="平均速度(/s)"
         android:textSize="12dp" />
     <TextView
         android:layout_height="17dp"

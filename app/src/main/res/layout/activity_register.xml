@@ -23,7 +23,7 @@
         android:layout_width="360dp"
         android:layout_height="360dp"
         android:layout_marginStart="114dp"
-        android:layout_marginTop="-55dp"
+        android:layout_marginTop="-70dp"
         android:src="@mipmap/resister3"/>
 
 
@@ -31,36 +31,36 @@
     <ImageView
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginStart="65dp"
-        android:layout_marginTop="275dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="280dp"
         android:src="@mipmap/user"/>
 
     <ImageView
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginStart="65dp"
-        android:layout_marginTop="320dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="325dp"
         android:src="@mipmap/phone"/>
 
     <ImageView
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginStart="65dp"
-        android:layout_marginTop="365dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="370dp"
         android:src="@mipmap/password"/>
 
     <ImageView
         android:id="@+id/VISIBLE"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginStart="290dp"
-        android:layout_marginTop="360dp"
+        android:layout_marginStart="275dp"
+        android:layout_marginTop="365dp"
         android:src="@mipmap/password_eye"/>
     <ImageView
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginStart="65dp"
-        android:layout_marginTop="405dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="415dp"
         android:src="@mipmap/setting_about_app"/>
 
     <EditText
@@ -72,7 +72,7 @@
         android:hint="用户名"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        android:layout_marginStart="100dp"/>
+        android:layout_marginStart="80dp"/>
     <EditText
         android:id="@+id/rg_phone"
         android:inputType="phone"
@@ -83,7 +83,7 @@
         android:hint="手机"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        android:layout_marginStart="100dp"/>
+        android:layout_marginStart="80dp"/>
 
     <EditText
         android:id="@+id/rg_password"
@@ -95,7 +95,7 @@
         android:hint="密码字数不少于6位"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        android:layout_marginStart="100dp"/>
+        android:layout_marginStart="80dp"/>
     <!--验证码-->
     <EditText
         android:id="@+id/rg_code"
@@ -107,7 +107,7 @@
         android:hint="验证码"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        android:layout_marginStart="100dp"/>
+        android:layout_marginStart="80dp"/>
 
 
     <Button
@@ -115,7 +115,7 @@
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:layout_marginTop="415dp"
-        android:layout_marginStart="260dp"
+        android:layout_marginStart="270dp"
         android:gravity="bottom"
         android:text="发送"
         android:textSize="15dp"
@@ -142,30 +142,30 @@
         android:textSize="16dp"
         android:textColor="@color/white"/>
     <View
-        android:layout_width="250dp"
+        android:layout_width="230dp"
         android:layout_height="1dp"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="80dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="300dp"
         android:background="@color/white"/>
     <View
-        android:layout_width="250dp"
+        android:layout_width="230dp"
         android:layout_height="1dp"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="80dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="345dp"
         android:background="@color/white"/>
     <View
-        android:layout_width="250dp"
+        android:layout_width="230dp"
         android:layout_height="1dp"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="80dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="390dp"
         android:background="@color/white"/>
     <View
-        android:layout_width="250dp"
+        android:layout_width="230dp"
         android:layout_height="1dp"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="80dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="435dp"
         android:background="@color/white"/>

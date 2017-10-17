@@ -37,7 +37,7 @@
     <ImageView
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginStart="70dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="335dp"
         android:background="@mipmap/phone"/>
     <TextView
@@ -49,14 +49,14 @@
     <ImageView
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginStart="70dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="400dp"
         android:src="@mipmap/password"/>
     <ImageView
         android:id="@+id/password_show"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginStart="320dp"
+        android:layout_marginStart="300dp"
         android:layout_marginTop="395dp"
         android:src="@mipmap/password_eye"/>
 
@@ -71,7 +71,7 @@
         android:textColorHint="@color/white"
         android:textColor="@color/white"
         android:textSize="16dp"
-        android:layout_marginStart="100dp"/>
+        android:layout_marginStart="80dp"/>
 
     <EditText
         android:id="@+id/user_login_pwd"
@@ -84,18 +84,18 @@
         android:textColorHint="@color/white"
         android:textColor="@color/white"
         android:textSize="16dp"
-        android:layout_marginStart="100dp"/>
+        android:layout_marginStart="80dp"/>
     <View
         android:layout_width="250dp"
         android:layout_height="1dp"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="80dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="350dp"
         android:background="@color/white"/>
     <View
         android:layout_width="250dp"
         android:layout_height="1dp"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="80dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="420dp"
         android:background="@color/white"/>
@@ -112,15 +112,15 @@
     <ImageView
         android:layout_width="15dp"
         android:layout_height="15dp"
-        android:layout_marginStart="240dp"
+        android:layout_marginStart="230dp"
         android:layout_marginTop="507dp"
         android:src="@mipmap/login1" />
     <TextView
         android:id="@+id/login_to_register"
         android:layout_marginTop="503dp"
-        android:layout_marginStart="163dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:text="前往注册"
         android:textSize="16dp"
         android:textColor="@color/white"/>

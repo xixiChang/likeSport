@@ -55,15 +55,14 @@ import com.baidu.mapapi.map.Polyline;
 import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import com.umeng.socialize.ShareAction;
-import com.umeng.socialize.UMShareListener;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-
 
 import ccc.tcl.com.sprotappui.App;
 import ccc.tcl.com.sprotappui.R;
@@ -161,9 +160,9 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 			if (s.equals(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_ERROR)) {
 				Toast.makeText(TraceRecordActivity.this, R.string.api_fail,Toast.LENGTH_SHORT).show();
 			} else if (s.equals(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_OK)) {
-				Toast.makeText(TraceRecordActivity.this,R.string.api_success,Toast.LENGTH_SHORT).show();
+				Toast.makeText(TraceRecordActivity.this, R.string.api_success,Toast.LENGTH_SHORT).show();
 			} else if (s.equals(SDKInitializer.SDK_BROADCAST_ACTION_STRING_NETWORK_ERROR)) {
-				Toast.makeText(TraceRecordActivity.this,R.string.network_fail,Toast.LENGTH_SHORT).show();
+				Toast.makeText(TraceRecordActivity.this, R.string.network_fail,Toast.LENGTH_SHORT).show();
 			}
 		}
 	}
@@ -237,7 +236,7 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 		mBaiduMap.setMyLocationEnabled(true);
 
 		mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(
-				com.baidu.mapapi.map.MyLocationConfiguration.LocationMode.FOLLOWING, true, null));
+				MyLocationConfiguration.LocationMode.FOLLOWING, true, null));
 
 		/**
 		 * 添加地图缩放状态变化监听，当手动放大或缩小地图时，拿到缩放后的比例，然后获取到下次定位，
@@ -299,7 +298,7 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 			/*运动结束，点击分享*/
 			case R.id.share:
 				new ShareAction(TraceRecordActivity.this)
-						.setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
+						.setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN)
 						.setCallback(umShareListener)
 						.open();
 				break;
@@ -333,7 +332,7 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 		slideView.setSlideListener(new SlideView.SlideListener() {
 			@Override
 			public void onDone() {
-				Toast.makeText(TraceRecordActivity.this,R.string.unlock_success, Toast.LENGTH_SHORT).show();
+				Toast.makeText(TraceRecordActivity.this, R.string.unlock_success, Toast.LENGTH_SHORT).show();
 				lockScreenArea.setVisibility(View.GONE);
 				lockScreen.setVisibility(View.VISIBLE);
 				end.setVisibility(View.VISIBLE);
@@ -749,7 +748,7 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 			public void onClick(DialogInterface dialog, int which) {
 				Intent intent = null;
 				//判断手机系统的版本  即API大于10 就是3.0或以上版本
-				if (android.os.Build.VERSION.SDK_INT > 10) {
+				if (Build.VERSION.SDK_INT > 10) {
 					intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
 				} else {
 					intent = new Intent();
