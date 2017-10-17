@@ -283,7 +283,7 @@ public class NewCreateActivity extends BaseActivity implements View.OnClickListe
                             new ShareAction(NewCreateActivity.this)
                                     .withText("hello")
                                     //.withMedia(new UMImage(LayoutActivity.this,new File("")))
-                                    .setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
+                                    .setDisplayList(SHARE_MEDIA.WEIXIN)
                                     .setCallback(umShareListener)
                                     .open();
                             break;

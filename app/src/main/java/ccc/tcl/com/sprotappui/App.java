@@ -73,7 +73,6 @@ public class App extends MultiDexApplication {
      */
     private void initUmeng(){
         PlatformConfig.setWeixin("wx615464c5b6f30c45", "2d11135893139930c161b102ae7a1f0f");
-        PlatformConfig.setQQZone("wx615464c5b6f30c45", "2d11135893139930c161b102ae7a1f0f");
         UMShareAPI.get(this);
     }
 }

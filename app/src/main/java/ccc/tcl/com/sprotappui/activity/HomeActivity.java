@@ -70,7 +70,7 @@ public class HomeActivity extends BaseActivity {
 //        super.setToolBar(toolbar, R.string.toolbar_name_sport, false);
         initIMConnect();
         initView();
-        //setFullScreen(true);
+        setFullScreen(true);
     }
 
 
