@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +21,8 @@ import static ccc.tcl.com.sprotappui.R.id.toolbar;
 
 public class SettingActivity extends BaseActivity {
     private ToolBar toolBar;
+    private TextView cacheSiez;
+    private ImageView clearCache;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,17 @@ public class SettingActivity extends BaseActivity {
         setContentView(R.layout.activity_setting);
         toolBar = (ToolBar) findViewById(toolbar);
         super.setToolBar(toolBar, R.string.user_setting, true);
+        cacheSiez = (TextView) findViewById(R.id.cache_size);
+        cacheSiez.setText(formatFileSize(getDirSize(getCacheDir())));
+        clearCache = (ImageView) findViewById(R.id.setting_clear_cache_image);
+        clearCache.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearCacheFolder(getCacheDir());
+                cacheSiez.setText(formatFileSize(getDirSize(getCacheDir())));
+                Toast.makeText(SettingActivity.this,"清楚缓存成功",Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         RelativeLayout msgSetting = (RelativeLayout) findViewById(R.id.setting_message_setting);
@@ -47,6 +61,8 @@ public class SettingActivity extends BaseActivity {
             }
         });
 
+        //clearCacheFolder(getCacheDir());
+
 
         RelativeLayout aboutApp = (RelativeLayout) findViewById(R.id.setting_about_app);
         aboutApp.setOnClickListener(new View.OnClickListener() {
@@ -62,21 +78,59 @@ public class SettingActivity extends BaseActivity {
         // clearAppCache();
     }
 
-    private void clearAppCache(){
-        //this.clearAppCache();
-        long size = this.getCacheDir().getTotalSpace() - this.getCacheDir().getUsableSpace();
-        Toast.makeText(this,""+this.getCacheDir().getParentFile().getAbsolutePath(),Toast.LENGTH_LONG).show();
-        File[] cache = this.getCacheDir().getParentFile().listFiles();
-        for (int i = 0;i<cache.length;i++)
-        if (cache[i].getName().equals("shared_prefs")) {
-            //Log.d("cacheName", "clearAppCache: "+cache[i].getName());
-            File[] shared_prefs = cache[i].listFiles();
-            for (int j = 0;j<shared_prefs.length;j++)
-            if (shared_prefs[j].getName().equals("UserInfo.xml"))
-                if (shared_prefs[j].delete())
-                    Log.d("succccccccc", "clearAppCache: ");
+    private void clearCacheFolder(File dir){
+        long curTime = System.currentTimeMillis();
+            if (dir!= null && dir.isDirectory()) {
+                try {
+                    for (File child:dir.listFiles()) {
+                        if (child.isDirectory()) {
+                            clearCacheFolder(child);
+                        }
+                        if (child.lastModified() < curTime) {
+                            if (child.delete()) {
+                                ;
+                            }
+                        }
+                    }
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+    }
+
+    public static long getDirSize(File dir) {
+        if (dir == null) {
+            return 0;
         }
-        Glide.getPhotoCacheDir(this).delete();
-        Log.d("cacheSize", "clearAppCache: "+size/1024+">>>>"+Glide.getPhotoCacheDir(this).getAbsolutePath());
+        if (!dir.isDirectory()) {
+            return 0;
+        }
+        long dirSize = 0;
+        File[] files = dir.listFiles();
+        for (File file : files) {
+            if (file.isFile()) {
+                dirSize += file.length();
+            } else if (file.isDirectory()) {
+                dirSize += file.length();
+                dirSize += getDirSize(file); // 递归调用继续统计
+            }
+        }
+        return dirSize;
+    }
+
+    public static String formatFileSize(long fileS) {
+        java.text.DecimalFormat df = new java.text.DecimalFormat("#.00");
+        String fileSizeString = "";
+        if (fileS < 1024) {
+            fileSizeString = df.format((double) fileS) + "B";
+        } else if (fileS < 1048576) {
+            fileSizeString = df.format((double) fileS / 1024) + "KB";
+        } else if (fileS < 1073741824) {
+            fileSizeString = df.format((double) fileS / 1048576) + "MB";
+        } else {
+            fileSizeString = df.format((double) fileS / 1073741824) + "G";
+        }
+        return fileSizeString;
     }
 }

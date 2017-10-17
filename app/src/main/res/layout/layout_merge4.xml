@@ -46,11 +46,10 @@
             android:id="@+id/moreJoiners"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_more_horiz_black_24px"
-
+            android:background="@mipmap/more_joiners"
             android:layout_weight="4"
             android:layout_marginLeft="220dp"
-/>
+            android:visibility="gone"/>
     </FrameLayout>
 </merge>
 <!--ConstraintLayout全解&实例，官方推荐的约束布局  -->

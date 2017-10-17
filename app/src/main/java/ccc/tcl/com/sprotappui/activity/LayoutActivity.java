@@ -169,6 +169,7 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
         address.setText(result.getAddress());
         details.setText(result.getDetails());
         joinerNum.setText("参与者 （" + result.getJoin_num() + " / " + result.getJoin_num_all() + "）");
+        hotValue.setText(activity.getHot_value());
         if (result.getJoiner().contains(result.getUser_id())) {
             joinButton.setText("已参加");
             //joinButton.setClickable(false);
@@ -210,7 +211,7 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
                 new ShareAction(LayoutActivity.this)
                         .withText("hello")
                         //.withMedia(new UMImage(LayoutActivity.this,new File("")))
-                        .setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
+                        .setDisplayList(SHARE_MEDIA.WEIXIN)
                         .setCallback(umShareListener)
                         .open();
         }
@@ -221,7 +222,6 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
         @Override
         public void onStart(SHARE_MEDIA share_media) {
             Log.d("lay111", "onStart: "+share_media.getsharestyle(true));
-            loadApps();
         }
 
         @Override
