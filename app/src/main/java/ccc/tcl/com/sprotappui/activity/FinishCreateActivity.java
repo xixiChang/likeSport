@@ -318,6 +318,6 @@ public class FinishCreateActivity extends BaseActivity {
     @Override
     protected void onStop() {
         uploadImage.onStop();
-        super.onDestroy();
+        super.onStop();
     }
 }

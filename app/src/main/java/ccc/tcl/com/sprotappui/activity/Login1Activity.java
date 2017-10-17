@@ -10,6 +10,7 @@ import android.view.WindowManager;
 
 import ccc.tcl.com.sprotappui.R;
 
+@Deprecated
 public class Login1Activity extends AppCompatActivity {
 
     @Override

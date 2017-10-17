@@ -2,44 +2,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/berore_bc"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".fragment.SportFragment">
-
-    <!--<ccc.tcl.com.sprotappui.customui.ToolBar-->
-        <!--android:id="@+id/toolbar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="?attr/actionBarSize"-->
-        <!--app:layout_scrollFlags="enterAlways|scroll|snap"-->
-        <!--app:popupTheme="@style/AppTheme.PopupOverlay">-->
-        <!--&lt;!&ndash;<Spinner&ndash;&gt;-->
-            <!--&lt;!&ndash;android:id="@+id/sport_type_spinner"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_weight="1"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:entries="@array/sport_type" />&ndash;&gt;-->
-        <!---->
-    <!--</ccc.tcl.com.sprotappui.customui.ToolBar>-->
 
     <RelativeLayout
         android:id="@+id/weather_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="60dp">
+        android:layout_marginTop="30dp">
 
         <ImageView
             android:id="@+id/weather_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher" />
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+             />
 
         <TextView
             android:id="@+id/weather_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/weather_icon"
+            android:layout_toRightOf="@+id/weather_icon" />
+
+        <TextView
+            android:id="@+id/temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/weather_icon"
-            android:text="多云" />
+            android:layout_centerVertical="true"
+            />
 
         <TextView
             android:id="@+id/pm_text"
@@ -47,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/weather_icon"
             android:layout_toRightOf="@+id/weather_icon"
-            android:text="25 良" />
+            />
     </RelativeLayout>
 
     <TextView
@@ -61,14 +54,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/center_line"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="30dp"
         android:layout_marginLeft="20dp">
 
         <TextView
             android:id="@+id/daily_distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3870"
+            android:text="0"
             android:textColor="@color/black_word_point"
             android:textSize="@dimen/activity_content_size_xxx_big" />
 
@@ -96,13 +89,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/center_line"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="40dp">
 
         <TextView
             android:id="@+id/fragment_sport_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="00:11:23"
+            android:text="00:00:00"
             android:textColor="@color/black_word_point"
             android:textSize="@dimen/activity_content_size_xxx_big" />
 
@@ -126,7 +119,7 @@
             android:id="@+id/fragment_sport_speed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="09'33"
+            android:text="0"
             android:textColor="@color/black_word_point"
             android:textSize="@dimen/activity_content_size_xxx_big" />
 
@@ -139,13 +132,13 @@
             android:textSize="@dimen/activity_content_size_big" />
     </RelativeLayout>
 
-    <!--<com.dl7.tag.TagView
-        android:id="@+id/login_out"
+    <com.dl7.tag.TagView
+        android:id="@+id/start_sport"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="20dp"
         android:layout_marginTop="@dimen/activity_content_size_big"
         app:tag_bg_color="@color/darkturquoise"
         app:tag_border_color="@color/darkturquoise"
@@ -155,6 +148,6 @@
         app:tag_text="开始运动"
         app:tag_text_color="@color/white"
         app:tag_text_size="@dimen/activity_content_size_big"
-        app:tag_vertical_padding="@dimen/button_padding_top" />-->
+        app:tag_vertical_padding="10dp" />
 
 </RelativeLayout>

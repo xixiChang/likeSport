@@ -110,10 +110,10 @@
                 android:textSize="@dimen/activity_content_size_mid"
                 android:text="运动id"/>
             <TextView
+                android:id="@+id/app_user_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:text="3215445"/>
+                android:layout_alignParentEnd="true" />
         </RelativeLayout>
 
         <RelativeLayout

@@ -1,20 +1,18 @@
 package ccc.tcl.com.sprotappui.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.annotation.GlideOption;
-import com.bumptech.glide.util.Util;
 
 import java.io.File;
-import java.io.FileFilter;
 
+import ccc.tcl.com.sprotappui.App;
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.customui.ToolBar;
 
@@ -29,11 +27,13 @@ public class SettingActivity extends BaseActivity {
         setContentView(R.layout.activity_setting);
         toolBar = (ToolBar) findViewById(toolbar);
         super.setToolBar(toolBar, R.string.user_setting, true);
+
+
         RelativeLayout msgSetting = (RelativeLayout) findViewById(R.id.setting_message_setting);
         msgSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SettingActivity.this,MsgSettingActivity.class);
+                Intent intent = new Intent(SettingActivity.this, MsgSettingActivity.class);
                 startActivity(intent);
             }
         });
@@ -46,7 +46,20 @@ public class SettingActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
-        clearAppCache();
+
+
+        RelativeLayout aboutApp = (RelativeLayout) findViewById(R.id.setting_about_app);
+        aboutApp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SettingActivity.this, AboutAppActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        TextView appUserId = (TextView) findViewById(R.id.app_user_id);
+        appUserId.setText(App.userInfo.getId());
+        // clearAppCache();
     }
 
     private void clearAppCache(){

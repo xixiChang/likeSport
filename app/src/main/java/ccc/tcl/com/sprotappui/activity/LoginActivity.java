@@ -86,19 +86,19 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 userInfo = responseResult.getResult();
                 userInfo.setPhone(phone);
                 userInfo.setPassword(pwd);
-                Log.d(TAG, "onSuccess: id>" + userInfo.getIm_uid());
-                Log.d(TAG, "onSuccess: pwd>" + userInfo.getSession());
 
                 saveUserInfoToDB();
                 startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                 finish();
+            }
+            else {
+                Toast.makeText(LoginActivity.this, "登录失败:" + responseResult.getMsg(), Toast.LENGTH_SHORT).show();
             }
         }
 
         @Override
         public void onRequestError(String msg) {
             Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
-            Log.d(TAG, "onError: " + msg);
         }
     };
 
@@ -144,6 +144,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             }
         }
     }
+
     @Override
     protected void onStop() {
         super.onStop();

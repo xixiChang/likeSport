@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SprotAppUI</string>
+    <string name="app_name">爱运动</string>
     <string name="activity_main_title">运动</string>
     <string name="whole_distance">总距离/kｍ</string>
     <string name="day_distance">里程/ｋｍ</string>

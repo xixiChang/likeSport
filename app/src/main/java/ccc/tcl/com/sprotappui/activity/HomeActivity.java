@@ -12,23 +12,25 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.TextView;
 
 import com.alibaba.mobileim.IYWLoginService;
 import com.alibaba.mobileim.YWLoginParam;
 import com.alibaba.mobileim.channel.event.IWxCallback;
+import com.flyco.dialog.listener.OnOperItemClickL;
+import com.flyco.dialog.widget.NormalListDialog;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
-import com.flyco.tablayout.utils.UnreadMsgUtils;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.entity.TabEntity;
 import ccc.tcl.com.sprotappui.fragment.MyFragment;
+import ccc.tcl.com.sprotappui.fragment.NewSportFragment;
 import ccc.tcl.com.sprotappui.fragment.SportCircleFragment;
-import ccc.tcl.com.sprotappui.fragment.SportFragment;
 import ccc.tcl.com.sprotappui.service.IMService;
 import ccc.tcl.com.sprotappui.utils.ViewFindUtils;
 
@@ -36,7 +38,7 @@ import static ccc.tcl.com.sprotappui.App.userInfo;
 import static ccc.tcl.com.sprotappui.service.IMService.mIMKit;
 
 
-public class HomeActivity extends BaseActivity {
+public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
     private Context mContext = this;
     private ArrayList<Fragment> mFragments = new ArrayList<>();
@@ -44,6 +46,7 @@ public class HomeActivity extends BaseActivity {
 
     private static final String TAG = "HomeActivity";
 
+    private String[] types = {"步行", "跑步", "骑行"};
     private String[] mTitles = {"运动", "运动圈", "消息", "我的"};
     private int[] mIconUnselectIds = {
             R.mipmap.table_run_unclick, R.mipmap.tab_circle_unclick,
@@ -58,24 +61,27 @@ public class HomeActivity extends BaseActivity {
     private Toolbar toolbar;
     private FragmentManager fragmentManager;
 
+    private TextView sportTypeSpinner;
+    private NormalListDialog normalListDialog;
+    private NewSportFragment newsportFragment;
+
+    private MenuItem menuItem;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setVisibility(View.GONE);
-        String flag=getIntent().getStringExtra("type");
-        Log.d("SimpleCardFragment", "onCreate: "+flag);
-//        super.setToolBar(toolbar, R.string.toolbar_name_sport, false);
+        setToolBar(toolbar, "" , false);
+
         initIMConnect();
         initView();
-        //setFullScreen(true);
     }
 
 
     private void initIMConnect() {
-        if (mIMKit == null){
+        if (mIMKit == null) {
             new IMService();
         }
         try {
@@ -86,15 +92,20 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void initView() {
-        mFragments.add(SportFragment.getInstance());
+        sportTypeSpinner = (TextView) findViewById(R.id.home_sport_type);
+
+        newsportFragment = NewSportFragment.getInstance();
+        mFragments.add(newsportFragment);
+
         SportCircleFragment sportCircleFragment = SportCircleFragment.getInstance();
         mFragments.add(sportCircleFragment);
-        if (mIMKit != null){
-            mFragments.add(mIMKit.getConversationFragment());
-        }else {
-            mFragments.add(SportFragment.getInstance());
-        }
+
+
+        mFragments.add(mIMKit.getConversationFragment());
+
         mFragments.add(MyFragment.getInstance());
+
+
         fragmentManager = getSupportFragmentManager();
 
         for (int i = 0; i < mTitles.length; i++) {
@@ -107,43 +118,30 @@ public class HomeActivity extends BaseActivity {
         mViewPager.setAdapter(new MyPagerAdapter(fragmentManager));
         mTabLayout = (CommonTabLayout) findViewById(R.id.home_tab_layout);
         setTabLayout();
-        mTabLayout.showMsg(2, 55);
-        mTabLayout.setMsgMargin(0, -5, 5);
 
-
-
-//        Window window = this.getWindow();
-//        //设置透明状态栏,这样才能让 ContentView 向上
-//        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-//
-//        //需要设置这个 flag 才能调用 setStatusBarColor 来设置状态栏颜色
-//        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-//        //设置状态栏颜色
-//        window.setStatusBarColor(Color.TRANSPARENT);
-//
-//        ViewGroup mContentView = (ViewGroup) this.findViewById(Window.ID_ANDROID_CONTENT);
-//        View mChildView = mContentView.getChildAt(0);
-//        if (mChildView != null) {
-//            //注意不是设置 ContentView 的 FitsSystemWindows, 而是设置 ContentView 的第一个子 View . 使其不为系统 View 预留空间.
-//            ViewCompat.setFitsSystemWindows(mChildView, false);
-//        }
+        sportTypeSpinner.setOnClickListener(this);
     }
 
-    private Random mRandom = new Random();
-
     private void showToolBar(int position) {
-        Log.d(TAG, "showToolBar: ");
         switch (position) {
             case 0:
-                toolbar.setVisibility(View.GONE);
-//                toolbar.setTitle(R.string.toolbar_name_sport);
+                toolbar.setVisibility(View.VISIBLE);
+                sportTypeSpinner.setVisibility(View.VISIBLE);
+                menuItem.setIcon(R.mipmap.before_record);
+                menuItem.setVisible(true);
+                toolbar.setTitle("");
                 break;
             case 1:
                 toolbar.setVisibility(View.VISIBLE);
+                sportTypeSpinner.setVisibility(View.GONE);
+                menuItem.setIcon(R.mipmap.ic_pick_pic);
+                menuItem.setVisible(true);
                 toolbar.setTitle(R.string.toolbar_name_sport_circle);
                 break;
             case 2:
                 toolbar.setVisibility(View.VISIBLE);
+                sportTypeSpinner.setVisibility(View.GONE);
+                menuItem.setVisible(false);
                 toolbar.setTitle(R.string.toolbar_name_contacts);
                 break;
             case 3:
@@ -165,10 +163,6 @@ public class HomeActivity extends BaseActivity {
 
             @Override
             public void onTabReselect(int position) {
-                if (position == 2) {
-                    mTabLayout.showMsg(2, mRandom.nextInt(100) + 1);
-                    UnreadMsgUtils.show(mTabLayout.getMsgView(2), mRandom.nextInt(100) + 1);
-                }
             }
         });
 
@@ -191,6 +185,22 @@ public class HomeActivity extends BaseActivity {
         });
 
         mViewPager.setCurrentItem(0);
+    }
+
+    /**
+     * Called when a view has been clicked.
+     *
+     * @param v The view that was clicked.
+     */
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.home_sport_type:
+                showPopupWindow();
+                break;
+            default:
+                break;
+        }
     }
 
     private class MyPagerAdapter extends FragmentPagerAdapter {
@@ -218,18 +228,29 @@ public class HomeActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_home_toolbar, menu);
+        menuItem = menu.getItem(0);
         return true;
     }
+
+//    @Override
+//    public boolean onPrepareOptionsMenu(Menu menu) {
+//        return super.onPrepareOptionsMenu(menu);
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.more:
-                //sportCircleFragment.update();
-                //startActivity(new Intent(mContext, TestActivity.class));
-                if (mViewPager.getCurrentItem()==2)
-                    break;
-                Intent create = new Intent(this,PickPictureActivity.class);
+                int position = mViewPager.getCurrentItem();
+                if (position == 2)
+                    return true;
+                Intent create = new Intent();
+                if (position == 0){
+                    create = new Intent(this, RecordActivity.class);
+                }
+                else if (position == 1){
+                    create = new Intent(this, PickPictureActivity.class);
+                }
                 startActivity(create);
                 return true;
             default:
@@ -261,6 +282,28 @@ public class HomeActivity extends BaseActivity {
                 Log.e(TAG, "onError: " + errCode + ">" + description);
             }
         });
+    }
+
+
+    private void showPopupWindow() {
+        if (normalListDialog == null) {
+            normalListDialog = new NormalListDialog(this, types);
+            normalListDialog.isTitleShow(false);
+            normalListDialog.widthScale(0.7f);
+            normalListDialog.layoutAnimation(null);
+//            normalListDialog.showAtLocation(Gravity.TOP, 0, 50);
+            normalListDialog.setOnOperItemClickL(new OnOperItemClickL() {
+                @Override
+                public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    if (normalListDialog.isShowing())
+                        normalListDialog.superDismiss();
+                    sportTypeSpinner.setText(types[position]);
+                    newsportFragment.setSport_Type(position);
+                }
+            });
+
+        }
+        normalListDialog.show();
     }
 
 

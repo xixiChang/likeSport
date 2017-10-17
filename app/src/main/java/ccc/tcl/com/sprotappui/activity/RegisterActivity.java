@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -66,9 +65,9 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         password = (EditText) findViewById(R.id.rg_password);
         getCode = (Button) findViewById(R.id.rg_get_code);
         register = (Button) findViewById(R.id.rg_register);
-        goLogin =(TextView)findViewById(R.id.register_to_login);
-        vb=(ImageView)findViewById(R.id.VISIBLE);
-
+        goLogin = (TextView) findViewById(R.id.register_to_login);
+        vb = (ImageView) findViewById(R.id.VISIBLE);
+        //
         RegisterCodeTimerService.setHandler(mCodeHandler);
         mIntent = new Intent(RegisterActivity.this, RegisterCodeTimerService.class);
 
@@ -83,28 +82,44 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @SuppressLint("HandlerLeak")
     Handler mCodeHandler = new Handler() {
         public void handleMessage(Message msg) {
-            if (msg.what == RegisterCodeTimer.IN_RUNNING) {// 正在倒计时
+            if (msg.what == RegisterCodeTimer.IN_RUNNING) {
                 getCode.setText(msg.obj.toString());
-            } else if (msg.what == RegisterCodeTimer.END_RUNNING) {// 完成倒计时
+            } else if (msg.what == RegisterCodeTimer.END_RUNNING) {
                 getCode.setEnabled(true);
                 getCode.setText(msg.obj.toString());
             }
         };
     };
+
     private SportAppView<ResponseResult<String>> sportAppView = new SportAppView<ResponseResult<String>>() {
         @Override
         public void onSuccess(ResponseResult<String> response) {
-            if (response.isSuccess()){
-                Log.d(TAG, "onSuccess: " + response.toString());
+            if (response.isSuccess()) {
                 Toast.makeText(RegisterActivity.this, "发送成功,　请查收哦～", Toast.LENGTH_SHORT).show();
-            }else{
-                Log.d(TAG, "onfalse: " + response.getMsg());
-                Toast.makeText(RegisterActivity.this, "发送失败:", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(RegisterActivity.this, "发送失败:" + response.getMsg(), Toast.LENGTH_SHORT).show();
             }
         }
         @Override
         public void onRequestError(String msg) {
-            Log.d(TAG, "onError: " + msg);
+            Toast.makeText(RegisterActivity.this, "发送失败:" + msg, Toast.LENGTH_SHORT).show();
+        }
+    };
+
+
+    private SportAppView<ResponseResult<String>> registerAppView = new SportAppView<ResponseResult<String>>() {
+        @Override
+        public void onSuccess(ResponseResult<String> response) {
+            if (response.isSuccess()) {
+                Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(RegisterActivity.this, "注册失败:" + response.getMsg(), Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        public void onRequestError(String msg) {
+            Toast.makeText(RegisterActivity.this, "注册失败:" + msg, Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -114,7 +129,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             case R.id.rg_get_code://设置倒计时按键
                 String sPhone0 = phone.getText().toString();
                 userPresenter.userGetAuthCode(sPhone0);
-                Log.d(TAG, "onClick: rg_get_code");
                 getCode.setEnabled(false);
                 startService(mIntent);
                 break;
@@ -123,18 +137,16 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 sPassword = password.getText().toString();
                 sName = name.getText().toString();
                 sCode = code.getText().toString();
+                userPresenter.attachView(registerAppView);
                 userPresenter.userRegister(sPhone, sName, sPassword, sCode);
-                Log.d(TAG, "注册: ");
                 break;
             case R.id.register_to_login:
-                Intent intent = new Intent(this,LoginActivity.class);
+                Intent intent = new Intent(this, LoginActivity.class);
                 startActivityForResult(intent, START_AC_REG);
             case R.id.VISIBLE:
                 if (!passwordDisplayTag) {
-                    // 设置 EditText 的 input type  显示 密码
                     password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                 } else {
-                    // 隐藏 密码
                     password.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
                 passwordDisplayTag = !passwordDisplayTag;
@@ -142,18 +154,20 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 break;
         }
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         Intent intent = new Intent();
         intent.putExtra("phone", sPhone);
         intent.putExtra("password", sPassword);
-        setResult(START_AC_REG, intent);
+
+        setResult(RESULT_OK, intent);
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onStop() {
+        super.onStop();
         userPresenter.onStop();
         stopService(mIntent);
     }

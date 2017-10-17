@@ -1,13 +1,11 @@
 package ccc.tcl.com.sprotappui.activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 
 import ccc.tcl.com.sprotappui.App;
@@ -58,7 +56,6 @@ public class WelcomeActivity extends AppCompatActivity {
         @Override
         public void run() {
             int msgWhat = JUMP_TO_Login;
-//            int msgWhat =JUMP_TO_HOME;
             //*****************************************
             long startTime = System.currentTimeMillis();
 

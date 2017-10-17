@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,9 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import ccc.tcl.com.sprotappui.App;
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.adapter.UserSportTeamItem;
+import ccc.tcl.com.sprotappui.constant.URLConstant;
 import ccc.tcl.com.sprotappui.data.UserInfo;
 import ccc.tcl.com.sprotappui.model.PlatFormActivity;
 import ccc.tcl.com.sprotappui.model.ResponseResult;
@@ -27,6 +28,8 @@ import ccc.tcl.com.sprotappui.presenter.presenterimpl.RecordPresenter;
 import ccc.tcl.com.sprotappui.ui.SportAppView;
 import ccc.tcl.com.sprotappui.utils.Util;
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static ccc.tcl.com.sprotappui.service.IMService.mIMKit;
 
 public class ContactActivity extends BaseActivity {
     private Toolbar toolBar;
@@ -154,9 +157,23 @@ public class ContactActivity extends BaseActivity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.add_contact){
+            openChatUI();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onDestroy() {
         recordPresenter.onStop();
         activityPresenter.onStop();
         super.onDestroy();
+    }
+
+    private void openChatUI(){
+        Intent intent = mIMKit.getChattingActivityIntent(userInfo.getIm_uid(), URLConstant.BAICHUAN_APP_KEY);
+        startActivity(intent);
     }
 }

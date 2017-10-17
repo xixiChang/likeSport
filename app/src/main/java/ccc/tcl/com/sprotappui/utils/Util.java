@@ -67,6 +67,9 @@ public class Util {
     }
 
     public static String getSpeed(String dis, String time){
+        int d = Integer.parseInt(dis);
+        if (d == 0)
+            return "0'00\"";
         double s = Integer.parseInt(time)/Integer.parseInt(dis);
         int m = (int) Math.floor(s);
         int ss = (int) (60 * (s - m));

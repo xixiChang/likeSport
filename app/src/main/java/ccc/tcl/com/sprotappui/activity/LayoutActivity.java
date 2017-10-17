@@ -118,7 +118,6 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
                     Glide.with(LayoutActivity.this).load(response.getResult().get(2).getImage_url()).into(joiner3);
                 }
             }
-                //Toast.makeText(LayoutActivity.this, "已加入肯德基豪华午餐", Toast.LENGTH_SHORT).show();
             else
                 Toast.makeText(LayoutActivity.this, "获取数据失败" + response.getMsg(), Toast.LENGTH_SHORT).show();
         }

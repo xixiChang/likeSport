@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alibaba.util.StringUtils;
 import com.bumptech.glide.Glide;
 import com.dl7.tag.TagView;
 import com.flyco.dialog.listener.OnOperItemClickL;
@@ -32,6 +31,7 @@ import ccc.tcl.com.sprotappui.activity.ScoreActivity;
 import ccc.tcl.com.sprotappui.activity.SettingActivity;
 import ccc.tcl.com.sprotappui.adapter.ChooseItem;
 import ccc.tcl.com.sprotappui.customui.RecycleViewDivider;
+import ccc.tcl.com.sprotappui.data.BaseData;
 import ccc.tcl.com.sprotappui.data.UserInfo;
 import ccc.tcl.com.sprotappui.model.ChooseItemModel;
 import ccc.tcl.com.sprotappui.model.ResponseResult;
@@ -42,6 +42,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class MyFragment extends Fragment {
+
+    private static final String NO_USER = "-1";
 
     private RecyclerView recyclerView;
     private static List<ChooseItemModel> itemsInfos;
@@ -194,6 +196,7 @@ public class MyFragment extends Fragment {
                         case 0:
                             if (logoutDialog.isShowing())
                                 logoutDialog.superDismiss();
+                            logoutApp();
                             getActivity().finish();
                             break;
                         default:
@@ -227,6 +230,17 @@ public class MyFragment extends Fragment {
                 break;
         }
         startActivity(intent);
+    }
+
+    @Override
+    public void onStop() {
+
+        super.onStop();
+    }
+
+    private void logoutApp(){
+        BaseData baseData = new BaseData(context);
+        baseData.updateUserID(NO_USER);
     }
 
 }
