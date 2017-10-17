@@ -68,7 +68,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         register = (Button) findViewById(R.id.rg_register);
         goLogin =(TextView)findViewById(R.id.register_to_login);
         vb=(ImageView)findViewById(R.id.VISIBLE);
-        //
+
         RegisterCodeTimerService.setHandler(mCodeHandler);
         mIntent = new Intent(RegisterActivity.this, RegisterCodeTimerService.class);
 
@@ -91,7 +91,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             }
         };
     };
-
     private SportAppView<ResponseResult<String>> sportAppView = new SportAppView<ResponseResult<String>>() {
         @Override
         public void onSuccess(ResponseResult<String> response) {

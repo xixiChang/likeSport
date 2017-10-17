@@ -2,9 +2,13 @@ package ccc.tcl.com.sprotappui.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+
 import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
+
+import android.icu.text.SimpleDateFormat;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,8 +16,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.view.Window;
 import android.view.WindowManager;
+
+
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -28,6 +35,10 @@ import java.util.List;
 
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.activity.CountTimerActivity;
+
+
+import ccc.tcl.com.sprotappui.activity.RecordActivity;
+
 
 import ccc.tcl.com.sprotappui.activity.RecordActivity;
 
@@ -60,8 +71,6 @@ public class SportFragment extends Fragment {
     private static final int VIEW_TYPE_WALK=1;
     private static final int VIEW_TYPE_RIDE=2;
 
-
-
     public static SportFragment getInstance() {
         SportFragment sf = new SportFragment();
         return sf;
@@ -76,6 +85,7 @@ public class SportFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fr_simple_card, null);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getActivity().getWindow();
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -83,6 +93,15 @@ public class SportFragment extends Fragment {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);
         }
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            Window window = getActivity().getWindow();
+//            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+//            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+//            window.setStatusBarColor(Color.TRANSPARENT);
+//        }
+
         init();
         return v;
     }
