@@ -9,14 +9,15 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activity.HomeActivity"
     android:clipToPadding="true"
-    android:fitsSystemWindows="false">
+    android:fitsSystemWindows="true">
     <RelativeLayout
         android:id="@+id/relative"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="10dp"
         android:background="@mipmap/bg_my"
-        android:fitsSystemWindows="false">
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true">
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/user_photo"
             android:src="@drawable/photo1"
@@ -24,7 +25,7 @@
             android:layout_height="60dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:fitsSystemWindows="true"
+            android:fitsSystemWindows="false"
             android:layout_marginTop="@dimen/page_content_margin_top" />
 
         <TextView
@@ -33,7 +34,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/user_photo"
             android:layout_marginTop="@dimen/title_content_margin"
-            android:text="小狐丸"
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/activity_content_size_big"
             android:layout_centerHorizontal="true" />
@@ -50,7 +50,7 @@
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/black"
                 android:textSize="@dimen/activity_content_size_mid"
-                android:text="56241"/>
+                android:text="0"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/black"
                 android:textSize="@dimen/activity_content_size_mid"
-                android:text="78"/>
+                android:text="0"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/black"
                 android:textSize="@dimen/activity_content_size_mid"
-                android:text="65122"/>
+                android:text="0"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

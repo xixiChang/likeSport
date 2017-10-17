@@ -30,7 +30,7 @@ public class CreateActivity extends BaseActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        super.setToolBar(toolbar, R.string.create_activity,true);
+        super.setToolBar(toolbar, "创建活动（2 / 3）",true);
         Intent intent = getIntent();
         platFormActivity = intent.getParcelableExtra("data");
         initView();

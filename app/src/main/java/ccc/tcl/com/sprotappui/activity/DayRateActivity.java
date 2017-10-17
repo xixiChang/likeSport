@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import ccc.tcl.com.sprotappui.App;
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.adapter.DayRateItem;
 import ccc.tcl.com.sprotappui.customui.RecycleViewDivider;
@@ -46,8 +47,33 @@ public class DayRateActivity extends BaseActivity {
         public void onSuccess(ResponseResult<List<RateItem>> response) {
             if (response.isSuccess()){
                 rates = response.getResult();
+                for (int i = 0;i < rates.size();i++)
+                    if (rates.get(i).getUser_id() == Integer.parseInt(App.userInfo.getId()))
+                    {
+                       dayDistance.setText(rates.get(i).getStep());
+                    }
                 setRecyclerViewAdapter();
 
+            }
+        }
+
+        @Override
+        public void onRequestError(String msg) {
+
+        }
+    };
+
+    private SportAppView MyRecordView = new SportAppView<ResponseResult<List<Record>>>() {
+        @Override
+        public void onSuccess(ResponseResult<List<Record>> response) {
+            if (response.isSuccess()){
+                int distance = 0 , calorie =0;
+                for (int i = 0;i < response.getResult().size();i++){
+                    distance += response.getResult().get(i).getDistance();
+                    calorie += response.getResult().get(i).getCalorie();
+                }
+                dayDistance.setText(distance+"");
+                dayConsume.setText(calorie+"");
             }
         }
 
@@ -66,7 +92,8 @@ public class DayRateActivity extends BaseActivity {
         context = this;
         toolBar = (Toolbar) findViewById(R.id.contact_toolbar);
         super.setToolBar(toolBar, R.string.day_rate, true);
-
+        this.getWindow().setStatusBarColor(getResources().getColor(R.color.transparent_color,null));
+        //StatusBarCompat.compat(this, getResources().getColor(R.color.status_bar_color));
         initView();
     }
 
@@ -77,6 +104,8 @@ public class DayRateActivity extends BaseActivity {
         recordPresenter.attachView(recordView);
         //SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         recordPresenter.getRating();
+        recordPresenter.attachView(MyRecordView);
+        recordPresenter.getDayAll(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         super.onResume();
     }
 

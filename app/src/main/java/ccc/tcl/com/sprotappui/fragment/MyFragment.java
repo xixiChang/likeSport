@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.util.StringUtils;
 import com.bumptech.glide.Glide;
 import com.dl7.tag.TagView;
 import com.flyco.dialog.listener.OnOperItemClickL;
@@ -80,8 +81,10 @@ public class MyFragment extends Fragment {
         @Override
         public void onSuccess(ResponseResult<Map<String,String>> response) {
             if (response.isSuccess()){
-                totalDistance.setText(response.getResult().get("distance"));
-                totalTime.setText(response.getResult().get("spent_time"));
+                if (response.getResult() == null)
+                    return;
+                totalDistance.setText(String.format("%.1f",Double.parseDouble(response.getResult().get("distance"))/1000));
+                totalTime.setText(String.format("%.1f",Double.parseDouble(response.getResult().get("spent_time"))/3600));
                 totalConsume.setText(response.getResult().get("calorie"));
             }
             else
@@ -148,7 +151,6 @@ public class MyFragment extends Fragment {
 
         recordPresenter.onCreate();
         recordPresenter.attachView(recordView);
-        String id = App.userInfo.getId();
         recordPresenter.getAllSum(App.userInfo.getId());
     }
 
@@ -203,6 +205,8 @@ public class MyFragment extends Fragment {
                 intent.setClass(context, ScoreActivity.class);
                 break;
             case 1:
+                if (userInfo==null || userInfo.getName() == null || userInfo.getName() == "")
+                    return;
                 intent.putExtra("data",new String[]{userInfo.getName(),userInfo.getImage_url()});
                 intent.setClass(context, DayRateActivity.class);
                 break;

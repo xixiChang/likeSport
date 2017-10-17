@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.util.Util;
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
 import com.umeng.socialize.ShareAction;
@@ -30,8 +31,10 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import ccc.tcl.com.sprotappui.R;
+import ccc.tcl.com.sprotappui.data.UserInfo;
 import ccc.tcl.com.sprotappui.model.PlatFormActivity;
 import ccc.tcl.com.sprotappui.model.ResponseResult;
 import ccc.tcl.com.sprotappui.presenter.presenterimpl.ActivityPresenter;
@@ -40,36 +43,131 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class NewCreateActivity extends BaseActivity implements View.OnClickListener{
     private TextView name;
-    TextView hotValue;
-    TextView startTime;
-    TextView endTime;
-    TextView distance;
-    TextView location;
-    TextView detail;
-    TextView leftTime;
-    TextView joiner;
+    private TextView hotValue;
+    private TextView startTime;
+    private TextView endTime;
+    private TextView distance;
+    private TextView location;
+    private TextView detail;
+    private TextView leftTime;
+    private TextView joiner;
     private ImageView sportIamge;
-    CircleImageView publisher;
-    PlatFormActivity sport;
+    private CircleImageView publisher;
+    private CircleImageView joiner0;
+    private CircleImageView joiner1;
+    private CircleImageView joiner2;
+    private CircleImageView joiner3;
+    private PlatFormActivity sport;
 
-    View changeView;
-    View cancelView;
-    TextView changeStart;
-    TextView changeEnd;
-    EditText changeReason;
-    EditText cancelReason;
-    TextView reason;
-    boolean set_start_time = true;
-    ViewStub stub;
-    LinearLayout ll = null;
-    DatePicker picker;
-    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    private View changeView;
+    private View cancelView;
+    private TextView changeStart;
+    private TextView changeEnd;
+    private EditText changeReason;
+    private  EditText cancelReason;
+    private TextView reason;
+    private boolean set_start_time = true;
+    private ViewStub stub;
+    private LinearLayout ll = null;
+    private DatePicker picker;
+    private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     private ActionSheetDialog logoutDialog;
-    private ActivityPresenter presenter;
+    private ActivityPresenter detailsPresenter;
+    private ActivityPresenter joinersPresenter;
     private String changeStartTemp;
     private String changeEndTemp;
     private String reasonTemp;
     private FrameLayout head_images;
+
+    private SportAppView detailsView = new SportAppView<ResponseResult<PlatFormActivity>>() {
+        @Override
+        public void onSuccess(ResponseResult<PlatFormActivity> response) {
+            if (response.isSuccess()){
+                //取消活动
+                if (response.getType().equals("cancel")) {
+                    sport.setStatus("3");
+                    sport.setReason(reasonTemp);
+                    updateData();
+                    Toast.makeText(NewCreateActivity.this, "操作成功", Toast.LENGTH_SHORT).show();
+                    //finish();
+                }
+                //改期
+                else if (response.getType().equals("delay")){
+                    sport.setStart_time(changeStartTemp);
+                    sport.setEnd_time(changeEndTemp);
+                    sport.setStatus("1");
+                    sport.setReason(reasonTemp);
+                    updateData();
+                    Toast.makeText(NewCreateActivity.this, "操作成功", Toast.LENGTH_SHORT).show();
+                }
+                //请求数据
+                else if (response.getType().equals("details")){
+                    sport = response.getResult();
+                    if (sport.getJoiner() != null)
+                        joinersPresenter.getJoinerInfo(ccc.tcl.com.sprotappui.utils.Util.stringToList(sport.getJoiner()));
+                    updateData();
+                }
+
+            }
+
+            else
+                Toast.makeText(NewCreateActivity.this,"操作失败"+response.getMsg(),Toast.LENGTH_SHORT).show();
+            //finish();
+        }
+
+        @Override
+        public void onRequestError(String msg) {
+            Toast.makeText(NewCreateActivity.this,"网络连接失败"+msg,Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    private SportAppView joinersView = new SportAppView<ResponseResult<List<UserInfo>>>() {
+        @Override
+        public void onSuccess(ResponseResult<List<UserInfo>> response) {
+            if (response.isSuccess()){
+                Glide.with(NewCreateActivity.this).load(response.getResult().get(0).getImage_url()).into(publisher);
+                int i = response.getResult().size();
+                if (i == 2){
+                    joiner0.setVisibility(View.VISIBLE);
+                    Glide.with(NewCreateActivity.this).load(response.getResult().get(1).getImage_url()).into(joiner0);
+                }
+                if (i == 3){
+                    joiner0.setVisibility(View.VISIBLE);
+                    joiner1.setVisibility(View.VISIBLE);
+                    Glide.with(NewCreateActivity.this).load(response.getResult().get(1).getImage_url()).into(joiner0);
+                    Glide.with(NewCreateActivity.this).load(response.getResult().get(2).getImage_url()).into(joiner1);
+                }
+                if (i == 4){
+                    joiner0.setVisibility(View.VISIBLE);
+                    joiner1.setVisibility(View.VISIBLE);
+                    joiner2.setVisibility(View.VISIBLE);
+                    Glide.with(NewCreateActivity.this).load(response.getResult().get(1).getImage_url()).into(joiner0);
+                    Glide.with(NewCreateActivity.this).load(response.getResult().get(2).getImage_url()).into(joiner1);
+                    Glide.with(NewCreateActivity.this).load(response.getResult().get(2).getImage_url()).into(joiner2);
+                }
+                if (i == 5){
+                    joiner0.setVisibility(View.VISIBLE);
+                    joiner1.setVisibility(View.VISIBLE);
+                    joiner2.setVisibility(View.VISIBLE);
+                    joiner3.setVisibility(View.VISIBLE);
+                    Glide.with(NewCreateActivity.this).load(response.getResult().get(1).getImage_url()).into(joiner0);
+                    Glide.with(NewCreateActivity.this).load(response.getResult().get(2).getImage_url()).into(joiner1);
+                    Glide.with(NewCreateActivity.this).load(response.getResult().get(2).getImage_url()).into(joiner2);
+                    Glide.with(NewCreateActivity.this).load(response.getResult().get(2).getImage_url()).into(joiner3);
+                }
+            }
+
+            else
+                Toast.makeText(NewCreateActivity.this,"获取数据失败"+response.getMsg(),Toast.LENGTH_SHORT).show();
+            //finish();
+        }
+
+        @Override
+        public void onRequestError(String msg) {
+            Toast.makeText(NewCreateActivity.this,"网络连接失败"+msg,Toast.LENGTH_SHORT).show();
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,58 +188,27 @@ public class NewCreateActivity extends BaseActivity implements View.OnClickListe
         leftTime = (TextView) findViewById(R.id.item_fm_sport_left_time);
         joiner = (TextView) findViewById(R.id.joiner_num);
         publisher = (CircleImageView) findViewById(R.id.publisher);
+        joiner0 = (CircleImageView) findViewById(R.id.joiner0);
+        joiner1 = (CircleImageView) findViewById(R.id.joiner1);
+        joiner2 = (CircleImageView) findViewById(R.id.joiner2);
+        joiner3 = (CircleImageView) findViewById(R.id.joiner3);
         head_images = (FrameLayout) findViewById(R.id.head_images);
         head_images.setOnClickListener(this);
         updateData();
 
-        presenter = new ActivityPresenter();
+        detailsPresenter = new ActivityPresenter();
+        joinersPresenter = new ActivityPresenter();
     }
 
     @Override
     protected void onResume() {
-        presenter.onCreate();
-        presenter.attachView(new SportAppView<ResponseResult<PlatFormActivity>>() {
-            @Override
-            public void onSuccess(ResponseResult<PlatFormActivity> response) {
-                if (response.isSuccess()){
-                    //取消活动
-                    if (response.getType().equals("cancel")) {
-                        sport.setStatus("3");
-                        sport.setReason(reasonTemp);
-                        updateData();
-                        Toast.makeText(NewCreateActivity.this, "操作成功", Toast.LENGTH_SHORT).show();
-                        //finish();
-                    }
-                    //改期
-                    else if (response.getType().equals("delay")){
-                        sport.setStart_time(changeStartTemp);
-                        sport.setEnd_time(changeEndTemp);
-                        sport.setStatus("1");
-                        sport.setReason(reasonTemp);
-                        updateData();
-                        Toast.makeText(NewCreateActivity.this, "操作成功", Toast.LENGTH_SHORT).show();
-                    }
-                    //请求数据
-                    else if (response.getType().equals("details")){
-                        sport = response.getResult();
-                        updateData();
-                    }
-
-                }
-
-                else
-                    Toast.makeText(NewCreateActivity.this,"操作失败"+response.getMsg(),Toast.LENGTH_SHORT).show();
-                //finish();
-            }
-
-            @Override
-            public void onRequestError(String msg) {
-                Toast.makeText(NewCreateActivity.this,"网络连接失败"+msg,Toast.LENGTH_SHORT).show();
-            }
-        });
-
+        detailsPresenter.onCreate();
+        joinersPresenter.onCreate();
+        detailsPresenter.attachView(detailsView);
+        joinersPresenter.attachView(joinersView);
         if (sport.getAddress() == null)
-            presenter.getActivity(String.valueOf(sport.getAt_server_id()));
+            detailsPresenter.getActivity(String.valueOf(sport.getAt_server_id()));
+
         super.onResume();
     }
 
@@ -190,6 +257,7 @@ public class NewCreateActivity extends BaseActivity implements View.OnClickListe
         leftTime.setText(sport.getLeft_time()+"天");
         joiner.setText("参与者（" + sport.getJoin_num() + " / "+ sport.getJoin_num_all() + "）");
         Glide.with(this).load(sport.getImage_url()).into(sportIamge);
+        Glide.with(this).load("").into(publisher);
         reason.setVisibility(View.GONE);
         if (sport.getReason() != null && sport.getStatus().equals("1")) {
             reason.setText("由于 " + sport.getReason() + ",活动已改期。");
@@ -234,7 +302,7 @@ public class NewCreateActivity extends BaseActivity implements View.OnClickListe
                                             changeStartTemp = changeStart.getText().toString();
                                             changeEndTemp = changeEnd.getText().toString();
                                             reasonTemp = changeReason.getText().toString();
-                                            presenter.delayActivity(sport.getAt_server_id()+"",reasonTemp,changeStartTemp,changeEndTemp);
+                                            detailsPresenter.delayActivity(sport.getAt_server_id()+"",reasonTemp,changeStartTemp,changeEndTemp);
 
                                         }
                                     })
@@ -251,7 +319,7 @@ public class NewCreateActivity extends BaseActivity implements View.OnClickListe
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
                                             reasonTemp = cancelReason.getText().toString();
-                                            presenter.cancelActivity(""+sport.getAt_server_id(),""+cancelReason.getText().toString());
+                                            detailsPresenter.cancelActivity(""+sport.getAt_server_id(),""+cancelReason.getText().toString());
 
                                         }
                                     })

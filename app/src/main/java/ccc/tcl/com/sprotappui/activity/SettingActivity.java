@@ -3,9 +3,17 @@ package ccc.tcl.com.sprotappui.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.annotation.GlideOption;
+import com.bumptech.glide.util.Util;
+
+import java.io.File;
+import java.io.FileFilter;
 
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.customui.ToolBar;
@@ -43,6 +51,19 @@ public class SettingActivity extends BaseActivity {
 
     private void clearAppCache(){
         //this.clearAppCache();
-        Toast.makeText(this,""+this.getCacheDir().getFreeSpace(),Toast.LENGTH_LONG).show();
+        long size = this.getCacheDir().getTotalSpace() - this.getCacheDir().getUsableSpace();
+        Toast.makeText(this,""+this.getCacheDir().getParentFile().getAbsolutePath(),Toast.LENGTH_LONG).show();
+        File[] cache = this.getCacheDir().getParentFile().listFiles();
+        for (int i = 0;i<cache.length;i++)
+        if (cache[i].getName().equals("shared_prefs")) {
+            //Log.d("cacheName", "clearAppCache: "+cache[i].getName());
+            File[] shared_prefs = cache[i].listFiles();
+            for (int j = 0;j<shared_prefs.length;j++)
+            if (shared_prefs[j].getName().equals("UserInfo.xml"))
+                if (shared_prefs[j].delete())
+                    Log.d("succccccccc", "clearAppCache: ");
+        }
+        Glide.getPhotoCacheDir(this).delete();
+        Log.d("cacheSize", "clearAppCache: "+size/1024+">>>>"+Glide.getPhotoCacheDir(this).getAbsolutePath());
     }
 }

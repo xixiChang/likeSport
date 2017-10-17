@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.util.StringUtils;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -38,17 +39,25 @@ public class ScoreActivity extends BaseActivity {
         @Override
         public void onSuccess(ResponseResult<Map<String, String>> response) {
             if (response.isSuccess()){
+                if (response.getResult() == null)
+                    return;
                 if (VIEW_TYPE_WALK.equals(response.getType())){
                     Map<String, String> map = response.getResult();
                     walkScore.setText(map.get("step"));
-                    walkTime.setText(map.get("spent_time"));
+                    int hour = Integer.parseInt(map.get("spent_time")) / 3600;
+                    int minute = (Integer.parseInt(map.get("spent_time")) % 3600) / 60;
+                    int second = (Integer.parseInt(map.get("spent_time")) % 3600) % 60;
+                    walkTime.setText(hour + "时" + minute + "分" + second + "秒");
                     Log.d(TAG, "onSuccess: type>>> 0" );
                     Log.d(TAG, "onSuccess: step>>> " + map.get("step"));
                     Log.d(TAG, "onSuccess: spent_time>>> " + map.get("spent_time"));
                 }else if (VIEW_TYPE_RUN.equals(response.getType())){
                     Map<String, String> map = response.getResult();
                     runScore.setText(map.get("distance"));
-                    runTime.setText(map.get("spent_time"));
+                    int hour = Integer.parseInt(map.get("spent_time")) / 3600;
+                    int minute = (Integer.parseInt(map.get("spent_time")) % 3600) / 60;
+                    int second = (Integer.parseInt(map.get("spent_time")) % 3600) % 60;
+                    runTime.setText(hour + "时" + minute + "分" + second + "秒");
                     Log.d(TAG, "onSuccess: type>>> 1" );
                     Log.d(TAG, "onSuccess: step>>> " + map.get("step"));
                     Log.d(TAG, "onSuccess: spent_time>>> " + map.get("spent_time"));

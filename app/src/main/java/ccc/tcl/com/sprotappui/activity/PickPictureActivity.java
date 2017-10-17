@@ -64,7 +64,7 @@ public class PickPictureActivity extends BaseActivity {
         setContentView(R.layout.activity_pick_picture);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        super.setToolBar(toolbar, R.string.create_activity, true);
+        super.setToolBar(toolbar, "创建活动（1 / 3）", true);
 
         imageView = (ImageView) findViewById(R.id.imageView);
         frameLayout = (FrameLayout) findViewById(R.id.frame_layout) ;
@@ -105,8 +105,8 @@ public class PickPictureActivity extends BaseActivity {
                 builder.setNegativeButton("取消", null).create().show();
                 break;
             case R.id.next:
-                if (imageView.getVisibility() == View.VISIBLE)
-                    break;
+//                if (imageView.getVisibility() == View.VISIBLE)
+//                    break;
                 Intent intent = new Intent(PickPictureActivity.this, CreateActivity.class);
                 PlatFormActivity platFormActivity = new PlatFormActivity();
                 platFormActivity.setImage_url(imagePath);

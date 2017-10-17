@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -49,7 +50,7 @@ public class FinishCreateActivity extends BaseActivity {
     private int[] start_textview = new int[2];
     private int ADDRESS_MAX_COUNT = 20;
     private int NOTE_MAX_COUNT = 40;
-    private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private boolean set_start_time = true;
 
     private static final String TAG = "FinishCreateActivity";
@@ -121,7 +122,7 @@ public class FinishCreateActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finish_create);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        super.setToolBar(toolbar, R.string.create_activity, true);
+        super.setToolBar(toolbar, "创建活动（3 / 3）", true);
         initView();
     }
 
@@ -168,13 +169,23 @@ public class FinishCreateActivity extends BaseActivity {
                 } else if (ll.getVisibility() == View.VISIBLE) {
                     String end = endTime.getText().toString();
                     picker.updateDate(Integer.parseInt(end.substring(0, 4)), Integer.parseInt(end.substring(5, 7)) - 1, Integer.parseInt(end.substring(8)));
+                    try {
+                        Toast.makeText(FinishCreateActivity.this, dateFormat.parse(startTime.getText().toString())+"<<>>"+endTime.getText().toString(),Toast.LENGTH_LONG).show();
+                        String date = startTime.getText().toString();
+                        picker.setMinDate(dateFormat.parse(date).getTime());
+                        Toast.makeText(FinishCreateActivity.this, dateFormat.format(picker.getMinDate()),Toast.LENGTH_LONG).show();
+                    } catch (ParseException e) {
+                        Log.e(TAG, "onClick: "+e.toString());
+                        e.printStackTrace();
+                    }
+
                 }
 
             }
 
         });
         final Date curr = new Date();
-        final String currTime = format.format(curr.getTime());
+        final String currTime = dateFormat.format(curr.getTime());
         startTime.setText(currTime);
         endTime.setText(currTime);
         stub = (ViewStub) findViewById(R.id.viewStub);
@@ -189,9 +200,9 @@ public class FinishCreateActivity extends BaseActivity {
                         Calendar calendar = Calendar.getInstance();
                         calendar.set(year, monthOfYear, dayOfMonth);
                         if (set_start_time)
-                            startTime.setText(format.format(calendar.getTime()));
+                            startTime.setText(dateFormat.format(calendar.getTime()));
                         else if (!set_start_time)
-                            endTime.setText(format.format(calendar.getTime()));
+                            endTime.setText(dateFormat.format(calendar.getTime()));
                     }
                 });
                 picker.setMinDate(curr.getTime());

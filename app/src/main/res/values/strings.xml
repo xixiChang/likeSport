@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">SprotAppUI</string>
     <string name="activity_main_title">运动</string>
-    <string name="whole_distance">总距离/ｍ</string>
+    <string name="whole_distance">总距离/kｍ</string>
     <string name="day_distance">里程/ｋｍ</string>
     <string name="whole_spent_time">总时长/ｈ</string>
     <string name="whole_consume">总消耗/ｋ</string>
@@ -77,6 +77,7 @@
     <string name="step">步数</string>
     <string name="cancelActivity">确定取消活动吗？</string>
     <string name="askReason">请输入原因</string>
+    <string name="join">参与活动</string>
     <string name="alreadyJoin">已参加</string>
     <string name="publisher">发起人</string>
 

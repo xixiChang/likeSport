@@ -38,6 +38,7 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
     CircleImageView joiner1;
     CircleImageView joiner2;
     CircleImageView joiner3;
+    CircleImageView moreJoiners;
     ImageView photo;
     TextView name;
     TextView hotValue;
@@ -63,7 +64,8 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
                 if (response.getType().equals("join")) {
                     joinButton.setText("已参加");
                     joinButton.setEnabled(false);
-
+                    joinButton.setBgColor(R.color.red);
+                    joinButton.setBgColorChecked(R.color.red);
                 }
             }
             else if (!response.isSuccess()) {
@@ -109,6 +111,7 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
                     joiner1.setVisibility(View.VISIBLE);
                     joiner2.setVisibility(View.VISIBLE);
                     joiner3.setVisibility(View.VISIBLE);
+                    moreJoiners.setVisibility(View.VISIBLE);
                     Glide.with(LayoutActivity.this).load(response.getResult().get(1).getImage_url()).into(joiner0);
                     Glide.with(LayoutActivity.this).load(response.getResult().get(2).getImage_url()).into(joiner1);
                     Glide.with(LayoutActivity.this).load(response.getResult().get(2).getImage_url()).into(joiner2);
@@ -171,6 +174,8 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
             joinButton.setText("已参加");
             //joinButton.setClickable(false);
             joinButton.setEnabled(false);
+            joinButton.setBgColor(R.color.red);
+            joinButton.setBgColorChecked(R.color.red);
         }
         List<String> users = Util.stringToList(activity.getJoiner());
         joinerInfoPresenter.getJoinerInfo(users);
@@ -184,8 +189,6 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
                 break;
             case R.id.head_images:
                 Intent intent = new Intent(this,JoinerActivity.class);
-                Bundle bundle = new Bundle();
-
                 intent.putExtra("users",activity.getJoiner());
                 startActivity(intent);
                 break;
@@ -269,7 +272,7 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
         joiner1 = (CircleImageView) findViewById(R.id.joiner1);
         joiner2 = (CircleImageView) findViewById(R.id.joiner2);
         joiner3 = (CircleImageView) findViewById(R.id.joiner3);
-
+        moreJoiners = (CircleImageView) findViewById(R.id.moreJoiners);
         photo = (ImageView) findViewById(R.id.news_details_photo);
         name = (TextView) findViewById(R.id.item_fm_sport_name);
         hotValue = (TextView) findViewById(R.id.item_fm_sport_hot_value);
