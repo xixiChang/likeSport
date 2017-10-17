@@ -1,5 +1,7 @@
 package ccc.tcl.com.sprotappui.activity;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import ccc.tcl.com.sprotappui.R;
+import ccc.tcl.com.sprotappui.utils.Util;
 
 import static ccc.tcl.com.sprotappui.utils.Util.hideInputMethod;
 import static ccc.tcl.com.sprotappui.utils.Util.isShouldHideInput;
@@ -27,13 +30,17 @@ public class BaseActivity extends AppCompatActivity {
     protected PermissionResult result;
     protected boolean hasRequestPermission = false;
 
-    protected interface PermissionResult{
+    protected interface PermissionResult {
         void onGranted(String name, int code);
+
         void onDenied(int code);
     }
 
+    protected ProgressDialog progressDialog;
+
+
+
     /**
-     *
      * @param toolbar
      * @param titleID
      * @param canBack 是否能点击左上角返回
@@ -46,6 +53,7 @@ public class BaseActivity extends AppCompatActivity {
         if (canBack)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
     protected void setToolBar(@NonNull Toolbar toolbar, @NonNull String title, @NonNull boolean canBack) {
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
@@ -57,6 +65,7 @@ public class BaseActivity extends AppCompatActivity {
 
     /**
      * 点击菜单响应事件
+     *
      * @param item
      * @return
      */
@@ -78,6 +87,7 @@ public class BaseActivity extends AppCompatActivity {
 
     /**
      * 点击空白处隐藏键盘
+     *
      * @param ev
      * @return
      */
@@ -96,12 +106,40 @@ public class BaseActivity extends AppCompatActivity {
 
 
     /**
+     * 显示progressDialog
+     * @param context
+     * @param title default:"请稍后"
+     * @param msg default:"正在处理"
+     */
+    protected void showProgressDialog(Context context, String title, String msg) {
+        if (progressDialog == null){
+            progressDialog = new ProgressDialog(context);
+        }
+        if (progressDialog.isShowing())
+            return;
+        progressDialog.setCancelable(false);
+        progressDialog.setTitle(Util.isEmpty(title) ? "请稍后" : title);
+        progressDialog.setMessage(Util.isEmpty(msg) ? "正在处理" : msg);
+        progressDialog.show();
+    }
+
+
+    /**
+     * 消失progressDialog
+     */
+    protected void dismissDialog(){
+        if (progressDialog.isShowing())
+            progressDialog.dismiss();
+    }
+
+    /**
      * 界面拉伸到状态栏
+     *
      * @param isFullScreen
      * @return
      */
-    public void setFullScreen(boolean isFullScreen){
-        if (Build.VERSION.SDK_INT >= 21 && isFullScreen){
+    public void setFullScreen(boolean isFullScreen) {
+        if (Build.VERSION.SDK_INT >= 21 && isFullScreen) {
             View decorView = getWindow().getDecorView();
             decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
             getWindow().setNavigationBarColor(Color.TRANSPARENT);
@@ -110,34 +148,31 @@ public class BaseActivity extends AppCompatActivity {
     }
 
 
-
-    protected void initPM(PermissionResult result){
+    protected void initPM(PermissionResult result) {
+        hasRequestPermission = true;
         this.result = result;
     }
 
 
-    protected boolean checkPermission(String name){
+    protected boolean checkPermission(String name) {
         return ContextCompat.checkSelfPermission(this,
                 name) == PackageManager.PERMISSION_GRANTED;
     }
 
-    protected void requestPermission(String name, int code){
+    protected void requestPermission(String name, int code) {
         ActivityCompat.requestPermissions(BaseActivity.this, new String[]{name}, code);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (hasRequestPermission){
+        if (hasRequestPermission) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
                 result.onGranted(permissions[0], requestCode);
-            else{
+            else {
                 result.onDenied(requestCode);
                 //Toast.makeText(this, "你拒绝的应用权限", Toast.LENGTH_SHORT).show();
             }
-        }
-
-        else
-            super.onRequestPermissionsResult(requestCode, permissions,  grantResults);
-
+        } else
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }

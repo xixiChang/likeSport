@@ -1,14 +1,125 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@mipmap/berore_bc"
+    android:alpha="30">
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="60dp"
+       android:background="@color/white">
+   </LinearLayout>
+   <Button
+       android:layout_width="15dp"
+       android:layout_height="15dp"
+       android:layout_marginStart="319dp"
+       android:layout_marginTop="40dp"
+       android:background="@mipmap/before_record"
+       android:id="@+id/RECORD" />
+   <Spinner
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="25dp"
+       android:layout_marginStart="42dp"
+       android:textAlignment="center"
+       android:id="@+id/spinner"
+       android:layout_centerHorizontal="true"
+       android:spinnerMode="dialog"/>
 
-    <TextView
-        android:id="@+id/card_title_tv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/background_card"
-        android:gravity="center"
-        android:textSize="18sp"/>
+   <ImageView
+       android:id="@+id/TXT"
+       android:layout_width="50dp"
+       android:layout_height="50dp"
+       android:layout_marginTop="112dp"
+       android:layout_marginStart="32dp"/>
+   <TextView android:layout_height="22dp"
+       android:layout_width="42dp"
+       android:layout_marginStart="82dp"
+       android:layout_marginTop="115dp"
+       android:id="@+id/TEP"
+       android:text="温度"
+       android:textSize="16dp" />
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="14dp"
+       android:layout_marginTop="133dp"
+       android:layout_marginStart="86dp"
+       android:textSize="10dp"
+       android:id="@+id/QUALITY"
+       android:text="良好" />
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="14dp"
+       android:layout_marginTop="143dp"
+       android:layout_marginStart="86dp"
+       android:textSize="10dp"
+       android:id="@+id/TXT1"
+       android:text="天气状况" />
+
+   <TextView
+       android:id="@+id/DISTANCE"
+       android:layout_width="wrap_content"
+       android:layout_height="47dp"
+       android:layout_marginStart="42dp"
+       android:layout_marginTop="177dp"
+       android:text=""
+       android:textSize="40dp" />
+   <!--<TextView-->
+       <!--android:layout_width="24dp"-->
+       <!--android:layout_height="22dp"-->
+       <!--android:layout_marginTop="197dp"-->
+       <!--android:layout_marginStart="129dp"-->
+       <!--android:text="km"-->
+       <!--android:textSize="16dp" />-->
+   <TextView
+       android:id="@+id/tv_change"
+       android:layout_height="22dp"
+       android:layout_width="wrap_content"
+       android:layout_marginStart="42dp"
+       android:layout_marginTop="232dp"
+       android:textSize="16dp"
+       android:text="今日里程(km)"/>
+
+   <TextView
+       android:id="@+id/TIME"
+       android:layout_width="wrap_content"
+       android:layout_height="35dp"
+       android:layout_marginStart="44dp"
+       android:layout_marginTop="344dp"
+       android:text=""
+       android:textSize="30dp" />
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="22dp"
+       android:layout_marginTop="379dp"
+       android:layout_marginStart="44dp"
+       android:textSize="16dp"
+       android:text="时长(小时)"
+       android:id="@+id/textView4" />
+   <TextView
+       android:id="@+id/SPEED"
+       android:layout_width="wrap_content"
+       android:layout_height="35dp"
+       android:layout_marginStart="236dp"
+       android:layout_marginTop="344dp"
+       android:text=""
+       android:textSize="30dp" />
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="22dp"
+       android:layout_marginTop="379dp"
+       android:layout_marginStart="236dp"
+       android:textSize="16dp"
+       android:text="卡路里(cal)"
+       android:id="@+id/textView5" />
+   <Button
+       android:layout_width="155dp"
+       android:layout_height="48dp"
+       android:layout_marginStart="103dp"
+       android:layout_marginTop="442dp"
+       android:textColor="@color/white"
+       android:id="@+id/pause"
+       android:background="@mipmap/activity_start" />
+
+
 
 </RelativeLayout>

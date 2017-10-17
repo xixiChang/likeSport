@@ -1,56 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_register"
+    android:id="@+id/activity_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@mipmap/resister_bg"
+    android:layout_marginTop="-20dp"
     tools:context="ccc.tcl.com.sprotappui.activity.RegisterActivity">
+
+    <ImageView
+        android:layout_width="212dp"
+        android:layout_height="212dp"
+        android:layout_marginTop="0dp"
+        android:src="@mipmap/resister1"
+        android:id="@+id/imageView2" />
+    <ImageView
+        android:layout_width="169dp"
+        android:layout_height="169dp"
+        android:layout_marginTop="0dp"
+        android:src="@mipmap/resister2"/>
+    <ImageView
+        android:layout_width="360dp"
+        android:layout_height="360dp"
+        android:layout_marginStart="114dp"
+        android:layout_marginTop="-55dp"
+        android:src="@mipmap/resister3"/>
+
+
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="275dp"
+        android:src="@mipmap/user"/>
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="320dp"
+        android:src="@mipmap/phone"/>
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="365dp"
+        android:src="@mipmap/password"/>
+
+    <ImageView
+        android:id="@+id/VISIBLE"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="290dp"
+        android:layout_marginTop="360dp"
+        android:src="@mipmap/password_eye"/>
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="405dp"
+        android:src="@mipmap/setting_about_app"/>
+
     <EditText
         android:id="@+id/rg_name"
-        android:layout_width="match_parent"
+        android:layout_marginTop="275dp"
+        android:layout_width="269dp"
         android:layout_height="wrap_content"
-        android:hint="昵称"/>
+        android:background="@null"
+        android:hint="用户名"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:layout_marginStart="100dp"/>
+    <EditText
+        android:id="@+id/rg_phone"
+        android:inputType="phone"
+        android:layout_marginTop="325dp"
+        android:layout_width="269dp"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:hint="手机"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:layout_marginStart="100dp"/>
 
     <EditText
         android:id="@+id/rg_password"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:inputType="numberPassword"
-        android:hint="密码"/>
-
-    <EditText
-        android:id="@+id/rg_phone"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="phone"
-        android:hint="电话"/>
-
+        android:inputType="textPassword"
+        android:layout_marginTop="362dp"
+        android:background="@null"
+        android:hint="密码字数不少于6位"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:layout_marginStart="100dp"/>
+    <!--验证码-->
     <EditText
         android:id="@+id/rg_code"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:hint="验证码"/>
+        android:inputType="textPassword"
+        android:layout_marginTop="412dp"
+        android:background="@null"
+        android:hint="验证码"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:layout_marginStart="100dp"/>
+
 
     <Button
         android:id="@+id/rg_get_code"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="获取验证码"/>
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="415dp"
+        android:layout_marginStart="260dp"
+        android:gravity="bottom"
+        android:text="发送"
+        android:textSize="15dp"
+        android:background="#00000000"
+        android:textColor="@color/white"/>
 
     <Button
         android:id="@+id/rg_register"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="注册"/>
+        android:layout_width="268dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="455dp"
+        android:layout_centerHorizontal="true"
+        android:background="@mipmap/redister_bt"
+        android:text="注册"
+        android:textColor="@color/lightseagreen"/>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/register_to_login"
+        android:layout_marginTop="503dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="已经注册过，直接登录"
+        android:textSize="16dp"
+        android:textColor="@color/white"/>
+    <View
+        android:layout_width="250dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="300dp"
+        android:background="@color/white"/>
+    <View
+        android:layout_width="250dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="345dp"
+        android:background="@color/white"/>
+    <View
+        android:layout_width="250dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="390dp"
+        android:background="@color/white"/>
+    <View
+        android:layout_width="250dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="435dp"
+        android:background="@color/white"/>
+
+
+
+</RelativeLayout>

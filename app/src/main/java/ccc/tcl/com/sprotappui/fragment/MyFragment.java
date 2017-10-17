@@ -20,12 +20,12 @@ import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import ccc.tcl.com.sprotappui.App;
 import ccc.tcl.com.sprotappui.R;
+import ccc.tcl.com.sprotappui.activity.ChangeUserActivity;
 import ccc.tcl.com.sprotappui.activity.DayRateActivity;
 import ccc.tcl.com.sprotappui.activity.MySportTeamActivity;
 import ccc.tcl.com.sprotappui.activity.ScoreActivity;
@@ -34,7 +34,6 @@ import ccc.tcl.com.sprotappui.adapter.ChooseItem;
 import ccc.tcl.com.sprotappui.customui.RecycleViewDivider;
 import ccc.tcl.com.sprotappui.data.UserInfo;
 import ccc.tcl.com.sprotappui.model.ChooseItemModel;
-import ccc.tcl.com.sprotappui.model.Record;
 import ccc.tcl.com.sprotappui.model.ResponseResult;
 import ccc.tcl.com.sprotappui.presenter.presenterimpl.RecordPresenter;
 import ccc.tcl.com.sprotappui.presenter.presenterimpl.UserPresenter;
@@ -138,6 +137,14 @@ public class MyFragment extends Fragment {
         totalDistance = (TextView) view.findViewById(R.id.whole_distance);
         totalTime = (TextView) view.findViewById(R.id.whole_spent_time);
         totalConsume = (TextView) view.findViewById(R.id.whole_consume);
+
+        userPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ChangeUserActivity.class);
+                startActivity(intent);
+            }
+        });
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override

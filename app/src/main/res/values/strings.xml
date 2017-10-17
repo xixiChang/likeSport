@@ -45,6 +45,9 @@
     <string name="reason">延期原因</string>
 
     <string name="joiner">参加人员</string>
+    <string name="user_info">个人信息</string>
+    <string name="user_sign">个性签名</string>
+    <string name="user_sign_hint">个性签名可以让别人更了解你哦</string>
     <!--百度地图相关字符串-->
     <string name="TraceRecord_title_name">跑步中</string>
     <string name="pause">暂停</string>

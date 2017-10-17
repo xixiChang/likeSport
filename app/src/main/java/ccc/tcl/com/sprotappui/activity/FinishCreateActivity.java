@@ -217,6 +217,7 @@ public class FinishCreateActivity extends BaseActivity {
         uploadImage.attachView(new SportAppView<ResponseResult<String>>() {
             @Override
             public void onSuccess(ResponseResult<String> response) {
+
                 if (response.isSuccess()) {
                     platFormActivity.setStart_time(startTime.getText().toString());
                     platFormActivity.setEnd_time(endTime.getText().toString());
@@ -227,6 +228,7 @@ public class FinishCreateActivity extends BaseActivity {
                     uploadActivity.uploadActivity(platFormActivity);
                     Toast.makeText(FinishCreateActivity.this, "图片上传成功", Toast.LENGTH_SHORT).show();
                 } else {
+                    dismissDialog();
                     platFormActivity.setImage_url(oriangal_image_url);
                     Toast.makeText(FinishCreateActivity.this, "图片上传失败: " + response.getMsg(), Toast.LENGTH_SHORT).show();
 
@@ -235,6 +237,7 @@ public class FinishCreateActivity extends BaseActivity {
 
             @Override
             public void onRequestError(String msg) {
+                dismissDialog();
                 Toast.makeText(FinishCreateActivity.this,"图片上传失败："+msg,Toast.LENGTH_SHORT).show();
             }
         });
@@ -244,6 +247,7 @@ public class FinishCreateActivity extends BaseActivity {
         uploadActivity.attachView(new SportAppView<ResponseResult>() {
             @Override
             public void onSuccess(ResponseResult response) {
+                dismissDialog();
                 if (response.isSuccess()){
                     Intent intent = new Intent(FinishCreateActivity.this,NewCreateActivity.class);
                     Bundle data = new Bundle();
@@ -261,6 +265,7 @@ public class FinishCreateActivity extends BaseActivity {
 
             @Override
             public void onRequestError(String msg) {
+                dismissDialog();
                 Toast.makeText(FinishCreateActivity.this,"网络链接失败："+msg,Toast.LENGTH_SHORT).show();
             }
         });
@@ -284,6 +289,7 @@ public class FinishCreateActivity extends BaseActivity {
                 }
 
                 File image = new File(platFormActivity.getImage_url());
+                showProgressDialog(this, null, null);
                 uploadImage.upLoadFile(image,"activity");
                 break;
 
@@ -310,7 +316,7 @@ public class FinishCreateActivity extends BaseActivity {
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onStop() {
         uploadImage.onStop();
         super.onDestroy();
     }

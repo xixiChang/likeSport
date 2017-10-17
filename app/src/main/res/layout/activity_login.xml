@@ -1,46 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@mipmap/resister_bg"
+    android:layout_marginTop="-20dp"
     tools:context="ccc.tcl.com.sprotappui.activity.LoginActivity">
+
+    <ImageView
+        android:layout_width="212dp"
+        android:layout_height="212dp"
+        android:layout_marginTop="0dp"
+        android:src="@mipmap/resister1"/>
+    <ImageView
+        android:layout_width="169dp"
+        android:layout_height="169dp"
+        android:layout_marginTop="0dp"
+        android:src="@mipmap/resister2"/>
+    <ImageView
+        android:layout_width="360dp"
+        android:layout_height="360dp"
+        android:layout_marginStart="114dp"
+        android:layout_marginTop="-55dp"
+        android:src="@mipmap/resister3"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginTop="227dp"
+        android:layout_gravity="center_horizontal"
+        android:text="手机登陆"
+        android:textSize="18dp"
+        android:textColor="@color/white"/>
+
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="335dp"
+        android:background="@mipmap/phone"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="22dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="325dp"
+        />
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="400dp"
+        android:src="@mipmap/password"/>
+    <ImageView
+        android:id="@+id/password_show"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="320dp"
+        android:layout_marginTop="395dp"
+        android:src="@mipmap/password_eye"/>
 
     <EditText
         android:id="@+id/user_login_phone"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="328dp"
         android:inputType="phone"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:hint="phone"/>
+        android:background="@null"
+        android:hint="手机"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:layout_marginStart="100dp"/>
+
     <EditText
         android:id="@+id/user_login_pwd"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:layout_marginTop="10dp"
-        android:hint="password"/>
-
-
+        android:layout_marginTop="400dp"
+        android:background="@null"
+        android:hint="密码"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:layout_marginStart="100dp"/>
+    <View
+        android:layout_width="250dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="350dp"
+        android:background="@color/white"/>
+    <View
+        android:layout_width="250dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="420dp"
+        android:background="@color/white"/>
     <Button
         android:id="@+id/login_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_width="268dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="445dp"
+        android:layout_gravity="center_horizontal"
         android:text="登录"
-        android:layout_gravity="center_horizontal"/>
-
+        android:textSize="16dp"
+        android:textColor="@color/mediumturquoise"
+        android:background="@mipmap/login_button"/>
+    <ImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginStart="240dp"
+        android:layout_marginTop="507dp"
+        android:src="@mipmap/login1" />
     <TextView
         android:id="@+id/login_to_register"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginTop="503dp"
+        android:layout_marginStart="163dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="没有帐号?前往注册..."/>
+        android:text="前往注册"
+        android:textSize="16dp"
+        android:textColor="@color/white"/>
 
-</LinearLayout>
+</FrameLayout>

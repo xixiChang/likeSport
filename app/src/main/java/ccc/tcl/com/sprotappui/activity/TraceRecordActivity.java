@@ -1,5 +1,6 @@
 package ccc.tcl.com.sprotappui.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
@@ -8,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -15,12 +17,17 @@ import android.hardware.SensorManager;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.ImageView;
@@ -127,8 +134,10 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 	private String start_time,end_time,this_time;
 	private String strDistanceM,speedMSStr,totalSecondStr;
 	private  int distanceMi,calorie,typei;
-	private double speedMSi;
+	private float speedMSi;
 	private RecordPresenter recordPresenter;
+	private static final int Location_Permission = 1;
+
 	/*起点图标*/
 	BitmapDescriptor startBD;
 	/*终点图标*/
@@ -204,6 +213,11 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 
 		TestGPS();
 		isNetworkConn(TraceRecordActivity.this);
+
+		/*百度地图动态权限申请，判断一下是否为安卓6.0机型*/
+		if (Build.VERSION.SDK_INT >= 23) {
+			requestPermission();
+		}
 
 		/*apikey的授权需要一定的时间，在授权成功之前地图相关操作会出现异常；apikey授权成功后会发送广播通知，这里注册 SDK 广播监听者*/
 		IntentFilter iFilter = new IntentFilter();
@@ -294,6 +308,7 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 				Intent intent = new Intent();
 				intent.setClass(TraceRecordActivity.this,
 						HomeActivity.class);
+				intent.putExtra("type",(typei+""));
 				startActivity(intent);
 				break;
 		}
@@ -392,10 +407,10 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 		recordPresenter.uploadRecord(record);
 		recordPresenter.attachView(sportAppView);
 
-		Log.i(TAG, "addRecordData:" + record.getDate()+",spent time:"+record.getSpent_time()
-				+",type:"+record.getType()+",mean speed:"+record.getMean_speed()+",calorie:"+record.getCalorie()
-				+",step:"+record.getStep()+",start time:"+record.getStart_time()+",end time:"+record.getEnd_time()
-				+",distance:"+record.getDistance()+",user id:"+record.getUser_id()+",id:"+record.getId());
+		Log.i(TAG, "addRecordData:" + record.getDate() + ",spent time:" + record.getSpent_time()
+				+ ",type:" + record.getType() + ",mean speed:" + record.getMean_speed() + ",calorie:" + record.getCalorie()
+				+ ",step:" + record.getStep() + ",start time:" + record.getStart_time() + ",end time:" + record.getEnd_time()
+				+ ",distance:" + record.getDistance() + ",user id:" + record.getUser_id() + ",id:" + record.getId());
 
 	}
 
@@ -425,6 +440,15 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 //		显示日期
 		nianYueRi.setText(getDate());
 	}
+
+	/*禁用系统的返回键*/
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			return true;
+		}
+		return  super.onKeyDown(keyCode, event);
+	}
+
 
 	/*运动结束时显示日期*/
 	public String getDate(){
@@ -595,7 +619,7 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 							tvSpeed.setText(strSpeed);
 						}
 						/*speedMSStr=String.valueOf(speedMS);*/
-						speedMSi=Double.parseDouble(String.valueOf(speedMS));
+						speedMSi=Float.parseFloat(String.valueOf(speedMS));
 
 					}
 
@@ -975,5 +999,45 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 		super.onDestroy();
 		unregisterReceiver(mReceiver);
 	}
+
+
+
+	/**
+	 * 动态申请地图权限
+	 */
+	private void requestPermission() {
+		if (ContextCompat.checkSelfPermission(this,
+				Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+			//第一次被拒绝后，第二次访问时，向用户说明为什么需要此权限
+			if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+					Manifest.permission.ACCESS_COARSE_LOCATION)) {
+				Toast.makeText(this, "开启后使用定位功能", Toast.LENGTH_SHORT).show();
+			}
+			//若权限没有开启，则请求权限
+			ActivityCompat.requestPermissions(this,
+					new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+					Location_Permission);
+		}
+	}
+
+
+	//	当用户选择接受或者拒绝时，申请权限执行的回调
+	public void onRequestPermissionsResult(int requestCode,
+										   @NonNull String[] permissions,
+										   @NonNull int[] grantResults) {
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		if (requestCode == Location_Permission) {
+			if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+				//请求权限成功
+				Toast.makeText(TraceRecordActivity.this, "请求权限成功！", Toast.LENGTH_SHORT).show();
+			} else {
+				//请求失败
+				Toast.makeText(TraceRecordActivity.this, "请求权限失败！", Toast.LENGTH_SHORT).show();
+			}
+		}
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+	}
+
+
 
 }

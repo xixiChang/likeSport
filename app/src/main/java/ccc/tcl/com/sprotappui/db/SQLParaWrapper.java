@@ -49,4 +49,13 @@ public class SQLParaWrapper {
                 userinfo.getLogin_method()
         };
     }
+
+    public Object[] getUpdateUserStringArray(UserInfo userInfo){
+        return new Object[]{
+                userInfo.getImage_url(),
+                userInfo.getName(),
+                userInfo.getRetain(),
+                userInfo.getId()
+        };
+    }
 }

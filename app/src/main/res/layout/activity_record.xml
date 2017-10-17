@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="-20dp"
+    tools:context=".activity.RecordActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:id="@+id/top"
+        android:background="@color/white">
+        <TextView
+            android:id="@+id/TYPE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="历史记录"
+            android:textSize="20dp"
+            android:layout_marginTop="0dp"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/TOP"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/white"
+        android:layout_below="@+id/top"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="14dp"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:text="周"
+            android:textSize="14dp"
+            android:background="@drawable/selector_button"
+            android:id="@+id/week" />
+        <Button
+            android:layout_width="14dp"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:text="月"
+            android:textSize="14dp"
+            android:background="@drawable/selector_button"
+            android:id="@+id/month" />
+        <Button
+            android:layout_width="14dp"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:text="总"
+            android:textSize="14dp"
+            android:background="@drawable/selector_button"
+            android:id="@+id/total" />
+    </LinearLayout>
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/lineChart"
+            android:layout_width="match_parent"
+            android:layout_height="255dp"
+            android:background="@color/grey"
+            android:layout_marginTop="100dp"
+            android:layout_centerHorizontal="true"/>
+
+
+
+        <ImageView
+            android:layout_height="40dp"
+            android:layout_width="40dp"
+            android:layout_marginTop="400dp"
+            android:layout_marginStart="42dp"
+            android:src="@mipmap/record_1"/>
+        <TextView
+            android:id="@+id/RECORD_DISTANCE"
+            android:layout_height="28dp"
+            android:layout_width="85dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="431dp"
+            android:gravity="left"
+            android:text="0"
+            android:textSize="24dp" />
+
+        <TextView
+            android:layout_height="17dp"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="457dp"
+            android:layout_marginStart="48dp"
+            android:text="步数"
+            android:textSize="12dp"
+            android:layout_gravity="left|bottom"/>
+
+    <ImageView
+        android:layout_height="40dp"
+        android:layout_width="40dp"
+        android:layout_marginTop="400dp"
+        android:layout_marginStart="208dp"
+        android:src="@mipmap/record_2"/>
+    <TextView
+        android:id="@+id/RECORD_TIME"
+        android:layout_height="28dp"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="210dp"
+        android:layout_marginTop="431dp"
+        android:text="1"
+        android:textSize="24dp" />
+
+    <TextView
+        android:layout_height="17dp"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="457dp"
+        android:layout_marginStart="210dp"
+        android:text="用时(h)"
+        android:textSize="12dp" />
+    <ImageView
+        android:layout_height="40dp"
+        android:layout_width="40dp"
+        android:layout_marginTop="493dp"
+        android:layout_marginStart="45dp"
+        android:src="@mipmap/record_3"/>
+
+    <TextView
+        android:id="@+id/RECORD_P_SPEED"
+        android:layout_height="28dp"
+        android:layout_width="85dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="517dp"
+        android:gravity="left"
+        android:text="1"
+        android:textSize="24dp" />
+
+
+    <ImageView
+        android:layout_height="40dp"
+        android:layout_width="40dp"
+        android:layout_marginTop="490dp"
+        android:layout_marginStart="208dp"
+        android:src="@mipmap/record_4"/>
+    <TextView
+        android:id="@+id/RECORD_C"
+        android:layout_height="28dp"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="210dp"
+        android:layout_marginTop="517dp"
+        android:gravity="left"
+        android:text="1"
+        android:textSize="24dp" />
+<TextView
+        android:layout_height="17dp"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="542dp"
+        android:layout_marginStart="48dp"
+        android:text="平均速度(s/h)"
+        android:textSize="12dp" />
+    <TextView
+        android:layout_height="17dp"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="542dp"
+        android:layout_marginStart="210dp"
+        android:text="卡路里(cal)"
+        android:textSize="12dp" />
+
+
+
+
+
+</RelativeLayout>

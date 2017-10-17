@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_test2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="ccc.tcl.com.sprotappui.activity.RecordActivity">
+    <include layout="@layout/toolbar_general"
+        android:id="@+id/top"></include>
+
+
+
+    <com.flyco.tablayout.CommonTabLayout
+        android:id="@+id/history_tab"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/lightskyblue"
+        android:layout_below="@+id/top"
+        tl:tl_iconVisible="false"
+        tl:tl_indicator_corner_radius="1.5dp"
+        tl:tl_indicator_height="3dp"
+        tl:tl_indicator_width="10dp"
+        tl:tl_textsize="14sp"/>
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/history_tab"
+        android:layout_height="300dp">
+    </com.github.mikephil.charting.charts.BarChart>
+    <ImageView
+        android:layout_height="40dp"
+        android:layout_width="40dp"
+        android:layout_marginTop="400dp"
+        android:layout_marginStart="42dp"
+        android:src="@mipmap/record_1"/>
+    <TextView
+        android:id="@+id/RECORD_DISTANCE"
+        android:layout_height="28dp"
+        android:layout_width="85dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="431dp"
+        android:gravity="left"
+        android:text="--"
+        android:textSize="24dp" />
+
+    <TextView
+        android:layout_height="17dp"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="457dp"
+        android:layout_marginStart="48dp"
+        android:text="步数"
+        android:textSize="12dp"
+        android:layout_gravity="left|bottom"/>
+
+    <ImageView
+        android:layout_height="40dp"
+        android:layout_width="40dp"
+        android:layout_marginTop="400dp"
+        android:layout_marginStart="208dp"
+        android:src="@mipmap/record_2"/>
+    <TextView
+        android:id="@+id/RECORD_TIME"
+        android:layout_height="28dp"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="210dp"
+        android:layout_marginTop="431dp"
+        android:text="--"
+        android:textSize="24dp" />
+
+    <TextView
+        android:layout_height="17dp"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="457dp"
+        android:layout_marginStart="210dp"
+        android:text="用时(h)"
+        android:textSize="12dp" />
+    <ImageView
+        android:layout_height="40dp"
+        android:layout_width="40dp"
+        android:layout_marginTop="493dp"
+        android:layout_marginStart="45dp"
+        android:src="@mipmap/record_3"/>
+
+    <TextView
+        android:id="@+id/RECORD_P_SPEED"
+        android:layout_height="28dp"
+        android:layout_width="85dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="517dp"
+        android:gravity="left"
+        android:text="--"
+        android:textSize="24dp" />
+
+
+    <ImageView
+        android:layout_height="40dp"
+        android:layout_width="40dp"
+        android:layout_marginTop="490dp"
+        android:layout_marginStart="208dp"
+        android:src="@mipmap/record_4"/>
+    <TextView
+        android:id="@+id/RECORD_C"
+        android:layout_height="28dp"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="210dp"
+        android:layout_marginTop="517dp"
+        android:gravity="left"
+        android:text="--"
+        android:textSize="24dp" />
+    <TextView
+        android:layout_height="17dp"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="542dp"
+        android:layout_marginStart="48dp"
+        android:text="平均速度(s/h)"
+        android:textSize="12dp" />
+    <TextView
+        android:layout_height="17dp"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="542dp"
+        android:layout_marginStart="210dp"
+        android:text="卡路里(cal)"
+        android:textSize="12dp" />
+
+
+
+
+</RelativeLayout>
