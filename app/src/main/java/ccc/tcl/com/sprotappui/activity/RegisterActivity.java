@@ -37,6 +37,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private static final int START_AC_REG = 5014;
     private boolean passwordDisplayTag;
     private Intent mIntent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +77,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         goLogin.setOnClickListener(this);
         vb.setOnClickListener(this);
     }
+
     /**
      * 倒计时Handler
      */
@@ -88,20 +90,25 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 getCode.setEnabled(true);
                 getCode.setText(msg.obj.toString());
             }
-        };
+        }
+
+        ;
     };
 
     private SportAppView<ResponseResult<String>> sportAppView = new SportAppView<ResponseResult<String>>() {
         @Override
         public void onSuccess(ResponseResult<String> response) {
+            dismissDialog();
             if (response.isSuccess()) {
                 Toast.makeText(RegisterActivity.this, "发送成功,　请查收哦～", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(RegisterActivity.this, "发送失败:" + response.getMsg(), Toast.LENGTH_SHORT).show();
             }
         }
+
         @Override
         public void onRequestError(String msg) {
+            dismissDialog();
             Toast.makeText(RegisterActivity.this, "发送失败:" + msg, Toast.LENGTH_SHORT).show();
         }
     };
@@ -110,6 +117,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private SportAppView<ResponseResult<String>> registerAppView = new SportAppView<ResponseResult<String>>() {
         @Override
         public void onSuccess(ResponseResult<String> response) {
+            dismissDialog();
             if (response.isSuccess()) {
                 Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
             } else {
@@ -119,6 +127,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
         @Override
         public void onRequestError(String msg) {
+            dismissDialog();
             Toast.makeText(RegisterActivity.this, "注册失败:" + msg, Toast.LENGTH_SHORT).show();
         }
     };
@@ -128,21 +137,27 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         switch (v.getId()) {
             case R.id.rg_get_code://设置倒计时按键
                 String sPhone0 = phone.getText().toString();
+                showProgressDialog(this, null, null);
                 userPresenter.userGetAuthCode(sPhone0);
                 getCode.setEnabled(false);
                 startService(mIntent);
                 break;
+
             case R.id.rg_register:
                 sPhone = phone.getText().toString();
                 sPassword = password.getText().toString();
                 sName = name.getText().toString();
                 sCode = code.getText().toString();
                 userPresenter.attachView(registerAppView);
+                showProgressDialog(this, null, "正在注册");
                 userPresenter.userRegister(sPhone, sName, sPassword, sCode);
                 break;
+
             case R.id.register_to_login:
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivityForResult(intent, START_AC_REG);
+                finish();
+
             case R.id.VISIBLE:
                 if (!passwordDisplayTag) {
                     password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());

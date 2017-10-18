@@ -81,6 +81,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private SportAppView<ResponseResult<UserInfo>> sportAppView = new SportAppView<ResponseResult<UserInfo>>() {
         @Override
         public void onSuccess(ResponseResult<UserInfo> responseResult) {
+            dismissDialog();
             if (responseResult.isSuccess()) {
                 Log.d(TAG, "onSuccess: ");
                 userInfo = responseResult.getResult();
@@ -98,6 +99,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
         @Override
         public void onRequestError(String msg) {
+            dismissDialog();
             Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
         }
     };
@@ -113,6 +115,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             case R.id.login_button:
                 phone = inputPhone.getText().toString();
                 pwd = inputPwd.getText().toString();
+                showProgressDialog(this, null, "正在登录");
                 userPresenter.userLogin(phone, pwd, 0);//做判断
                 break;
             case R.id.password_show:
