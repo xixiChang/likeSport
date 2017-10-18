@@ -55,14 +55,17 @@ import com.baidu.mapapi.map.Polyline;
 import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
-import com.umeng.socialize.ShareAction;
-import com.umeng.socialize.UMShareListener;
-import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import com.bumptech.glide.Glide;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+
 
 import ccc.tcl.com.sprotappui.App;
 import ccc.tcl.com.sprotappui.R;
@@ -74,6 +77,7 @@ import ccc.tcl.com.sprotappui.step_detector.StepDetector;
 import ccc.tcl.com.sprotappui.ui.SlideView;
 import ccc.tcl.com.sprotappui.ui.SportAppView;
 import ccc.tcl.com.sprotappui.utils.BaiduMapUtil;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /*实现实时动态画运动轨迹*/
 
@@ -100,8 +104,7 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 	private TextView tvPause;
 	private ImageView pause_img;
 	private ImageView go_on_img;
-	private ImageView userPic;
-
+	private CircleImageView userPic;
 	private long rangeTime;
 	private long rangeTime1;
 	private long totalTime = 0;
@@ -160,9 +163,9 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 			if (s.equals(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_ERROR)) {
 				Toast.makeText(TraceRecordActivity.this, R.string.api_fail,Toast.LENGTH_SHORT).show();
 			} else if (s.equals(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_OK)) {
-				Toast.makeText(TraceRecordActivity.this, R.string.api_success,Toast.LENGTH_SHORT).show();
+				Toast.makeText(TraceRecordActivity.this,R.string.api_success,Toast.LENGTH_SHORT).show();
 			} else if (s.equals(SDKInitializer.SDK_BROADCAST_ACTION_STRING_NETWORK_ERROR)) {
-				Toast.makeText(TraceRecordActivity.this, R.string.network_fail,Toast.LENGTH_SHORT).show();
+				Toast.makeText(TraceRecordActivity.this,R.string.network_fail,Toast.LENGTH_SHORT).show();
 			}
 		}
 	}
@@ -186,7 +189,7 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 		tvStep = (TextView)findViewById(R.id.tv_step);
 		pause_img = (ImageView) findViewById(R.id.pause_img);
 		go_on_img = (ImageView) findViewById(R.id.go_on_img);
-		userPic = (ImageView) findViewById(R.id.userPic);
+		userPic = (CircleImageView) findViewById(R.id.userPic);
 
 		end = (LinearLayout) findViewById(R.id.btnEnd);
 		pause = (LinearLayout) findViewById(R.id.btnPause);
@@ -236,31 +239,28 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 		mBaiduMap.setMyLocationEnabled(true);
 
 		mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(
-				MyLocationConfiguration.LocationMode.FOLLOWING, true, null));
+				com.baidu.mapapi.map.MyLocationConfiguration.LocationMode.FOLLOWING, true, null));
 
 		/**
 		 * 添加地图缩放状态变化监听，当手动放大或缩小地图时，拿到缩放后的比例，然后获取到下次定位，
 		 *  给地图重新设置缩放比例，否则地图会重新回到默认的mCurrentZoom缩放比例
 		 */
-		mBaiduMap.setOnMapStatusChangeListener(new BaiduMap.OnMapStatusChangeListener() {
+		/*mBaiduMap.setOnMapStatusChangeListener(new BaiduMap.OnMapStatusChangeListener() {
 
-			@Override
+
 			public void onMapStatusChangeStart(MapStatus arg0) {
-				// TODO Auto-generated method stub
+				Log.i(TAG, "BaiduMap");
 
 			}
 
-			@Override
 			public void onMapStatusChangeFinish(MapStatus arg0) {
-				mCurrentZoom = arg0.zoom;
+				Log.i(TAG, "BaiduMap");
 			}
 
-			@Override
 			public void onMapStatusChange(MapStatus arg0) {
-				// TODO Auto-generated method stub
-
+				Log.i(TAG, "BaiduMap");
 			}
-		});
+		});*/
 
 		/*定位初始化*/
 		mLocClient = new LocationClient(this);
@@ -298,7 +298,7 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 			/*运动结束，点击分享*/
 			case R.id.share:
 				new ShareAction(TraceRecordActivity.this)
-						.setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN)
+						.setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
 						.setCallback(umShareListener)
 						.open();
 				break;
@@ -307,7 +307,7 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 				Intent intent = new Intent();
 				intent.setClass(TraceRecordActivity.this,
 						HomeActivity.class);
-				intent.putExtra("type",(typei+""));
+				intent.putExtra("type",typei);
 				startActivity(intent);
 				break;
 		}
@@ -332,7 +332,7 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 		slideView.setSlideListener(new SlideView.SlideListener() {
 			@Override
 			public void onDone() {
-				Toast.makeText(TraceRecordActivity.this, R.string.unlock_success, Toast.LENGTH_SHORT).show();
+				Toast.makeText(TraceRecordActivity.this,R.string.unlock_success, Toast.LENGTH_SHORT).show();
 				lockScreenArea.setVisibility(View.GONE);
 				lockScreen.setVisibility(View.VISIBLE);
 				end.setVisibility(View.VISIBLE);
@@ -404,7 +404,7 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 		recordPresenter=new RecordPresenter();
 		recordPresenter.onCreate();
 		recordPresenter.uploadRecord(record);
-		recordPresenter.attachView(sportAppView);
+		recordPresenter.attachView(recordView);
 
 		Log.i(TAG, "addRecordData:" + record.getDate() + ",spent time:" + record.getSpent_time()
 				+ ",type:" + record.getType() + ",mean speed:" + record.getMean_speed() + ",calorie:" + record.getCalorie()
@@ -416,7 +416,6 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 
 	/*运动结束时的显示信息*/
 	public void endShow(){
-
 		end.setVisibility(View.GONE);
 		pause.setVisibility(View.GONE);
 		lockScreen.setVisibility(View.GONE);
@@ -424,21 +423,22 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 		distanceMArea.setVisibility(View.GONE);
 		endShowArea.setVisibility(View.VISIBLE);
 		top.setVisibility(View.VISIBLE);
-//		显示用户名
+		/*显示用户名和头像*/
 		tvUser.setText(App.userInfo.getName());
-//		显示用户头像
-//		userPic.setImageResource();
+		Glide.with(TraceRecordActivity.this).load(App.userInfo.getImage_url()).into(userPic);
 		/*骑行不显示步数*/
 		if(typei == 2){
 			stepArea.setVisibility(View.GONE);
 		}else {
-			//显示步数
+			/*显示步数*/
 			String strStep = String.valueOf(StepDetector.CURRENT_STEP);
 			tvStep.setText(strStep);
 		}
-//		显示日期
+		/*显示日期*/
 		nianYueRi.setText(getDate());
 	}
+
+
 
 	/*禁用系统的返回键*/
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -748,7 +748,7 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 			public void onClick(DialogInterface dialog, int which) {
 				Intent intent = null;
 				//判断手机系统的版本  即API大于10 就是3.0或以上版本
-				if (Build.VERSION.SDK_INT > 10) {
+				if (android.os.Build.VERSION.SDK_INT > 10) {
 					intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
 				} else {
 					intent = new Intent();
@@ -951,22 +951,24 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 				SensorManager.SENSOR_DELAY_UI);
 	}
 
-	private SportAppView<ResponseResult> sportAppView = new SportAppView<ResponseResult>() {
+	private SportAppView<ResponseResult> recordView = new SportAppView<ResponseResult>() {
 		@Override
 		public void onSuccess(ResponseResult response) {
 			if (response.isSuccess()){
 				Log.d(TAG, "onSuccess: ");
-				Toast.makeText(TraceRecordActivity.this, "上传运动记录成功", 			Toast.LENGTH_SHORT).show();
+				Toast.makeText(TraceRecordActivity.this, "上传运动记录成功",Toast.LENGTH_SHORT).show();
 			}
 			else {
 				Log.d(TAG, "onSuccess: " + response.getMsg());//数据引起
 			}
 		}
+
 		@Override
 		public void onRequestError(String msg) {
 			Log.e(TAG, "onRequestError: " + msg);
 		}
 	};
+
 
 	@Override
 	protected void onStop() {
