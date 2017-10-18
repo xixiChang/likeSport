@@ -20,7 +20,7 @@
         android:fitsSystemWindows="true">
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/user_photo"
-            android:src="@drawable/photo1"
+            android:src="@drawable/app_icon"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_alignParentTop="true"

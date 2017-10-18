@@ -2,9 +2,12 @@ package ccc.tcl.com.sprotappui.activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -39,6 +42,16 @@ public class BaseActivity extends AppCompatActivity {
     protected ProgressDialog progressDialog;
 
 
+    /**
+     * 所有继承自BaseActivity的活动都强制竖屏
+     * @param savedInstanceState
+     * @param persistentState
+     */
+    @Override
+    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
+        super.onCreate(savedInstanceState, persistentState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
 
     /**
      * @param toolbar

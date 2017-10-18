@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,9 +18,6 @@ import ccc.tcl.com.sprotappui.App;
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.adapter.DayRateItem;
 import ccc.tcl.com.sprotappui.customui.RecycleViewDivider;
-import ccc.tcl.com.sprotappui.customui.ToolBar;
-import ccc.tcl.com.sprotappui.data.UserInfo;
-import ccc.tcl.com.sprotappui.model.DayRate;
 import ccc.tcl.com.sprotappui.model.RateItem;
 import ccc.tcl.com.sprotappui.model.Record;
 import ccc.tcl.com.sprotappui.model.ResponseResult;
@@ -29,8 +25,6 @@ import ccc.tcl.com.sprotappui.presenter.presenterimpl.RecordPresenter;
 import ccc.tcl.com.sprotappui.presenter.presenterimpl.UserPresenter;
 import ccc.tcl.com.sprotappui.ui.SportAppView;
 import de.hdodenhof.circleimageview.CircleImageView;
-
-import static ccc.tcl.com.sprotappui.R.id.toolbar;
 
 public class DayRateActivity extends BaseActivity {
     private List<RateItem> rates;
@@ -128,19 +122,6 @@ public class DayRateActivity extends BaseActivity {
         recordPresenter = new RecordPresenter();
     }
 
-    private void initData() {
-        rates = new ArrayList<>();
-        DayRate dayRate;
-        for (int i=0; i<6; i++){
-            dayRate = new DayRate();
-            dayRate.setRating((i+1) + "");
-            dayRate.setImage_url(R.drawable.photo1 + "");
-            dayRate.setUserName("用户"+ (i+1));
-            dayRate.setUserDesc("用户"+ (i+1) + "的描述");
-            dayRate.setUserDist(""+new Float((6-i)*6*0.8).floatValue());
-            //rates.add(dayRate);
-        }
-    }
 
     private void setRecyclerViewAdapter() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);

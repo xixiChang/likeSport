@@ -34,7 +34,6 @@
                 android:layout_width="@dimen/user_photo_size"
                 android:layout_height="@dimen/user_photo_size"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/photo1"
                 android:layout_marginTop="50dp"/>
             <TextView
                 android:id="@+id/day_rate_user_name"
