@@ -55,17 +55,15 @@ import com.baidu.mapapi.map.Polyline;
 import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import com.bumptech.glide.Glide;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import ccc.tcl.com.sprotappui.App;
 import ccc.tcl.com.sprotappui.R;
@@ -297,8 +295,17 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 				break;
 			/*运动结束，点击分享*/
 			case R.id.share:
+				StringBuilder builder = new StringBuilder();
+				builder.append("我使用爱运动APP运动了")
+						.append(distanceMi)
+						.append("米,感觉很不错.")
+						.append("\r\n")
+						.append(App.userInfo.getName())
+						.append("分享自爱运动APP");
+
 				new ShareAction(TraceRecordActivity.this)
-						.setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
+						.setDisplayList(SHARE_MEDIA.WEIXIN)
+						.withText(builder.toString())
 						.setCallback(umShareListener)
 						.open();
 				break;

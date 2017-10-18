@@ -32,7 +32,7 @@ import ccc.tcl.com.sprotappui.ui.SportAppView;
 import ccc.tcl.com.sprotappui.utils.Util;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class LayoutActivity extends BaseActivity implements View.OnClickListener{
+public class LayoutActivity extends BaseActivity implements View.OnClickListener {
     CircleImageView publisherImage;
     CircleImageView joiner0;
     CircleImageView joiner1;
@@ -55,10 +55,13 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
     PlatFormActivity activity;
     FrameLayout headImages;
     private List<ResolveInfo> apps;
+
+    private static final String TAG = "LayoutActivity";
+
     private SportAppView load = new SportAppView<ResponseResult<PlatFormActivity>>() {
         @Override
         public void onSuccess(ResponseResult<PlatFormActivity> response) {
-            if (response.isSuccess()){
+            if (response.isSuccess()) {
                 if (response.getType().equals("details"))
                     handleActivityDetails(response.getResult());
                 if (response.getType().equals("join")) {
@@ -67,8 +70,7 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
                     joinButton.setBgColor(R.color.red);
                     joinButton.setBgColorChecked(R.color.red);
                 }
-            }
-            else if (!response.isSuccess()) {
+            } else if (!response.isSuccess()) {
                 if (response.getType().equals("details"))
                     Toast.makeText(LayoutActivity.this, "数据加载失败：" + response.getMsg(), Toast.LENGTH_SHORT).show();
                 if (response.getType().equals("join"))
@@ -78,27 +80,27 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
 
         @Override
         public void onRequestError(String msg) {
-            Toast.makeText(LayoutActivity.this,"网络连接失败:"+msg,Toast.LENGTH_SHORT).show();
+            Toast.makeText(LayoutActivity.this, "网络连接失败:" + msg, Toast.LENGTH_SHORT).show();
         }
     };
 
     private SportAppView join = new SportAppView<ResponseResult<List<UserInfo>>>() {
         @Override
         public void onSuccess(ResponseResult<List<UserInfo>> response) {
-            if (response.isSuccess()){
+            if (response.isSuccess()) {
                 int i = response.getResult().size();
                 Glide.with(LayoutActivity.this).load(response.getResult().get(0).getImage_url()).into(publisherImage);
-                if (i == 2){
+                if (i == 2) {
                     joiner0.setVisibility(View.VISIBLE);
                     Glide.with(LayoutActivity.this).load(response.getResult().get(1).getImage_url()).into(joiner0);
                 }
-                if (i == 3){
+                if (i == 3) {
                     joiner0.setVisibility(View.VISIBLE);
                     joiner1.setVisibility(View.VISIBLE);
                     Glide.with(LayoutActivity.this).load(response.getResult().get(1).getImage_url()).into(joiner0);
                     Glide.with(LayoutActivity.this).load(response.getResult().get(2).getImage_url()).into(joiner1);
                 }
-                if (i == 4){
+                if (i == 4) {
                     joiner0.setVisibility(View.VISIBLE);
                     joiner1.setVisibility(View.VISIBLE);
                     joiner2.setVisibility(View.VISIBLE);
@@ -106,7 +108,7 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
                     Glide.with(LayoutActivity.this).load(response.getResult().get(2).getImage_url()).into(joiner1);
                     Glide.with(LayoutActivity.this).load(response.getResult().get(2).getImage_url()).into(joiner2);
                 }
-                if (i == 5){
+                if (i == 5) {
                     joiner0.setVisibility(View.VISIBLE);
                     joiner1.setVisibility(View.VISIBLE);
                     joiner2.setVisibility(View.VISIBLE);
@@ -117,8 +119,7 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
                     Glide.with(LayoutActivity.this).load(response.getResult().get(2).getImage_url()).into(joiner2);
                     Glide.with(LayoutActivity.this).load(response.getResult().get(2).getImage_url()).into(joiner3);
                 }
-            }
-            else
+            } else
                 Toast.makeText(LayoutActivity.this, "获取数据失败" + response.getMsg(), Toast.LENGTH_SHORT).show();
         }
 
@@ -134,7 +135,7 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.news_details_toolbar);
-        super.setToolBar(toolbar, R.string.activity_main_title,true);
+        super.setToolBar(toolbar, R.string.activity_main_title, true);
 
         Intent intent = getIntent();
         activity = intent.getParcelableExtra("data");
@@ -164,8 +165,8 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
         activity = result;
         startTime.setText(result.getStart_time());
         endTime.setText(result.getEnd_time());
-        leftTime.setText(result.getLeft_time()+"天");
-        distance.setText(result.getDistance()+"");
+        leftTime.setText(result.getLeft_time() + "天");
+        distance.setText(result.getDistance() + "");
         address.setText(result.getAddress());
         details.setText(result.getDetails());
         joinerNum.setText("参与者 （" + result.getJoin_num() + " / " + result.getJoin_num_all() + "）");
@@ -183,13 +184,13 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.join:
                 loadPresenter.joinActivity(String.valueOf(activity.getAt_server_id()));
                 break;
             case R.id.head_images:
-                Intent intent = new Intent(this,JoinerActivity.class);
-                intent.putExtra("users",activity.getJoiner());
+                Intent intent = new Intent(this, JoinerActivity.class);
+                intent.putExtra("users", activity.getJoiner());
                 startActivity(intent);
                 break;
             default:
@@ -199,14 +200,14 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.share_toolbar,menu);
+        getMenuInflater().inflate(R.menu.share_toolbar, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.share_activity:
                 new ShareAction(LayoutActivity.this)
                         .withText("hello")
@@ -221,22 +222,22 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
     private UMShareListener umShareListener = new UMShareListener() {
         @Override
         public void onStart(SHARE_MEDIA share_media) {
-            Log.d("lay111", "onStart: "+share_media.getsharestyle(true));
+            Log.d(TAG, "onStart: " + share_media.getsharestyle(true));
         }
 
         @Override
         public void onResult(SHARE_MEDIA share_media) {
-
+            Log.d(TAG, "onResult: " + share_media);
         }
 
         @Override
         public void onError(SHARE_MEDIA share_media, Throwable throwable) {
-            Log.d("lay1111", "onError: "+throwable);
+            Log.d(TAG, "onError: " + throwable);
         }
 
         @Override
         public void onCancel(SHARE_MEDIA share_media) {
-            Log.d("lay1111", "onCancel: "+share_media);
+            Log.d(TAG, "onCancel: " + share_media);
         }
     };
 
@@ -246,6 +247,8 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
         UMShareAPI.get(this).release();
         super.onDestroy();
     }
+
+
     private void loadApps() {
         apps = new ArrayList<>();
         Intent intent = new Intent(Intent.ACTION_MAIN, null);
@@ -257,11 +260,11 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
             String packageName = info.activityInfo.packageName;
             CharSequence cls = info.activityInfo.name;
             CharSequence name = info.activityInfo.loadLabel(getPackageManager());
-            Log.e("ddddddd",name+"----"+packageName+"----"+cls);
+            Log.e("ddddddd", name + "----" + packageName + "----" + cls);
         }
     }
 
-    private void initView(){
+    private void initView() {
         joinButton = (TagView) findViewById(R.id.join);
         joinButton.setOnClickListener(this);
         headImages = (FrameLayout) findViewById(R.id.head_images);

@@ -41,6 +41,7 @@ android {
 //            keyPassword "tcl123456"
 //        }
 //    }
+
     sourceSets {
         main() {
             jniLibs.srcDirs = ['libs']
@@ -99,5 +100,4 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:4.1.1'
     compile 'com.github.bumptech.glide:compiler:4.1.1'
     //    百度地图
-    compile files('libs/baidumapapi_map_v4_3_1.jar')
 }
