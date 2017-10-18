@@ -158,7 +158,7 @@ public class ContactActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.add_contact){
+        if (item.getItemId() == R.id.talk){
             openChatUI();
             return true;
         }

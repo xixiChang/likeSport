@@ -19,7 +19,9 @@ import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -140,7 +142,7 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
         Intent intent = getIntent();
         activity = intent.getParcelableExtra("data");
         initView();
-
+        UMShareAPI.get(this);
         //loadApps();
 //        startTime.setText("111");
 //        endTime.setText("111");
@@ -210,9 +212,9 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
         switch (item.getItemId()) {
             case R.id.share_activity:
                 new ShareAction(LayoutActivity.this)
-                        .withText("hello")
-                        //.withMedia(new UMImage(LayoutActivity.this,new File("")))
-                        .setDisplayList(SHARE_MEDIA.WEIXIN)
+                        .withText(activity.getName() + "\r\n" + " ---分享自 爱运动 APP")
+                        .withMedia(new UMImage(LayoutActivity.this,activity.getImage_url()))
+                        .setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
                         .setCallback(umShareListener)
                         .open();
         }
@@ -232,6 +234,8 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
 
         @Override
         public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+            Toast.makeText(LayoutActivity.this,throwable.toString(),Toast.LENGTH_LONG).show();
+            Log.d("lay1111", "onError: "+throwable);
             Log.d(TAG, "onError: " + throwable);
         }
 

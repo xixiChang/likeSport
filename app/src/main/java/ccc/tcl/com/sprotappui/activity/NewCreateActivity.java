@@ -25,8 +25,10 @@ import com.bumptech.glide.util.Util;
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
 import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -40,6 +42,8 @@ import ccc.tcl.com.sprotappui.model.ResponseResult;
 import ccc.tcl.com.sprotappui.presenter.presenterimpl.ActivityPresenter;
 import ccc.tcl.com.sprotappui.ui.SportAppView;
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static ccc.tcl.com.sprotappui.R.mipmap.activity;
 
 public class NewCreateActivity extends BaseActivity implements View.OnClickListener{
     private TextView name;
@@ -176,6 +180,7 @@ public class NewCreateActivity extends BaseActivity implements View.OnClickListe
         sport = intent.getParcelableExtra("data");
         Toolbar toolbar = (Toolbar) findViewById(R.id.news_details_toolbar);
         super.setToolBar(toolbar, " ",true);
+        UMShareAPI.get(this);
         name = (TextView) findViewById(R.id.item_fm_sport_name);
         sportIamge = (ImageView) findViewById(R.id.news_details_photo);
         hotValue = (TextView) findViewById(R.id.item_fm_sport_hot_value);
@@ -215,7 +220,7 @@ public class NewCreateActivity extends BaseActivity implements View.OnClickListe
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         Log.d("", "onCreateOptionsMenu: "+sport.getUser_id()+"--"+sport.getPublish_user_id());
-        getMenuInflater().inflate(R.menu.activity_home_toolbar,menu);
+        getMenuInflater().inflate(R.menu.activity_new_create_toolbar,menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -281,8 +286,8 @@ public class NewCreateActivity extends BaseActivity implements View.OnClickListe
                         case 0:
                             logoutDialog.cancel();
                             new ShareAction(NewCreateActivity.this)
-                                    .withText("hello")
-                                    //.withMedia(new UMImage(LayoutActivity.this,new File("")))
+                                    .withText(sport.getName() + "\r\n" + " ---分享自 爱运动 APP")
+                                    .withMedia(new UMImage(NewCreateActivity.this,sport.getImage_url()))
                                     .setDisplayList(SHARE_MEDIA.WEIXIN)
                                     .setCallback(umShareListener)
                                     .open();
@@ -445,4 +450,10 @@ public class NewCreateActivity extends BaseActivity implements View.OnClickListe
 
         }
     };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        UMShareAPI.get(this).release();
+    }
 }
