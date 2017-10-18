@@ -141,7 +141,7 @@ public class BaseActivity extends AppCompatActivity {
      * 消失progressDialog
      */
     protected void dismissDialog(){
-        if (progressDialog.isShowing())
+        if (progressDialog != null && progressDialog.isShowing())
             progressDialog.dismiss();
     }
 
