@@ -40,7 +40,6 @@ import static ccc.tcl.com.sprotappui.service.IMService.mIMKit;
 
 public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
-    private Context mContext = this;
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
 

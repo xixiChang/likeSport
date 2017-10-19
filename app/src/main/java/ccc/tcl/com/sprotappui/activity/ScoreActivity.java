@@ -38,7 +38,7 @@ public class ScoreActivity extends BaseActivity {
     private ImageView shareRun;
     private RecordPresenter recordPresenter;
     private int ScoreOfWalk = 0,ScoreOfRun = 0;
-    private String TimeOfWalk,TimeOfRun;
+    private String TimeOfWalk = "0秒",TimeOfRun = "0秒";
     private SportAppView<ResponseResult<Map<String,String>>> sportAppView
             = new SportAppView<ResponseResult<Map<String, String>>>() {
         @Override
@@ -98,7 +98,7 @@ public class ScoreActivity extends BaseActivity {
             public void onClick(View v) {
                 new ShareAction(ScoreActivity.this)
                         .withText("嘿，我一次行走了" + ScoreOfWalk + "步，用时" + TimeOfWalk+"\r\n ---分享自 爱运动 APP")
-                        .setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
+                        .setDisplayList(SHARE_MEDIA.WEIXIN)
                         .setCallback(umShareListener)
                         .open();
             }

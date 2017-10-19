@@ -35,6 +35,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import ccc.tcl.com.sprotappui.App;
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.data.UserInfo;
 import ccc.tcl.com.sprotappui.model.PlatFormActivity;
@@ -53,6 +54,7 @@ public class NewCreateActivity extends BaseActivity implements View.OnClickListe
     private TextView distance;
     private TextView location;
     private TextView detail;
+    private TextView note;
     private TextView leftTime;
     private TextView joiner;
     private ImageView sportIamge;
@@ -178,31 +180,8 @@ public class NewCreateActivity extends BaseActivity implements View.OnClickListe
         setContentView(R.layout.activity_new_create);
         Intent intent = getIntent();
         sport = intent.getParcelableExtra("data");
-        Toolbar toolbar = (Toolbar) findViewById(R.id.news_details_toolbar);
-        super.setToolBar(toolbar, " ",true);
-        UMShareAPI.get(this);
-        name = (TextView) findViewById(R.id.item_fm_sport_name);
-        sportIamge = (ImageView) findViewById(R.id.news_details_photo);
-        hotValue = (TextView) findViewById(R.id.item_fm_sport_hot_value);
-        startTime = (TextView) findViewById(R.id.start_time_show);
-        endTime = (TextView) findViewById(R.id.end_time_show);
-        distance = (TextView) findViewById(R.id.distance_show);
-        location = (TextView) findViewById(R.id.location_show);
-        detail =(TextView) findViewById(R.id.detail_show);
-        reason = (TextView) findViewById(R.id.update);
-        leftTime = (TextView) findViewById(R.id.item_fm_sport_left_time);
-        joiner = (TextView) findViewById(R.id.joiner_num);
-        publisher = (CircleImageView) findViewById(R.id.publisher);
-        joiner0 = (CircleImageView) findViewById(R.id.joiner0);
-        joiner1 = (CircleImageView) findViewById(R.id.joiner1);
-        joiner2 = (CircleImageView) findViewById(R.id.joiner2);
-        joiner3 = (CircleImageView) findViewById(R.id.joiner3);
-        head_images = (FrameLayout) findViewById(R.id.head_images);
-        head_images.setOnClickListener(this);
+        init();
         updateData();
-
-        detailsPresenter = new ActivityPresenter();
-        joinersPresenter = new ActivityPresenter();
     }
 
     @Override
@@ -251,6 +230,35 @@ public class NewCreateActivity extends BaseActivity implements View.OnClickListe
         }
     }
 
+    private void init(){
+        Toolbar toolbar = (Toolbar) findViewById(R.id.news_details_toolbar);
+        super.setToolBar(toolbar, " ",true);
+        UMShareAPI.get(this);
+        name = (TextView) findViewById(R.id.item_fm_sport_name);
+        sportIamge = (ImageView) findViewById(R.id.news_details_photo);
+        hotValue = (TextView) findViewById(R.id.item_fm_sport_hot_value);
+        startTime = (TextView) findViewById(R.id.start_time_show);
+        endTime = (TextView) findViewById(R.id.end_time_show);
+        distance = (TextView) findViewById(R.id.distance_show);
+        location = (TextView) findViewById(R.id.location_show);
+        detail =(TextView) findViewById(R.id.detail_show);
+        note = (TextView) findViewById(R.id.notes_show);
+        reason = (TextView) findViewById(R.id.update);
+        leftTime = (TextView) findViewById(R.id.item_fm_sport_left_time);
+        joiner = (TextView) findViewById(R.id.joiner_num);
+        publisher = (CircleImageView) findViewById(R.id.publisher);
+        joiner0 = (CircleImageView) findViewById(R.id.joiner0);
+        joiner1 = (CircleImageView) findViewById(R.id.joiner1);
+        joiner2 = (CircleImageView) findViewById(R.id.joiner2);
+        joiner3 = (CircleImageView) findViewById(R.id.joiner3);
+        head_images = (FrameLayout) findViewById(R.id.head_images);
+        head_images.setOnClickListener(this);
+        Glide.with(this).load(App.userInfo.getImage_url()).into(publisher);
+        detailsPresenter = new ActivityPresenter();
+        joinersPresenter = new ActivityPresenter();
+
+    }
+
     private void updateData(){
         name.setText(sport.getName());
         hotValue.setText(sport.getHot_value());
@@ -259,6 +267,7 @@ public class NewCreateActivity extends BaseActivity implements View.OnClickListe
         distance.setText(sport.getDistance() + "KM");
         location.setText(sport.getAddress());
         detail.setText(sport.getDetails());
+        note.setText(sport.getNotes());
         leftTime.setText(sport.getLeft_time()+"天");
         joiner.setText("参与者（" + sport.getJoin_num() + " / "+ sport.getJoin_num_all() + "）");
         Glide.with(this).load(sport.getImage_url()).into(sportIamge);

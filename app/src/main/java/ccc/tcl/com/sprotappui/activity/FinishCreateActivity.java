@@ -170,10 +170,10 @@ public class FinishCreateActivity extends BaseActivity {
                     String end = endTime.getText().toString();
                     picker.updateDate(Integer.parseInt(end.substring(0, 4)), Integer.parseInt(end.substring(5, 7)) - 1, Integer.parseInt(end.substring(8)));
                     try {
-                        Toast.makeText(FinishCreateActivity.this, dateFormat.parse(startTime.getText().toString())+"<<>>"+endTime.getText().toString(),Toast.LENGTH_LONG).show();
+                        //Toast.makeText(FinishCreateActivity.this, dateFormat.parse(startTime.getText().toString())+"<<>>"+endTime.getText().toString(),Toast.LENGTH_LONG).show();
                         String date = startTime.getText().toString();
                         picker.setMinDate(dateFormat.parse(date).getTime());
-                        Toast.makeText(FinishCreateActivity.this, dateFormat.format(picker.getMinDate()),Toast.LENGTH_LONG).show();
+                        //Toast.makeText(FinishCreateActivity.this, dateFormat.format(picker.getMinDate()),Toast.LENGTH_LONG).show();
                     } catch (ParseException e) {
                         Log.e(TAG, "onClick: "+e.toString());
                         e.printStackTrace();
@@ -282,9 +282,7 @@ public class FinishCreateActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.finish:
-                String locationText = address.getText().toString();
-                String distanceText = distance.getText().toString();
-                if (locationText.isEmpty() || distanceText.isEmpty()) {
+                if (address.getText().toString().isEmpty() || distance.getText().toString().isEmpty()) {
                     break;
                 }
 

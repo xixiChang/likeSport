@@ -2,6 +2,8 @@ package ccc.tcl.com.sprotappui.activity;
 
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -16,12 +18,15 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.dl7.tag.TagView;
 import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.ShareContent;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
+import com.umeng.weixin.handler.UmengWXHandler;
 
-import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +55,7 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
     TextView address;
     TextView distance;
     TextView details;
+    TextView note;
     TextView joinerNum;
     TagView joinButton;
     ActivityPresenter loadPresenter;
@@ -171,6 +177,7 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
         distance.setText(result.getDistance() + "");
         address.setText(result.getAddress());
         details.setText(result.getDetails());
+        note.setText(result.getNotes());
         joinerNum.setText("参与者 （" + result.getJoin_num() + " / " + result.getJoin_num_all() + "）");
         hotValue.setText(activity.getHot_value());
         if (result.getJoiner().contains(result.getUser_id())) {
@@ -211,10 +218,17 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.share_activity:
+                FileInputStream fis = null;
+                try {
+                    fis = new FileInputStream(activity.getImage_url());
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                Bitmap bitmap = BitmapFactory.decodeStream(fis);
                 new ShareAction(LayoutActivity.this)
-                        .withText(activity.getName() + "\r\n" + " ---分享自 爱运动 APP")
-                        .withMedia(new UMImage(LayoutActivity.this,activity.getImage_url()))
-                        .setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
+                        .withText(activity.getImage_url() + "\r\n" + activity.getName() + "\r\n" + " ---分享自 爱运动 APP")
+                        //.withMedia(new UMImage(LayoutActivity.this,bitmap))
+                        .setDisplayList(SHARE_MEDIA.WEIXIN)
                         .setCallback(umShareListener)
                         .open();
         }
@@ -235,7 +249,6 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
         @Override
         public void onError(SHARE_MEDIA share_media, Throwable throwable) {
             Toast.makeText(LayoutActivity.this,throwable.toString(),Toast.LENGTH_LONG).show();
-            Log.d("lay1111", "onError: "+throwable);
             Log.d(TAG, "onError: " + throwable);
         }
 
@@ -289,6 +302,7 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
         distance = (TextView) findViewById(R.id.distance_show);
         address = (TextView) findViewById(R.id.location_show);
         details = (TextView) findViewById(R.id.detail_show);
+        note = (TextView) findViewById(R.id.notes_show);
         joinerNum = (TextView) findViewById(R.id.joiner_num);
 
 
@@ -313,4 +327,6 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
 //        else
 //            join.setVisibility(View.GONE);
     }
+
+
 }

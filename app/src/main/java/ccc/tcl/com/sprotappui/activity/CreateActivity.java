@@ -49,14 +49,15 @@ public class CreateActivity extends BaseActivity{
             case R.id.next:
                 String nameText = name.getText().toString();
                 String detailText = detail.getText().toString();
-                if (nameText.isEmpty()||detailText.isEmpty()){
+                String limitText = joiner_limit.getText().toString();
+                if (nameText.isEmpty()||detailText.isEmpty() || limitText.isEmpty()){
                     break;
                 }
                 Intent intent = new Intent(this,FinishCreateActivity.class);
                 Bundle data = new Bundle();
-                platFormActivity.setName(name.getText().toString());
-                platFormActivity.setDetails(detail.getText().toString());
-                platFormActivity.setJoin_num_all(Integer.parseInt(joiner_limit.getText().toString()));
+                platFormActivity.setName(nameText);
+                platFormActivity.setDetails(detailText);
+                platFormActivity.setJoin_num_all(Integer.parseInt(limitText));
                 data.putParcelable("data", platFormActivity);
                 intent.putExtras(data);
                 startActivity(intent);
