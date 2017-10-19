@@ -45,7 +45,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginEnd="@dimen/activity_horizontal_margin_small"
-        android:text="/km"/>
+        android:text="/m"/>
     
     <TextView
         android:id="@+id/item_day_rate_user_distance"

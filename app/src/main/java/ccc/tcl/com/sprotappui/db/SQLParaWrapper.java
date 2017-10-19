@@ -46,7 +46,8 @@ public class SQLParaWrapper {
                 userinfo.getSession(),
                 userinfo.getImage_url(),
                 userinfo.getIm_uid(),
-                userinfo.getLogin_method()
+                userinfo.getLogin_method(),
+                userinfo.getRetain()
         };
     }
 

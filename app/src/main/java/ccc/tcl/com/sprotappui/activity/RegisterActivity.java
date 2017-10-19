@@ -155,7 +155,9 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
             case R.id.register_to_login:
                 Intent intent = new Intent(this, LoginActivity.class);
-                startActivityForResult(intent, START_AC_REG);
+                intent.putExtra("phone", sPhone);
+                intent.putExtra("password", sPassword);
+                setResult(RESULT_OK, intent);
                 finish();
 
             case R.id.VISIBLE:

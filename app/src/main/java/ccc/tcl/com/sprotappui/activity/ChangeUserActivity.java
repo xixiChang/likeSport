@@ -103,7 +103,7 @@ public class ChangeUserActivity extends BaseActivity implements View.OnClickList
         public void onSuccess(ResponseResult<String> response) {
             if (response.isSuccess()){
                 image_url = response.getResult();
-                uploadUserInfo();
+                uploadUserInfo(true);
             }
             else {
                 Toast.makeText(ChangeUserActivity.this, "头像上传失败:" + response.getMsg(), Toast.LENGTH_SHORT).show();
@@ -171,7 +171,22 @@ public class ChangeUserActivity extends BaseActivity implements View.OnClickList
 
         retain = App.userInfo.getRetain();
         name = App.userInfo.getName();
+
+        initPM(permissionResult);
     }
+
+    private PermissionResult permissionResult = new PermissionResult() {
+        @Override
+        public void onGranted(String name, int code) {
+            if (code == Request_Permission_CAMERA)
+                startTakePhoto();
+        }
+
+        @Override
+        public void onDenied(int code) {
+            Toast.makeText(ChangeUserActivity.this, "你拒绝的权限获取！", Toast.LENGTH_SHORT).show();
+        }
+    };
 
     @Override
     protected void onResume() {
@@ -257,16 +272,16 @@ public class ChangeUserActivity extends BaseActivity implements View.OnClickList
     }
 
     private void uploadUserHead() {
-        if (file == null || !file.exists()){
-            Toast.makeText(this, "请设定一个头像吧", Toast.LENGTH_SHORT).show();
+        showProgressDialog(this, null, "正在设定");
+        if (file != null && file.exists()){
+            fileUploadPresenter.upLoadFile(file, "head");
             return;
         }
-        showProgressDialog(this, null, "正在设定");
-        fileUploadPresenter.upLoadFile(file, "head");
+        uploadUserInfo(false);
     }
 
 
-    private void uploadUserInfo() {
+    private void uploadUserInfo(boolean hasHead) {
 
         /**
          * 赋值
@@ -281,7 +296,10 @@ public class ChangeUserActivity extends BaseActivity implements View.OnClickList
 
         UpdateUser updateUser = new UpdateUser();
         updateUser.setRetain(retain);
-        updateUser.setImage_url(image_url);
+        if (hasHead)
+            updateUser.setImage_url(image_url);
+        else
+            updateUser.setImage_url(App.userInfo.getImage_url());
         updateUser.setName(name);
         updateUser.setUser_id(App.userInfo.getId());
         userPresenterUpload.updateUser(updateUser);
@@ -475,4 +493,7 @@ public class ChangeUserActivity extends BaseActivity implements View.OnClickList
         file = pictureCutUtil.cutPictureQuality(photo_data, "head");
         //imagePath = imageFile.getAbsolutePath();
     }
+
+
+
 }

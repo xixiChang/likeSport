@@ -21,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.util.Util;
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
 import com.umeng.socialize.ShareAction;
@@ -43,8 +42,6 @@ import ccc.tcl.com.sprotappui.model.ResponseResult;
 import ccc.tcl.com.sprotappui.presenter.presenterimpl.ActivityPresenter;
 import ccc.tcl.com.sprotappui.ui.SportAppView;
 import de.hdodenhof.circleimageview.CircleImageView;
-
-import static ccc.tcl.com.sprotappui.R.mipmap.activity;
 
 public class NewCreateActivity extends BaseActivity implements View.OnClickListener{
     private TextView name;
@@ -117,7 +114,7 @@ public class NewCreateActivity extends BaseActivity implements View.OnClickListe
             }
 
             else
-                Toast.makeText(NewCreateActivity.this,"操作失败"+response.getMsg(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(NewCreateActivity.this,"操作失败:"+response.getMsg(),Toast.LENGTH_SHORT).show();
             //finish();
         }
 
@@ -131,35 +128,41 @@ public class NewCreateActivity extends BaseActivity implements View.OnClickListe
         @Override
         public void onSuccess(ResponseResult<List<UserInfo>> response) {
             if (response.isSuccess()){
-                Glide.with(NewCreateActivity.this).load(response.getResult().get(0).getImage_url()).into(publisher);
                 int i = response.getResult().size();
+                for (int j = 0; j<i; j++){
+                    if (response.getResult().get(j).getId().equals(sport.getPublish_user_id())){
+                        Glide.with(NewCreateActivity.this).load(response.getResult().get(j).getImage_url()).into(publisher);
+                        response.getResult().remove(j);
+                        break;
+                    }
+                }
                 if (i == 2){
                     joiner0.setVisibility(View.VISIBLE);
-                    Glide.with(NewCreateActivity.this).load(response.getResult().get(1).getImage_url()).into(joiner0);
+                    Glide.with(NewCreateActivity.this).load(response.getResult().get(0).getImage_url()).into(joiner0);
                 }
                 if (i == 3){
                     joiner0.setVisibility(View.VISIBLE);
                     joiner1.setVisibility(View.VISIBLE);
-                    Glide.with(NewCreateActivity.this).load(response.getResult().get(1).getImage_url()).into(joiner0);
-                    Glide.with(NewCreateActivity.this).load(response.getResult().get(2).getImage_url()).into(joiner1);
+                    Glide.with(NewCreateActivity.this).load(response.getResult().get(0).getImage_url()).into(joiner0);
+                    Glide.with(NewCreateActivity.this).load(response.getResult().get(1).getImage_url()).into(joiner1);
                 }
                 if (i == 4){
                     joiner0.setVisibility(View.VISIBLE);
                     joiner1.setVisibility(View.VISIBLE);
                     joiner2.setVisibility(View.VISIBLE);
-                    Glide.with(NewCreateActivity.this).load(response.getResult().get(1).getImage_url()).into(joiner0);
-                    Glide.with(NewCreateActivity.this).load(response.getResult().get(2).getImage_url()).into(joiner1);
+                    Glide.with(NewCreateActivity.this).load(response.getResult().get(0).getImage_url()).into(joiner0);
+                    Glide.with(NewCreateActivity.this).load(response.getResult().get(1).getImage_url()).into(joiner1);
                     Glide.with(NewCreateActivity.this).load(response.getResult().get(2).getImage_url()).into(joiner2);
                 }
-                if (i == 5){
+                if (i >= 5){
                     joiner0.setVisibility(View.VISIBLE);
                     joiner1.setVisibility(View.VISIBLE);
                     joiner2.setVisibility(View.VISIBLE);
                     joiner3.setVisibility(View.VISIBLE);
-                    Glide.with(NewCreateActivity.this).load(response.getResult().get(1).getImage_url()).into(joiner0);
-                    Glide.with(NewCreateActivity.this).load(response.getResult().get(2).getImage_url()).into(joiner1);
+                    Glide.with(NewCreateActivity.this).load(response.getResult().get(0).getImage_url()).into(joiner0);
+                    Glide.with(NewCreateActivity.this).load(response.getResult().get(1).getImage_url()).into(joiner1);
                     Glide.with(NewCreateActivity.this).load(response.getResult().get(2).getImage_url()).into(joiner2);
-                    Glide.with(NewCreateActivity.this).load(response.getResult().get(2).getImage_url()).into(joiner3);
+                    Glide.with(NewCreateActivity.this).load(response.getResult().get(3).getImage_url()).into(joiner3);
                 }
             }
 
@@ -273,7 +276,7 @@ public class NewCreateActivity extends BaseActivity implements View.OnClickListe
         leftTime.setText(sport.getLeft_time()+"天");
         joiner.setText("参与者（" + sport.getJoin_num() + " / "+ sport.getJoin_num_all() + "）");
         Glide.with(this).load(sport.getImage_url()).into(sportIamge);
-        Glide.with(this).load(App.userInfo.getImage_url()).into(publisher);
+
         reason.setVisibility(View.GONE);
         if (sport.getReason() != null && sport.getStatus().equals("1")) {
             reason.setText("由于 " + sport.getReason() + ",活动已改期。");

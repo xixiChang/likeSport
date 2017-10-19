@@ -7,14 +7,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import ccc.tcl.com.sprotappui.App;
 import ccc.tcl.com.sprotappui.R;
 import ccc.tcl.com.sprotappui.adapter.DayRateItem;
 import ccc.tcl.com.sprotappui.customui.RecycleViewDivider;
@@ -22,46 +23,54 @@ import ccc.tcl.com.sprotappui.model.RateItem;
 import ccc.tcl.com.sprotappui.model.Record;
 import ccc.tcl.com.sprotappui.model.ResponseResult;
 import ccc.tcl.com.sprotappui.presenter.presenterimpl.RecordPresenter;
-import ccc.tcl.com.sprotappui.presenter.presenterimpl.UserPresenter;
 import ccc.tcl.com.sprotappui.ui.SportAppView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DayRateActivity extends BaseActivity {
-    private List<RateItem> rates;
+    private List<RateItem> rates = new ArrayList<>();
     private Toolbar toolBar;
     private TextView dayDistance, dayConsume, userName;
     private CircleImageView headImage;
     private RecyclerView recyclerView;
     private Context context;
-    private UserPresenter userPresenter;
-    private RecordPresenter recordPresenter;
+
+    private RecordPresenter myRecordPresenter;
+    private RecordPresenter ratingRecordPresenter;
     private String[] data;
-    private SportAppView recordView = new SportAppView<ResponseResult<List<RateItem>>>() {
+    private DayRateItem adapter;
+    private SportAppView ratingList = new SportAppView<ResponseResult<List<RateItem>>>() {
         @Override
         public void onSuccess(ResponseResult<List<RateItem>> response) {
             if (response.isSuccess()){
-                rates = response.getResult();
-                for (int i = 0;i < rates.size();i++)
-                    if (rates.get(i).getUser_id() == Integer.parseInt(App.userInfo.getId()))
-                    {
-                       dayDistance.setText(rates.get(i).getStep());
-                    }
-                setRecyclerViewAdapter();
+                rates.clear();
+                if (response.getResult() == null || response.getResult().size() == 0){
+                    RateItem item = new RateItem();
+                    item.setRetain("今天还没有人上传记录哦～");
+                    rates.add(item);
+                    return;
+                }
 
+                rates.addAll(response.getResult());
+                adapter.notifyDataSetChanged();
+            }
+            else {
+                Toast.makeText(DayRateActivity.this, "未获取到数据:" + response.getMsg(), Toast.LENGTH_SHORT).show();
             }
         }
 
         @Override
         public void onRequestError(String msg) {
-
+            Toast.makeText(DayRateActivity.this, "未获取到数据:" + msg, Toast.LENGTH_SHORT).show();
         }
     };
 
-    private SportAppView MyRecordView = new SportAppView<ResponseResult<List<Record>>>() {
+    private SportAppView myRecord = new SportAppView<ResponseResult<List<Record>>>() {
         @Override
         public void onSuccess(ResponseResult<List<Record>> response) {
             if (response.isSuccess()){
                 int distance = 0 , calorie =0;
+                if (response.getResult() == null)
+                    return;
                 for (int i = 0;i < response.getResult().size();i++){
                     distance += response.getResult().get(i).getDistance();
                     calorie += response.getResult().get(i).getCalorie();
@@ -93,13 +102,13 @@ public class DayRateActivity extends BaseActivity {
 
     @Override
     protected void onResume() {
-        userPresenter.onCreate();
-        recordPresenter.onCreate();
-        recordPresenter.attachView(recordView);
+        myRecordPresenter.onCreate();
+        ratingRecordPresenter.onCreate();
+        myRecordPresenter.attachView(myRecord);
+        ratingRecordPresenter.attachView(ratingList);
+        myRecordPresenter.getDayAll(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        ratingRecordPresenter.getRating();
         //SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        recordPresenter.getRating();
-        recordPresenter.attachView(MyRecordView);
-        recordPresenter.getDayAll(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         super.onResume();
     }
 
@@ -112,22 +121,28 @@ public class DayRateActivity extends BaseActivity {
 
         //initData();
 
-
-        dayDistance.setText("12.1");
-        dayConsume.setText("35465");
         userName.setText(data[0]);
         Glide.with(this).load(data[1]).into(headImage);
         //headImage.setImageResource(R.drawable.photo1);
-        userPresenter = new UserPresenter();
-        recordPresenter = new RecordPresenter();
+        myRecordPresenter = new RecordPresenter();
+        ratingRecordPresenter = new RecordPresenter();
+        setRecyclerViewAdapter();
+
     }
 
 
     private void setRecyclerViewAdapter() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
-        DayRateItem adapter = new DayRateItem(rates);
+        adapter = new DayRateItem(rates);
         recyclerView.addItemDecoration(new RecycleViewDivider(context, LinearLayoutManager.VERTICAL, 2, R.color.darkgrey));
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        myRecordPresenter.onStop();
+        ratingRecordPresenter.onStop();
     }
 }

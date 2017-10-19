@@ -72,10 +72,10 @@ public final class SQLStatement {
      */
     public static final String AddUser = 
             "insert into user(" +
-            "id,pwd,phone,name,session,image_url,im_uid,login_method" +
+            "id,pwd,phone,name,session,image_url,im_uid,login_method,retain" +
             ")" +
             "values(" +
-            "?,?,?,?,?,?,?,?)";
+            "?,?,?,?,?,?,?,?,?)";
 
     public static final String AddSportRecord = 
             "insert into " +RECORD_TABLE_NAME +"(" +

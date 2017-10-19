@@ -68,7 +68,7 @@ public class AuthoritySettingActivity extends BaseActivity implements View.OnCli
                 }
                 else {
                     dialog.show();
-                    storage.setChecked(true);
+                    camera.setChecked(true);
                 }
                 break;
             case R.id.storage:

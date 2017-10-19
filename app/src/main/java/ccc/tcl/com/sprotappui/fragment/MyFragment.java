@@ -63,38 +63,36 @@ public class MyFragment extends Fragment {
     private SportAppView userView = new SportAppView<ResponseResult<UserInfo>>() {
         @Override
         public void onSuccess(ResponseResult<UserInfo> response) {
-            if (response.isSuccess()){
+            if (response.isSuccess()) {
                 userInfo = response.getResult();
                 Glide.with(MyFragment.this).load(userInfo.getImage_url()).into(userPhoto);
                 userName.setText(userInfo.getName());
-            }
-            else
-                Toast.makeText(context,"数据请求失败"+response.getMsg(),Toast.LENGTH_SHORT).show();
+            } else
+                Toast.makeText(context, "数据请求失败" + response.getMsg(), Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onRequestError(String msg) {
-            Toast.makeText(context,"数据连接失败"+msg,Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "数据连接失败" + msg, Toast.LENGTH_SHORT).show();
         }
     };
     private RecordPresenter recordPresenter;
-    private SportAppView recordView = new SportAppView<ResponseResult<Map<String,String>>>() {
+    private SportAppView recordView = new SportAppView<ResponseResult<Map<String, String>>>() {
         @Override
-        public void onSuccess(ResponseResult<Map<String,String>> response) {
-            if (response.isSuccess()){
+        public void onSuccess(ResponseResult<Map<String, String>> response) {
+            if (response.isSuccess()) {
                 if (response.getResult() == null)
                     return;
-                totalDistance.setText(String.format("%.1f",Double.parseDouble(response.getResult().get("distance"))/1000));
-                totalTime.setText(String.format("%.1f",Double.parseDouble(response.getResult().get("spent_time"))/3600));
+                totalDistance.setText(String.format("%.1f", Double.parseDouble(response.getResult().get("distance")) / 1000));
+                totalTime.setText(String.format("%.1f", Double.parseDouble(response.getResult().get("spent_time")) / 3600));
                 totalConsume.setText(response.getResult().get("calorie"));
-            }
-            else
-                Toast.makeText(context,"数据请求失败"+response.getMsg(),Toast.LENGTH_SHORT).show();
+            } else
+                Toast.makeText(context, "数据请求失败" + response.getMsg(), Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onRequestError(String msg) {
-            Toast.makeText(context,"数据连接失败"+msg,Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "数据连接失败" + msg, Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -208,16 +206,16 @@ public class MyFragment extends Fragment {
         logoutDialog.show();
     }
 
-    private void handleItem(int position){
+    private void handleItem(int position) {
         Intent intent = new Intent();
-        switch (position){
+        switch (position) {
             case 0:
                 intent.setClass(context, ScoreActivity.class);
                 break;
             case 1:
-                if (userInfo==null || userInfo.getName() == null || userInfo.getName() == "")
+                if (userInfo == null || userInfo.getName() == null || "".equals(userInfo.getName()))
                     return;
-                intent.putExtra("data",new String[]{userInfo.getName(),userInfo.getImage_url()});
+                intent.putExtra("data", new String[]{userInfo.getName(), userInfo.getImage_url()});
                 intent.setClass(context, DayRateActivity.class);
                 break;
             case 2:
@@ -238,7 +236,7 @@ public class MyFragment extends Fragment {
         super.onStop();
     }
 
-    private void logoutApp(){
+    private void logoutApp() {
         BaseData baseData = new BaseData(context);
         baseData.updateUserID(NO_USER);
     }

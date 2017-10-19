@@ -18,12 +18,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.dl7.tag.TagView;
 import com.umeng.socialize.ShareAction;
-import com.umeng.socialize.ShareContent;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.media.UMImage;
-import com.umeng.weixin.handler.UmengWXHandler;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -97,35 +94,42 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
         public void onSuccess(ResponseResult<List<UserInfo>> response) {
             if (response.isSuccess()) {
                 int i = response.getResult().size();
-                Glide.with(LayoutActivity.this).load(response.getResult().get(0).getImage_url()).into(publisherImage);
+                for (int j = 0; j<i; j++){
+                    if (response.getResult().get(j).getId().equals(activity.getPublish_user_id())){
+                        Glide.with(LayoutActivity.this).load(response.getResult().get(j).getImage_url()).into(publisherImage);
+                        response.getResult().remove(j);
+                        break;
+                    }
+                }
+
                 if (i == 2) {
                     joiner0.setVisibility(View.VISIBLE);
-                    Glide.with(LayoutActivity.this).load(response.getResult().get(1).getImage_url()).into(joiner0);
+                    Glide.with(LayoutActivity.this).load(response.getResult().get(0).getImage_url()).into(joiner0);
                 }
                 if (i == 3) {
                     joiner0.setVisibility(View.VISIBLE);
                     joiner1.setVisibility(View.VISIBLE);
-                    Glide.with(LayoutActivity.this).load(response.getResult().get(1).getImage_url()).into(joiner0);
-                    Glide.with(LayoutActivity.this).load(response.getResult().get(2).getImage_url()).into(joiner1);
+                    Glide.with(LayoutActivity.this).load(response.getResult().get(0).getImage_url()).into(joiner0);
+                    Glide.with(LayoutActivity.this).load(response.getResult().get(1).getImage_url()).into(joiner1);
                 }
                 if (i == 4) {
                     joiner0.setVisibility(View.VISIBLE);
                     joiner1.setVisibility(View.VISIBLE);
                     joiner2.setVisibility(View.VISIBLE);
-                    Glide.with(LayoutActivity.this).load(response.getResult().get(1).getImage_url()).into(joiner0);
-                    Glide.with(LayoutActivity.this).load(response.getResult().get(2).getImage_url()).into(joiner1);
+                    Glide.with(LayoutActivity.this).load(response.getResult().get(0).getImage_url()).into(joiner0);
+                    Glide.with(LayoutActivity.this).load(response.getResult().get(1).getImage_url()).into(joiner1);
                     Glide.with(LayoutActivity.this).load(response.getResult().get(2).getImage_url()).into(joiner2);
                 }
-                if (i == 5) {
+                if (i >= 5) {
                     joiner0.setVisibility(View.VISIBLE);
                     joiner1.setVisibility(View.VISIBLE);
                     joiner2.setVisibility(View.VISIBLE);
                     joiner3.setVisibility(View.VISIBLE);
                     moreJoiners.setVisibility(View.VISIBLE);
-                    Glide.with(LayoutActivity.this).load(response.getResult().get(1).getImage_url()).into(joiner0);
-                    Glide.with(LayoutActivity.this).load(response.getResult().get(2).getImage_url()).into(joiner1);
+                    Glide.with(LayoutActivity.this).load(response.getResult().get(0).getImage_url()).into(joiner0);
+                    Glide.with(LayoutActivity.this).load(response.getResult().get(1).getImage_url()).into(joiner1);
                     Glide.with(LayoutActivity.this).load(response.getResult().get(2).getImage_url()).into(joiner2);
-                    Glide.with(LayoutActivity.this).load(response.getResult().get(2).getImage_url()).into(joiner3);
+                    Glide.with(LayoutActivity.this).load(response.getResult().get(3).getImage_url()).into(joiner3);
                 }
             } else
                 Toast.makeText(LayoutActivity.this, "获取数据失败" + response.getMsg(), Toast.LENGTH_SHORT).show();
@@ -136,6 +140,7 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
             Toast.makeText(LayoutActivity.this, "网络连接失败" + msg, Toast.LENGTH_SHORT).show();
         }
     };
+
 
 
     @Override
@@ -156,6 +161,7 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
 //        address.setText("111");
 //        details.setText("111");
         //initView();
+
     }
 
     @Override
@@ -277,7 +283,7 @@ public class LayoutActivity extends BaseActivity implements View.OnClickListener
             String packageName = info.activityInfo.packageName;
             CharSequence cls = info.activityInfo.name;
             CharSequence name = info.activityInfo.loadLabel(getPackageManager());
-            Log.e("ddddddd", name + "----" + packageName + "----" + cls);
+
         }
     }
 
