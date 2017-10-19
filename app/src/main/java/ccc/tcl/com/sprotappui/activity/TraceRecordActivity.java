@@ -134,7 +134,7 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 	private String start_time,end_time,this_time;
 	private String strDistanceM,speedMSStr,totalSecondStr;
 	private  int distanceMi,calorie,typei;
-	private float speedMSi;
+	private double speedMSi;
 	private RecordPresenter recordPresenter;
 	private static final int Location_Permission = 1;
 
@@ -625,7 +625,7 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 							tvSpeed.setText(strSpeed);
 						}
 						/*speedMSStr=String.valueOf(speedMS);*/
-						speedMSi=Float.parseFloat(String.valueOf(speedMS));
+						speedMSi=Double.parseDouble(String.valueOf(speedMS));
 
 					}
 
