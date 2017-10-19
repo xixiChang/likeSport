@@ -261,6 +261,8 @@ public class NewCreateActivity extends BaseActivity implements View.OnClickListe
 
     private void updateData(){
         name.setText(sport.getName());
+        if (sport.getHot_value().isEmpty())
+            sport.setHot_value("0");
         hotValue.setText(sport.getHot_value());
         startTime.setText(sport.getStart_time());
         endTime.setText(sport.getEnd_time());
@@ -271,7 +273,7 @@ public class NewCreateActivity extends BaseActivity implements View.OnClickListe
         leftTime.setText(sport.getLeft_time()+"天");
         joiner.setText("参与者（" + sport.getJoin_num() + " / "+ sport.getJoin_num_all() + "）");
         Glide.with(this).load(sport.getImage_url()).into(sportIamge);
-        Glide.with(this).load("").into(publisher);
+        Glide.with(this).load(App.userInfo.getImage_url()).into(publisher);
         reason.setVisibility(View.GONE);
         if (sport.getReason() != null && sport.getStatus().equals("1")) {
             reason.setText("由于 " + sport.getReason() + ",活动已改期。");
