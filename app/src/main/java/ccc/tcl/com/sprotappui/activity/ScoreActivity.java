@@ -7,14 +7,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alibaba.util.StringUtils;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.media.UMImage;
 
-import java.io.File;
 import java.util.Map;
 
 import ccc.tcl.com.sprotappui.R;
@@ -54,10 +51,8 @@ public class ScoreActivity extends BaseActivity {
                     TimeOfWalk = hour + "时" + minute + "分" + second + "秒";
                     ScoreOfWalk = Integer.parseInt(map.get("step"));
                     walkTime.setText(TimeOfWalk);
-                    walkScore.setText(ScoreOfWalk);
-                    Log.d(TAG, "onSuccess: type>>> 0" );
-                    Log.d(TAG, "onSuccess: step>>> " + map.get("step"));
-                    Log.d(TAG, "onSuccess: spent_time>>> " + map.get("spent_time"));
+                    walkScore.setText(String.valueOf(ScoreOfWalk));
+
                 }else if (VIEW_TYPE_RUN.equals(response.getType())){
                     Map<String, String> map = response.getResult();
                     int hour = Integer.parseInt(map.get("spent_time")) / 3600;
@@ -66,10 +61,8 @@ public class ScoreActivity extends BaseActivity {
                     ScoreOfRun = Integer.parseInt(map.get("distance"));
                     TimeOfRun = hour + "时" + minute + "分" + second + "秒";
                     runTime.setText(TimeOfRun);
-                    runScore.setText(ScoreOfRun);
-                    Log.d(TAG, "onSuccess: type>>> 1" );
-                    Log.d(TAG, "onSuccess: step>>> " + map.get("step"));
-                    Log.d(TAG, "onSuccess: spent_time>>> " + map.get("spent_time"));
+                    runScore.setText(String.valueOf(ScoreOfRun));
+
                 }
             }
         }
@@ -140,7 +133,7 @@ public class ScoreActivity extends BaseActivity {
 
         @Override
         public void onError(SHARE_MEDIA share_media, Throwable throwable) {
-            Toast.makeText(ScoreActivity.this,throwable.toString(),Toast.LENGTH_LONG).show();
+            Toast.makeText(ScoreActivity.this, throwable.toString(),Toast.LENGTH_LONG).show();
             //Toast.makeText(ScoreActivity.this,"未安装微信",Toast.LENGTH_LONG).show();
         }
 

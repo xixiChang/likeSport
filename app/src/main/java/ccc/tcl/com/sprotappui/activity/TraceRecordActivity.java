@@ -27,7 +27,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.ImageView;
@@ -106,6 +105,7 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 	private long rangeTime;
 	private long rangeTime1;
 	private long totalTime = 0;
+	private long exitTime = 0;
 	private boolean PAUSE=false;
 	Chronometer meter;
 
@@ -209,7 +209,7 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 		pause.setOnClickListener(this);
 		lockScreen.setOnClickListener(this);
 		share.setOnClickListener(this);
-		back.setOnClickListener(this);
+		//back.setOnClickListener(this);
 
 		TestGPS();
 		isNetworkConn(TraceRecordActivity.this);
@@ -311,11 +311,12 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 				break;
 			/*运动结束，点击返回*/
 			case R.id.back:
-				Intent intent = new Intent();
-				intent.setClass(TraceRecordActivity.this,
-						HomeActivity.class);
-				intent.putExtra("type",typei);
-				startActivity(intent);
+//				Intent intent = new Intent();
+//				intent.setClass(TraceRecordActivity.this,
+//						HomeActivity.class);
+//				intent.putExtra("type",typei);
+//				startActivity(intent);
+				finish();
 				break;
 		}
 	}
@@ -413,13 +414,17 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 		recordPresenter.uploadRecord(record);
 		recordPresenter.attachView(recordView);
 
-		Log.i(TAG, "addRecordData:" + record.getDate() + ",spent time:" + record.getSpent_time()
-				+ ",type:" + record.getType() + ",mean speed:" + record.getMean_speed() + ",calorie:" + record.getCalorie()
-				+ ",step:" + record.getStep() + ",start time:" + record.getStart_time() + ",end time:" + record.getEnd_time()
-				+ ",distance:" + record.getDistance() + ",user id:" + record.getUser_id() + ",id:" + record.getId());
+//		Log.i(TAG, "addRecordData:" + record.getDate() + ",spent time:" + record.getSpent_time()
+//				+ ",type:" + record.getType() + ",mean speed:" + record.getMean_speed() + ",calorie:" + record.getCalorie()
+//				+ ",step:" + record.getStep() + ",start time:" + record.getStart_time() + ",end time:" + record.getEnd_time()
+//				+ ",distance:" + record.getDistance() + ",user id:" + record.getUser_id() + ",id:" + record.getId());
 
 	}
 
+	@Override
+	public void onBackPressed() {
+		exitActivity();
+	}
 
 	/*运动结束时的显示信息*/
 	public void endShow(){
@@ -447,13 +452,13 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 
 
 
-	/*禁用系统的返回键*/
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			return true;
-		}
-		return  super.onKeyDown(keyCode, event);
-	}
+//	/*禁用系统的返回键*/
+//	public boolean onKeyDown(int keyCode, KeyEvent event) {
+//		if (keyCode == KeyEvent.KEYCODE_BACK) {
+//			return true;
+//		}
+//		return  super.onKeyDown(keyCode, event);
+//	}
 
 
 	/*运动结束时显示日期*/
@@ -1046,6 +1051,14 @@ public class TraceRecordActivity extends Activity implements SensorEventListener
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 	}
 
-
+	private void exitActivity() {
+		// 判断2次点击事件时间
+		if ((System.currentTimeMillis() - exitTime) > 2000) {
+			Toast.makeText(this, "再按一次退出运动模式", Toast.LENGTH_SHORT).show();
+			exitTime = System.currentTimeMillis();
+		} else {
+			finish();
+		}
+	}
 
 }

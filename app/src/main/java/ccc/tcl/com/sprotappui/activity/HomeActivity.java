@@ -1,6 +1,5 @@
 package ccc.tcl.com.sprotappui.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.mobileim.IYWLoginService;
 import com.alibaba.mobileim.YWLoginParam;
@@ -65,6 +65,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     private NewSportFragment newsportFragment;
 
     private MenuItem menuItem;
+
+    private long exitTime = 0;
 
 
     @Override
@@ -231,7 +233,12 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         return true;
     }
 
-//    @Override
+    @Override
+    public void onBackPressed() {
+        exitApp();
+    }
+
+    //    @Override
 //    public boolean onPrepareOptionsMenu(Menu menu) {
 //        return super.onPrepareOptionsMenu(menu);
 //    }
@@ -305,5 +312,12 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         normalListDialog.show();
     }
 
-
+    private void exitApp() {
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
+            Toast.makeText(HomeActivity.this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            exitTime = System.currentTimeMillis();
+        } else {
+            finish();
+        }
+    }
 }

@@ -41,6 +41,7 @@ import ccc.tcl.com.sprotappui.model.PlatFormActivity;
 import ccc.tcl.com.sprotappui.model.ResponseResult;
 import ccc.tcl.com.sprotappui.presenter.presenterimpl.ActivityPresenter;
 import ccc.tcl.com.sprotappui.ui.SportAppView;
+import ccc.tcl.com.sprotappui.utils.Util;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class NewCreateActivity extends BaseActivity implements View.OnClickListener{
@@ -264,7 +265,7 @@ public class NewCreateActivity extends BaseActivity implements View.OnClickListe
 
     private void updateData(){
         name.setText(sport.getName());
-        if (sport.getHot_value().isEmpty())
+        if (Util.isEmpty(sport.getHot_value()))
             sport.setHot_value("0");
         hotValue.setText(sport.getHot_value());
         startTime.setText(sport.getStart_time());
