@@ -1,6 +1,7 @@
 package ccc.tcl.com.sprotappui.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,15 +11,20 @@ import android.util.Log;
 
 import ccc.tcl.com.sprotappui.App;
 import ccc.tcl.com.sprotappui.R;
+import ccc.tcl.com.sprotappui.data.UserInfo;
 import ccc.tcl.com.sprotappui.db.SQLParaWrapper;
 import ccc.tcl.com.sprotappui.db.SQLStatement;
 import ccc.tcl.com.sprotappui.service.IMService;
 
+import static ccc.tcl.com.sprotappui.App.baseData;
 import static ccc.tcl.com.sprotappui.App.userInfo;
 
 public class WelcomeActivity extends AppCompatActivity {
     public static final int JUMP_TO_HOME = 2603;
     public static final int JUMP_TO_Login = 2604;
+
+    private static final String NO_USER = "-1";
+    private static final String SHARE_MAP = "UserInfo";
 
     private static final int WELCOME_DELAY_TIME = 1000;
 
@@ -35,7 +41,6 @@ public class WelcomeActivity extends AppCompatActivity {
                 finish();
             }else {
                 Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
-//                Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -58,6 +63,12 @@ public class WelcomeActivity extends AppCompatActivity {
             int msgWhat = JUMP_TO_Login;
             //*****************************************
             long startTime = System.currentTimeMillis();
+            userInfo = new UserInfo();
+            String userID = getBaseData(baseData.sharedPreferences);
+
+            if (!userID.equals(NO_USER)){
+                userInfo.setId(userID);
+            }
 
             if (App.userInfo.getId() != null){
                 sqlParaWrapper = new SQLParaWrapper(WelcomeActivity.this);
@@ -101,5 +112,9 @@ public class WelcomeActivity extends AppCompatActivity {
         cursor.close();
     }
 
+
+    private String getBaseData(SharedPreferences s) {
+        return s.getString("current_user_id", NO_USER);
+    }
 
 }

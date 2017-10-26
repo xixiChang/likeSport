@@ -58,6 +58,15 @@ public class UserSignActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.putExtra("sign", content.getText().toString());
+        intent.setFlags(-1);
+        setResult(1759, intent);
+        finish();
+    }
+
     class EditStatusListener implements TextWatcher {
         private CharSequence temp = "";
         private int editStart;

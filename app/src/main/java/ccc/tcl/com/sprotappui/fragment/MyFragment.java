@@ -31,7 +31,6 @@ import ccc.tcl.com.sprotappui.activity.ScoreActivity;
 import ccc.tcl.com.sprotappui.activity.SettingActivity;
 import ccc.tcl.com.sprotappui.adapter.ChooseItem;
 import ccc.tcl.com.sprotappui.customui.RecycleViewDivider;
-import ccc.tcl.com.sprotappui.data.BaseData;
 import ccc.tcl.com.sprotappui.data.UserInfo;
 import ccc.tcl.com.sprotappui.model.ChooseItemModel;
 import ccc.tcl.com.sprotappui.model.ResponseResult;
@@ -39,6 +38,8 @@ import ccc.tcl.com.sprotappui.presenter.presenterimpl.RecordPresenter;
 import ccc.tcl.com.sprotappui.presenter.presenterimpl.UserPresenter;
 import ccc.tcl.com.sprotappui.ui.SportAppView;
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static ccc.tcl.com.sprotappui.App.baseData;
 
 
 public class MyFragment extends Fragment {
@@ -232,13 +233,13 @@ public class MyFragment extends Fragment {
 
     @Override
     public void onStop() {
-
+        userPresenter.onStop();
         super.onStop();
     }
 
     private void logoutApp() {
-        BaseData baseData = new BaseData(context);
         baseData.updateUserID(NO_USER);
+        userInfo= new UserInfo();
     }
 
 }

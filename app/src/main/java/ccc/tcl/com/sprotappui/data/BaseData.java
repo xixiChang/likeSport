@@ -10,9 +10,10 @@ import android.content.SharedPreferences;
 public class BaseData {
     private static final String SHARE_MAP = "UserInfo";
     private SharedPreferences.Editor editor;
+    public SharedPreferences sharedPreferences;
 
     public BaseData(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARE_MAP,
+        sharedPreferences = context.getSharedPreferences(SHARE_MAP,
                 Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
     }
@@ -20,5 +21,6 @@ public class BaseData {
     public void updateUserID(String id){
         editor.putString("current_user_id", id);
         editor.apply();
+        editor.commit();
     }
 }

@@ -18,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ccc.tcl.com.sprotappui.R;
-import ccc.tcl.com.sprotappui.data.BaseData;
 import ccc.tcl.com.sprotappui.data.UserInfo;
 import ccc.tcl.com.sprotappui.db.SQLParaWrapper;
 import ccc.tcl.com.sprotappui.db.SQLStatement;
@@ -27,6 +26,7 @@ import ccc.tcl.com.sprotappui.presenter.presenterimpl.UserPresenter;
 import ccc.tcl.com.sprotappui.service.IMService;
 import ccc.tcl.com.sprotappui.ui.SportAppView;
 
+import static ccc.tcl.com.sprotappui.App.baseData;
 import static ccc.tcl.com.sprotappui.App.userInfo;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
@@ -162,7 +162,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }catch (SQLiteException e){
             Log.e(TAG, "saveUserInfoToDB: " + e.getMessage() );
         }
-        BaseData baseData = new BaseData(this);
+
         baseData.updateUserID(userInfo.getId());
         new IMService();
     }
